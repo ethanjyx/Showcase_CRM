@@ -1,18 +1,18 @@
 //
-//  FirstViewController.m
+//  ViewController.m
 //  Showcase_CRM
 //
-//  Created by Yixing Jiang on 14-6-7.
-//  Copyright (c) 2014年 LogicSolutions. All rights reserved.
+//  Created by Linfeng Shi on 6/10/14.
+//  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "ViewController.h"
 
-@interface FirstViewController ()
+@interface ViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation ViewController
 
 - (void)viewDidLoad
 {

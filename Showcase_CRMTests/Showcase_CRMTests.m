@@ -2,8 +2,8 @@
 //  Showcase_CRMTests.m
 //  Showcase_CRMTests
 //
-//  Created by Yixing Jiang on 14-6-7.
-//  Copyright (c) 2014年 LogicSolutions. All rights reserved.
+//  Created by Linfeng Shi on 6/10/14.
+//  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

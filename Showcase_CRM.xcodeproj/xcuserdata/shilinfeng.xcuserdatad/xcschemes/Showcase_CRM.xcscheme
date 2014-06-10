@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9DA2417F194341B100B265DD"
+               BlueprintIdentifier = "618E024C19473FAF0094BD1F"
                BuildableName = "Showcase_CRM.app"
                BlueprintName = "Showcase_CRM"
                ReferencedContainer = "container:Showcase_CRM.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9DA241A3194341B100B265DD"
+               BlueprintIdentifier = "618E026D19473FB00094BD1F"
                BuildableName = "Showcase_CRMTests.xctest"
                BlueprintName = "Showcase_CRMTests"
                ReferencedContainer = "container:Showcase_CRM.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9DA2417F194341B100B265DD"
+            BlueprintIdentifier = "618E024C19473FAF0094BD1F"
             BuildableName = "Showcase_CRM.app"
             BlueprintName = "Showcase_CRM"
             ReferencedContainer = "container:Showcase_CRM.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9DA2417F194341B100B265DD"
+            BlueprintIdentifier = "618E024C19473FAF0094BD1F"
             BuildableName = "Showcase_CRM.app"
             BlueprintName = "Showcase_CRM"
             ReferencedContainer = "container:Showcase_CRM.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9DA2417F194341B100B265DD"
+            BlueprintIdentifier = "618E024C19473FAF0094BD1F"
             BuildableName = "Showcase_CRM.app"
             BlueprintName = "Showcase_CRM"
             ReferencedContainer = "container:Showcase_CRM.xcodeproj">
