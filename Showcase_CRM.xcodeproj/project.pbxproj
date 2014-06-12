@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		618DE7351949B272000CC43E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE7341949B272000CC43E /* MainViewController.m */; };
+		618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE73A1949B2D0000CC43E /* CreateClientViewController.m */; };
 		618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025019473FAF0094BD1F /* Foundation.framework */; };
 		618E025319473FAF0094BD1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025219473FAF0094BD1F /* CoreGraphics.framework */; };
 		618E025519473FAF0094BD1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025419473FAF0094BD1F /* UIKit.framework */; };
@@ -34,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		618DE7331949B272000CC43E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		618DE7341949B272000CC43E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		618DE7391949B2D0000CC43E /* CreateClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateClientViewController.h; sourceTree = "<group>"; };
+		618DE73A1949B2D0000CC43E /* CreateClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateClientViewController.m; sourceTree = "<group>"; };
 		618E024D19473FAF0094BD1F /* Showcase_CRM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Showcase_CRM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		618E025019473FAF0094BD1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		618E025219473FAF0094BD1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +123,10 @@
 				618E026219473FAF0094BD1F /* Main.storyboard */,
 				618E026519473FAF0094BD1F /* ViewController.h */,
 				618E026619473FAF0094BD1F /* ViewController.m */,
+				618DE7331949B272000CC43E /* MainViewController.h */,
+				618DE7341949B272000CC43E /* MainViewController.m */,
+				618DE7391949B2D0000CC43E /* CreateClientViewController.h */,
+				618DE73A1949B2D0000CC43E /* CreateClientViewController.m */,
 				618E026819473FB00094BD1F /* Images.xcassets */,
 				618E025719473FAF0094BD1F /* Supporting Files */,
 			);
@@ -252,6 +262,8 @@
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
+				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
+				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +470,7 @@
 				618E028119473FB00094BD1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		618E028219473FB00094BD1F /* Build configuration list for PBXNativeTarget "Showcase_CRMTests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +479,7 @@
 				618E028419473FB00094BD1F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
