@@ -7,10 +7,6 @@
 //
 
 #import "Project.h"
-#import "Contact.h"
-#import "Event.h"
-#import "Sales.h"
-#import "Status.h"
 
 
 @implementation Project
@@ -22,8 +18,8 @@
 @dynamic possibility;
 @dynamic memo;
 @dynamic status;
+@dynamic sale;
 @dynamic contacts;
-@dynamic event;
-@dynamic sales;
+@dynamic events;
 
 @end

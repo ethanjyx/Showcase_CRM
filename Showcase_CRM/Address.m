@@ -18,8 +18,8 @@
 @dynamic province;
 @dynamic country;
 @dynamic postal;
+@dynamic company_billing;
 @dynamic contact;
 @dynamic company_shipping;
-@dynamic company_billing;
 
 @end

@@ -14,13 +14,14 @@
 @interface Event : NSManagedObject
 
 @property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * memo;
 @property (nonatomic, retain) NSString * attachment_url;
 @property (nonatomic, retain) Company *company;
 @property (nonatomic, retain) NSSet *contacts;
-@property (nonatomic, retain) NSSet *projects;
+@property (nonatomic, retain) Project *project;
 @end
 
 @interface Event (CoreDataGeneratedAccessors)
@@ -29,10 +30,5 @@
 - (void)removeContactsObject:(Contact *)value;
 - (void)addContacts:(NSSet *)values;
 - (void)removeContacts:(NSSet *)values;
-
-- (void)addProjectsObject:(Project *)value;
-- (void)removeProjectsObject:(Project *)value;
-- (void)addProjects:(NSSet *)values;
-- (void)removeProjects:(NSSet *)values;
 
 @end

@@ -18,8 +18,8 @@
 @property (nonatomic, retain) NSString * province;
 @property (nonatomic, retain) NSString * country;
 @property (nonatomic, retain) NSString * postal;
+@property (nonatomic, retain) Company *company_billing;
 @property (nonatomic, retain) Contact *contact;
 @property (nonatomic, retain) Company *company_shipping;
-@property (nonatomic, retain) Company *company_billing;
 
 @end

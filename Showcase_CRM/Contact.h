@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Address, Company, Event, Project, Sales;
+@class Company, Project, Sale;
 
 @interface Contact : NSManagedObject
 
@@ -27,17 +27,17 @@
 @property (nonatomic, retain) NSString * wechat;
 @property (nonatomic, retain) NSString * skype;
 @property (nonatomic, retain) NSString * weibo;
-@property (nonatomic, retain) NSSet *sales;
-@property (nonatomic, retain) Address *address;
 @property (nonatomic, retain) Company *company;
-@property (nonatomic, retain) Event *event;
+@property (nonatomic, retain) NSManagedObject *address;
+@property (nonatomic, retain) NSManagedObject *event;
+@property (nonatomic, retain) NSSet *sales;
 @property (nonatomic, retain) NSSet *projects;
 @end
 
 @interface Contact (CoreDataGeneratedAccessors)
 
-- (void)addSalesObject:(Sales *)value;
-- (void)removeSalesObject:(Sales *)value;
+- (void)addSalesObject:(Sale *)value;
+- (void)removeSalesObject:(Sale *)value;
 - (void)addSales:(NSSet *)values;
 - (void)removeSales:(NSSet *)values;
 

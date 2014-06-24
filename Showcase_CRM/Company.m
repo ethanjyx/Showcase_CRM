@@ -7,11 +7,6 @@
 //
 
 #import "Company.h"
-#import "Address.h"
-#import "Contact.h"
-#import "Event.h"
-#import "Industry.h"
-#import "Sales.h"
 
 
 @implementation Company
@@ -22,8 +17,8 @@
 @dynamic industry;
 @dynamic shipping_address;
 @dynamic billing_address;
-@dynamic contacts;
 @dynamic events;
+@dynamic contacts;
 @dynamic sales;
 
 @end

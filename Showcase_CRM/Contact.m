@@ -7,11 +7,9 @@
 //
 
 #import "Contact.h"
-#import "Address.h"
 #import "Company.h"
-#import "Event.h"
 #import "Project.h"
-#import "Sales.h"
+#import "Sale.h"
 
 
 @implementation Contact
@@ -30,10 +28,10 @@
 @dynamic wechat;
 @dynamic skype;
 @dynamic weibo;
-@dynamic sales;
-@dynamic address;
 @dynamic company;
+@dynamic address;
 @dynamic event;
+@dynamic sales;
 @dynamic projects;
 
 @end

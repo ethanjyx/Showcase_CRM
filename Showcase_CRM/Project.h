@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Contact, Event, Sales, Status;
 
 @interface Project : NSManagedObject
 
@@ -19,17 +18,22 @@
 @property (nonatomic, retain) NSNumber * amount;
 @property (nonatomic, retain) NSNumber * possibility;
 @property (nonatomic, retain) NSString * memo;
-@property (nonatomic, retain) Status *status;
+@property (nonatomic, retain) NSManagedObject *status;
+@property (nonatomic, retain) NSManagedObject *sale;
 @property (nonatomic, retain) NSSet *contacts;
-@property (nonatomic, retain) Event *event;
-@property (nonatomic, retain) Sales *sales;
+@property (nonatomic, retain) NSSet *events;
 @end
 
 @interface Project (CoreDataGeneratedAccessors)
 
-- (void)addContactsObject:(Contact *)value;
-- (void)removeContactsObject:(Contact *)value;
+- (void)addContactsObject:(NSManagedObject *)value;
+- (void)removeContactsObject:(NSManagedObject *)value;
 - (void)addContacts:(NSSet *)values;
 - (void)removeContacts:(NSSet *)values;
+
+- (void)addEventsObject:(NSManagedObject *)value;
+- (void)removeEventsObject:(NSManagedObject *)value;
+- (void)addEvents:(NSSet *)values;
+- (void)removeEvents:(NSSet *)values;
 
 @end

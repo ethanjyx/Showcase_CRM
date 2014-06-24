@@ -15,12 +15,13 @@
 @implementation Event
 
 @dynamic date;
+@dynamic id;
 @dynamic name;
 @dynamic location;
 @dynamic memo;
 @dynamic attachment_url;
 @dynamic company;
 @dynamic contacts;
-@dynamic projects;
+@dynamic project;
 
 @end

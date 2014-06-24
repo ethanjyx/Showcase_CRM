@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6120CFBA1959EC0B001FCAC1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6120CFB91959EC0B001FCAC1 /* CoreData.framework */; };
+		6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */; };
+		6120CFC01959F3EC001FCAC1 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFBF1959F3EC001FCAC1 /* Company.m */; };
+		6120CFC31959F3ED001FCAC1 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC21959F3ED001FCAC1 /* Project.m */; };
+		6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC51959F3ED001FCAC1 /* Sale.m */; };
+		6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC81959F3ED001FCAC1 /* Industry.m */; };
+		6120CFCC1959F3ED001FCAC1 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFCB1959F3ED001FCAC1 /* Contact.m */; };
+		6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFCE1959F3ED001FCAC1 /* Event.m */; };
+		6120CFD21959F3ED001FCAC1 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD11959F3ED001FCAC1 /* Status.m */; };
+		6120CFD51959F3ED001FCAC1 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD41959F3ED001FCAC1 /* Address.m */; };
 		618DE7351949B272000CC43E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE7341949B272000CC43E /* MainViewController.m */; };
 		618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE73A1949B2D0000CC43E /* CreateClientViewController.m */; };
 		618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025019473FAF0094BD1F /* Foundation.framework */; };
@@ -36,6 +46,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6120CFB91959EC0B001FCAC1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6120CFBC1959EE16001FCAC1 /* CRM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CRM.xcdatamodel; sourceTree = "<group>"; };
+		6120CFBE1959F3EC001FCAC1 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		6120CFBF1959F3EC001FCAC1 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		6120CFC11959F3ED001FCAC1 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		6120CFC21959F3ED001FCAC1 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
+		6120CFC41959F3ED001FCAC1 /* Sale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sale.h; sourceTree = "<group>"; };
+		6120CFC51959F3ED001FCAC1 /* Sale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sale.m; sourceTree = "<group>"; };
+		6120CFC71959F3ED001FCAC1 /* Industry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Industry.h; sourceTree = "<group>"; };
+		6120CFC81959F3ED001FCAC1 /* Industry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Industry.m; sourceTree = "<group>"; };
+		6120CFCA1959F3ED001FCAC1 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		6120CFCB1959F3ED001FCAC1 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		6120CFCD1959F3ED001FCAC1 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		6120CFCE1959F3ED001FCAC1 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		6120CFD01959F3ED001FCAC1 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		6120CFD11959F3ED001FCAC1 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		6120CFD31959F3ED001FCAC1 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		6120CFD41959F3ED001FCAC1 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		618DE7331949B272000CC43E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		618DE7341949B272000CC43E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		618DE7391949B2D0000CC43E /* CreateClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateClientViewController.h; sourceTree = "<group>"; };
@@ -66,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6120CFBA1959EC0B001FCAC1 /* CoreData.framework in Frameworks */,
 				618E025319473FAF0094BD1F /* CoreGraphics.framework in Frameworks */,
 				618E025519473FAF0094BD1F /* UIKit.framework in Frameworks */,
 				618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */,
@@ -107,6 +136,7 @@
 		618E024F19473FAF0094BD1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6120CFB91959EC0B001FCAC1 /* CoreData.framework */,
 				618E025019473FAF0094BD1F /* Foundation.framework */,
 				618E025219473FAF0094BD1F /* CoreGraphics.framework */,
 				618E025419473FAF0094BD1F /* UIKit.framework */,
@@ -127,6 +157,23 @@
 				618DE7341949B272000CC43E /* MainViewController.m */,
 				618DE7391949B2D0000CC43E /* CreateClientViewController.h */,
 				618DE73A1949B2D0000CC43E /* CreateClientViewController.m */,
+				6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */,
+				6120CFD31959F3ED001FCAC1 /* Address.h */,
+				6120CFD41959F3ED001FCAC1 /* Address.m */,
+				6120CFD01959F3ED001FCAC1 /* Status.h */,
+				6120CFD11959F3ED001FCAC1 /* Status.m */,
+				6120CFCD1959F3ED001FCAC1 /* Event.h */,
+				6120CFCE1959F3ED001FCAC1 /* Event.m */,
+				6120CFCA1959F3ED001FCAC1 /* Contact.h */,
+				6120CFCB1959F3ED001FCAC1 /* Contact.m */,
+				6120CFC71959F3ED001FCAC1 /* Industry.h */,
+				6120CFC81959F3ED001FCAC1 /* Industry.m */,
+				6120CFC41959F3ED001FCAC1 /* Sale.h */,
+				6120CFC51959F3ED001FCAC1 /* Sale.m */,
+				6120CFC11959F3ED001FCAC1 /* Project.h */,
+				6120CFC21959F3ED001FCAC1 /* Project.m */,
+				6120CFBE1959F3EC001FCAC1 /* Company.h */,
+				6120CFBF1959F3EC001FCAC1 /* Company.m */,
 				618E026819473FB00094BD1F /* Images.xcassets */,
 				618E025719473FAF0094BD1F /* Supporting Files */,
 			);
@@ -259,11 +306,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */,
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
+				6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */,
+				6120CFD51959F3ED001FCAC1 /* Address.m in Sources */,
+				6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */,
+				6120CFC31959F3ED001FCAC1 /* Project.m in Sources */,
+				6120CFD21959F3ED001FCAC1 /* Status.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
+				6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */,
+				6120CFCC1959F3ED001FCAC1 /* Contact.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
 				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
+				6120CFC01959F3EC001FCAC1 /* Company.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +538,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6120CFBC1959EE16001FCAC1 /* CRM.xcdatamodel */,
+			);
+			currentVersion = 6120CFBC1959EE16001FCAC1 /* CRM.xcdatamodel */;
+			path = CRM.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 618E024519473FAF0094BD1F /* Project object */;
 }
