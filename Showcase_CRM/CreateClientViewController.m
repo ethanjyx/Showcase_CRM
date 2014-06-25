@@ -7,10 +7,14 @@
 //
 
 #import "CreateClientViewController.h"
+#import "AppDelegate.h"
 
 @interface CreateClientViewController ()
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end
+
 
 @implementation CreateClientViewController
 
