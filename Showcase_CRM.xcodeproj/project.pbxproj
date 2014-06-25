@@ -23,6 +23,23 @@
 		618E027219473FB00094BD1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025419473FAF0094BD1F /* UIKit.framework */; };
 		618E027A19473FB00094BD1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 618E027819473FB00094BD1F /* InfoPlist.strings */; };
 		618E027C19473FB00094BD1F /* Showcase_CRMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 618E027B19473FB00094BD1F /* Showcase_CRMTests.m */; };
+		9DC75F131959D74C0016FCF9 /* NSString+TKUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F0B1959D74C0016FCF9 /* NSString+TKUtilities.m */; };
+		9DC75F141959D74C0016FCF9 /* UIImage+TKUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F0D1959D74C0016FCF9 /* UIImage+TKUtilities.m */; };
+		9DC75F151959D74C0016FCF9 /* TKContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F101959D74C0016FCF9 /* TKContact.m */; };
+		9DC75F161959D74C0016FCF9 /* TKGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F121959D74C0016FCF9 /* TKGroup.m */; };
+		9DC75F231959D7680016FCF9 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F181959D7680016FCF9 /* blank.png */; };
+		9DC75F241959D7680016FCF9 /* blank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F191959D7680016FCF9 /* blank@2x.png */; };
+		9DC75F251959D7680016FCF9 /* checkBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F1A1959D7680016FCF9 /* checkBox.png */; };
+		9DC75F261959D7680016FCF9 /* checkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F1B1959D7680016FCF9 /* checkBox@2x.png */; };
+		9DC75F271959D7680016FCF9 /* uncheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F1C1959D7680016FCF9 /* uncheckBox.png */; };
+		9DC75F281959D7680016FCF9 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F1D1959D7680016FCF9 /* uncheckBox@2x.png */; };
+		9DC75F291959D7680016FCF9 /* TKContactsMultiPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F1F1959D7680016FCF9 /* TKContactsMultiPickerController.m */; };
+		9DC75F2A1959D7680016FCF9 /* TKContactsMultiPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F201959D7680016FCF9 /* TKContactsMultiPickerController.xib */; };
+		9DC75F2B1959D7680016FCF9 /* TKGroupPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F221959D7680016FCF9 /* TKGroupPickerController.m */; };
+		9DC75F321959D7890016FCF9 /* TKGroupPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F2C1959D7890016FCF9 /* TKGroupPickerController.xib */; };
+		9DC75F331959D7890016FCF9 /* TKNoContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F2E1959D7890016FCF9 /* TKNoContactViewController.m */; };
+		9DC75F341959D7890016FCF9 /* TKNoContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC75F2F1959D7890016FCF9 /* TKNoContactViewController.xib */; };
+		9DC75F351959D7890016FCF9 /* TKPeoplePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC75F311959D7890016FCF9 /* TKPeoplePickerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +76,31 @@
 		618E027719473FB00094BD1F /* Showcase_CRMTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Showcase_CRMTests-Info.plist"; sourceTree = "<group>"; };
 		618E027919473FB00094BD1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		618E027B19473FB00094BD1F /* Showcase_CRMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Showcase_CRMTests.m; sourceTree = "<group>"; };
+		9DC75F0A1959D74C0016FCF9 /* NSString+TKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TKUtilities.h"; sourceTree = "<group>"; };
+		9DC75F0B1959D74C0016FCF9 /* NSString+TKUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TKUtilities.m"; sourceTree = "<group>"; };
+		9DC75F0C1959D74C0016FCF9 /* UIImage+TKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TKUtilities.h"; sourceTree = "<group>"; };
+		9DC75F0D1959D74C0016FCF9 /* UIImage+TKUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TKUtilities.m"; sourceTree = "<group>"; };
+		9DC75F0F1959D74C0016FCF9 /* TKContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContact.h; sourceTree = "<group>"; };
+		9DC75F101959D74C0016FCF9 /* TKContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKContact.m; sourceTree = "<group>"; };
+		9DC75F111959D74C0016FCF9 /* TKGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGroup.h; sourceTree = "<group>"; };
+		9DC75F121959D74C0016FCF9 /* TKGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGroup.m; sourceTree = "<group>"; };
+		9DC75F181959D7680016FCF9 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		9DC75F191959D7680016FCF9 /* blank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank@2x.png"; sourceTree = "<group>"; };
+		9DC75F1A1959D7680016FCF9 /* checkBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBox.png; sourceTree = "<group>"; };
+		9DC75F1B1959D7680016FCF9 /* checkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBox@2x.png"; sourceTree = "<group>"; };
+		9DC75F1C1959D7680016FCF9 /* uncheckBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckBox.png; sourceTree = "<group>"; };
+		9DC75F1D1959D7680016FCF9 /* uncheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckBox@2x.png"; sourceTree = "<group>"; };
+		9DC75F1E1959D7680016FCF9 /* TKContactsMultiPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactsMultiPickerController.h; sourceTree = "<group>"; };
+		9DC75F1F1959D7680016FCF9 /* TKContactsMultiPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKContactsMultiPickerController.m; sourceTree = "<group>"; };
+		9DC75F201959D7680016FCF9 /* TKContactsMultiPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKContactsMultiPickerController.xib; sourceTree = "<group>"; };
+		9DC75F211959D7680016FCF9 /* TKGroupPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGroupPickerController.h; sourceTree = "<group>"; };
+		9DC75F221959D7680016FCF9 /* TKGroupPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGroupPickerController.m; sourceTree = "<group>"; };
+		9DC75F2C1959D7890016FCF9 /* TKGroupPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKGroupPickerController.xib; sourceTree = "<group>"; };
+		9DC75F2D1959D7890016FCF9 /* TKNoContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNoContactViewController.h; sourceTree = "<group>"; };
+		9DC75F2E1959D7890016FCF9 /* TKNoContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNoContactViewController.m; sourceTree = "<group>"; };
+		9DC75F2F1959D7890016FCF9 /* TKNoContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKNoContactViewController.xib; sourceTree = "<group>"; };
+		9DC75F301959D7890016FCF9 /* TKPeoplePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPeoplePickerController.h; sourceTree = "<group>"; };
+		9DC75F311959D7890016FCF9 /* TKPeoplePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPeoplePickerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +160,19 @@
 		618E025619473FAF0094BD1F /* Showcase_CRM */ = {
 			isa = PBXGroup;
 			children = (
-				618E025F19473FAF0094BD1F /* AppDelegate.h */,
-				618E026019473FAF0094BD1F /* AppDelegate.m */,
+				9DC75F381959D7B10016FCF9 /* Delegate */,
+				9DC75F361959D7960016FCF9 /* Xibs */,
+				9DC75F171959D7680016FCF9 /* Resources */,
+				9DC75F1E1959D7680016FCF9 /* TKContactsMultiPickerController.h */,
+				9DC75F1F1959D7680016FCF9 /* TKContactsMultiPickerController.m */,
+				9DC75F211959D7680016FCF9 /* TKGroupPickerController.h */,
+				9DC75F221959D7680016FCF9 /* TKGroupPickerController.m */,
+				9DC75F2D1959D7890016FCF9 /* TKNoContactViewController.h */,
+				9DC75F2E1959D7890016FCF9 /* TKNoContactViewController.m */,
+				9DC75F301959D7890016FCF9 /* TKPeoplePickerController.h */,
+				9DC75F311959D7890016FCF9 /* TKPeoplePickerController.m */,
+				9DC75F091959D74C0016FCF9 /* Additions */,
+				9DC75F0E1959D74C0016FCF9 /* Models */,
 				618E026219473FAF0094BD1F /* Main.storyboard */,
 				618E026519473FAF0094BD1F /* ViewController.h */,
 				618E026619473FAF0094BD1F /* ViewController.m */,
@@ -160,6 +213,60 @@
 				618E027819473FB00094BD1F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9DC75F091959D74C0016FCF9 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				9DC75F0A1959D74C0016FCF9 /* NSString+TKUtilities.h */,
+				9DC75F0B1959D74C0016FCF9 /* NSString+TKUtilities.m */,
+				9DC75F0C1959D74C0016FCF9 /* UIImage+TKUtilities.h */,
+				9DC75F0D1959D74C0016FCF9 /* UIImage+TKUtilities.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		9DC75F0E1959D74C0016FCF9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9DC75F0F1959D74C0016FCF9 /* TKContact.h */,
+				9DC75F101959D74C0016FCF9 /* TKContact.m */,
+				9DC75F111959D74C0016FCF9 /* TKGroup.h */,
+				9DC75F121959D74C0016FCF9 /* TKGroup.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9DC75F171959D7680016FCF9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9DC75F181959D7680016FCF9 /* blank.png */,
+				9DC75F191959D7680016FCF9 /* blank@2x.png */,
+				9DC75F1A1959D7680016FCF9 /* checkBox.png */,
+				9DC75F1B1959D7680016FCF9 /* checkBox@2x.png */,
+				9DC75F1C1959D7680016FCF9 /* uncheckBox.png */,
+				9DC75F1D1959D7680016FCF9 /* uncheckBox@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9DC75F361959D7960016FCF9 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				9DC75F201959D7680016FCF9 /* TKContactsMultiPickerController.xib */,
+				9DC75F2C1959D7890016FCF9 /* TKGroupPickerController.xib */,
+				9DC75F2F1959D7890016FCF9 /* TKNoContactViewController.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+		9DC75F381959D7B10016FCF9 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				618E025F19473FAF0094BD1F /* AppDelegate.h */,
+				618E026019473FAF0094BD1F /* AppDelegate.m */,
+			);
+			name = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,9 +345,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC75F231959D7680016FCF9 /* blank.png in Resources */,
+				9DC75F2A1959D7680016FCF9 /* TKContactsMultiPickerController.xib in Resources */,
+				9DC75F241959D7680016FCF9 /* blank@2x.png in Resources */,
+				9DC75F251959D7680016FCF9 /* checkBox.png in Resources */,
+				9DC75F321959D7890016FCF9 /* TKGroupPickerController.xib in Resources */,
+				9DC75F341959D7890016FCF9 /* TKNoContactViewController.xib in Resources */,
+				9DC75F271959D7680016FCF9 /* uncheckBox.png in Resources */,
 				618E026919473FB00094BD1F /* Images.xcassets in Resources */,
 				618E025B19473FAF0094BD1F /* InfoPlist.strings in Resources */,
+				9DC75F261959D7680016FCF9 /* checkBox@2x.png in Resources */,
 				618E026419473FAF0094BD1F /* Main.storyboard in Resources */,
+				9DC75F281959D7680016FCF9 /* uncheckBox@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,10 +376,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
+				9DC75F351959D7890016FCF9 /* TKPeoplePickerController.m in Sources */,
+				9DC75F151959D74C0016FCF9 /* TKContact.m in Sources */,
+				9DC75F2B1959D7680016FCF9 /* TKGroupPickerController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
+				9DC75F161959D74C0016FCF9 /* TKGroup.m in Sources */,
+				9DC75F141959D74C0016FCF9 /* UIImage+TKUtilities.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
 				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
+				9DC75F331959D7890016FCF9 /* TKNoContactViewController.m in Sources */,
+				9DC75F131959D74C0016FCF9 /* NSString+TKUtilities.m in Sources */,
+				9DC75F291959D7680016FCF9 /* TKContactsMultiPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +514,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Showcase_CRM/Showcase_CRM-Prefix.pch";
 				INFOPLIST_FILE = "Showcase_CRM/Showcase_CRM-Info.plist";
@@ -403,6 +528,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Showcase_CRM/Showcase_CRM-Prefix.pch";
 				INFOPLIST_FILE = "Showcase_CRM/Showcase_CRM-Info.plist";

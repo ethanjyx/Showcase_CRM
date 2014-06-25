@@ -124,6 +124,9 @@
                                             <state key="normal" title="导入">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="showPeoplePicker:" destination="oOj-8t-4aU" eventType="touchUpInside" id="evi-Ii-2Uu"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="IC5-me-vQH">
@@ -142,7 +145,13 @@
                                             <state key="normal" title="导出">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="showPeoplePicker:" destination="oOj-8t-4aU" eventType="touchUpInside" id="lz2-Hu-lz2"/>
+                                            </connections>
                                         </button>
+                                        <connections>
+                                            <action selector="A:" destination="oOj-8t-4aU" id="LrN-Re-Cc1"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>

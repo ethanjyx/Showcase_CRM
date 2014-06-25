@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TKPeoplePickerController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UINavigationControllerDelegate, TKPeoplePickerControllerDelegate>
+
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+
+- (IBAction)showPeoplePicker:(id)sender;
 
 @end
