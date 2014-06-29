@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource> {
+    
+}
+@property(nonatomic,retain) NSMutableDictionary *states;
+@property(nonatomic,retain) NSArray *datasource;
+
+-(void)setupArray;
 
 @end
+
+
+

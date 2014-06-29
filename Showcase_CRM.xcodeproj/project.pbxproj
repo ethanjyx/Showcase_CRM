@@ -23,6 +23,7 @@
 		618E027219473FB00094BD1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025419473FAF0094BD1F /* UIKit.framework */; };
 		618E027A19473FB00094BD1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 618E027819473FB00094BD1F /* InfoPlist.strings */; };
 		618E027C19473FB00094BD1F /* Showcase_CRMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 618E027B19473FB00094BD1F /* Showcase_CRMTests.m */; };
+		CE81FD061959ADBE00E637AB /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE81FD051959ADBE00E637AB /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		618E027719473FB00094BD1F /* Showcase_CRMTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Showcase_CRMTests-Info.plist"; sourceTree = "<group>"; };
 		618E027919473FB00094BD1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		618E027B19473FB00094BD1F /* Showcase_CRMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Showcase_CRMTests.m; sourceTree = "<group>"; };
+		CE81FD041959ADBE00E637AB /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		CE81FD051959ADBE00E637AB /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				618E026019473FAF0094BD1F /* AppDelegate.m */,
 				618E026219473FAF0094BD1F /* Main.storyboard */,
 				618E026519473FAF0094BD1F /* ViewController.h */,
+				CE81FD041959ADBE00E637AB /* DetailViewController.h */,
+				CE81FD051959ADBE00E637AB /* DetailViewController.m */,
 				618E026619473FAF0094BD1F /* ViewController.m */,
 				618DE7331949B272000CC43E /* MainViewController.h */,
 				618DE7341949B272000CC43E /* MainViewController.m */,
@@ -264,6 +269,7 @@
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
 				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
+				CE81FD061959ADBE00E637AB /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
