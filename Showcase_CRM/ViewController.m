@@ -81,10 +81,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
+    /*DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
     detail.state = [datasource objectAtIndex:indexPath.row];
     detail.capital = [states objectForKey:detail.state];
-    [self.navigationController pushViewController:detail animated:YES];
+    [self.navigationController pushViewController:detail animated:YES];*/
     
 }
 
