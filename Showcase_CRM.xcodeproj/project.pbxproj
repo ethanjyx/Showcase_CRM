@@ -33,6 +33,7 @@
 		618E027219473FB00094BD1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025419473FAF0094BD1F /* UIKit.framework */; };
 		618E027A19473FB00094BD1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 618E027819473FB00094BD1F /* InfoPlist.strings */; };
 		618E027C19473FB00094BD1F /* Showcase_CRMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 618E027B19473FB00094BD1F /* Showcase_CRMTests.m */; };
+		61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */; };
 		9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D132E6A195A589700CD5788 /* TKContactsMultiPickerController.m */; };
 		9D132E75195A589700CD5788 /* TKContactsMultiPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E6B195A589700CD5788 /* TKContactsMultiPickerController.xib */; };
 		9D132E76195A589700CD5788 /* TKGroupPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D132E6D195A589700CD5788 /* TKGroupPickerController.m */; };
@@ -51,7 +52,6 @@
 		9D132E94195A58DA00CD5788 /* uncheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8A195A58DA00CD5788 /* uncheckBox.png */; };
 		9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */; };
 		CE0E674F196161F50074E821 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E674E196161F50074E821 /* DetailViewController.m */; };
-		CE0E6752196162030074E821 /* Sales.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E6751196162030074E821 /* Sales.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +106,8 @@
 		618E027719473FB00094BD1F /* Showcase_CRMTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Showcase_CRMTests-Info.plist"; sourceTree = "<group>"; };
 		618E027919473FB00094BD1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		618E027B19473FB00094BD1F /* Showcase_CRMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Showcase_CRMTests.m; sourceTree = "<group>"; };
+		61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseInterface.h; sourceTree = "<group>"; };
+		61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseInterface.m; sourceTree = "<group>"; };
 		9D132E69195A589700CD5788 /* TKContactsMultiPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactsMultiPickerController.h; sourceTree = "<group>"; };
 		9D132E6A195A589700CD5788 /* TKContactsMultiPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKContactsMultiPickerController.m; sourceTree = "<group>"; };
 		9D132E6B195A589700CD5788 /* TKContactsMultiPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKContactsMultiPickerController.xib; sourceTree = "<group>"; };
@@ -133,8 +135,6 @@
 		9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckBox@2x.png"; sourceTree = "<group>"; };
 		CE0E674B196160160074E821 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		CE0E674E196161F50074E821 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		CE0E6750196162030074E821 /* Sales.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sales.h; sourceTree = "<group>"; };
-		CE0E6751196162030074E821 /* Sales.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sales.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +196,9 @@
 		618E025619473FAF0094BD1F /* Showcase_CRM */ = {
 			isa = PBXGroup;
 			children = (
+				61ECB2B11961BB320072F8D6 /* Database */,
+				61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */,
+				61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */,
 				CE0E674E196161F50074E821 /* DetailViewController.m */,
 				CE0E674B196160160074E821 /* DetailViewController.h */,
 				9D132E68195A587B00CD5788 /* ImportContact */,
@@ -209,24 +212,6 @@
 				618DE7391949B2D0000CC43E /* CreateClientViewController.h */,
 				618DE73A1949B2D0000CC43E /* CreateClientViewController.m */,
 				6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */,
-				6120CFD31959F3ED001FCAC1 /* Address.h */,
-				6120CFD41959F3ED001FCAC1 /* Address.m */,
-				6120CFD01959F3ED001FCAC1 /* Status.h */,
-				6120CFD11959F3ED001FCAC1 /* Status.m */,
-				6120CFCD1959F3ED001FCAC1 /* Event.h */,
-				6120CFCE1959F3ED001FCAC1 /* Event.m */,
-				6120CFCA1959F3ED001FCAC1 /* Contact.h */,
-				6120CFCB1959F3ED001FCAC1 /* Contact.m */,
-				6120CFC71959F3ED001FCAC1 /* Industry.h */,
-				6120CFC81959F3ED001FCAC1 /* Industry.m */,
-				6120CFC41959F3ED001FCAC1 /* Sale.h */,
-				6120CFC51959F3ED001FCAC1 /* Sale.m */,
-				CE0E6750196162030074E821 /* Sales.h */,
-				CE0E6751196162030074E821 /* Sales.m */,
-				6120CFC11959F3ED001FCAC1 /* Project.h */,
-				6120CFC21959F3ED001FCAC1 /* Project.m */,
-				6120CFBE1959F3EC001FCAC1 /* Company.h */,
-				6120CFBF1959F3EC001FCAC1 /* Company.m */,
 				618E026819473FB00094BD1F /* Images.xcassets */,
 				618E025719473FAF0094BD1F /* Supporting Files */,
 			);
@@ -260,6 +245,29 @@
 				618E027819473FB00094BD1F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		61ECB2B11961BB320072F8D6 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				6120CFD31959F3ED001FCAC1 /* Address.h */,
+				6120CFD41959F3ED001FCAC1 /* Address.m */,
+				6120CFD01959F3ED001FCAC1 /* Status.h */,
+				6120CFD11959F3ED001FCAC1 /* Status.m */,
+				6120CFCD1959F3ED001FCAC1 /* Event.h */,
+				6120CFCE1959F3ED001FCAC1 /* Event.m */,
+				6120CFCA1959F3ED001FCAC1 /* Contact.h */,
+				6120CFCB1959F3ED001FCAC1 /* Contact.m */,
+				6120CFC71959F3ED001FCAC1 /* Industry.h */,
+				6120CFC81959F3ED001FCAC1 /* Industry.m */,
+				6120CFC41959F3ED001FCAC1 /* Sale.h */,
+				6120CFC51959F3ED001FCAC1 /* Sale.m */,
+				6120CFC11959F3ED001FCAC1 /* Project.h */,
+				6120CFC21959F3ED001FCAC1 /* Project.m */,
+				6120CFBE1959F3EC001FCAC1 /* Company.h */,
+				6120CFBF1959F3EC001FCAC1 /* Company.m */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 		9D132E68195A587B00CD5788 /* ImportContact */ = {
@@ -442,11 +450,11 @@
 				6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */,
 				6120CFCC1959F3ED001FCAC1 /* Contact.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
-				CE0E6752196162030074E821 /* Sales.m in Sources */,
 				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
 				9D132E8E195A58DA00CD5788 /* TKContact.m in Sources */,
 				6120CFC01959F3EC001FCAC1 /* Company.m in Sources */,
 				9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */,
+				61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */,
 				9D132E8D195A58DA00CD5788 /* UIImage+TKUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
