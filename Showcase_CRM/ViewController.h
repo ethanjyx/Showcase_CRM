@@ -8,16 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
+#import "TKPeoplePickerController.h"
 
-@interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource> {
+@interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource, UINavigationControllerDelegate, TKPeoplePickerControllerDelegate> {
     
 }
 @property(nonatomic,retain) NSMutableDictionary *states;
 @property(nonatomic,retain) NSArray *datasource;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+
 
 -(void)setupArray;
+- (IBAction)showPeoplePicker:(id)sender;
 
 @end
-
-
 
