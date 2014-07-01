@@ -16,7 +16,7 @@
 @property(nonatomic,retain) NSMutableDictionary *states;
 @property(nonatomic,retain) NSArray *datasource;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 
 -(void)setupArray;
 - (IBAction)showPeoplePicker:(id)sender;
