@@ -59,7 +59,7 @@
 		F6CE94D619631B5C0017DDAD /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D519631B5C0017DDAD /* OpenGLES.framework */; };
 		F6CE94D819631B660017DDAD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D719631B660017DDAD /* SystemConfiguration.framework */; };
 		F6CE94DA19631B7B0017DDAD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D919631B7B0017DDAD /* Security.framework */; };
-		F6CE94E21963253A0017DDAD /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94E11963253A0017DDAD /* libbaidumapapi.a */; };
+		F6CE94E419632B880017DDAD /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94E319632B880017DDAD /* libbaidumapapi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,7 +210,7 @@
 		F6CE94D519631B5C0017DDAD /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		F6CE94D719631B660017DDAD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F6CE94D919631B7B0017DDAD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		F6CE94E11963253A0017DDAD /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = ../BaiduMap_IOSSDK_v2.3.0_All/BaiduMap_IOSSDK_v2.3.0_Lib/libbaidumapapi.a; sourceTree = "<group>"; };
+		F6CE94E319632B880017DDAD /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +225,7 @@
 				F6CE94D419631B550017DDAD /* QuartzCore.framework in Frameworks */,
 				F6CE94D219631B300017DDAD /* CoreLocation.framework in Frameworks */,
 				6120CFBA1959EC0B001FCAC1 /* CoreData.framework in Frameworks */,
-				F6CE94E21963253A0017DDAD /* libbaidumapapi.a in Frameworks */,
+				F6CE94E419632B880017DDAD /* libbaidumapapi.a in Frameworks */,
 				618E025519473FAF0094BD1F /* UIKit.framework in Frameworks */,
 				618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */,
 			);
@@ -266,7 +266,7 @@
 		618E024F19473FAF0094BD1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F6CE94E11963253A0017DDAD /* libbaidumapapi.a */,
+				F6CE94E319632B880017DDAD /* libbaidumapapi.a */,
 				F6CE94D919631B7B0017DDAD /* Security.framework */,
 				F6CE94D719631B660017DDAD /* SystemConfiguration.framework */,
 				F6CE94D519631B5C0017DDAD /* OpenGLES.framework */,
