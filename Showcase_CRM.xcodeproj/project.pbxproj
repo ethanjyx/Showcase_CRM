@@ -53,13 +53,13 @@
 		9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */; };
 		CE0E674F196161F50074E821 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E674E196161F50074E821 /* DetailViewController.m */; };
 		F6CE94CB19631A670017DDAD /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F6CE94CA19631A670017DDAD /* mapapi.bundle */; };
-		F6CE94CE19631A7A0017DDAD /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE94CD19631A7A0017DDAD /* MapViewController.m */; };
-		F6CE94D019631B160017DDAD /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94CF19631B160017DDAD /* libbaidumapapi.a */; };
+		F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F6CE94CD19631A7A0017DDAD /* MapViewController.mm */; };
 		F6CE94D219631B300017DDAD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D119631B300017DDAD /* CoreLocation.framework */; };
 		F6CE94D419631B550017DDAD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D319631B550017DDAD /* QuartzCore.framework */; };
 		F6CE94D619631B5C0017DDAD /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D519631B5C0017DDAD /* OpenGLES.framework */; };
 		F6CE94D819631B660017DDAD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D719631B660017DDAD /* SystemConfiguration.framework */; };
 		F6CE94DA19631B7B0017DDAD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D919631B7B0017DDAD /* Security.framework */; };
+		F6CE94E21963253A0017DDAD /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94E11963253A0017DDAD /* libbaidumapapi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,13 +204,13 @@
 		F6CE94C919631A420017DDAD /* BMKVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMKVersion.h; path = inc/BMKVersion.h; sourceTree = "<group>"; };
 		F6CE94CA19631A670017DDAD /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		F6CE94CC19631A7A0017DDAD /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		F6CE94CD19631A7A0017DDAD /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		F6CE94CF19631B160017DDAD /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = ../BaiduMap_IOSSDK_v2.3.0_All/BaiduMap_IOSSDK_v2.3.0_Lib/libbaidumapapi.a; sourceTree = "<group>"; };
+		F6CE94CD19631A7A0017DDAD /* MapViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapViewController.mm; sourceTree = "<group>"; };
 		F6CE94D119631B300017DDAD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F6CE94D319631B550017DDAD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F6CE94D519631B5C0017DDAD /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		F6CE94D719631B660017DDAD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F6CE94D919631B7B0017DDAD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F6CE94E11963253A0017DDAD /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaidumapapi.a; path = ../BaiduMap_IOSSDK_v2.3.0_All/BaiduMap_IOSSDK_v2.3.0_Lib/libbaidumapapi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +225,7 @@
 				F6CE94D419631B550017DDAD /* QuartzCore.framework in Frameworks */,
 				F6CE94D219631B300017DDAD /* CoreLocation.framework in Frameworks */,
 				6120CFBA1959EC0B001FCAC1 /* CoreData.framework in Frameworks */,
-				F6CE94D019631B160017DDAD /* libbaidumapapi.a in Frameworks */,
+				F6CE94E21963253A0017DDAD /* libbaidumapapi.a in Frameworks */,
 				618E025519473FAF0094BD1F /* UIKit.framework in Frameworks */,
 				618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */,
 			);
@@ -266,12 +266,12 @@
 		618E024F19473FAF0094BD1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F6CE94E11963253A0017DDAD /* libbaidumapapi.a */,
 				F6CE94D919631B7B0017DDAD /* Security.framework */,
 				F6CE94D719631B660017DDAD /* SystemConfiguration.framework */,
 				F6CE94D519631B5C0017DDAD /* OpenGLES.framework */,
 				F6CE94D319631B550017DDAD /* QuartzCore.framework */,
 				F6CE94D119631B300017DDAD /* CoreLocation.framework */,
-				F6CE94CF19631B160017DDAD /* libbaidumapapi.a */,
 				6120CFB91959EC0B001FCAC1 /* CoreData.framework */,
 				618E025019473FAF0094BD1F /* Foundation.framework */,
 				618E025219473FAF0094BD1F /* CoreGraphics.framework */,
@@ -419,7 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				F6CE94CC19631A7A0017DDAD /* MapViewController.h */,
-				F6CE94CD19631A7A0017DDAD /* MapViewController.m */,
+				F6CE94CD19631A7A0017DDAD /* MapViewController.mm */,
 				F6CE948E19631A2B0017DDAD /* Resources */,
 				F6CE948D19631A250017DDAD /* inc */,
 			);
@@ -629,7 +629,7 @@
 				9D132E8E195A58DA00CD5788 /* TKContact.m in Sources */,
 				6120CFC01959F3EC001FCAC1 /* Company.m in Sources */,
 				9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */,
-				F6CE94CE19631A7A0017DDAD /* MapViewController.m in Sources */,
+				F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */,
 				61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */,
 				9D132E8D195A58DA00CD5788 /* UIImage+TKUtilities.m in Sources */,
 			);
@@ -765,6 +765,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/logic/Desktop/workspace/BaiduMap_IOSSDK_v2.3.0_All/BaiduMap_IOSSDK_v2.3.0_Lib,
+					"/Users/logic/Desktop/workspace/BaiduMap_IOSSDK_v2.3.0_All/BaiduMap_IOSSDK_v2.3.0_Lib/Release-iphonesimulator",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -783,6 +785,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/logic/Desktop/workspace/BaiduMap_IOSSDK_v2.3.0_All/BaiduMap_IOSSDK_v2.3.0_Lib,
+					"/Users/logic/Desktop/workspace/BaiduMap_IOSSDK_v2.3.0_All/BaiduMap_IOSSDK_v2.3.0_Lib/Release-iphonesimulator",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
