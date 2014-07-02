@@ -8,15 +8,27 @@
 
 #import "CreateClientViewController.h"
 #import "AppDelegate.h"
+#import "DatabaseInterface.h"
 
 @interface CreateClientViewController ()
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (retain, nonatomic) IBOutlet UITextField *companyName;
+@property (retain, nonatomic) IBOutlet UITextField *phone;
+@property (retain, nonatomic) IBOutlet UITextField *website;
+@property (retain, nonatomic) IBOutlet UITextField *industryType;
+
+
+- (IBAction)save:(id)sender;
 
 @end
 
 
 @implementation CreateClientViewController
+@synthesize companyName = _companyName;
+@synthesize phone = _phone;
+@synthesize website = _website;
+@synthesize industryType = _industryType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,4 +62,19 @@
 }
 */
 
+- (IBAction)save:(id)sender {
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    [database addCompanyWithName:_companyName.text phone:_phone.text website:_website.text industry:_industryType.text];
+}
+
+
+
+
+- (void)dealloc {
+    [_companyName release];
+    [_phone release];
+    [_website release];
+    [_industryType release];
+    [super dealloc];
+}
 @end
