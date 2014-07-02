@@ -25,10 +25,10 @@
 
 
 @implementation CreateClientViewController
-@synthesize companyName = _companyName;
-@synthesize phone = _phone;
-@synthesize website = _website;
-@synthesize industryType = _industryType;
+@synthesize companyName;
+@synthesize phone;
+@synthesize website;
+@synthesize industryType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,17 +64,9 @@
 
 - (IBAction)save:(id)sender {
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    [database addCompanyWithName:_companyName.text phone:_phone.text website:_website.text industry:_industryType.text];
+    [database addCompanyWithName:companyName.text phone:phone.text website:website.text industry:industryType.text];
 }
 
 
 
-
-- (void)dealloc {
-    [_companyName release];
-    [_phone release];
-    [_website release];
-    [_industryType release];
-    [super dealloc];
-}
 @end

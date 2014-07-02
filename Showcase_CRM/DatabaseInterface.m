@@ -21,6 +21,8 @@
 
 @implementation DatabaseInterface
 
+@synthesize managedObjectContext;
+
 + (id)databaseInterface
 {
     static DatabaseInterface *databaseInterface = nil;
@@ -53,8 +55,8 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Industry"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    NSString *predicateString = [NSString stringWithFormat: @"industry_type == %@", industry];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateString];
+    //NSString *predicateString = [NSString stringWithFormat: @"industry_type == %@", industry];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"industry_type == %@", industry];
     [fetchRequest setPredicate:predicate];
     NSError* error;
     NSArray *fetchedIndustries = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -68,7 +70,7 @@
         industry1.industry_type = industry;
         newEntry.industry = industry1;
     }
-    
+    //NSError* error;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
