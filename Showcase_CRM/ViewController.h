@@ -13,8 +13,8 @@
 @interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource, UINavigationControllerDelegate, TKPeoplePickerControllerDelegate> {
     
 }
-@property(nonatomic,retain) NSMutableDictionary *states;
-@property(nonatomic,retain) NSArray *datasource;
+@property(nonatomic,retain) NSArray *fetchedCompaniesArray;
+//@property(nonatomic,retain) NSArray *datasource;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 

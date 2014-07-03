@@ -63,6 +63,7 @@
     
     if ([fetchedIndustries count]) {
         newEntry.industry = [fetchedIndustries objectAtIndex:0];
+        //NSLog(@"existing industry");
     }
     else {
         Industry * industry1 = [NSEntityDescription insertNewObjectForEntityForName:@"Industry"
