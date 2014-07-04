@@ -8,12 +8,14 @@
 #import "ViewController.h"
 #import "DetailViewController.h"
 #import "UIImage+TKUtilities.h"
+#import "DatabaseInterface.h"
+#import "Company.h"
 
 #define thumbnailSize 75
 @implementation ViewController
 @synthesize scrollView = _scrollView;
 @synthesize tableView = _tableView;
-@synthesize states,datasource;
+@synthesize fetchedCompaniesArray;
 
 - (void)didReceiveMemoryWarning
 {
@@ -38,22 +40,16 @@
     // e.g. self.myOutlet = nil;
 }
 -(void)setupArray{
-    
-    states = [[NSMutableDictionary alloc]init];
-    [states setObject:@"Lansing" forKey:@"a公司"];
-    [states setObject:@"Sacremento" forKey:@"丁公司"];
-    [states setObject:@"Albany" forKey:@"丙公司"];
-    [states setObject:@"Phoenix" forKey:@"乙公司"];
-    [states setObject:@"Tulsa" forKey:@"甲公司"];
-    
-    datasource = [states allKeys];
-    
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    fetchedCompaniesArray = [database getAllCompanies];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 5;
+    
+    //TODO: consider adjust this value later
+    return [fetchedCompaniesArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,7 +68,9 @@
     [[cell textLabel] setBackgroundColor:[UIColor clearColor]];
     [[cell detailTextLabel] setBackgroundColor:[UIColor clearColor]];
     
-    cell.textLabel.text = [datasource objectAtIndex:indexPath.row];
+    Company *oneCompany = [fetchedCompaniesArray objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = oneCompany.name;
     
     //Arrow
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -144,11 +142,13 @@
     
     [contacts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         TKContact *contact = (TKContact*)obj;
-        [states setObject:contact.firstName forKey:contact.name];
+        
+        //TODO: add new contacts to database and reload
+        //[states setObject:contact.firstName forKey:contact.name];
+        
         NSLog(@"%@", contact.name);
     }];
     
-    datasource = [states allKeys];
     [self.tableView reloadData];
 }
 

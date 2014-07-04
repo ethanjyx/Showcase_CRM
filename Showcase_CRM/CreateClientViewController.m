@@ -8,15 +8,27 @@
 
 #import "CreateClientViewController.h"
 #import "AppDelegate.h"
+#import "DatabaseInterface.h"
 
 @interface CreateClientViewController ()
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (retain, nonatomic) IBOutlet UITextField *companyName;
+@property (retain, nonatomic) IBOutlet UITextField *phone;
+@property (retain, nonatomic) IBOutlet UITextField *website;
+@property (retain, nonatomic) IBOutlet UITextField *industryType;
+
+
+- (IBAction)save:(id)sender;
 
 @end
 
 
 @implementation CreateClientViewController
+@synthesize companyName;
+@synthesize phone;
+@synthesize website;
+@synthesize industryType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,5 +61,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)save:(id)sender {
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    [database addCompanyWithName:companyName.text phone:phone.text website:website.text industry:industryType.text];
+}
+
+
 
 @end

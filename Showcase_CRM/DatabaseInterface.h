@@ -10,4 +10,17 @@
 
 @interface DatabaseInterface : NSObject
 
+
++ (id)databaseInterface;
+
+
+- (void)addCompanyWithName:(NSString*)name phone:(NSString*) phone website:(NSString*)website industry:(NSString*)industry;
+
+- (NSArray*)getAllCompanies;
+
+
+
+
 @end
+
+
