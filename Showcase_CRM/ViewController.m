@@ -125,7 +125,7 @@
 
 - (IBAction)showPeoplePicker:(id)sender
 {
-    TKPeoplePickerController *controller = [[[TKPeoplePickerController alloc] initPeoplePicker] autorelease];
+    TKPeoplePickerController *controller = [[TKPeoplePickerController alloc] initPeoplePicker];
     controller.actionDelegate = self;
     controller.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:controller animated:YES completion:nil];
@@ -157,9 +157,4 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)dealloc {
-    [_tableView release];
-    [_tableView release];
-    [super dealloc];
-}
 @end

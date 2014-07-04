@@ -133,10 +133,6 @@
 }
 */
 
-- (void)dealloc {
-    [super dealloc];
-}
-
 - (IBAction)CRMButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

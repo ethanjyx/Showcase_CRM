@@ -11,18 +11,6 @@
 @implementation TKContact
 @synthesize name, email, tel, thumbnail, recordID, sectionNumber, rowSelected, lastName, firstName;
 
-- (void)dealloc
-{
-    [name release];
-    [email release];
-    [tel release];
-    [thumbnail release];
-    [lastName release];
-    [firstName release];
-    
-    [super dealloc];
-}
-
 - (NSString*)sorterFirstName {
     if (nil != firstName && ![firstName isEqualToString:@""]) {
         return firstName;
@@ -33,7 +21,7 @@
     if (nil != name && ![name isEqualToString:@""]) {
         return name;
     }
-    return nil;
+    return @"";
 }
 
 - (NSString*)sorterLastName {
@@ -46,7 +34,7 @@
     if (nil != name && ![name isEqualToString:@""]) {
         return name;
     }
-    return nil;
+    return @"";
 }
 
 @end

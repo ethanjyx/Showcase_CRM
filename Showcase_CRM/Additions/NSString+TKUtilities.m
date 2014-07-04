@@ -17,7 +17,7 @@
 	return range.location != NSNotFound;
 }
 
-- (NSString*)telephoneWithReformat
+- (NSString*)initTelephoneWithReformat
 {
     if ([self containsString:@"-"])
     {

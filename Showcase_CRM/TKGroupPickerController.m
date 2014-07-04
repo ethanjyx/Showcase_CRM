@@ -30,12 +30,11 @@
         ABRecordRef groupRecord = CFArrayGetValueAtIndex(allGroups, i);
         CFStringRef groupName = ABRecordCopyCompositeName(groupRecord);
         CFArrayRef currentGroupCount = ABGroupCopyArrayOfAllMembers(groupRecord);
-        group.name = (NSString*)groupName;
+        group.name = (__bridge NSString*)groupName;
         group.recordID = (int)ABRecordGetRecordID(groupRecord);
-        group.membersCount = (int)[(NSArray*)currentGroupCount count];
+        group.membersCount = (int)[(__bridge NSArray*)currentGroupCount count];
         
 		[groupsTemp addObject:group];
-        [group release];
         
         CFRelease(groupName);
         CFRelease(groupName);
@@ -45,7 +44,7 @@
     // Sorting by name
     NSMutableArray *sortGroups = [NSMutableArray arrayWithArray:groupsTemp];
     NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES] autorelease];
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSMutableArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
     self.groups = [NSMutableArray arrayWithArray:[sortGroups sortedArrayUsingDescriptors:sortDescriptors]];
 }
@@ -69,8 +68,8 @@
 {
     [super viewDidLoad];
     
-    [self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroup:)] autorelease]];
-    [self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)] autorelease]];
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroup:)]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
     [self reloadGroups];
@@ -112,7 +111,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
@@ -147,7 +146,6 @@
     }
     [controller setDelegate:peoplePicker];
     [self.navigationController pushViewController:controller animated:YES];
-    [controller release];
 }
 
 #pragma mark -
@@ -173,13 +171,6 @@
 {
     [super viewDidUnload];
     self.tableView = nil;
-}
-
-- (void)dealloc
-{
-    [_groups release];
-    [_tableView release];
-	[super dealloc];
 }
 
 @end

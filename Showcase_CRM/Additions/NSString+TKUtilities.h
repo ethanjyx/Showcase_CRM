@@ -11,6 +11,6 @@
 @interface NSString (TKUtilities)
 
 - (BOOL)containsString:(NSString *)aString;
-- (NSString*)telephoneWithReformat;
+- (NSString*)initTelephoneWithReformat;
 
 @end

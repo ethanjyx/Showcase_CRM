@@ -117,7 +117,7 @@
 		61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseInterface.h; sourceTree = "<group>"; };
 		61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseInterface.m; sourceTree = "<group>"; };
 		9D132E69195A589700CD5788 /* TKContactsMultiPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactsMultiPickerController.h; sourceTree = "<group>"; };
-		9D132E6A195A589700CD5788 /* TKContactsMultiPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKContactsMultiPickerController.m; sourceTree = "<group>"; };
+		9D132E6A195A589700CD5788 /* TKContactsMultiPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TKContactsMultiPickerController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9D132E6B195A589700CD5788 /* TKContactsMultiPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKContactsMultiPickerController.xib; sourceTree = "<group>"; };
 		9D132E6C195A589700CD5788 /* TKGroupPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGroupPickerController.h; sourceTree = "<group>"; };
 		9D132E6D195A589700CD5788 /* TKGroupPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGroupPickerController.m; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 		9D132E71195A589700CD5788 /* TKNoContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKNoContactViewController.xib; sourceTree = "<group>"; };
 		9D132E72195A589700CD5788 /* TKPeoplePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKPeoplePickerController.h; sourceTree = "<group>"; };
 		9D132E73195A589700CD5788 /* TKPeoplePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKPeoplePickerController.m; sourceTree = "<group>"; };
-		9D132E7C195A58DA00CD5788 /* NSString+TKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TKUtilities.h"; sourceTree = "<group>"; };
-		9D132E7D195A58DA00CD5788 /* NSString+TKUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TKUtilities.m"; sourceTree = "<group>"; };
+		9D132E7C195A58DA00CD5788 /* NSString+TKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSString+TKUtilities.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9D132E7D195A58DA00CD5788 /* NSString+TKUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+TKUtilities.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9D132E7E195A58DA00CD5788 /* UIImage+TKUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TKUtilities.h"; sourceTree = "<group>"; };
 		9D132E7F195A58DA00CD5788 /* UIImage+TKUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TKUtilities.m"; sourceTree = "<group>"; };
 		9D132E81195A58DA00CD5788 /* TKContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContact.h; sourceTree = "<group>"; };
@@ -758,7 +758,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Showcase_CRM/Showcase_CRM-Prefix.pch";
 				INFOPLIST_FILE = "Showcase_CRM/Showcase_CRM-Info.plist";
@@ -778,7 +778,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Showcase_CRM/Showcase_CRM-Prefix.pch";
 				INFOPLIST_FILE = "Showcase_CRM/Showcase_CRM-Info.plist";

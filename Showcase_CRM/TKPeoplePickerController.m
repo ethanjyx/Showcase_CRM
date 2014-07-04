@@ -39,7 +39,6 @@
     TKNoContactViewController *noContactController = [[TKNoContactViewController alloc] initWithNibName:NSStringFromClass([TKNoContactViewController class]) bundle:nil];
     noContactController.delegate = self;
     [self pushViewController:noContactController animated:NO];
-    [noContactController release];
 }
 
 - (void)presentContactsMultiPickerController
@@ -50,12 +49,11 @@
     contactMultiController.delegate = self;
     [self pushViewController:contactMultiController animated:NO];
     self.contactController = contactMultiController;
-    [contactMultiController release];
 }
 
 - (id)initPeoplePicker
 {
-    self.groupController = [[[TKGroupPickerController alloc] initWithNibName:NSStringFromClass([TKGroupPickerController class]) bundle:nil] autorelease];
+    self.groupController = [[TKGroupPickerController alloc] initWithNibName:NSStringFromClass([TKGroupPickerController class]) bundle:nil];
     self.groupController.delegate = self;
     self = [super initWithRootViewController:self.groupController];
     if (self) {
@@ -90,14 +88,6 @@
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    if (_addressBook) CFRelease(_addressBook);
-    [_groupController release];
-    [_contactController release];
-    [super dealloc];
 }
 
 - (void)viewDidLoad

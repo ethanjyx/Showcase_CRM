@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     [self.navigationItem setLeftBarButtonItem:nil];
-    [self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)] autorelease]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)]];
 }
 
 - (void)didReceiveMemoryWarning
