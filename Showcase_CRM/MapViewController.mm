@@ -78,7 +78,12 @@
 {
     NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     [_mapView updateLocationData:userLocation];
-    //[_mapView setCenterCoordinate:userLocation.location.coordinate];
+    CLLocationDegrees longitudeDiff = fabs(_mapView.centerCoordinate.longitude - userLocation.location.coordinate.longitude);
+    CLLocationDegrees latitudeDiff = fabs(_mapView.centerCoordinate.latitude - userLocation.location.coordinate.latitude);
+    
+    if(longitudeDiff > 0.0001 || latitudeDiff > 0.0001) {
+        [_mapView setCenterCoordinate:userLocation.location.coordinate];
+    }
 }
 
 /**
