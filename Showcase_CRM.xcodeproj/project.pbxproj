@@ -52,6 +52,7 @@
 		9D132E94195A58DA00CD5788 /* uncheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8A195A58DA00CD5788 /* uncheckBox.png */; };
 		9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */; };
 		CE0E674F196161F50074E821 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E674E196161F50074E821 /* DetailViewController.m */; };
+		CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */; };
 		F6CE94CB19631A670017DDAD /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F6CE94CA19631A670017DDAD /* mapapi.bundle */; };
 		F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F6CE94CD19631A7A0017DDAD /* MapViewController.mm */; };
 		F6CE94D219631B300017DDAD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D119631B300017DDAD /* CoreLocation.framework */; };
@@ -143,6 +144,8 @@
 		9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckBox@2x.png"; sourceTree = "<group>"; };
 		CE0E674B196160160074E821 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		CE0E674E196161F50074E821 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
+		CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MutableDeepCopy.m"; sourceTree = "<group>"; };
 		F6CE948F19631A410017DDAD /* BMapKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMapKit.h; path = inc/BMapKit.h; sourceTree = "<group>"; };
 		F6CE949019631A410017DDAD /* BMKActionPaopaoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMKActionPaopaoView.h; path = inc/BMKActionPaopaoView.h; sourceTree = "<group>"; };
 		F6CE949119631A410017DDAD /* BMKAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMKAnnotation.h; path = inc/BMKAnnotation.h; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */,
 				618E026819473FB00094BD1F /* Images.xcassets */,
 				618E025719473FAF0094BD1F /* Supporting Files */,
+				CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */,
+				CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */,
 			);
 			path = Showcase_CRM;
 			sourceTree = "<group>";
@@ -607,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */,
 				6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */,
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				CE0E674F196161F50074E821 /* DetailViewController.m in Sources */,
