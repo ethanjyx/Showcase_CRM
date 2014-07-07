@@ -10,7 +10,8 @@
 #import "AppDelegate.h"
 #import "Company.h"
 #import "Industry.h"
-
+#import "Contact.h"
+#import "Address.h"
 
 @interface DatabaseInterface()
 
@@ -103,13 +104,72 @@
 }
 
 
+- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note address:(Address*)address
+{
+    Contact *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Contact"
+                                                      inManagedObjectContext:self.managedObjectContext];
+    newEntry.lastname = lastname;
+    newEntry.firstname = firstname;
+    newEntry.title = title;
+    newEntry.phone_work = phoneWork;
+    newEntry.phone_home = phoneHome;
+    newEntry.phone_mobile = phoneMobile;
+    newEntry.email_work = emailWork;
+    newEntry.email_personal = emailPersonal;
+    newEntry.note = note;
+    
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"street == %@ AND city == %@ AND province == %@ AND country == %@", address.street, address.city, address.province, address.country];
+    [fetchRequest setPredicate:predicate];
+    NSError* error;
+    NSArray *fetchedIndustries = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedIndustries count]) {
+        newEntry.address = [fetchedIndustries objectAtIndex:0];
+        //NSLog(@"existing industry");
+    }
+    else {
+        Address * address1 = [NSEntityDescription insertNewObjectForEntityForName:@"Address"
+                                                           inManagedObjectContext:self.managedObjectContext];
+        address1 = address;
+        newEntry.address = address1; // TODO: check address relation with contact
+    }
+    //NSError* error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+}
 
 
 
-
-
-
-
+- (NSArray*)getAllContacts
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
+    NSArray *sortDescriptors = @[contactDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSError* error;
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedContacts = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return fetchedContacts;
+}
 
 
 

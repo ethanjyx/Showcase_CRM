@@ -18,8 +18,9 @@
 
 - (NSArray*)getAllCompanies;
 
+- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note address:(NSString*)address;
 
-
+- (NSArray*)getAllContacts;
 
 @end
 

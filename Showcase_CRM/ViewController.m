@@ -227,7 +227,7 @@
     _mutableNames=[_names mutableDeepCopy];
     //使用mutableDeepCopy方法深复制
     NSMutableArray *keyarr=[NSMutableArray new];
-    [keyarr addObjectsFromArray:[[_names allKeys] sortedArrayUsingSelector:@selector(compare:)]];
+    //[keyarr addObjectsFromArray:[[_names allKeys] sortedArrayUsingSelector:@selector(compare:)]];
     //读取键，排序后存放可变数组
     _mutableKeys=keyarr;
     
