@@ -308,14 +308,7 @@
     
 }
 
-
-
-
-
-
-
-
-
+// 导入， 弹出contacts的选择框
 - (IBAction)showPeoplePicker:(id)sender
 {
     TKPeoplePickerController *controller = [[TKPeoplePickerController alloc] initPeoplePicker];
@@ -323,6 +316,29 @@
     controller.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:controller animated:YES completion:nil];
 }
+
+// 导出
+- (IBAction)exportContacts:(id)sender {
+    ABAddressBookRef addressBook = ABAddressBookCreate(); // create address book record
+    ABRecordRef person = ABPersonCreate(); // create a person
+    
+    NSString *phone = @"0123456789"; // the phone number to add
+    
+    //Phone number is a list of phone number, so create a multivalue
+    ABMutableMultiValueRef phoneNumberMultiValue =
+    ABMultiValueCreateMutable(kABPersonPhoneProperty);
+    ABMultiValueAddValueAndLabel(phoneNumberMultiValue ,(__bridge CFTypeRef)(phone),kABPersonPhoneMobileLabel, NULL);
+    
+    ABRecordSetValue(person, kABPersonFirstNameProperty, @"FirstName" , nil); // first name of the new person
+    ABRecordSetValue(person, kABPersonLastNameProperty, @"AAA", nil); // his last name
+    ABRecordSetValue(person, kABPersonPhoneProperty, phoneNumberMultiValue, nil); // set the phone number property
+    ABAddressBookAddRecord(addressBook, person, nil); //add the new person to the record
+    
+    ABAddressBookSave(addressBook, nil); //save the record
+    
+    CFRelease(person); // relase the ABRecordRef  variable
+}
+
 
 #pragma mark - TKContactsMultiPickerControllerDelegate
 
