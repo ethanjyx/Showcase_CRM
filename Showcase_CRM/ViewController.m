@@ -35,16 +35,18 @@
 	// Do any additional setup after loading the view, typically from a nib.
   //  [self setTitle:@"Contacts"];
     //[self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showPeoplePicker:)] autorelease]];
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"sortednames" ofType:@"plist"];
+    //NSString *path=[[NSBundle mainBundle] pathForResource:@"sortednames" ofType:@"plist"];
     //取得sortednames.plist绝对路径
     //sortednames.plist本身是一个NSDictionary,以键-值的形式存储字符串数组
     
-    NSDictionary *dict=[[NSDictionary alloc] initWithContentsOfFile:path];
+    //NSDictionary *dict=[[NSDictionary alloc] initWithContentsOfFile:path];
     //转换成NSDictionary对象
-    self.names=dict;
+    //self.names=dict;
+    _names = [[NSMutableDictionary alloc] initWithCapacity:10];
     
+    [self setupNames];
     [self resetSearch];
-    //重置
+    //重置resetSearch
     [_tableView reloadData];
     //重新载入数据
 }
@@ -61,12 +63,19 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-/*-(void)setupArray{
+
+-(void)setupNames{
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    fetchedCompaniesArray = [database getAllCompanies];
+    NSArray *fetchedCompaniesArray = [database getAllCompanies];
+    NSLog(@"names %d", [fetchedCompaniesArray count]);
+    for (int i = 0; i < [fetchedCompaniesArray count]; i++) {
+        Company *oneCompany = [fetchedCompaniesArray objectAtIndex:i];
+        [_names setObject:oneCompany.name forKey:oneCompany.name];
+    }
+    NSLog(@"_names %d", [_names count]);
 }
- 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+
+/*- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //#warning Incomplete method implementation.
     // Return the number of rows in the section.
@@ -211,6 +220,7 @@
     return _mutableKeys;
     //通过key来索引
 }
+
 
 -(void)resetSearch
 {//重置搜索

@@ -1585,6 +1585,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </state>
                                 <connections>
                                     <action selector="save:" destination="8Hx-ga-pF6" eventType="touchUpInside" id="2dg-CU-sDG"/>
+                                    <segue destination="vz6-XA-cMz" kind="replace" splitViewControllerTargetIndex="1" id="Qxi-Y8-DiZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ah8-8t-woB">
@@ -1989,7 +1990,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bn9-qF-nri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3131" y="153"/>
+            <point key="canvasLocation" x="-2703" y="-507"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="6nL-q9-Uwg">

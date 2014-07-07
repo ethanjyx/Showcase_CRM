@@ -17,7 +17,7 @@
 //@property(nonatomic,retain) NSArray *fetchedCompaniesArray;
 //@property(nonatomic,retain) NSArray *fetchedContacts;
 
-@property (strong,nonatomic) NSDictionary *names;
+@property (strong,nonatomic) NSMutableDictionary *names;
 @property (strong,nonatomic) NSMutableDictionary *mutableNames;
 @property (strong,nonatomic) NSMutableArray *mutableKeys;
 //@property(nonatomic,retain) NSArray *datasource;
@@ -31,7 +31,7 @@
 -(void)handleSearchForTerm: (NSString*)searchTerm;
 //处理搜索，把不包含searchTerm的值从可变数组中去除
 
-//-(void)setupArray;
+-(void)setupNames;
 - (IBAction)showPeoplePicker:(id)sender;
 
 @end
