@@ -51,6 +51,12 @@
 		9D132E93195A58DA00CD5788 /* checkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E89195A58DA00CD5788 /* checkBox@2x.png */; };
 		9D132E94195A58DA00CD5788 /* uncheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8A195A58DA00CD5788 /* uncheckBox.png */; };
 		9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */; };
+		9DF63598196BBA4D00E10E48 /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF6358E196BBA4D00E10E48 /* expandableImage.png */; };
+		9DF63599196BBA4D00E10E48 /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */; };
+		9DF6359A196BBA4D00E10E48 /* SKSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63591196BBA4D00E10E48 /* SKSTableView.m */; };
+		9DF6359B196BBA4D00E10E48 /* SKSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63593196BBA4D00E10E48 /* SKSTableViewCell.m */; };
+		9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63595196BBA4D00E10E48 /* SKSTableViewCellIndicator.m */; };
+		9DF6359D196BBA4D00E10E48 /* sksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63597196BBA4D00E10E48 /* sksViewController.m */; };
 		CE0E674F196161F50074E821 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E674E196161F50074E821 /* DetailViewController.m */; };
 		CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */; };
 		F6CE94CB19631A670017DDAD /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F6CE94CA19631A670017DDAD /* mapapi.bundle */; };
@@ -142,6 +148,16 @@
 		9D132E89195A58DA00CD5788 /* checkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBox@2x.png"; sourceTree = "<group>"; };
 		9D132E8A195A58DA00CD5788 /* uncheckBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckBox.png; sourceTree = "<group>"; };
 		9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckBox@2x.png"; sourceTree = "<group>"; };
+		9DF6358E196BBA4D00E10E48 /* expandableImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandableImage.png; sourceTree = "<group>"; };
+		9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expandableImage@2x.png"; sourceTree = "<group>"; };
+		9DF63590196BBA4D00E10E48 /* SKSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableView.h; sourceTree = "<group>"; };
+		9DF63591196BBA4D00E10E48 /* SKSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableView.m; sourceTree = "<group>"; };
+		9DF63592196BBA4D00E10E48 /* SKSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableViewCell.h; sourceTree = "<group>"; };
+		9DF63593196BBA4D00E10E48 /* SKSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableViewCell.m; sourceTree = "<group>"; };
+		9DF63594196BBA4D00E10E48 /* SKSTableViewCellIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableViewCellIndicator.h; sourceTree = "<group>"; };
+		9DF63595196BBA4D00E10E48 /* SKSTableViewCellIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableViewCellIndicator.m; sourceTree = "<group>"; };
+		9DF63596196BBA4D00E10E48 /* sksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sksViewController.h; sourceTree = "<group>"; };
+		9DF63597196BBA4D00E10E48 /* sksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sksViewController.m; sourceTree = "<group>"; };
 		CE0E674B196160160074E821 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		CE0E674E196161F50074E821 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
@@ -287,6 +303,7 @@
 		618E025619473FAF0094BD1F /* Showcase_CRM */ = {
 			isa = PBXGroup;
 			children = (
+				9DF6359E196BBA5200E10E48 /* SKSTableViewImp */,
 				F6CE948C19631A1F0017DDAD /* BaiduMap */,
 				61ECB2B11961BB320072F8D6 /* Database */,
 				61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */,
@@ -418,6 +435,23 @@
 				9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9DF6359E196BBA5200E10E48 /* SKSTableViewImp */ = {
+			isa = PBXGroup;
+			children = (
+				9DF6358E196BBA4D00E10E48 /* expandableImage.png */,
+				9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */,
+				9DF63590196BBA4D00E10E48 /* SKSTableView.h */,
+				9DF63591196BBA4D00E10E48 /* SKSTableView.m */,
+				9DF63592196BBA4D00E10E48 /* SKSTableViewCell.h */,
+				9DF63593196BBA4D00E10E48 /* SKSTableViewCell.m */,
+				9DF63594196BBA4D00E10E48 /* SKSTableViewCellIndicator.h */,
+				9DF63595196BBA4D00E10E48 /* SKSTableViewCellIndicator.m */,
+				9DF63596196BBA4D00E10E48 /* sksViewController.h */,
+				9DF63597196BBA4D00E10E48 /* sksViewController.m */,
+			);
+			name = SKSTableViewImp;
 			sourceTree = "<group>";
 		};
 		F6CE948C19631A1F0017DDAD /* BaiduMap */ = {
@@ -582,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				618E026919473FB00094BD1F /* Images.xcassets in Resources */,
+				9DF63598196BBA4D00E10E48 /* expandableImage.png in Resources */,
 				9D132E91195A58DA00CD5788 /* blank@2x.png in Resources */,
 				F6CE94CB19631A670017DDAD /* mapapi.bundle in Resources */,
 				9D132E92195A58DA00CD5788 /* checkBox.png in Resources */,
@@ -591,6 +626,7 @@
 				618E026419473FAF0094BD1F /* Main.storyboard in Resources */,
 				9D132E75195A589700CD5788 /* TKContactsMultiPickerController.xib in Resources */,
 				9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */,
+				9DF63599196BBA4D00E10E48 /* expandableImage@2x.png in Resources */,
 				9D132E90195A58DA00CD5788 /* blank.png in Resources */,
 				9D132E79195A589700CD5788 /* TKNoContactViewController.xib in Resources */,
 				9D132E94195A58DA00CD5788 /* uncheckBox.png in Resources */,
@@ -615,12 +651,14 @@
 				CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */,
 				6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */,
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
+				9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */,
 				CE0E674F196161F50074E821 /* DetailViewController.m in Sources */,
 				9D132E76195A589700CD5788 /* TKGroupPickerController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				9D132E8C195A58DA00CD5788 /* NSString+TKUtilities.m in Sources */,
 				6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */,
 				9D132E7A195A589700CD5788 /* TKPeoplePickerController.m in Sources */,
+				9DF6359B196BBA4D00E10E48 /* SKSTableViewCell.m in Sources */,
 				6120CFD51959F3ED001FCAC1 /* Address.m in Sources */,
 				6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */,
 				6120CFC31959F3ED001FCAC1 /* Project.m in Sources */,
@@ -631,12 +669,14 @@
 				6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */,
 				6120CFCC1959F3ED001FCAC1 /* Contact.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
+				9DF6359A196BBA4D00E10E48 /* SKSTableView.m in Sources */,
 				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
 				9D132E8E195A58DA00CD5788 /* TKContact.m in Sources */,
 				6120CFC01959F3EC001FCAC1 /* Company.m in Sources */,
 				9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */,
 				F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */,
 				61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */,
+				9DF6359D196BBA4D00E10E48 /* sksViewController.m in Sources */,
 				9D132E8D195A58DA00CD5788 /* UIImage+TKUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
