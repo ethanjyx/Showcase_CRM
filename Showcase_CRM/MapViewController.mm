@@ -9,7 +9,8 @@
 #import "MapViewController.h"
 
 @interface MapViewController ()
-- (IBAction)CRMButton:(id)sender;
+- (IBAction)returnButton:(id)sender;
+- (IBAction)locateButton:(id)sender;
 
 @end
 
@@ -30,10 +31,11 @@
     // Do any additional setup after loading the view.
     _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, 1024, 724)];
     _mapView.showsUserLocation = YES;//显示定位图层
-    _mapView.zoomLevel = 7;
+    [self.view addSubview:_mapView];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 34, 800, 44)];
+    [self.view addSubview:searchBar];
     _locService = [[BMKLocationService alloc]init];
     [_locService startUserLocationService];
-    [self.view addSubview:_mapView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +59,6 @@
 - (void)mapViewWillStartLocatingUser:(BMKMapView *)mapView
 {
 	NSLog(@"start locate");
-    
 }
 
 /**
@@ -78,12 +79,6 @@
 {
     NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     [_mapView updateLocationData:userLocation];
-    CLLocationDegrees longitudeDiff = fabs(_mapView.centerCoordinate.longitude - userLocation.location.coordinate.longitude);
-    CLLocationDegrees latitudeDiff = fabs(_mapView.centerCoordinate.latitude - userLocation.location.coordinate.latitude);
-    
-    if(longitudeDiff > 0.0001 || latitudeDiff > 0.0001) {
-        [_mapView setCenterCoordinate:userLocation.location.coordinate];
-    }
 }
 
 /**
@@ -138,8 +133,13 @@
 }
 */
 
-- (IBAction)CRMButton:(id)sender {
+
+- (IBAction)returnButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)locateButton:(id)sender {
+    [_mapView setCenterCoordinate:_locService.userLocation.location.coordinate animated:YES];
 }
 
 @end

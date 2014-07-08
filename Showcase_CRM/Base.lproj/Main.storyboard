@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A2093" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="TeU-Xk-Db8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="TeU-Xk-Db8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -2068,11 +2068,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="云销通" width="341.30000000000001" id="hNG-iW-NHe"/>
-                                    <barButtonItem title="GPS" width="341.30000000000001" id="neW-55-Z1j"/>
-                                    <barButtonItem title="CRM" width="341.30000000000001" id="x6j-VY-prw">
+                                    <barButtonItem title="定位" width="341.30000000000001" id="hNG-iW-NHe">
                                         <connections>
-                                            <action selector="CRMButton:" destination="kSA-q7-8j8" id="Okh-hQ-xez"/>
+                                            <action selector="locateButton:" destination="kSA-q7-8j8" id="1N8-RS-m25"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="路线规划" width="341.30000000000001" id="neW-55-Z1j">
+                                        <connections>
+                                            <segue destination="uLH-D2-DcE" kind="popover" popoverAnchorBarButtonItem="neW-55-Z1j" id="QkD-TH-4qr">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="返回" width="341.30000000000001" id="x6j-VY-prw">
+                                        <connections>
+                                            <action selector="returnButton:" destination="kSA-q7-8j8" id="AUl-iC-aMQ"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -2085,7 +2095,37 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZT-MH-ERT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6125" y="126"/>
+            <point key="canvasLocation" x="-6165" y="320"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="5nd-T5-Ld8">
+            <objects>
+                <tableViewController id="uLH-D2-DcE" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lIF-y6-DAm">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qbb-gk-P9p">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qbb-gk-P9p" id="EAI-Il-bl1">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uLH-D2-DcE" id="rXt-n3-W0h"/>
+                            <outlet property="delegate" destination="uLH-D2-DcE" id="wro-0C-PWS"/>
+                        </connections>
+                    </tableView>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZI-xQ-bXo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4957" y="410"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
