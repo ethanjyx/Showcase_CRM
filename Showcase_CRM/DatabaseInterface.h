@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Company.h"
+#import "Address.h"
+#import "Contact.h"
 
 @interface DatabaseInterface : NSObject
 
@@ -18,9 +21,19 @@
 
 - (NSArray*)getAllCompanies;
 
-- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note address:(NSString*)address;
+- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note address:(NSString*)address companyName:(NSString*)companyName;
 
 - (NSArray*)getAllContacts;
+
+- (Company*)fetchCompanyByName:(NSString*)companyName;
+
+- (void)addCompany:(NSString*)companyName billingAddress:(Address*)billingAddress shippingAddress:(Address*)shippingAddress;
+
+- (void)editOldCompany:(Company*) oldCompany toNewCompany:(Company*) newCompany;
+
+- (void)editContact:(Contact*) contact;
+
+- (void)deleteContact:(Contact*) contact;
 
 @end
 

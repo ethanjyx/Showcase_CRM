@@ -56,7 +56,6 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Industry"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    //NSString *predicateString = [NSString stringWithFormat: @"industry_type == %@", industry];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"industry_type == %@", industry];
     [fetchRequest setPredicate:predicate];
     NSError* error;
@@ -64,7 +63,6 @@
     
     if ([fetchedIndustries count]) {
         newEntry.industry = [fetchedIndustries objectAtIndex:0];
-        //NSLog(@"existing industry");
     }
     else {
         Industry * industry1 = [NSEntityDescription insertNewObjectForEntityForName:@"Industry"
@@ -72,13 +70,10 @@
         industry1.industry_type = industry;
         newEntry.industry = industry1;
     }
-    //NSError* error;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }
 }
-
-
 
 - (NSArray*)getAllCompanies
 {
@@ -104,7 +99,7 @@
 }
 
 
-- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note address:(Address*)address
+- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note address:(Address*)address companyName:(NSString*)companyName
 {
     Contact *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Contact"
                                                       inManagedObjectContext:self.managedObjectContext];
@@ -118,21 +113,17 @@
     newEntry.email_personal = emailPersonal;
     newEntry.note = note;
     
-    
-    
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"street == %@ AND city == %@ AND province == %@ AND country == %@", address.street, address.city, address.province, address.country];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(street == %@) AND (city == %@) AND (province == %@) AND (country == %@)", address.street, address.city, address.province, address.country];
     [fetchRequest setPredicate:predicate];
     NSError* error;
-    NSArray *fetchedIndustries = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSArray *fetchedAddresses = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    if ([fetchedIndustries count]) {
-        newEntry.address = [fetchedIndustries objectAtIndex:0];
-        //NSLog(@"existing industry");
+    if ([fetchedAddresses count]) {
+        newEntry.address = [fetchedAddresses lastObject];
     }
     else {
         Address * address1 = [NSEntityDescription insertNewObjectForEntityForName:@"Address"
@@ -140,12 +131,50 @@
         address1 = address;
         newEntry.address = address1; // TODO: check address relation with contact
     }
-    //NSError* error;
+    newEntry.company = [self fetchCompanyByName:companyName];
+    
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity2 = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:entity2];
+    
+    // Specify that the request should return dictionaries.
+    [request setResultType:NSDictionaryResultType];
+    
+    // Create an expression for the key path.
+    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"id"];
+    
+    // Create an expression to represent the minimum value at the key path 'creationDate'
+    NSExpression *maxExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
+    
+    // Create an expression description using the minExpression and returning a date.
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+    
+    // The name is the key that will be used in the dictionary for the return value.
+    [expressionDescription setName:@"maxId"];
+    [expressionDescription setExpression:maxExpression];
+    [expressionDescription setExpressionResultType:NSDecimalAttributeType];
+    
+    // Set the request's properties to fetch just the property represented by the expressions.
+    [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+    
+    NSArray *objects = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (objects == nil) {
+        newEntry.id = [[NSNumber alloc] initWithInt:1];
+    }
+    else {
+        if ([objects count] > 0) {
+            newEntry.id = @([[[objects objectAtIndex:0] valueForKey:@"maxId"] intValue] + 1);
+        }
+        else {
+            newEntry.id = [[NSNumber alloc] initWithInt:1];
+        }
+    }
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }
 }
-
 
 
 - (NSArray*)getAllContacts
@@ -171,29 +200,162 @@
     return fetchedContacts;
 }
 
+- (Company*)fetchCompanyByName:(NSString*)companyName
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", companyName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return [fetchedObjects lastObject];
+}
 
 
 
+- (void)addCompany:(NSString*)companyName billingAddress:(Address*)billingAddress shippingAddress:(Address*)shippingAddress
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", companyName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    Company *fetchedObject = [fetchedObjects lastObject];
+    
+    
+    NSFetchRequest *fetchRequest2 = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity2 = [NSEntityDescription entityForName:@"Address"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest2 setEntity:entity2];
+    NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"(street == %@) AND (city == %@) AND (province == %@) AND (country == %@)", billingAddress.street, billingAddress.city, billingAddress.province, billingAddress.country];
+    [fetchRequest2 setPredicate:predicate2];
+    NSArray *fetchedAddress1 = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedAddress1 count]) {
+        fetchedObject.billing_address = [fetchedAddress1 lastObject];
+    }
+    else {
+        Address * newAddress = [NSEntityDescription insertNewObjectForEntityForName:@"Address"
+                                                           inManagedObjectContext:self.managedObjectContext];
+        newAddress = billingAddress;
+        fetchedObject.billing_address = newAddress;
+    }
+
+    NSFetchRequest *fetchRequest3 = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity3 = [NSEntityDescription entityForName:@"Address"
+                                               inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest3 setEntity:entity3];
+    NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"(street == %@) AND (city == %@) AND (province == %@) AND (country == %@)", shippingAddress.street, shippingAddress.city, shippingAddress.province, shippingAddress.country];
+    [fetchRequest3 setPredicate:predicate3];
+    NSArray *fetchedAddress2 = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedAddress2 count]) {
+        fetchedObject.shipping_address = [fetchedAddress2 lastObject];
+    }
+    else {
+        Address * newAddress = [NSEntityDescription insertNewObjectForEntityForName:@"Address"
+                                                             inManagedObjectContext:self.managedObjectContext];
+        newAddress = billingAddress;
+        fetchedObject.shipping_address = newAddress;
+    }
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+- (void)editOldCompany:(Company*) oldCompany toNewCompany:(Company*) newCompany
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", oldCompany.name];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Company *editCompany = [fetchedObjects lastObject];
+    editCompany = newCompany;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+
+- (void)editContact:(Contact*) contact
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", contact.id];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Contact *editContact = [fetchedObjects lastObject];
+    editContact = contact;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- (void)deleteContact:(Contact*) contact
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", contact.id];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Contact *fetchedContact = [fetchedObjects lastObject];
+    [self.managedObjectContext deleteObject:fetchedContact];
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
 
 @end

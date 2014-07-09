@@ -17,7 +17,6 @@
 @implementation ViewController
 @synthesize scrollView;
 @synthesize tableView;
-@synthesize fetchedCompaniesArray;
 @synthesize names, mutableNames, mutableKeys;
 @synthesize search;
 
@@ -36,18 +35,29 @@
     mutableKeys = [[NSMutableArray alloc] init];
     [self setupNames];
     [self resetSearch];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
 }
+
+
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
 }
+
+- (void)updateTable
+{
+    [names removeAllObjects];
+    [mutableNames removeAllObjects];
+    [mutableKeys removeAllObjects];
+    [self setupNames];
+    [self resetSearch];
+    [tableView reloadData];
+}
+
 - (void)setupNames
 {
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    fetchedCompaniesArray = [database getAllCompanies];
-    
-    
     NSArray *fetchedCompaniesArrayLocal = [database getAllCompanies];
     NSLog(@"fetched %d", [fetchedCompaniesArrayLocal count]);
     for (int i = 0; i < [fetchedCompaniesArrayLocal count]; i++) {
