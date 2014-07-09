@@ -141,11 +141,12 @@
         
     } else {
         
+        // for subrow! TODO: modify here
         NSIndexPath *indexPathForSubrow = [self correspondingIndexPathForSubRowAtIndexPath:indexPath];
         UITableViewCell *cell = [_SKSTableViewDelegate tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:indexPathForSubrow];
         cell.backgroundView = nil;
         cell.backgroundColor = [self separatorColor];
-        cell.indentationLevel = 2;
+        cell.indentationLevel = 1;
         
         return cell;
         
@@ -260,6 +261,7 @@
         NSInteger row = indexPath.row;
         NSInteger section = indexPath.section;
         
+        // create the indexPaths for subrows
         for (NSInteger index = 1; index <= numberOfSubRows; index++) {
             
             NSIndexPath *expIndexPath = [NSIndexPath indexPathForRow:row+index inSection:section];
