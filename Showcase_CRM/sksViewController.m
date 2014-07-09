@@ -102,6 +102,7 @@
     return cell;
 }
 
+// called in SKSTableView.m to create cell for subRows
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"UITableViewCell";
@@ -112,7 +113,30 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    // add button as subView to control subRow
+    UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [editButton addTarget:self
+               action:@selector(aMethod:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [editButton setTitle:@"Edit" forState:UIControlStateNormal];
+    editButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
+    [cell.contentView addSubview:editButton];
+    
+    UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [deleteButton addTarget:self
+                   action:@selector(aMethod:)
+         forControlEvents:UIControlEventTouchUpInside];
+    [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+    deleteButton.frame = CGRectMake(540, 0, 160.0, 40.0); // x, y, width, height
+    [cell.contentView addSubview:deleteButton];
+    
+//    UIView *buttonViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 232)];
+//    [buttonViews addSubview:editButton];
+//    [buttonViews addSubview:deleteButton];
+//    cell.accessoryView = buttonViews;
     
     return cell;
 }
