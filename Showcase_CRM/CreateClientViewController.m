@@ -65,7 +65,7 @@
 - (IBAction)save:(id)sender {
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     [database addCompanyWithName:companyName.text phone:phone.text website:website.text industry:industryType.text];
-    //NSLog(@"saved customer");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTable" object:nil];
 }
 
 

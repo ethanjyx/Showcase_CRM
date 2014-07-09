@@ -15,7 +15,7 @@
     
 }
 
-@property(nonatomic,retain) NSArray *fetchedCompaniesArray;
+
 @property (retain,nonatomic) NSMutableDictionary *names;
 @property (retain,nonatomic) NSMutableDictionary *mutableNames;
 @property (retain,nonatomic) NSMutableArray *mutableKeys;
@@ -24,7 +24,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *search;
 
 
--(void)setupNames;
+- (void)setupNames;
+- (void)updateTable;
 - (IBAction)showPeoplePicker:(id)sender;
 
 @end
