@@ -171,7 +171,26 @@
     return fetchedContacts;
 }
 
-
+- (Company*)fetchCompanyByName:(NSString*)companyName
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", companyName];
+    [fetchRequest setPredicate:predicate];
+    
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedContacts = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return [fetchedContacts lastObject];
+}
 
 
 
