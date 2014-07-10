@@ -43,14 +43,14 @@
     self.tableView.SKSTableViewDelegate = self;
     
     _contents = @[
+                  /*@[
+                      @[@"公司详细信息", @"Row0_Subrow1",@"Row0_Subrow2"]
+                      ],*/
                   @[
-                      @[@"客户详细信息", @"Row0_Subrow1",@"Row0_Subrow2"]
+                      @[@"地址信息", @"开单地址", @"收货地址"]
                       ],
                   @[
                       @[@"联系人信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6", @"Row1_Subrow7", @"Row1_Subrow8", @"Row1_Subrow9", @"Row1_Subrow10", @"Row1_Subrow11", @"Row1_Subrow12"]
-                      ],
-                  @[
-                      @[@"地址信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6"]
                       ],
                   @[
                       @[@"业务进程", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3"]
@@ -147,14 +147,14 @@
 
 -(void)setSelectedCompany:(Company *)comp {
     _contents = @[
+                  /*@[
+                      @[@"公司详细", comp.name, @"Row0_Subrow2"]
+                      ],*/
                   @[
-                      @[@"客户详细", comp.name, @"Row0_Subrow2"]
+                      @[@"地址信息", @"开单地址", @"收货地址"]
                       ],
                   @[
                       @[@"联系人信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6", @"Row1_Subrow7", @"Row1_Subrow8", @"Row1_Subrow9", @"Row1_Subrow10", @"Row1_Subrow11", @"Row1_Subrow12"]
-                      ],
-                  @[
-                      @[@"地址信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6"]
                       ],
                   @[
                       @[@"业务进程", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3"]
