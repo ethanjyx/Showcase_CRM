@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SKSTableView.h"
+#import "Company.h"
+#import "SplitViewSelectionDelegate.h"
 
-@interface sksViewController : UIViewController <SKSTableViewDelegate>
+@interface sksViewController : UIViewController <SKSTableViewDelegate, SplitViewSelectionDelegate>
 
 @property (nonatomic, assign) IBOutlet SKSTableView *tableView;
+
+@property (nonatomic, strong) Company *company;
 
 @end

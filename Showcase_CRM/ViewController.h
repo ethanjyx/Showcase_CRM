@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "TKPeoplePickerController.h"
 #import "NSDictionary+MutableDeepCopy.h"
+#import "SplitViewSelectionDelegate.h"
 
 @interface ViewController : UIViewController<UITableViewDelegate,UITableViewDataSource, UINavigationControllerDelegate, TKPeoplePickerControllerDelegate, UISearchBarDelegate> {
     
@@ -22,7 +23,7 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *search;
-
+@property (nonatomic, assign) id<SplitViewSelectionDelegate> delegate;
 
 - (void)setupNames;
 - (void)updateTable;

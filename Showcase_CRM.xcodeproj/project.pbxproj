@@ -51,6 +51,7 @@
 		9D132E93195A58DA00CD5788 /* checkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E89195A58DA00CD5788 /* checkBox@2x.png */; };
 		9D132E94195A58DA00CD5788 /* uncheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8A195A58DA00CD5788 /* uncheckBox.png */; };
 		9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */; };
+		9DD7B38C196E2E990063009B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7B38B196E2E990063009B /* RootViewController.m */; };
 		9DF63598196BBA4D00E10E48 /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF6358E196BBA4D00E10E48 /* expandableImage.png */; };
 		9DF63599196BBA4D00E10E48 /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */; };
 		9DF6359A196BBA4D00E10E48 /* SKSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63591196BBA4D00E10E48 /* SKSTableView.m */; };
@@ -148,6 +149,9 @@
 		9D132E89195A58DA00CD5788 /* checkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBox@2x.png"; sourceTree = "<group>"; };
 		9D132E8A195A58DA00CD5788 /* uncheckBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckBox.png; sourceTree = "<group>"; };
 		9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckBox@2x.png"; sourceTree = "<group>"; };
+		9DD7B389196E19900063009B /* SplitViewSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewSelectionDelegate.h; sourceTree = "<group>"; };
+		9DD7B38A196E2E990063009B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		9DD7B38B196E2E990063009B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		9DF6358E196BBA4D00E10E48 /* expandableImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandableImage.png; sourceTree = "<group>"; };
 		9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expandableImage@2x.png"; sourceTree = "<group>"; };
 		9DF63590196BBA4D00E10E48 /* SKSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSTableView.h; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 				9D132E68195A587B00CD5788 /* ImportContact */,
 				618E025F19473FAF0094BD1F /* AppDelegate.h */,
 				618E026019473FAF0094BD1F /* AppDelegate.m */,
+				9DD7B38A196E2E990063009B /* RootViewController.h */,
+				9DD7B38B196E2E990063009B /* RootViewController.m */,
 				618E026219473FAF0094BD1F /* Main.storyboard */,
 				618E026519473FAF0094BD1F /* ViewController.h */,
 				618E026619473FAF0094BD1F /* ViewController.m */,
@@ -325,6 +331,7 @@
 				618E025719473FAF0094BD1F /* Supporting Files */,
 				CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */,
 				CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */,
+				9DD7B389196E19900063009B /* SplitViewSelectionDelegate.h */,
 			);
 			path = Showcase_CRM;
 			sourceTree = "<group>";
@@ -656,6 +663,7 @@
 				9D132E76195A589700CD5788 /* TKGroupPickerController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				9D132E8C195A58DA00CD5788 /* NSString+TKUtilities.m in Sources */,
+				9DD7B38C196E2E990063009B /* RootViewController.m in Sources */,
 				6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */,
 				9D132E7A195A589700CD5788 /* TKPeoplePickerController.m in Sources */,
 				9DF6359B196BBA4D00E10E48 /* SKSTableViewCell.m in Sources */,

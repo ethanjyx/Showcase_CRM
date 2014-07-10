@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+#import "sksViewController.h"
 
 @implementation AppDelegate
 
@@ -16,6 +18,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    //NSLog(@"%@", NSStringFromClass(self.window.rootViewController.class));
+    
+    // 问：同样的代码放后面会崩？ 而且self.window不好使？
+    // setting up the delegate to control the segue
+//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//    UISplitViewController *splitViewController = (UISplitViewController *)window.rootViewController;
+//    
+//    UINavigationController *leftNavController = [splitViewController.viewControllers objectAtIndex:0];
+//    ViewController *leftViewController = (ViewController *)[leftNavController topViewController];
+//    sksViewController *rightViewController = [splitViewController.viewControllers objectAtIndex:1];
+//    leftViewController.delegate = rightViewController;
+//    
+//    NSLog(@"%@", NSStringFromClass(splitViewController.class));
+    
     // Override point for customization after application launch.
     // 要使用百度地图，请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
@@ -26,6 +43,13 @@
     }
     // Add the navigation controller's view to the window and display.
     [self.window makeKeyAndVisible];
+    
+    
+//    UIViewController *rootViewController = self.window.rootViewController;
+//    UIViewController *v = [rootViewController presentedViewController];
+//    NSLog(@"%@", NSStringFromClass(v.class));
+//    
+    
     return YES;
 }
 							

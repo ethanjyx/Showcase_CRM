@@ -26,37 +26,39 @@
     }
     return self;
 }
-
-- (NSArray *)contents
-{
-    if (!_contents) {
-        _contents = @[
-              @[
-                  @[@"客户详细信息", @"Row0_Subrow1",@"Row0_Subrow2"]
-                ],
-              @[
-                  @[@"联系人信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6", @"Row1_Subrow7", @"Row1_Subrow8", @"Row1_Subrow9", @"Row1_Subrow10", @"Row1_Subrow11", @"Row1_Subrow12"]
-                ],
-              @[
-                  @[@"地址信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6"]
-                ],
-              @[
-                  @[@"业务进程", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3"]
-                ],
-              @[
-                  @[@"活动历史", @"Row1_Subrow1"]
-                ]
-          ];
-    }
-    
-    return _contents;
-}
+//
+//- (NSArray *)contents
+//{
+//    if (!_contents) {
+//        
+//    }
+//    
+//    return _contents;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     self.tableView.SKSTableViewDelegate = self;
+    
+    _contents = @[
+                  @[
+                      @[@"客户详细信息", @"Row0_Subrow1",@"Row0_Subrow2"]
+                      ],
+                  @[
+                      @[@"联系人信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6", @"Row1_Subrow7", @"Row1_Subrow8", @"Row1_Subrow9", @"Row1_Subrow10", @"Row1_Subrow11", @"Row1_Subrow12"]
+                      ],
+                  @[
+                      @[@"地址信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6"]
+                      ],
+                  @[
+                      @[@"业务进程", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3"]
+                      ],
+                  @[
+                      @[@"活动历史", @"Row1_Subrow1"]
+                      ]
+                  ];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,6 +94,8 @@
         cell = [[SKSTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
+    
+    NSLog(@"%@", cell.textLabel.text);
     
     //if ((indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 0)) || (indexPath.section == 1 && (indexPath.row == 0 || indexPath.row == 2)))
     
@@ -139,6 +143,31 @@
 //    cell.accessoryView = buttonViews;
     
     return cell;
+}
+
+-(void)setSelectedCompany:(Company *)comp {
+    _contents = @[
+                  @[
+                      @[@"客户详细", comp.name, @"Row0_Subrow2"]
+                      ],
+                  @[
+                      @[@"联系人信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6", @"Row1_Subrow7", @"Row1_Subrow8", @"Row1_Subrow9", @"Row1_Subrow10", @"Row1_Subrow11", @"Row1_Subrow12"]
+                      ],
+                  @[
+                      @[@"地址信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6"]
+                      ],
+                  @[
+                      @[@"业务进程", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3"]
+                      ],
+                  @[
+                      @[@"活动历史", @"Row1_Subrow1"]
+                      ]
+                  ];
+    
+    NSLog(@"%@", _contents[0][0][1]);
+    
+    [self.tableView reloadData];
+    NSLog(@"%@", _contents[0][0][0]);
 }
 
 @end
