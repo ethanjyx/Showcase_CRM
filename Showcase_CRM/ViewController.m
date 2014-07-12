@@ -22,7 +22,7 @@
 @synthesize tableView;
 @synthesize names, mutableNames, mutableKeys;
 @synthesize search;
-
+@synthesize Segment;
 
 
 
@@ -65,20 +65,37 @@
 - (void)setupNames
 {
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    NSArray *fetchedCompaniesArrayLocal = [database getAllCompanies];
-    NSLog(@"fetched %d", [fetchedCompaniesArrayLocal count]);
-    for (int i = 0; i < [fetchedCompaniesArrayLocal count]; i++) {
-        Company *oneCompany = [fetchedCompaniesArrayLocal objectAtIndex:i];
-        NSString *key = [oneCompany.name substringToIndex:1];
-        NSMutableArray *localNames = [names objectForKey:key];
-        if (localNames == nil) {
-            NSMutableArray *newArray = [[NSMutableArray alloc] init];
-            localNames = newArray;
+    if ( [Segment selectedSegmentIndex]==0) {
+        NSArray *fetchedCompaniesArrayLocal = [database getAllCompanies];
+        NSLog(@"fetched %d", [fetchedCompaniesArrayLocal count]);
+             for (int i = 0; i < [fetchedCompaniesArrayLocal count]; i++) {
+                 Company *oneCompany = [fetchedCompaniesArrayLocal objectAtIndex:i];
+                 NSString *key = [oneCompany.name substringToIndex:1];
+                 NSMutableArray *localNames = [names objectForKey:key];
+                 if (localNames == nil) {
+                     NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                     localNames = newArray;
+                 }
+                 [localNames addObject:oneCompany.name];
+                 [names setObject:localNames forKey:key];
+             }
         }
-        [localNames addObject:oneCompany.name];
-        [names setObject:localNames forKey:key];
-    }
+    else {
+            NSArray *fetchedContactsArrayLocal = [database getAllContacts];
+            NSLog(@"fetched %d", [fetchedContactsArrayLocal count]);
+            for (int i = 0; i < [fetchedContactsArrayLocal count]; i++) {
+                Contact *oneContact = [fetchedContactsArrayLocal objectAtIndex:i];
+                NSString *key = [oneContact.lastname substringToIndex:1];
+                NSMutableArray *localNames = [names objectForKey:key];
+                if (localNames == nil) {
+                    NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                    localNames = newArray;
+                }
+                [localNames addObject:[NSString stringWithFormat:@"%@,%@",oneContact.lastname,oneContact.firstname]];
+                [names setObject:localNames forKey:key];
+            }
     //NSLog(@"names %d", [names count]);
+        }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -297,6 +314,16 @@
     controller.actionDelegate = self;
     controller.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+//选择公司或者联系人时加载不同的数据
+- (IBAction)SegmentControl:(id)sender {
+    names = [[NSMutableDictionary alloc] init];
+    mutableNames = [[NSMutableDictionary alloc] init];
+    mutableKeys = [[NSMutableArray alloc] init];
+    [self setupNames];
+    [self resetSearch];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
 }
 
 // 导出

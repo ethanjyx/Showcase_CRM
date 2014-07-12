@@ -24,9 +24,12 @@
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *search;
 @property (nonatomic, assign) id<SplitViewSelectionDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *Segment;
 
 - (void)setupNames;
 - (void)updateTable;
 - (IBAction)showPeoplePicker:(id)sender;
+
+- (IBAction)SegmentControl:(id)sender;
 
 @end
