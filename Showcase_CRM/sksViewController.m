@@ -9,6 +9,7 @@
 #import "sksViewController.h"
 #import "SKSTableView.h"
 #import "SKSTableViewCell.h"
+#import "Industry.h"
 
 @interface sksViewController ()
 
@@ -17,6 +18,8 @@
 @end
 
 @implementation sksViewController
+
+@synthesize phone,industryType,website,CompanyName,company;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +44,7 @@
     [super viewDidLoad];
 
     self.tableView.SKSTableViewDelegate = self;
+    
     
     _contents = @[
                   /*@[
@@ -95,7 +99,7 @@
     
     cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
     
-    NSLog(@"%@", cell.textLabel.text);
+    //NSLog(@"%@", cell.textLabel.text);
     
     //if ((indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 0)) || (indexPath.section == 1 && (indexPath.row == 0 || indexPath.row == 2)))
     
@@ -164,10 +168,10 @@
                       ]
                   ];
     
-    NSLog(@"%@", _contents[0][0][1]);
+    //NSLog(@"%@", _contents[0][0][1]);
     
     [self.tableView reloadData];
-    NSLog(@"%@", _contents[0][0][0]);
+    //NSLog(@"%@", _contents[0][0][0]);
 }
 
 @end

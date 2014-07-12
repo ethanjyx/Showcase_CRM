@@ -10,6 +10,7 @@
 #import "UIImage+TKUtilities.h"
 #import "DatabaseInterface.h"
 #import "Company.h"
+#import "sksViewController.h"
 
 #define thumbnailSize 75
 
@@ -89,7 +90,7 @@
     return [nameSection count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)localTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     NSUInteger section=[indexPath section];
@@ -103,7 +104,7 @@
     NSArray *nameSection=[mutableNames objectForKey:key];
     
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = (UITableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = (UITableViewCell *) [localTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
@@ -121,26 +122,22 @@
     //Arrow
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
+    NSLog(@"%@", cell.textLabel.text);
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    /*
-    DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
-    detail.state = [datasource objectAtIndex:indexPath.row];
-    detail.capital = [states objectForKey:detail.state];
-    [self.navigationController pushViewController:detail animated:YES];
-    */
-    
     NSString* companyName = [self getCompanyNameAtIndexPath:indexPath];
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     Company* selectedCompany = [database fetchCompanyByName:companyName];
-
-    if (_delegate)
-        [_delegate setSelectedCompany:selectedCompany];
-    else
-        printf("!~~~~\n");
+    sksViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
+    detail.company = selectedCompany;
+    detail.phone.text = selectedCompany.phone;
+    detail.CompanyName.text = selectedCompany.name;
+    detail.website.text = selectedCompany.website;
+    //Industry *industry = company.industry;
+    [self performSegueWithIdentifier: @"detailSegue" sender:self];
 }
 
 -(NSString*)getCompanyNameAtIndexPath: (NSIndexPath*) indexPath {

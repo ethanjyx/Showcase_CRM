@@ -13,6 +13,10 @@
 
 @interface sksViewController : UIViewController <SKSTableViewDelegate, SplitViewSelectionDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *phone;
+@property (weak, nonatomic) IBOutlet UILabel *industryType;
+@property (weak, nonatomic) IBOutlet UILabel *website;
+@property (weak, nonatomic) IBOutlet UILabel *CompanyName;
 @property (nonatomic, assign) IBOutlet SKSTableView *tableView;
 
 @property (nonatomic, strong) Company *company;
