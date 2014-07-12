@@ -19,6 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *CompanyName;
 @property (nonatomic, assign) IBOutlet SKSTableView *tableView;
 
-@property (nonatomic, strong) Company *company;
+@property (nonatomic, strong) NSString *company;
 
 @end

@@ -15,11 +15,16 @@
 #define thumbnailSize 75
 
 
-@implementation ViewController
+@implementation ViewController {
+    NSString *globalSelectedCompany;
+}
 @synthesize scrollView;
 @synthesize tableView;
 @synthesize names, mutableNames, mutableKeys;
 @synthesize search;
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -34,6 +39,7 @@
     names = [[NSMutableDictionary alloc] init];
     mutableNames = [[NSMutableDictionary alloc] init];
     mutableKeys = [[NSMutableArray alloc] init];
+    globalSelectedCompany = [[NSString alloc] init];
     [self setupNames];
     [self resetSearch];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
@@ -72,7 +78,7 @@
         [localNames addObject:oneCompany.name];
         [names setObject:localNames forKey:key];
     }
-    NSLog(@"names %d", [names count]);
+    //NSLog(@"names %d", [names count]);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -122,23 +128,24 @@
     //Arrow
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    NSLog(@"%@", cell.textLabel.text);
+    //NSLog(@"%@", cell.textLabel.text);
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString* companyName = [self getCompanyNameAtIndexPath:indexPath];
-    DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    Company* selectedCompany = [database fetchCompanyByName:companyName];
-    sksViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detail"];
-    detail.company = selectedCompany;
-    detail.phone.text = selectedCompany.phone;
-    detail.CompanyName.text = selectedCompany.name;
-    detail.website.text = selectedCompany.website;
-    //Industry *industry = company.industry;
+    globalSelectedCompany = [self getCompanyNameAtIndexPath:indexPath];
     [self performSegueWithIdentifier: @"detailSegue" sender:self];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"detailSegue"]) {
+        sksViewController *detail = segue.destinationViewController;
+        detail.company = globalSelectedCompany;
+    }
+}
+
 
 -(NSString*)getCompanyNameAtIndexPath: (NSIndexPath*) indexPath {
     return [[mutableNames objectForKey:[mutableKeys objectAtIndex:[indexPath section]]] objectAtIndex: [indexPath row]];

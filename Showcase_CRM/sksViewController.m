@@ -10,6 +10,7 @@
 #import "SKSTableView.h"
 #import "SKSTableViewCell.h"
 #import "Industry.h"
+#import "DatabaseInterface.h"
 
 @interface sksViewController ()
 
@@ -17,7 +18,9 @@
 
 @end
 
-@implementation sksViewController
+@implementation sksViewController {
+    Company *globalCompany;
+}
 
 @synthesize phone,industryType,website,CompanyName,company;
 
@@ -44,6 +47,13 @@
     [super viewDidLoad];
 
     self.tableView.SKSTableViewDelegate = self;
+    
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    globalCompany = [database fetchCompanyByName:company];
+    
+    phone.text = globalCompany.phone;
+    CompanyName.text = globalCompany.name;
+    website.text = globalCompany.website;
     
     
     _contents = @[
