@@ -17,6 +17,7 @@
 		6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFCE1959F3ED001FCAC1 /* Event.m */; };
 		6120CFD21959F3ED001FCAC1 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD11959F3ED001FCAC1 /* Status.m */; };
 		6120CFD51959F3ED001FCAC1 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD41959F3ED001FCAC1 /* Address.m */; };
+		61438ACD19717E5E00B9DF58 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61438ACC19717E5E00B9DF58 /* AddContactViewController.m */; };
 		618DE7351949B272000CC43E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE7341949B272000CC43E /* MainViewController.m */; };
 		618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE73A1949B2D0000CC43E /* CreateClientViewController.m */; };
 		618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025019473FAF0094BD1F /* Foundation.framework */; };
@@ -99,6 +100,8 @@
 		6120CFD11959F3ED001FCAC1 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		6120CFD31959F3ED001FCAC1 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		6120CFD41959F3ED001FCAC1 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		61438ACB19717E5D00B9DF58 /* AddContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactViewController.h; sourceTree = "<group>"; };
+		61438ACC19717E5E00B9DF58 /* AddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactViewController.m; sourceTree = "<group>"; };
 		618DE7331949B272000CC43E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		618DE7341949B272000CC43E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		618DE7391949B2D0000CC43E /* CreateClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateClientViewController.h; sourceTree = "<group>"; };
@@ -457,6 +460,8 @@
 				9DF63595196BBA4D00E10E48 /* SKSTableViewCellIndicator.m */,
 				9DF63596196BBA4D00E10E48 /* sksViewController.h */,
 				9DF63597196BBA4D00E10E48 /* sksViewController.m */,
+				61438ACB19717E5D00B9DF58 /* AddContactViewController.h */,
+				61438ACC19717E5E00B9DF58 /* AddContactViewController.m */,
 			);
 			name = SKSTableViewImp;
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				9D132E8C195A58DA00CD5788 /* NSString+TKUtilities.m in Sources */,
 				9DD7B38C196E2E990063009B /* RootViewController.m in Sources */,
+				61438ACD19717E5E00B9DF58 /* AddContactViewController.m in Sources */,
 				6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */,
 				9D132E7A195A589700CD5788 /* TKPeoplePickerController.m in Sources */,
 				9DF6359B196BBA4D00E10E48 /* SKSTableViewCell.m in Sources */,

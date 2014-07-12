@@ -99,7 +99,7 @@
 }
 
 
-- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note address:(Address*)address companyName:(NSString*)companyName
+- (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note country:(NSString*)country province:(NSString*)province city:(NSString*)city street:(NSString*)street postcode:(NSString*)postcode companyName:(NSString*)companyName QQ:(NSString*)QQ weChat:(NSString*)weChat skype:(NSString*)Skype weibo:(NSString*) Weibo
 {
     Contact *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Contact"
                                                       inManagedObjectContext:self.managedObjectContext];
@@ -112,7 +112,12 @@
     newEntry.email_work = emailWork;
     newEntry.email_personal = emailPersonal;
     newEntry.note = note;
+    newEntry.qq = QQ;
+    newEntry.wechat = weChat;
+    newEntry.skype = Skype;
+    newEntry.weibo = Weibo;
     
+    /*
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
                                               inManagedObjectContext:self.managedObjectContext];
@@ -122,6 +127,7 @@
     NSError* error;
     NSArray *fetchedAddresses = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
+     
     if ([fetchedAddresses count]) {
         newEntry.address = [fetchedAddresses lastObject];
     }
@@ -131,9 +137,20 @@
         address1 = address;
         newEntry.address = address1; // TODO: check address relation with contact
     }
+    */
+    
+    Address * address = [NSEntityDescription insertNewObjectForEntityForName:@"Address"
+                                                       inManagedObjectContext:self.managedObjectContext];
+    address.country = country;
+    address.province = province;
+    address.city = city;
+    address.street = street;
+    address.postal = postcode;
+    
+    newEntry.address = address; // TODO: check address relation with contact
+
+    
     newEntry.company = [self fetchCompanyByName:companyName];
-    
-    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity2 = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
     [request setEntity:entity2];
@@ -158,6 +175,7 @@
     // Set the request's properties to fetch just the property represented by the expressions.
     [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
     
+    NSError* error;
     NSArray *objects = [managedObjectContext executeFetchRequest:request error:&error];
     
     if (objects == nil) {

@@ -11,11 +11,13 @@
 #import "SKSTableViewCell.h"
 #import "Industry.h"
 #import "DatabaseInterface.h"
+#import "AddContactViewController.h"
 
 @interface sksViewController ()
 
-@property (nonatomic, strong) NSArray *contents;
-
+@property (nonatomic, strong) NSMutableArray *contents;
+- (void)updateContents;
+- (void)addContact;
 @end
 
 @implementation sksViewController {
@@ -23,6 +25,7 @@
 }
 
 @synthesize phone,industryType,website,CompanyName,company;
+@synthesize contents;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,15 +35,6 @@
     }
     return self;
 }
-//
-//- (NSArray *)contents
-//{
-//    if (!_contents) {
-//        
-//    }
-//    
-//    return _contents;
-//}
 
 - (void)viewDidLoad
 {
@@ -54,25 +48,45 @@
     phone.text = globalCompany.phone;
     CompanyName.text = globalCompany.name;
     website.text = globalCompany.website;
+    Industry *industry = globalCompany.industry;
+    industryType.text = industry.industry_type;
+    //NSMutableArray *contents = [NSMutableArray array];
     
     
-    _contents = @[
-                  /*@[
-                      @[@"公司详细信息", @"Row0_Subrow1",@"Row0_Subrow2"]
-                      ],*/
+    contents = @[
                   @[
                       @[@"地址信息", @"开单地址", @"收货地址"]
                       ],
                   @[
-                      @[@"联系人信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6", @"Row1_Subrow7", @"Row1_Subrow8", @"Row1_Subrow9", @"Row1_Subrow10", @"Row1_Subrow11", @"Row1_Subrow12"]
+                      @[@"联系人信息"]
                       ],
                   @[
-                      @[@"业务进程", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3"]
+                      @[@"业务进程"]
                       ],
                   @[
-                      @[@"活动历史", @"Row1_Subrow1"]
+                      @[@"活动历史"]
                       ]
                   ];
+    //[self updateContents];
+}
+
+- (void)updateContents
+{
+    NSSet *contacts = globalCompany.contacts;
+    NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
+    NSArray *contactDescriptors = @[contactDescriptor];
+    NSArray *sortedContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+    NSMutableArray *sortedContactNames = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<[sortedContacts count]; i++) {
+        Contact *oneContact = sortedContacts[i];
+        NSString *name = [NSString stringWithFormat:@"%@%@", oneContact.firstname, oneContact.lastname];
+        NSLog(@"%@", name);
+        [sortedContactNames addObject:name];
+        NSMutableArray *contact1 = contents[1][0];
+        [contact1 addObject:name];
+        contents[1][0] = contact1;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,16 +123,43 @@
     
     cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
     
-    //NSLog(@"%@", cell.textLabel.text);
+    if ([contents[indexPath.section][indexPath.row] count] == 1)
+        cell.isExpandable = NO; // will call setIsExpandable
+    else
+        cell.isExpandable = YES;
     
-    //if ((indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 0)) || (indexPath.section == 1 && (indexPath.row == 0 || indexPath.row == 2)))
     
-    cell.isExpandable = YES; // will call setIsExpandable
-    //else
-        // cell.isExpandable = NO;
+    if (indexPath.section == 1) {
+
+        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    
+        [addButton addTarget:self
+                      action:@selector(addContact)
+            forControlEvents:UIControlEventTouchUpInside];
+        [addButton setTitle:@"Add" forState:UIControlStateNormal];
+        addButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
+        [cell.contentView addSubview:addButton];
+    }
+    
+    
     
     return cell;
 }
+
+- (void)addContact
+{
+    [self performSegueWithIdentifier: @"addContactSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"addContactSegue"]) {
+        AddContactViewController *addContact = segue.destinationViewController;
+        addContact.company = company;
+    }
+}
+
+
 
 // called in SKSTableView.m to create cell for subRows
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,6 +175,7 @@
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
+    
     // add button as subView to control subRow
     UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [editButton addTarget:self
@@ -143,6 +185,8 @@
     editButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
     [cell.contentView addSubview:editButton];
     
+    
+    
     UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [deleteButton addTarget:self
                    action:@selector(aMethod:)
@@ -150,6 +194,7 @@
     [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
     deleteButton.frame = CGRectMake(540, 0, 160.0, 40.0); // x, y, width, height
     [cell.contentView addSubview:deleteButton];
+    
     
 //    UIView *buttonViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 232)];
 //    [buttonViews addSubview:editButton];
@@ -160,28 +205,21 @@
 }
 
 -(void)setSelectedCompany:(Company *)comp {
-    _contents = @[
-                  /*@[
-                      @[@"公司详细", comp.name, @"Row0_Subrow2"]
-                      ],*/
+    contents = @[
                   @[
                       @[@"地址信息", @"开单地址", @"收货地址"]
                       ],
                   @[
-                      @[@"联系人信息", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3", @"Row1_Subrow4", @"Row1_Subrow5", @"Row1_Subrow6", @"Row1_Subrow7", @"Row1_Subrow8", @"Row1_Subrow9", @"Row1_Subrow10", @"Row1_Subrow11", @"Row1_Subrow12"]
+                      @[@"联系人信息"]
                       ],
                   @[
-                      @[@"业务进程", @"Row1_Subrow1", @"Row1_Subrow2", @"Row1_Subrow3"]
+                      @[@"业务进程"]
                       ],
                   @[
-                      @[@"活动历史", @"Row1_Subrow1"]
+                      @[@"活动历史"]
                       ]
                   ];
-    
-    //NSLog(@"%@", _contents[0][0][1]);
-    
     [self.tableView reloadData];
-    //NSLog(@"%@", _contents[0][0][0]);
 }
 
 @end
