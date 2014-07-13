@@ -62,9 +62,11 @@
     NSArray *fetchedIndustries = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if ([fetchedIndustries count]) {
+        // this industry already exists
         newEntry.industry = [fetchedIndustries objectAtIndex:0];
     }
     else {
+        // create a new industry if the industry does not exist
         Industry * industry1 = [NSEntityDescription insertNewObjectForEntityForName:@"Industry"
                                                              inManagedObjectContext:self.managedObjectContext];
         industry1.industry_type = industry;
@@ -350,8 +352,6 @@
     }
 }
 
-
-
 - (void)deleteContact:(Contact*) contact
 {
     // initializing NSFetchRequest
@@ -371,6 +371,23 @@
     
     Contact *fetchedContact = [fetchedObjects lastObject];
     [self.managedObjectContext deleteObject:fetchedContact];
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+- (void)importContacts:(NSArray *)contacts
+{
+    Contact * newContact;
+    for (Contact* contact in contacts) {
+        newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
+        newContact.phone_home = contact.phone_home;
+        newContact.lastname = contact.lastname;
+        newContact.firstname = contact.firstname;
+        // can add more attributes here
+    }
+    
+    NSError* error;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }
