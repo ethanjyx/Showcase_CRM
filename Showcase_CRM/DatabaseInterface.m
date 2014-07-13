@@ -377,22 +377,4 @@
     }
 }
 
-- (void)importContacts:(NSArray *)contacts
-{
-    // TODO: connect with company
-    Contact * newContact;
-    for (TKContact* contact in contacts) {
-        newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
-        newContact.phone_home = contact.tel;
-        newContact.lastname = contact.lastName;
-        newContact.firstname = contact.firstName;
-        // can add more attributes here
-    }
-    
-    NSError* error;
-    if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Couldn't save: %@", [error localizedDescription]);
-    }
-}
-
 @end

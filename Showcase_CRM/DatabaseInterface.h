@@ -35,8 +35,6 @@
 
 - (void)deleteContact:(Contact*) contact;
 
-- (void)importContacts:(NSArray*) contacts;
-
 @end
 
 

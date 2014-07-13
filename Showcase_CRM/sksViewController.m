@@ -255,7 +255,7 @@
     
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     
-    [database importContacts:contacts];
+    //[database importContacts:contacts];
     
     [self.tableView reloadData];
 }
