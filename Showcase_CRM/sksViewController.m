@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSArray *contents;
 - (void)updateContents;
 - (void)addContact;
+- (void)importContacts;
 @end
 
 @implementation sksViewController {
@@ -132,11 +133,18 @@
                       action:@selector(addContact)
             forControlEvents:UIControlEventTouchUpInside];
         [addButton setTitle:@"Add" forState:UIControlStateNormal];
-        addButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
+        addButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
         [cell.contentView addSubview:addButton];
+        
+        UIButton *importButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        
+        [importButton addTarget:self
+                      action:@selector(importContacts)
+            forControlEvents:UIControlEventTouchUpInside];
+        [importButton setTitle:@"Import" forState:UIControlStateNormal];
+        importButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
+        [cell.contentView addSubview:importButton];
     }
-    
-    
     
     return cell;
 }
@@ -144,6 +152,14 @@
 - (void)addContact
 {
     [self performSegueWithIdentifier: @"addContactSegue" sender:self];
+}
+
+- (void)importContacts
+{
+    TKPeoplePickerController *controller = [[TKPeoplePickerController alloc] initPeoplePicker];
+    controller.actionDelegate = self;
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -194,7 +210,7 @@
                    action:@selector(aMethod:)
          forControlEvents:UIControlEventTouchUpInside];
     [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-    deleteButton.frame = CGRectMake(540, 0, 160.0, 40.0); // x, y, width, height
+    deleteButton.frame = CGRectMake(560, 0, 160.0, 40.0); // x, y, width, height
     [cell.contentView addSubview:deleteButton];
     
     
@@ -225,4 +241,27 @@
     [self.tableView reloadData];
 }
 */
+
+#pragma mark - TKContactsMultiPickerControllerDelegate
+
+- (void)tkPeoplePickerController:(TKPeoplePickerController*)picker didFinishPickingDataWithInfo:(NSArray*)contacts
+{
+    
+    [self dismissModalViewControllerAnimated:YES];
+//    for (id view in self.scrollView.subviews) {
+//        if ([view isKindOfClass:[UIButton class]])
+//            [(UIButton*)view removeFromSuperview];
+//    }
+    
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    
+    [database importContacts:contacts];
+    
+    [self.tableView reloadData];
+}
+
+- (void)tkPeoplePickerControllerDidCancel:(TKPeoplePickerController*)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
 @end

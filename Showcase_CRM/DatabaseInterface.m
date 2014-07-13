@@ -12,6 +12,7 @@
 #import "Industry.h"
 #import "Contact.h"
 #import "Address.h"
+#import "TKContact.h"
 
 @interface DatabaseInterface()
 
@@ -378,12 +379,13 @@
 
 - (void)importContacts:(NSArray *)contacts
 {
+    // TODO: connect with company
     Contact * newContact;
-    for (Contact* contact in contacts) {
+    for (TKContact* contact in contacts) {
         newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
-        newContact.phone_home = contact.phone_home;
-        newContact.lastname = contact.lastname;
-        newContact.firstname = contact.firstname;
+        newContact.phone_home = contact.tel;
+        newContact.lastname = contact.lastName;
+        newContact.firstname = contact.firstName;
         // can add more attributes here
     }
     

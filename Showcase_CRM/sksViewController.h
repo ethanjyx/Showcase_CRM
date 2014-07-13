@@ -10,8 +10,9 @@
 #import "SKSTableView.h"
 #import "Company.h"
 #import "SplitViewSelectionDelegate.h"
+#import "TKPeoplePickerController.h"
 
-@interface sksViewController : UIViewController <SKSTableViewDelegate, SplitViewSelectionDelegate>
+@interface sksViewController : UIViewController <SKSTableViewDelegate, SplitViewSelectionDelegate, TKPeoplePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *phone;
 @property (weak, nonatomic) IBOutlet UILabel *industryType;
