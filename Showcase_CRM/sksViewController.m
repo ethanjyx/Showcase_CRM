@@ -15,13 +15,14 @@
 
 @interface sksViewController ()
 
-@property (nonatomic, strong) NSMutableArray *contents;
+@property (nonatomic, strong) NSArray *contents;
 - (void)updateContents;
 - (void)addContact;
 @end
 
 @implementation sksViewController {
     Company *globalCompany;
+    NSMutableArray *allContacts;
 }
 
 @synthesize phone,industryType,website,CompanyName,company;
@@ -50,7 +51,7 @@
     website.text = globalCompany.website;
     Industry *industry = globalCompany.industry;
     industryType.text = industry.industry_type;
-    //NSMutableArray *contents = [NSMutableArray array];
+    allContacts = [[NSMutableArray alloc] init];
     
     
     contents = @[
@@ -67,7 +68,7 @@
                       @[@"活动历史"]
                       ]
                   ];
-    //[self updateContents];
+    [self updateContents];
 }
 
 - (void)updateContents
@@ -75,18 +76,7 @@
     NSSet *contacts = globalCompany.contacts;
     NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
     NSArray *contactDescriptors = @[contactDescriptor];
-    NSArray *sortedContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
-    NSMutableArray *sortedContactNames = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i<[sortedContacts count]; i++) {
-        Contact *oneContact = sortedContacts[i];
-        NSString *name = [NSString stringWithFormat:@"%@%@", oneContact.firstname, oneContact.lastname];
-        NSLog(@"%@", name);
-        [sortedContactNames addObject:name];
-        NSMutableArray *contact1 = contents[1][0];
-        [contact1 addObject:name];
-        contents[1][0] = contact1;
-    }
+    allContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,7 +99,10 @@
 
 - (NSInteger)tableView:(SKSTableView *)tableView numberOfSubRowsAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.contents[indexPath.section][indexPath.row] count] - 1;
+    if (indexPath.section == 1)
+        return [allContacts count];
+    else
+        return [contents[indexPath.section][indexPath.row] count] - 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,8 +116,10 @@
     
     cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
     
-    if ([contents[indexPath.section][indexPath.row] count] == 1)
+    if ([contents[indexPath.section][indexPath.row] count] == 1 && indexPath.section != 1)
         cell.isExpandable = NO; // will call setIsExpandable
+    else if (indexPath.section == 1 && [allContacts count] == 0)
+        cell.isExpandable = NO;
     else
         cell.isExpandable = YES;
     
@@ -171,7 +166,14 @@
     if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
+    
+    if (indexPath.section != 1)
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
+    else {
+        Contact *oneContact = [allContacts objectAtIndex:indexPath.subRow-1];
+        NSString *name = [NSString stringWithFormat:@"%@%@", oneContact.firstname, oneContact.lastname];
+        cell.textLabel.text = name;
+    }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -204,6 +206,7 @@
     return cell;
 }
 
+/*
 -(void)setSelectedCompany:(Company *)comp {
     contents = @[
                   @[
@@ -221,5 +224,5 @@
                   ];
     [self.tableView reloadData];
 }
-
+*/
 @end
