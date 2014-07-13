@@ -253,10 +253,15 @@
 //            [(UIButton*)view removeFromSuperview];
 //    }
     
+    
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     
     //[database importContacts:contacts];
+    for (TKContact* contact in contacts) {
+        [database addContactWithLastname:contact.lastName firstname:contact.firstName title:nil phoneWork:contact.tel phoneHome:nil phoneMobile:nil emailWork:contact.email emailPersonal:nil note:nil country:nil province:nil city:nil street:nil postcode:nil companyName:CompanyName.text QQ:nil weChat:nil skype:nil weibo:nil];
+    }
     
+    [self updateContents];
     [self.tableView reloadData];
 }
 

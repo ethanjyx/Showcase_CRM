@@ -91,7 +91,7 @@
                     NSMutableArray *newArray = [[NSMutableArray alloc] init];
                     localNames = newArray;
                 }
-                [localNames addObject:[NSString stringWithFormat:@"%@%@",oneContact.lastname,oneContact.firstname]];
+                [localNames addObject:[NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname]];
                 [names setObject:localNames forKey:key];
             }
     //NSLog(@"names %d", [names count]);
