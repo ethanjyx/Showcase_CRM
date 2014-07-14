@@ -132,7 +132,7 @@
         [addButton addTarget:self
                       action:@selector(addContact)
             forControlEvents:UIControlEventTouchUpInside];
-        [addButton setTitle:@"Add" forState:UIControlStateNormal];
+        [addButton setTitle:@"新建" forState:UIControlStateNormal];
         addButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
         [cell.contentView addSubview:addButton];
         
@@ -141,7 +141,7 @@
         [importButton addTarget:self
                       action:@selector(importContacts)
             forControlEvents:UIControlEventTouchUpInside];
-        [importButton setTitle:@"Import" forState:UIControlStateNormal];
+        [importButton setTitle:@"导入" forState:UIControlStateNormal];
         importButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
         [cell.contentView addSubview:importButton];
     }
@@ -199,7 +199,7 @@
     [editButton addTarget:self
                action:@selector(aMethod:)
      forControlEvents:UIControlEventTouchUpInside];
-    [editButton setTitle:@"Edit" forState:UIControlStateNormal];
+    [editButton setTitle:@"编辑" forState:UIControlStateNormal];
     editButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
     [cell.contentView addSubview:editButton];
     
@@ -209,7 +209,7 @@
     [deleteButton addTarget:self
                    action:@selector(aMethod:)
          forControlEvents:UIControlEventTouchUpInside];
-    [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+    [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
     deleteButton.frame = CGRectMake(560, 0, 160.0, 40.0); // x, y, width, height
     [cell.contentView addSubview:deleteButton];
     
