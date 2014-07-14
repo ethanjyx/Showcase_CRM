@@ -187,7 +187,7 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
     else {
         Contact *oneContact = [allContacts objectAtIndex:indexPath.subRow-1];
-        NSString *name = [NSString stringWithFormat:@"%@%@", oneContact.firstname, oneContact.lastname];
+        NSString *name = [NSString stringWithFormat:@"%@ %@", oneContact.lastname, oneContact.firstname];
         cell.textLabel.text = name;
     }
     
