@@ -30,6 +30,9 @@
     [super viewDidLoad];
     // Init View for BaiduMap
     _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 1024, 724)];
+    CLLocationCoordinate2D coor = CLLocationCoordinate2DMake(31.023884, 121.437449);
+    _mapView.centerCoordinate = coor;
+    _mapView.showsUserLocation = YES;
     [self.view addSubview:_mapView];
     
     // Add search bar on map view
@@ -141,8 +144,8 @@
     // 添加一个PointAnnotation
     BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
     CLLocationCoordinate2D coor;
-    coor.latitude = 39.915;
-    coor.longitude = 116.404;
+    coor.latitude = 31.023884;
+    coor.longitude = 121.537449;
     annotation.coordinate = coor;
     //annotation.title = @"这里是北京";
     [_mapView addAnnotation:annotation];

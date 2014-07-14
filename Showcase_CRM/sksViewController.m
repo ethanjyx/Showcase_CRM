@@ -200,7 +200,7 @@
                action:@selector(aMethod:)
      forControlEvents:UIControlEventTouchUpInside];
     [editButton setTitle:@"编辑" forState:UIControlStateNormal];
-    editButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
+    editButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
     [cell.contentView addSubview:editButton];
     
     
@@ -210,7 +210,7 @@
                    action:@selector(aMethod:)
          forControlEvents:UIControlEventTouchUpInside];
     [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
-    deleteButton.frame = CGRectMake(560, 0, 160.0, 40.0); // x, y, width, height
+    deleteButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
     [cell.contentView addSubview:deleteButton];
     
     
