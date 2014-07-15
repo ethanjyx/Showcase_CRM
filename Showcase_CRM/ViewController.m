@@ -17,6 +17,8 @@
 
 @implementation ViewController {
     NSString *globalSelectedCompany;
+    Contact *globalContact;
+    NSMutableArray *allContacts;
 }
 @synthesize scrollView;
 @synthesize tableView;
@@ -25,6 +27,8 @@
 @synthesize Segment;
 @synthesize CompanyButton;
 @synthesize ContactButton;
+@synthesize contactsurname;
+
 
 
 - (void)didReceiveMemoryWarning
@@ -44,8 +48,9 @@
     [self setupNames];
     [self resetSearch];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
+    
+ 
 }
-
 
 
 - (void)viewDidUnload
