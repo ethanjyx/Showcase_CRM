@@ -7,6 +7,9 @@
 //
 
 #import "MapViewController.h"
+#import "DatabaseInterface.h"
+#import "Contact.h"
+#import "Address.h"
 
 @interface MapViewController ()
 - (IBAction)returnButton:(id)sender;
@@ -40,7 +43,8 @@
     _locService = [[BMKLocationService alloc] init];
     [_locService startUserLocationService];
     
-    // Create table view for pin annotation
+    // Create table view associated with pin annotation
+    /*
     NSArray *list = [NSArray arrayWithObjects:@"姓名：张军",@"地址：东川路800号",@"电话：18933012031",@"公司：上海电力有限公司",@"签到次数：7次",@"",@"                        签到", nil];
     self.dataList = list;
     
@@ -50,6 +54,26 @@
     // 设置tableView的委托
     tableView.delegate = self;
     self.myTableView = tableView;
+    */
+     
+    // Init Geocoder then convert street address to latitude and longitude
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    self.contacts = [database getAllContacts];
+    for (int i = 0; i < 2; i++) {
+        Contact *contact = [self.contacts objectAtIndex:i];
+        Address *address = contact.address;
+        NSLog(@"country:%@, province:%@, city:%@, street:%@, postal:%@", address.country, address.province, address.city, address.street, address.postal);
+        _geocodesearch = [[BMKGeoCodeSearch alloc] init];
+        BMKGeoCodeSearchOption *geocodeSearchOption = [[BMKGeoCodeSearchOption alloc] init];
+        geocodeSearchOption.city= address.city;
+        geocodeSearchOption.address = address.street;
+        BOOL flag = [_geocodesearch geoCode:geocodeSearchOption];
+        if (flag) {
+            NSLog(@"geo检索发送成功");
+        }   else {
+            NSLog(@"geo检索发送失败");
+        }
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -74,22 +98,12 @@
     return cell;
 }
 
-- (void)didReceiveMemoryWarning
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [_mapView viewWillAppear];
-    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-    _locService.delegate = self;
-}
-
--(void)viewWillDisappear:(BOOL)animated {
-    [_mapView viewWillDisappear];
-    _mapView.delegate = nil; // 不用时，置nil
-    _locService.delegate = nil;
+    
+    NSString *msg = [[NSString alloc] initWithFormat:@"你选择的是:%@",[self.dataList objectAtIndex:[indexPath row]]];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 - (void)mapViewWillStartLocatingUser:(BMKMapView *)mapView
@@ -136,8 +150,58 @@
     NSLog(@"location error");
 }
 
+- (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
+{
+    static int i = 0;
+    /*
+    NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
+	[_mapView removeAnnotations:array];
+	array = [NSArray arrayWithArray:_mapView.overlays];
+	[_mapView removeOverlays:array];
+    */
+	if (error == 0) {
+		BMKPointAnnotation* pinAnnotation = [[BMKPointAnnotation alloc] init];
+		pinAnnotation.coordinate = result.location;
+        [_mapView addAnnotation:pinAnnotation];
+        
+        NSLog(@"%@", result.address);
+        
+        NSString* titleStr;
+        NSString* showmeg;
+        
+        titleStr = @"正向地理编码";
+        showmeg = [NSString stringWithFormat:@"经度:%f,纬度:%f", pinAnnotation.coordinate.latitude, pinAnnotation.coordinate.longitude];
+        
+        NSLog(@"%@ %@", titleStr, showmeg);
+        
+        //UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:titleStr message:showmeg delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+        //[myAlertView show];
+	}
+    i++;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [_mapView viewWillAppear];
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _locService.delegate = self;
+    _geocodesearch.delegate = self;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [_mapView viewWillDisappear];
+    _mapView.delegate = nil; // 不用时，置nil
+    _locService.delegate = nil;
+    _geocodesearch.delegate = nil;
+}
+
+/*
 - (void) viewDidAppear:(BOOL)animated {
-    NSLog(@"viewDidAppear called");
     // 添加一个PointAnnotation
     BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
     CLLocationCoordinate2D coor;
@@ -147,10 +211,10 @@
     //annotation.title = @"这里是北京";
     [_mapView addAnnotation:annotation];
 }
- 
+*/
+
 // Override
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
-    NSLog(@"viewForAnnotation called");
     /*
     if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
@@ -164,6 +228,7 @@
     NSString *AnnotationViewID = [NSString stringWithFormat:@"viewID"];
     
     BMKPinAnnotationView *newAnnotation = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+    
     // 设置颜色
     ((BMKPinAnnotationView*)newAnnotation).pinColor = BMKPinAnnotationColorPurple;
     // 从天上掉下效果
@@ -222,7 +287,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
 
 - (IBAction)returnButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
