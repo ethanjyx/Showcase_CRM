@@ -12,13 +12,12 @@
 @interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate> {
     BMKMapView* _mapView;
     BMKLocationService* _locService;
-    BMKGeoCodeSearch* _geocodesearch;
 }
 
-@property (nonatomic, retain) NSArray *dataList;
-@property (nonatomic, retain) UITableView *myTableView;
-@property (nonatomic, retain) NSMutableDictionary *tableviewDatalist;
-@property (nonatomic, retain) NSMutableDictionary *pinTableview;
+@property (nonatomic, retain) NSMutableArray *geocodeSearchs;
 @property (nonatomic, retain) NSArray *contacts;
+@property (nonatomic, retain) NSMutableArray *dataLists;
+@property (nonatomic, retain) NSMutableArray *tableViews;
+@property (nonatomic, retain) NSMutableArray *annotations;
 
 @end
