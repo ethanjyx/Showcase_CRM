@@ -17,6 +17,7 @@
 }
 
 
+@property (weak, nonatomic) IBOutlet UILabel *contactsurname;
 @property (retain,nonatomic) NSMutableDictionary *names;
 @property (retain,nonatomic) NSMutableDictionary *mutableNames;
 @property (retain,nonatomic) NSMutableArray *mutableKeys;

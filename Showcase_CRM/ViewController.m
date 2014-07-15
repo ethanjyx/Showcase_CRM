@@ -17,6 +17,7 @@
 
 @implementation ViewController {
     Company *globalSelectedCompany;
+    Contact *globalSelectedContact;
 }
 @synthesize scrollView;
 @synthesize tableView;
@@ -25,6 +26,8 @@
 @synthesize Segment;
 @synthesize CompanyButton;
 @synthesize ContactButton;
+@synthesize contactsurname;
+
 
 
 - (void)didReceiveMemoryWarning
@@ -43,8 +46,9 @@
     [self setupNames];
     [self resetSearch];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
+    
+ 
 }
-
 
 
 - (void)viewDidUnload
@@ -170,11 +174,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ( [Segment selectedSegmentIndex]==0) { // company
-        globalSelectedCompany = [self getCompanyNameAtIndexPath:indexPath];
+        globalSelectedCompany = [[mutableNames objectForKey:[mutableKeys objectAtIndex:[indexPath section]]] objectAtIndex: [indexPath row]];
         [self performSegueWithIdentifier: @"detailSegue" sender:self];
     }
     else { // Contact
-        
+        globalSelectedContact = [[mutableNames objectForKey:[mutableKeys objectAtIndex:[indexPath section]]] objectAtIndex: [indexPath row]];
         
     
     }
@@ -186,11 +190,6 @@
         sksViewController *detail = segue.destinationViewController;
         detail.company = globalSelectedCompany.name;
     }
-}
-
-
--(Company*)getCompanyNameAtIndexPath: (NSIndexPath*) indexPath {
-    return [[mutableNames objectForKey:[mutableKeys objectAtIndex:[indexPath section]]] objectAtIndex: [indexPath row]];
 }
 
 -(void)resetSearch
