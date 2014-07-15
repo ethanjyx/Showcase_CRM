@@ -16,7 +16,7 @@
 
 
 @implementation ViewController {
-    NSString *globalSelectedCompany;
+    Company *globalSelectedCompany;
 }
 @synthesize scrollView;
 @synthesize tableView;
@@ -40,7 +40,6 @@
     names = [[NSMutableDictionary alloc] init];
     mutableNames = [[NSMutableDictionary alloc] init];
     mutableKeys = [[NSMutableArray alloc] init];
-    globalSelectedCompany = [[NSString alloc] init];
     [self setupNames];
     [self resetSearch];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
@@ -79,7 +78,7 @@
                      NSMutableArray *newArray = [[NSMutableArray alloc] init];
                      localNames = newArray;
                  }
-                 [localNames addObject:oneCompany.name];
+                 [localNames addObject:oneCompany];
                  [names setObject:localNames forKey:key];
              }
         }
@@ -96,7 +95,8 @@
                     NSMutableArray *newArray = [[NSMutableArray alloc] init];
                     localNames = newArray;
                 }
-                [localNames addObject:[NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname]];
+                //[localNames addObject:[NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname]];
+                [localNames addObject:oneContact];
                 [names setObject:localNames forKey:key];
             }
     //NSLog(@"names %d", [names count]);
@@ -145,8 +145,21 @@
     [[cell textLabel] setBackgroundColor:[UIColor clearColor]];
     [[cell detailTextLabel] setBackgroundColor:[UIColor clearColor]];
     
+    
+    
     // set text
-    cell.textLabel.text=[nameSection objectAtIndex:rowNumber];
+    if ( [Segment selectedSegmentIndex]==0) {
+        Company *oneCompany = [nameSection objectAtIndex:rowNumber];
+        cell.textLabel.text=oneCompany.name;
+    }
+    else {
+        Contact *oneContact = [nameSection objectAtIndex:rowNumber];
+        
+        cell.textLabel.text=[NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname];
+    }
+    
+    
+    
     //Arrow
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -156,20 +169,27 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    globalSelectedCompany = [self getCompanyNameAtIndexPath:indexPath];
-    [self performSegueWithIdentifier: @"detailSegue" sender:self];
+    if ( [Segment selectedSegmentIndex]==0) { // company
+        globalSelectedCompany = [self getCompanyNameAtIndexPath:indexPath];
+        [self performSegueWithIdentifier: @"detailSegue" sender:self];
+    }
+    else { // Contact
+        
+        
+    
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"detailSegue"]) {
         sksViewController *detail = segue.destinationViewController;
-        detail.company = globalSelectedCompany;
+        detail.company = globalSelectedCompany.name;
     }
 }
 
 
--(NSString*)getCompanyNameAtIndexPath: (NSIndexPath*) indexPath {
+-(Company*)getCompanyNameAtIndexPath: (NSIndexPath*) indexPath {
     return [[mutableNames objectForKey:[mutableKeys objectAtIndex:[indexPath section]]] objectAtIndex: [indexPath row]];
 }
 
