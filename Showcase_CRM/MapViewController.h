@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
 
-@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate> {
     BMKMapView* _mapView;
     BMKLocationService* _locService;
 }
 
-@property (nonatomic, retain) NSArray *dataList;
-@property (nonatomic, retain) UITableView *myTableView;
+@property (nonatomic, retain) NSMutableArray *geocodeSearchs;
+@property (nonatomic, retain) NSArray *contacts;
+@property (nonatomic, retain) NSMutableArray *dataLists;
+@property (nonatomic, retain) NSMutableArray *tableViews;
+@property (nonatomic, retain) NSMutableArray *annotations;
 
 @end
