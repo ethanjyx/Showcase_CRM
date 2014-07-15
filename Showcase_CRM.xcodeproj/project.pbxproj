@@ -34,6 +34,8 @@
 		618E027219473FB00094BD1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025419473FAF0094BD1F /* UIKit.framework */; };
 		618E027A19473FB00094BD1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 618E027819473FB00094BD1F /* InfoPlist.strings */; };
 		618E027C19473FB00094BD1F /* Showcase_CRMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 618E027B19473FB00094BD1F /* Showcase_CRMTests.m */; };
+		61AE4DC31975584B00E3811C /* pinyin.dat in Resources */ = {isa = PBXBuildFile; fileRef = 61AE4DC01975584B00E3811C /* pinyin.dat */; };
+		61AE4DC41975584B00E3811C /* Hanzi2Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61AE4DC21975584B00E3811C /* Hanzi2Pinyin.m */; };
 		61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */; };
 		9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D132E6A195A589700CD5788 /* TKContactsMultiPickerController.m */; };
 		9D132E75195A589700CD5788 /* TKContactsMultiPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E6B195A589700CD5788 /* TKContactsMultiPickerController.xib */; };
@@ -126,6 +128,9 @@
 		618E027719473FB00094BD1F /* Showcase_CRMTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Showcase_CRMTests-Info.plist"; sourceTree = "<group>"; };
 		618E027919473FB00094BD1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		618E027B19473FB00094BD1F /* Showcase_CRMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Showcase_CRMTests.m; sourceTree = "<group>"; };
+		61AE4DC01975584B00E3811C /* pinyin.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = pinyin.dat; sourceTree = "<group>"; };
+		61AE4DC11975584B00E3811C /* Hanzi2Pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hanzi2Pinyin.h; sourceTree = "<group>"; };
+		61AE4DC21975584B00E3811C /* Hanzi2Pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hanzi2Pinyin.m; sourceTree = "<group>"; };
 		61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseInterface.h; sourceTree = "<group>"; };
 		61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseInterface.m; sourceTree = "<group>"; };
 		9D132E69195A589700CD5788 /* TKContactsMultiPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKContactsMultiPickerController.h; sourceTree = "<group>"; };
@@ -313,31 +318,29 @@
 		618E025619473FAF0094BD1F /* Showcase_CRM */ = {
 			isa = PBXGroup;
 			children = (
+				61AE4DBF1975583500E3811C /* Pinyin */,
 				9DF6359E196BBA5200E10E48 /* SKSTableViewImp */,
 				F6CE948C19631A1F0017DDAD /* BaiduMap */,
 				61ECB2B11961BB320072F8D6 /* Database */,
-				61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */,
-				61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */,
-				CE0E674E196161F50074E821 /* DetailViewController.m */,
-				CE0E674B196160160074E821 /* DetailViewController.h */,
 				9D132E68195A587B00CD5788 /* ImportContact */,
 				618E025F19473FAF0094BD1F /* AppDelegate.h */,
 				618E026019473FAF0094BD1F /* AppDelegate.m */,
 				9DD7B38A196E2E990063009B /* RootViewController.h */,
 				9DD7B38B196E2E990063009B /* RootViewController.m */,
-				618E026219473FAF0094BD1F /* Main.storyboard */,
 				618E026519473FAF0094BD1F /* ViewController.h */,
 				618E026619473FAF0094BD1F /* ViewController.m */,
+				CE0E674E196161F50074E821 /* DetailViewController.m */,
+				CE0E674B196160160074E821 /* DetailViewController.h */,
 				618DE7331949B272000CC43E /* MainViewController.h */,
 				618DE7341949B272000CC43E /* MainViewController.m */,
 				618DE7391949B2D0000CC43E /* CreateClientViewController.h */,
 				618DE73A1949B2D0000CC43E /* CreateClientViewController.m */,
-				6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */,
-				618E026819473FB00094BD1F /* Images.xcassets */,
-				618E025719473FAF0094BD1F /* Supporting Files */,
+				618E026219473FAF0094BD1F /* Main.storyboard */,
 				CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */,
 				CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */,
 				9DD7B389196E19900063009B /* SplitViewSelectionDelegate.h */,
+				618E026819473FB00094BD1F /* Images.xcassets */,
+				618E025719473FAF0094BD1F /* Supporting Files */,
 			);
 			path = Showcase_CRM;
 			sourceTree = "<group>";
@@ -371,9 +374,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		61AE4DBF1975583500E3811C /* Pinyin */ = {
+			isa = PBXGroup;
+			children = (
+				61AE4DC01975584B00E3811C /* pinyin.dat */,
+				61AE4DC11975584B00E3811C /* Hanzi2Pinyin.h */,
+				61AE4DC21975584B00E3811C /* Hanzi2Pinyin.m */,
+			);
+			name = Pinyin;
+			sourceTree = "<group>";
+		};
 		61ECB2B11961BB320072F8D6 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */,
+				61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */,
+				61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */,
 				6120CFD31959F3ED001FCAC1 /* Address.h */,
 				6120CFD41959F3ED001FCAC1 /* Address.m */,
 				6120CFD01959F3ED001FCAC1 /* Status.h */,
@@ -640,6 +656,7 @@
 				9D132E77195A589700CD5788 /* TKGroupPickerController.xib in Resources */,
 				618E025B19473FAF0094BD1F /* InfoPlist.strings in Resources */,
 				9D132E93195A58DA00CD5788 /* checkBox@2x.png in Resources */,
+				61AE4DC31975584B00E3811C /* pinyin.dat in Resources */,
 				618E026419473FAF0094BD1F /* Main.storyboard in Resources */,
 				9D132E75195A589700CD5788 /* TKContactsMultiPickerController.xib in Resources */,
 				9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */,
@@ -687,6 +704,7 @@
 				6120CFD21959F3ED001FCAC1 /* Status.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
 				6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */,
+				61AE4DC41975584B00E3811C /* Hanzi2Pinyin.m in Sources */,
 				6120CFCC1959F3ED001FCAC1 /* Contact.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
 				9DF6359A196BBA4D00E10E48 /* SKSTableView.m in Sources */,
