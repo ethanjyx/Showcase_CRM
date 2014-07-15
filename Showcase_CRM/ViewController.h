@@ -31,5 +31,6 @@
 - (IBAction)showPeoplePicker:(id)sender;
 
 - (IBAction)SegmentControl:(id)sender;
+- (IBAction)switchview:(id)sender;
 
 @end

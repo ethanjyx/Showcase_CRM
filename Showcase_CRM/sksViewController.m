@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSArray *contents;
 - (void)updateContents;
 - (void)addContact;
+- (void)importContacts;
 @end
 
 @implementation sksViewController {
@@ -131,12 +132,19 @@
         [addButton addTarget:self
                       action:@selector(addContact)
             forControlEvents:UIControlEventTouchUpInside];
-        [addButton setTitle:@"Add" forState:UIControlStateNormal];
-        addButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
+        [addButton setTitle:@"新建" forState:UIControlStateNormal];
+        addButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
         [cell.contentView addSubview:addButton];
+        
+        UIButton *importButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        
+        [importButton addTarget:self
+                      action:@selector(importContacts)
+            forControlEvents:UIControlEventTouchUpInside];
+        [importButton setTitle:@"导入" forState:UIControlStateNormal];
+        importButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
+        [cell.contentView addSubview:importButton];
     }
-    
-    
     
     return cell;
 }
@@ -144,6 +152,14 @@
 - (void)addContact
 {
     [self performSegueWithIdentifier: @"addContactSegue" sender:self];
+}
+
+- (void)importContacts
+{
+    TKPeoplePickerController *controller = [[TKPeoplePickerController alloc] initPeoplePicker];
+    controller.actionDelegate = self;
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -171,7 +187,7 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
     else {
         Contact *oneContact = [allContacts objectAtIndex:indexPath.subRow-1];
-        NSString *name = [NSString stringWithFormat:@"%@%@", oneContact.firstname, oneContact.lastname];
+        NSString *name = [NSString stringWithFormat:@"%@ %@", oneContact.lastname, oneContact.firstname];
         cell.textLabel.text = name;
     }
     
@@ -183,7 +199,7 @@
     [editButton addTarget:self
                action:@selector(aMethod:)
      forControlEvents:UIControlEventTouchUpInside];
-    [editButton setTitle:@"Edit" forState:UIControlStateNormal];
+    [editButton setTitle:@"编辑" forState:UIControlStateNormal];
     editButton.frame = CGRectMake(500, 0, 160.0, 40.0); // x, y, width, height
     [cell.contentView addSubview:editButton];
     
@@ -193,8 +209,8 @@
     [deleteButton addTarget:self
                    action:@selector(aMethod:)
          forControlEvents:UIControlEventTouchUpInside];
-    [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-    deleteButton.frame = CGRectMake(540, 0, 160.0, 40.0); // x, y, width, height
+    [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+    deleteButton.frame = CGRectMake(560, 0, 160.0, 40.0); // x, y, width, height
     [cell.contentView addSubview:deleteButton];
     
     
@@ -225,4 +241,32 @@
     [self.tableView reloadData];
 }
 */
+
+#pragma mark - TKContactsMultiPickerControllerDelegate
+
+- (void)tkPeoplePickerController:(TKPeoplePickerController*)picker didFinishPickingDataWithInfo:(NSArray*)contacts
+{
+    
+    [self dismissModalViewControllerAnimated:YES];
+//    for (id view in self.scrollView.subviews) {
+//        if ([view isKindOfClass:[UIButton class]])
+//            [(UIButton*)view removeFromSuperview];
+//    }
+    
+    
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    
+    //[database importContacts:contacts];
+    for (TKContact* contact in contacts) {
+        [database addContactWithLastname:contact.lastName firstname:contact.firstName title:nil phoneWork:contact.tel phoneHome:nil phoneMobile:nil emailWork:contact.email emailPersonal:nil note:nil country:nil province:nil city:nil street:nil postcode:nil companyName:CompanyName.text QQ:nil weChat:nil skype:nil weibo:nil];
+    }
+    
+    [self updateContents];
+    [self.tableView reloadData];
+}
+
+- (void)tkPeoplePickerControllerDidCancel:(TKPeoplePickerController*)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
 @end

@@ -91,7 +91,7 @@
                     NSMutableArray *newArray = [[NSMutableArray alloc] init];
                     localNames = newArray;
                 }
-                [localNames addObject:[NSString stringWithFormat:@"%@,%@",oneContact.lastname,oneContact.firstname]];
+                [localNames addObject:[NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname]];
                 [names setObject:localNames forKey:key];
             }
     //NSLog(@"names %d", [names count]);
@@ -318,12 +318,11 @@
 
 //选择公司或者联系人时加载不同的数据
 - (IBAction)SegmentControl:(id)sender {
-    names = [[NSMutableDictionary alloc] init];
-    mutableNames = [[NSMutableDictionary alloc] init];
-    mutableKeys = [[NSMutableArray alloc] init];
-    [self setupNames];
-    [self resetSearch];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
+    [self updateTable];
+}
+
+- (IBAction)switchview:(id)sender {
+    
 }
 
 // 导出

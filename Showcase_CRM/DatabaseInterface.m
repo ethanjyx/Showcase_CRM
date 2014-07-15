@@ -12,6 +12,7 @@
 #import "Industry.h"
 #import "Contact.h"
 #import "Address.h"
+#import "TKContact.h"
 
 @interface DatabaseInterface()
 
@@ -62,9 +63,11 @@
     NSArray *fetchedIndustries = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if ([fetchedIndustries count]) {
+        // this industry already exists
         newEntry.industry = [fetchedIndustries objectAtIndex:0];
     }
     else {
+        // create a new industry if the industry does not exist
         Industry * industry1 = [NSEntityDescription insertNewObjectForEntityForName:@"Industry"
                                                              inManagedObjectContext:self.managedObjectContext];
         industry1.industry_type = industry;
@@ -349,8 +352,6 @@
         NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }
 }
-
-
 
 - (void)deleteContact:(Contact*) contact
 {
