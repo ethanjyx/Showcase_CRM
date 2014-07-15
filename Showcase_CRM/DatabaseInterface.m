@@ -242,6 +242,28 @@
     return [fetchedObjects lastObject];
 }
 
+- (Contact*)fetchContactByName:(NSString*)contactName
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", contactName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    // Returning Fetched Records
+    return [fetchedObjects lastObject];
+}
+
+
 
 
 - (void)addCompany:(NSString*)companyName billingAddress:(Address*)billingAddress shippingAddress:(Address*)shippingAddress

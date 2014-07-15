@@ -12,12 +12,13 @@
 #import "Company.h"
 #import "sksViewController.h"
 #import "Hanzi2Pinyin.h"
-
+#import "DetailContactViewController.h"
 #define thumbnailSize 75
 
 
 @implementation ViewController {
     Company *globalSelectedCompany;
+    Contact *globalContact;
     Contact *globalSelectedContact;
 }
 @synthesize scrollView;
@@ -27,7 +28,7 @@
 @synthesize Segment;
 @synthesize CompanyButton;
 @synthesize ContactButton;
-@synthesize contactsurname;
+
 
 
 
@@ -47,7 +48,6 @@
     [self setupNames];
     [self resetSearch];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable) name:@"updateTable" object:nil];
-    
  
 }
 
@@ -194,8 +194,8 @@
     }
     else { // Contact
         globalSelectedContact = [[mutableNames objectForKey:[mutableKeys objectAtIndex:[indexPath section]]] objectAtIndex: [indexPath row]];
+        [self performSegueWithIdentifier: @"detailContact" sender:self];
         
-    
     }
 }
 
@@ -204,6 +204,11 @@
     if ([segue.identifier isEqualToString:@"detailSegue"]) {
         sksViewController *detail = segue.destinationViewController;
         detail.company = globalSelectedCompany.name;
+    }
+    else if ([segue.identifier isEqualToString:@"detailContact"]) {
+        DetailContactViewController *detailcontact=segue.destinationViewController;
+        detailcontact.lastnamestring=globalSelectedContact.lastname;
+        detailcontact.firstnamestring=globalSelectedContact.firstname;
     }
 }
 
