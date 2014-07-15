@@ -23,7 +23,8 @@
 @synthesize names, mutableNames, mutableKeys;
 @synthesize search;
 @synthesize Segment;
-
+@synthesize CompanyButton;
+@synthesize ContactButton;
 
 
 - (void)didReceiveMemoryWarning
@@ -66,6 +67,8 @@
 {
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     if ( [Segment selectedSegmentIndex]==0) {
+        CompanyButton.hidden=0;
+        ContactButton.hidden=1;
         NSArray *fetchedCompaniesArrayLocal = [database getAllCompanies];
         NSLog(@"fetched %d", [fetchedCompaniesArrayLocal count]);
              for (int i = 0; i < [fetchedCompaniesArrayLocal count]; i++) {
@@ -81,8 +84,10 @@
              }
         }
     else {
-            NSArray *fetchedContactsArrayLocal = [database getAllContacts];
-            NSLog(@"fetched %d", [fetchedContactsArrayLocal count]);
+        CompanyButton.hidden=1;
+        ContactButton.hidden=0;
+        NSArray *fetchedContactsArrayLocal = [database getAllContacts];
+        NSLog(@"fetched %d", [fetchedContactsArrayLocal count]);
             for (int i = 0; i < [fetchedContactsArrayLocal count]; i++) {
                 Contact *oneContact = [fetchedContactsArrayLocal objectAtIndex:i];
                 NSString *key = [oneContact.lastname substringToIndex:1];

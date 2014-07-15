@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *search;
 @property (nonatomic, assign) id<SplitViewSelectionDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *Segment;
+@property (weak, nonatomic) IBOutlet UIButton *CompanyButton;
+@property (weak, nonatomic) IBOutlet UIButton *ContactButton;
 
 - (void)setupNames;
 - (void)updateTable;

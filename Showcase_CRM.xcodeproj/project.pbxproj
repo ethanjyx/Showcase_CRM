@@ -60,6 +60,7 @@
 		9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63595196BBA4D00E10E48 /* SKSTableViewCellIndicator.m */; };
 		9DF6359D196BBA4D00E10E48 /* sksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63597196BBA4D00E10E48 /* sksViewController.m */; };
 		CE0E674F196161F50074E821 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E674E196161F50074E821 /* DetailViewController.m */; };
+		CE65A39C19754C760051BFAC /* AddContact2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE65A39B19754C760051BFAC /* AddContact2ViewController.m */; };
 		CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */; };
 		F6CE94CB19631A670017DDAD /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F6CE94CA19631A670017DDAD /* mapapi.bundle */; };
 		F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F6CE94CD19631A7A0017DDAD /* MapViewController.mm */; };
@@ -167,6 +168,8 @@
 		9DF63597196BBA4D00E10E48 /* sksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sksViewController.m; sourceTree = "<group>"; };
 		CE0E674B196160160074E821 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		CE0E674E196161F50074E821 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		CE65A39A19754C760051BFAC /* AddContact2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContact2ViewController.h; sourceTree = "<group>"; };
+		CE65A39B19754C760051BFAC /* AddContact2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContact2ViewController.m; sourceTree = "<group>"; };
 		CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
 		CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MutableDeepCopy.m"; sourceTree = "<group>"; };
 		F6CE948F19631A410017DDAD /* BMapKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMapKit.h; path = inc/BMapKit.h; sourceTree = "<group>"; };
@@ -462,6 +465,8 @@
 				9DF63597196BBA4D00E10E48 /* sksViewController.m */,
 				61438ACB19717E5D00B9DF58 /* AddContactViewController.h */,
 				61438ACC19717E5E00B9DF58 /* AddContactViewController.m */,
+				CE65A39A19754C760051BFAC /* AddContact2ViewController.h */,
+				CE65A39B19754C760051BFAC /* AddContact2ViewController.m */,
 			);
 			name = SKSTableViewImp;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 				6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */,
 				6120CFC31959F3ED001FCAC1 /* Project.m in Sources */,
 				9D132E8F195A58DA00CD5788 /* TKGroup.m in Sources */,
+				CE65A39C19754C760051BFAC /* AddContact2ViewController.m in Sources */,
 				9D132E78195A589700CD5788 /* TKNoContactViewController.m in Sources */,
 				6120CFD21959F3ED001FCAC1 /* Status.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,

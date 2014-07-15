@@ -1,17 +1,17 @@
 //
-//  AddContactViewController.m
+//  AddContact2ViewController.m
 //  Showcase_CRM
 //
-//  Created by Linfeng Shi on 7/12/14.
-//  Copyright (c) 2014 Linfeng Shi. All rights reserved.
+//  Created by user on 14-7-15.
+//  Copyright (c) 2014年 Linfeng Shi. All rights reserved.
 //
 
-#import "AddContactViewController.h"
+#import "AddContact2ViewController.h"
 #import "DatabaseInterface.h"
 #import "Address.h"
 #import "sksViewController.h"
 
-@interface AddContactViewController ()
+@interface AddContact2ViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *lastname;
 @property (weak, nonatomic) IBOutlet UITextField *firstname;
@@ -33,13 +33,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *note;
 @property (weak, nonatomic) IBOutlet UIButton *save;
 
-
 @end
 
-@implementation AddContactViewController
+@implementation AddContact2ViewController
 
 @synthesize lastname, firstname, title, email_work, email_personal, phone_work, phone_personal, mobile_phone, QQ, WeChat, Skype, Weibo, province, city, address, country, postcode,note;
-
 @synthesize company;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,9 +53,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,10 +60,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
 
 /*
 #pragma mark - Navigation
@@ -80,17 +71,15 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    sksViewController *localContact = segue.destinationViewController;
+    localContact.company = company;
+  
+}*/
 - (IBAction)save:(id)sender {
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     [database addContactWithLastname:lastname.text firstname:firstname.text title:title.text phoneWork:phone_work.text phoneHome:phone_personal.text phoneMobile:mobile_phone.text emailWork:email_work.text emailPersonal:email_personal.text note:note.text country:country.text province:province.text city:city.text street:address.text postcode:postcode.text companyName:company QQ:QQ.text weChat:WeChat.text skype:Skype.text weibo:Weibo.text];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTable" object:nil];
-    
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-        sksViewController *localContact = segue.destinationViewController;
-        localContact.company = company;
 }
 @end
