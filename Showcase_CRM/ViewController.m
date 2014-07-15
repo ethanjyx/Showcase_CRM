@@ -78,14 +78,14 @@
              for (int i = 0; i < [fetchedCompaniesArrayLocal count]; i++) {
                  Company *oneCompany = [fetchedCompaniesArrayLocal objectAtIndex:i];
                  
-                 NSString *key;
+                 NSString *initKey;
                  if ([Hanzi2Pinyin hasChineseCharacter:oneCompany.name]) {
-                     key = [[Hanzi2Pinyin convert:oneCompany.name] substringToIndex:1];
+                     initKey = [[Hanzi2Pinyin convert:oneCompany.name] substringToIndex:1];
                  }
                  else {
-                     key = [oneCompany.name substringToIndex:1];
+                     initKey = [oneCompany.name substringToIndex:1];
                  }
-                 
+                 NSString *key = [initKey uppercaseString];
                  //NSString *key = [oneCompany.name substringToIndex:1];
                  NSMutableArray *localNames = [names objectForKey:key];
                  if (localNames == nil) {
@@ -96,9 +96,28 @@
                  
                  
                  
-                 NSMutableArray *sortedNames;
+                 NSArray *sortedNames = [localNames sortedArrayUsingComparator:^NSComparisonResult(Company* a, Company* b) {
+                     
+                     NSString *first = a.name;
+                     NSString *second = b.name;
+                     
+                     if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+                         first = [Hanzi2Pinyin convert:first];
+                         first = [NSString stringWithFormat:@"%@%@",@" ", first];
+                     }
+                     if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+                         second = [Hanzi2Pinyin convert:second];
+                         second = [NSString stringWithFormat:@"%@%@",@" ", second];
+                     }
+                     
+                     
+                     
+                     return [first compare:second];
+                 }];
                  
-                 [names setObject:localNames forKey:key];
+                 NSMutableArray *sortedMutableArray = [NSMutableArray arrayWithArray:sortedNames];
+                 
+                 [names setObject:sortedMutableArray forKey:key];
              }
         }
     else {
@@ -108,15 +127,55 @@
         NSLog(@"fetched %d", [fetchedContactsArrayLocal count]);
             for (int i = 0; i < [fetchedContactsArrayLocal count]; i++) {
                 Contact *oneContact = [fetchedContactsArrayLocal objectAtIndex:i];
-                NSString *key = [oneContact.lastname substringToIndex:1];
+                
+                NSString *name = [NSString stringWithFormat:@"%@%@",oneContact.lastname, oneContact.firstname];
+                
+                NSString *initKey;
+                if ([Hanzi2Pinyin hasChineseCharacter:name]) {
+                    initKey = [[Hanzi2Pinyin convert:name] substringToIndex:1];
+                }
+                else {
+                    initKey = [name substringToIndex:1];
+                }
+                NSString *key = [initKey uppercaseString];
+
                 NSMutableArray *localNames = [names objectForKey:key];
                 if (localNames == nil) {
                     NSMutableArray *newArray = [[NSMutableArray alloc] init];
                     localNames = newArray;
                 }
-                //[localNames addObject:[NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname]];
                 [localNames addObject:oneContact];
-                [names setObject:localNames forKey:key];
+                
+                
+                
+                
+                NSArray *sortedNames = [localNames sortedArrayUsingComparator:^NSComparisonResult(Contact* a, Contact* b) {
+                    
+                    NSString *first = [NSString stringWithFormat:@"%@%@",a.lastname, a.firstname];
+                    NSString *second = [NSString stringWithFormat:@"%@%@",b.lastname, b.firstname];
+                    
+                    if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+                        first = [Hanzi2Pinyin convert:first];
+                        first = [NSString stringWithFormat:@"%@%@",@" ", first];
+                    }
+                    if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+                        second = [Hanzi2Pinyin convert:second];
+                        second = [NSString stringWithFormat:@"%@%@",@" ", second];
+                    }
+                    
+                    
+                    
+                    return [first compare:second];
+                }];
+                
+                NSMutableArray *sortedMutableArray = [NSMutableArray arrayWithArray:sortedNames];
+
+                
+                
+                
+                
+
+                [names setObject:sortedMutableArray forKey:key];
             }
         }
 }
