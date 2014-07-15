@@ -11,6 +11,7 @@
 #import "DatabaseInterface.h"
 #import "Company.h"
 #import "sksViewController.h"
+#import "Hanzi2Pinyin.h"
 
 #define thumbnailSize 75
 
@@ -76,13 +77,27 @@
         NSLog(@"fetched %d", [fetchedCompaniesArrayLocal count]);
              for (int i = 0; i < [fetchedCompaniesArrayLocal count]; i++) {
                  Company *oneCompany = [fetchedCompaniesArrayLocal objectAtIndex:i];
-                 NSString *key = [oneCompany.name substringToIndex:1];
+                 
+                 NSString *key;
+                 if ([Hanzi2Pinyin hasChineseCharacter:oneCompany.name]) {
+                     key = [[Hanzi2Pinyin convert:oneCompany.name] substringToIndex:1];
+                 }
+                 else {
+                     key = [oneCompany.name substringToIndex:1];
+                 }
+                 
+                 //NSString *key = [oneCompany.name substringToIndex:1];
                  NSMutableArray *localNames = [names objectForKey:key];
                  if (localNames == nil) {
                      NSMutableArray *newArray = [[NSMutableArray alloc] init];
                      localNames = newArray;
                  }
                  [localNames addObject:oneCompany];
+                 
+                 
+                 
+                 NSMutableArray *sortedNames;
+                 
                  [names setObject:localNames forKey:key];
              }
         }
@@ -103,9 +118,9 @@
                 [localNames addObject:oneContact];
                 [names setObject:localNames forKey:key];
             }
-    //NSLog(@"names %d", [names count]);
         }
 }
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -223,17 +238,39 @@
         NSMutableArray *array=[mutableNames valueForKey:key];
         NSMutableArray *toRemove=[NSMutableArray new];
         //待删除列表
-        for(NSString *name in array)
-        {//数组内的元素循环对比
-            if([name rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location==NSNotFound)
-            {
-                //rangeOfString方法是返回NSRange对象(包含位置索引和长度信息)
-                //NSCaseInsensitiveSearch是忽略大小写
-                //这里的代码会在name中找不到searchTerm时执行
-                [toRemove addObject:name];
-                //找不到，把name添加到待删除列表
+        if ([Segment selectedSegmentIndex]==0) {
+            
+            for(Company *company in array)
+            {//数组内的元素循环对比
+                if([company.name rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location==NSNotFound)
+                {
+                    //rangeOfString方法是返回NSRange对象(包含位置索引和长度信息)
+                    //NSCaseInsensitiveSearch是忽略大小写
+                    //这里的代码会在name中找不到searchTerm时执行
+                    [toRemove addObject:company];
+                    //找不到，把name添加到待删除列表
+                }
             }
+            
+            
         }
+        else {
+            
+            for(Contact *contact in array)
+            {//数组内的元素循环对比
+                if([[NSString stringWithFormat:@"%@ %@",contact.lastname, contact.firstname] rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location==NSNotFound)
+                {
+                    //rangeOfString方法是返回NSRange对象(包含位置索引和长度信息)
+                    //NSCaseInsensitiveSearch是忽略大小写
+                    //这里的代码会在name中找不到searchTerm时执行
+                    [toRemove addObject:contact];
+                    //找不到，把name添加到待删除列表
+                }
+            }
+        
+        
+        }
+
         if ([array count]==[toRemove count]) {
             [sectionToRemove addObject:key];
             //如果待删除的总数和数组元素总数相同，把该分组的key加入待删除列表，即不显示该分组
