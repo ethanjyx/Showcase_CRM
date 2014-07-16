@@ -11,10 +11,12 @@
 #import "Contact.h"
 
 
+
 @interface DetailContactViewController : ViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *lastname;
 @property (weak, nonatomic) IBOutlet UILabel *firstname;
-@property (strong,nonatomic) NSString *lastnamestring;
-@property (strong,nonatomic) NSString *firstnamestring;
+
+@property (nonatomic, strong) Contact *contact;
+
 @end

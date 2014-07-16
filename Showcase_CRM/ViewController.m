@@ -18,7 +18,6 @@
 
 @implementation ViewController {
     Company *globalSelectedCompany;
-    Contact *globalContact;
     Contact *globalSelectedContact;
 }
 @synthesize scrollView;
@@ -266,8 +265,7 @@
     }
     else if ([segue.identifier isEqualToString:@"detailContact"]) {
         DetailContactViewController *detailcontact=segue.destinationViewController;
-        detailcontact.lastnamestring=globalSelectedContact.lastname;
-        detailcontact.firstnamestring=globalSelectedContact.firstname;
+        detailcontact.contact = globalSelectedContact;
     }
 }
 
