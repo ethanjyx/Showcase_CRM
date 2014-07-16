@@ -19,6 +19,7 @@
 - (void)updateContents;
 - (void)addContact;
 - (void)importContacts;
+- (void)deleteContact:(UIButton*)sender;
 @end
 
 @implementation sksViewController {
@@ -149,19 +150,6 @@
     return cell;
 }
 
-- (void)addContact
-{
-    [self performSegueWithIdentifier: @"addContactSegue" sender:self];
-}
-
-- (void)importContacts
-{
-    TKPeoplePickerController *controller = [[TKPeoplePickerController alloc] initPeoplePicker];
-    controller.actionDelegate = self;
-    controller.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:controller animated:YES completion:nil];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"addContactSegue"]) {
@@ -169,8 +157,6 @@
         addContact.company = company;
     }
 }
-
-
 
 // called in SKSTableView.m to create cell for subRows
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath
@@ -206,20 +192,36 @@
     
     
     UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    deleteButton.tag = indexPath.subRow - 1;
     [deleteButton addTarget:self
-                   action:@selector(aMethod:)
+                     action:@selector(deleteContact:)
          forControlEvents:UIControlEventTouchUpInside];
     [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
     deleteButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
     [cell.contentView addSubview:deleteButton];
     
-    
-//    UIView *buttonViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 240, 232)];
-//    [buttonViews addSubview:editButton];
-//    [buttonViews addSubview:deleteButton];
-//    cell.accessoryView = buttonViews;
-    
     return cell;
+}
+
+- (void)addContact
+{
+    [self performSegueWithIdentifier: @"addContactSegue" sender:self];
+}
+
+- (void)importContacts
+{
+    TKPeoplePickerController *controller = [[TKPeoplePickerController alloc] initPeoplePicker];
+    controller.actionDelegate = self;
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)deleteContact:(UIButton*)sender
+{
+    // TODO: add alertview here
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    [database deleteContact:[allContacts objectAtIndex:sender.tag]];
+    // TODO: add reload page here
 }
 
 /*
