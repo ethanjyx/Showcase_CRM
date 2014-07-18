@@ -13,10 +13,9 @@
 @end
 
 @implementation DetailContactViewController
-@synthesize lastnamestring;
-@synthesize firstnamestring;
 @synthesize lastname;
 @synthesize firstname;
+@synthesize contact;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,8 +30,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    lastname.text=lastnamestring;
-    firstname.text=firstnamestring;
+    lastname.text=contact.firstname;
+    firstname.text=contact.lastname;
 }
 
 - (void)didReceiveMemoryWarning

@@ -82,15 +82,19 @@
 */
 
 - (IBAction)save:(id)sender {
-    DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    [database addContactWithLastname:lastname.text firstname:firstname.text title:title.text phoneWork:phone_work.text phoneHome:phone_personal.text phoneMobile:mobile_phone.text emailWork:email_work.text emailPersonal:email_personal.text note:note.text country:country.text province:province.text city:city.text street:address.text postcode:postcode.text companyName:company QQ:QQ.text weChat:WeChat.text skype:Skype.text weibo:Weibo.text];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTable" object:nil];
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:@"saveContact"]) {
+        DatabaseInterface *database = [DatabaseInterface databaseInterface];
+        [database addContactWithLastname:lastname.text firstname:firstname.text title:title.text phoneWork:phone_work.text phoneHome:phone_personal.text phoneMobile:mobile_phone.text emailWork:email_work.text emailPersonal:email_personal.text note:note.text country:country.text province:province.text city:city.text street:address.text postcode:postcode.text companyName:company QQ:QQ.text weChat:WeChat.text skype:Skype.text weibo:Weibo.text];
         sksViewController *localContact = segue.destinationViewController;
         localContact.company = company;
+    }
+    else if([segue.identifier isEqualToString:@"returnFromContact"]) {
+        sksViewController *localContact = segue.destinationViewController;
+        localContact.company = company;
+    }
 }
 @end
