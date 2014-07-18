@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="TeU-Xk-Db8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A2093" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="TeU-Xk-Db8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -2034,11 +2034,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <viewControllerLayoutGuide type="bottom" id="wW6-Es-sqs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qVx-rh-bun">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C90-9Q-ex3">
-                                <rect key="frame" x="0.0" y="0.0" width="704" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="769" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="联系人信息" id="Isz-Vj-mwn"/>
@@ -2153,7 +2153,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="arZ-H1-8NY">
-                                <rect key="frame" x="-1" y="259" width="704" height="44"/>
+                                <rect key="frame" x="-1" y="259" width="769" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="P8S-4z-YBV"/>
@@ -2172,7 +2172,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1AY-c3-WKd">
-                                <rect key="frame" x="-1" y="498" width="704" height="44"/>
+                                <rect key="frame" x="-1" y="498" width="769" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="w3i-eF-Tcs"/>
@@ -2186,8 +2186,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="cog-GO-ddO"/>
                     <connections>
                         <outlet property="firstname" destination="OmK-Ew-Qrd" id="wLI-z2-duP"/>
                         <outlet property="lastname" destination="pkL-nX-B7M" id="O37-af-I6e"/>
@@ -2195,7 +2195,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inw-8c-zUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6454" y="-5613"/>
+            <point key="canvasLocation" x="-6263" y="-2013"/>
         </scene>
         <!--Sks View Controller-->
         <scene sceneID="Bdg-eT-OXB">
@@ -2277,6 +2277,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="tableView" destination="dzc-hk-h6i" id="pnL-z0-m1o"/>
                         <outlet property="website" destination="vCH-8S-pnz" id="kcC-JL-YgZ"/>
                         <segue destination="Pib-Yb-REo" kind="replace" identifier="addContactSegue" splitViewControllerTargetIndex="1" id="S4e-re-maR"/>
+                        <segue destination="ubu-aj-fW8" kind="replace" identifier="contactDetailSegue" splitViewControllerTargetIndex="1" id="5pP-jx-gOd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Glb-KB-Etq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2747,9 +2748,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="Oi0-y6-JXQ"/>
+        <segue reference="5pP-jx-gOd"/>
         <segue reference="4yY-fI-DdS"/>
-        <segue reference="blV-vO-hxv"/>
-        <segue reference="wb9-VR-N7k"/>
         <segue reference="tAd-vV-Fah"/>
     </inferredMetricsTieBreakers>
 </document>

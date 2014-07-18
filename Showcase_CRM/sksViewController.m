@@ -12,6 +12,7 @@
 #import "Industry.h"
 #import "DatabaseInterface.h"
 #import "AddContactViewController.h"
+#import "DetailContactViewController.h"
 
 @interface sksViewController ()
 
@@ -24,6 +25,7 @@
 
 @implementation sksViewController {
     Company *globalCompany;
+    Contact *globalSelectedContact;
     NSMutableArray *allContacts;
 }
 
@@ -107,6 +109,16 @@
         return [contents[indexPath.section][indexPath.row] count] - 1;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    printf("%d %d\n", indexPath.section, indexPath.row);
+    if (indexPath.section == 1 && indexPath.row != 0) {
+        // a contact is clicked
+        globalSelectedContact = [allContacts objectAtIndex:indexPath.row - 1];
+        [self performSegueWithIdentifier:@"contactDetailSegue" sender:self];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"SKSTableViewCell";
@@ -155,6 +167,9 @@
     if ([segue.identifier isEqualToString:@"addContactSegue"]) {
         AddContactViewController *addContact = segue.destinationViewController;
         addContact.company = company;
+    } else if ([segue.identifier isEqualToString:@"contactDetailSegue"]) {
+        DetailContactViewController *detailcontact=segue.destinationViewController;
+        detailcontact.contact = globalSelectedContact;
     }
 }
 
