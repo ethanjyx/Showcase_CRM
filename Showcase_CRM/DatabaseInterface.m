@@ -119,6 +119,7 @@
     newEntry.wechat = weChat;
     newEntry.skype = Skype;
     newEntry.weibo = Weibo;
+    newEntry.sign_up_times = 0;
     
     /*
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -242,7 +243,7 @@
     return [fetchedObjects lastObject];
 }
 
-- (Contact*)fetchContactByName:(NSString*)contactName
+- (Contact*)fetchContactByID:(NSNumber*)contactID
 {
     // initializing NSFetchRequest
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -252,7 +253,7 @@
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", contactName];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", contactID];
     [fetchRequest setPredicate:predicate];
     
     NSError* error;

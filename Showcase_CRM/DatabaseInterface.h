@@ -27,6 +27,8 @@
 
 - (Company*)fetchCompanyByName:(NSString*)companyName;
 
+- (Contact*)fetchContactByID:(NSNumber*)contactID;
+
 - (void)addCompany:(NSString*)companyName billingAddress:(Address*)billingAddress shippingAddress:(Address*)shippingAddress;
 
 - (void)editOldCompany:(Company*) oldCompany toNewCompany:(Company*) newCompany;
