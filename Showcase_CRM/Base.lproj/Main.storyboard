@@ -2828,6 +2828,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="save:" destination="7Rb-a8-ToM" eventType="touchUpInside" id="pYT-8F-J6F"/>
                                     <segue destination="jIa-eO-fpF" kind="replace" identifier="saveBillingAddress" splitViewControllerTargetIndex="1" id="s1B-nQ-zg2"/>
                                 </connections>
                             </button>
@@ -2838,7 +2839,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="jIa-eO-fpF" kind="replace" identifier="returnFromBillingAddress" splitViewControllerTargetIndex="1" id="itD-Oy-Ll1"/>
+                                    <action selector="returnFromBilling:" destination="7Rb-a8-ToM" eventType="touchUpInside" id="H5C-gL-zxm"/>
+                                    <segue destination="jIa-eO-fpF" kind="replace" identifier="returnFromBillingAddress" splitViewControllerTargetIndex="1" id="022-7Z-6fn"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Adidas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTZ-XS-nIk">
@@ -2850,10 +2852,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="address" destination="DSK-Xw-2c8" id="LLm-VC-Sz8"/>
+                        <outlet property="city" destination="isA-1a-zfh" id="nVg-gi-tsa"/>
+                        <outlet property="companyName" destination="mTZ-XS-nIk" id="opp-U2-ljd"/>
+                        <outlet property="country" destination="zVK-Nd-AZs" id="Gqd-Pz-bIi"/>
+                        <outlet property="postcode" destination="0Ru-Yt-eYL" id="TsF-52-9Hi"/>
+                        <outlet property="province" destination="x61-j8-6ik" id="Do6-FT-enT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBV-Z3-ZEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2182" y="-982"/>
+            <point key="canvasLocation" x="-1956" y="-1465"/>
         </scene>
         <!--Shipping Address View Controller-->
         <scene sceneID="cyg-uU-2dm">
@@ -2940,6 +2950,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="save:" destination="A6m-EH-Da0" eventType="touchUpInside" id="phV-Od-ez2"/>
                                     <segue destination="jIa-eO-fpF" kind="replace" identifier="saveShippingAddress" splitViewControllerTargetIndex="1" id="ccB-YB-caj"/>
                                 </connections>
                             </button>
@@ -2950,6 +2961,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="returnFromShipping:" destination="A6m-EH-Da0" eventType="touchUpInside" id="2O0-H7-DtY"/>
                                     <segue destination="jIa-eO-fpF" kind="replace" identifier="returnFromShippingAddress" splitViewControllerTargetIndex="1" id="svS-ta-jLk"/>
                                 </connections>
                             </button>
@@ -2962,10 +2974,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="address" destination="A8u-8A-wqK" id="1Bp-ZY-qyK"/>
+                        <outlet property="city" destination="PAN-Ae-Rif" id="jjj-gD-dNY"/>
+                        <outlet property="companyName" destination="zrO-tM-fBb" id="ATl-J2-jKM"/>
+                        <outlet property="country" destination="W2V-Vg-WSe" id="zeG-zb-gd0"/>
+                        <outlet property="postcode" destination="ApJ-WU-OSV" id="NqZ-a2-z3d"/>
+                        <outlet property="province" destination="fED-Qw-vfY" id="b3h-3W-HaI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qdg-l1-xA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2226" y="-1244"/>
+            <point key="canvasLocation" x="-2624" y="-298"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -2974,7 +2994,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sE1-rH-xou"/>
+        <segue reference="zXn-ca-5jz"/>
         <segue reference="scm-2R-sld"/>
         <segue reference="5pP-jx-gOd"/>
         <segue reference="svS-ta-jLk"/>

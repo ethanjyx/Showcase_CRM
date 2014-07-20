@@ -9,10 +9,24 @@
 #import "BillAddressViewController.h"
 
 @interface BillAddressViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *companyName;
+@property (weak, nonatomic) IBOutlet UITextField *country;
+@property (weak, nonatomic) IBOutlet UITextField *province;
+@property (weak, nonatomic) IBOutlet UITextField *city;
+@property (weak, nonatomic) IBOutlet UITextField *address;
+@property (weak, nonatomic) IBOutlet UITextField *postcode;
+
+- (IBAction)save:(id)sender;
+- (IBAction)returnFromBilling:(id)sender;
+
+
 
 @end
 
 @implementation BillAddressViewController
+
+@synthesize company;
+@synthesize companyName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +41,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    companyName.text = company.name;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,4 +61,9 @@
 }
 */
 
+- (IBAction)save:(id)sender {
+}
+
+- (IBAction)returnFromBilling:(id)sender {
+}
 @end

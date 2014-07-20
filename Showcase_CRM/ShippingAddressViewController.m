@@ -10,9 +10,22 @@
 
 @interface ShippingAddressViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *companyName;
+@property (weak, nonatomic) IBOutlet UITextField *country;
+@property (weak, nonatomic) IBOutlet UITextField *province;
+@property (weak, nonatomic) IBOutlet UITextField *city;
+@property (weak, nonatomic) IBOutlet UITextField *address;
+@property (weak, nonatomic) IBOutlet UITextField *postcode;
+
+
+- (IBAction)save:(id)sender;
+- (IBAction)returnFromShipping:(id)sender;
+
 @end
 
 @implementation ShippingAddressViewController
+
+@synthesize company;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,4 +59,9 @@
 }
 */
 
+- (IBAction)save:(id)sender {
+}
+
+- (IBAction)returnFromShipping:(id)sender {
+}
 @end

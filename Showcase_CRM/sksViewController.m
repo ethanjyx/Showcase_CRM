@@ -13,6 +13,8 @@
 #import "DatabaseInterface.h"
 #import "AddContactViewController.h"
 #import "DetailContactViewController.h"
+#import "ShippingAddressViewController.h"
+#import "BillAddressViewController.h"
 
 @interface sksViewController ()
 
@@ -112,8 +114,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     printf("%d %d\n", indexPath.section, indexPath.row);
-    
-    
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        
+        [self performSegueWithIdentifier:@"billingAddress" sender:self];
+    }
+    if (indexPath.section == 0 && indexPath.row == 2) {
+        
+        [self performSegueWithIdentifier:@"shippingAddress" sender:self];
+    }
+
     
     
     
@@ -176,6 +185,14 @@
         DetailContactViewController *detailcontact=segue.destinationViewController;
         detailcontact.contact = globalSelectedContact;
     }
+    else if ([segue.identifier isEqualToString:@"shippingAddress"]) {
+        ShippingAddressViewController *shippingAddressController = segue.destinationViewController;
+        shippingAddressController.company = globalCompany;
+    }
+    else if([segue.identifier isEqualToString:@"billingAddress"]) {
+        BillAddressViewController *billingAddressController = segue.destinationViewController;
+        billingAddressController.company = globalCompany;
+    }
 }
 
 // called in SKSTableView.m to create cell for subRows
@@ -199,18 +216,18 @@
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    
-    // add button as subView to control subRow
-    UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [editButton addTarget:self
-               action:@selector(aMethod:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [editButton setTitle:@"编辑" forState:UIControlStateNormal];
-    editButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
-    [cell.contentView addSubview:editButton];
-    
-    
     if (indexPath.section == 1) {
+        // add button as subView to control subRow
+        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [editButton addTarget:self
+                   action:@selector(aMethod:)
+         forControlEvents:UIControlEventTouchUpInside];
+        [editButton setTitle:@"编辑" forState:UIControlStateNormal];
+        editButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
+        [cell.contentView addSubview:editButton];
+        
+    
+
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         deleteButton.tag = indexPath.subRow - 1;
         [deleteButton addTarget:self

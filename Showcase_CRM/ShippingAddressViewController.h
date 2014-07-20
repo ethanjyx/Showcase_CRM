@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "Company.h"
 
 @interface ShippingAddressViewController : ViewController
+
+@property (nonatomic, strong) Company *company;
 
 @end
