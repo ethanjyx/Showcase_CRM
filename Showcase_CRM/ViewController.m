@@ -309,8 +309,14 @@
                     //rangeOfString方法是返回NSRange对象(包含位置索引和长度信息)
                     //NSCaseInsensitiveSearch是忽略大小写
                     //这里的代码会在name中找不到searchTerm时执行
+                    
+
                     [toRemove addObject:company];
+                
                     //找不到，把name添加到待删除列表
+                }
+                if (([Hanzi2Pinyin hasChineseCharacter:company.name] && [[Hanzi2Pinyin convertToAbbreviation:company.name] rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location!=NSNotFound)) {
+                    [toRemove removeObject:company];
                 }
             }
             
@@ -320,7 +326,8 @@
             
             for(Contact *contact in array)
             {//数组内的元素循环对比
-                if([[NSString stringWithFormat:@"%@ %@",contact.lastname, contact.firstname] rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location==NSNotFound)
+                NSString *contactName = [NSString stringWithFormat:@"%@ %@",contact.lastname, contact.firstname];
+                if([contactName rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location==NSNotFound)
                 {
                     //rangeOfString方法是返回NSRange对象(包含位置索引和长度信息)
                     //NSCaseInsensitiveSearch是忽略大小写
@@ -328,6 +335,10 @@
                     [toRemove addObject:contact];
                     //找不到，把name添加到待删除列表
                 }
+                if (([Hanzi2Pinyin hasChineseCharacter:contactName] && [[Hanzi2Pinyin convertToAbbreviation:contactName] rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location!=NSNotFound)) {
+                    [toRemove removeObject:contact];
+                }
+
             }
         
         
