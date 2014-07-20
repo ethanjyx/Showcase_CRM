@@ -2,36 +2,39 @@
 //  Contact.m
 //  Showcase_CRM
 //
-//  Created by Linfeng Shi on 6/25/14.
+//  Created by Linfeng Shi on 7/20/14.
 //  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
 #import "Contact.h"
+#import "Address.h"
 #import "Company.h"
+#import "Event.h"
 #import "Project.h"
 #import "Sale.h"
 
 
 @implementation Contact
 
+@dynamic email_personal;
+@dynamic email_work;
+@dynamic firstname;
 @dynamic id;
 @dynamic lastname;
-@dynamic firstname;
-@dynamic title;
-@dynamic phone_work;
+@dynamic note;
 @dynamic phone_home;
 @dynamic phone_mobile;
-@dynamic email_work;
-@dynamic email_personal;
-@dynamic note;
+@dynamic phone_work;
 @dynamic qq;
-@dynamic wechat;
 @dynamic skype;
+@dynamic title;
+@dynamic wechat;
 @dynamic weibo;
-@dynamic company;
+@dynamic sign_up_times;
 @dynamic address;
+@dynamic company;
 @dynamic event;
-@dynamic sales;
 @dynamic projects;
+@dynamic sales;
 
 @end
