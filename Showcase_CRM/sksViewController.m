@@ -22,6 +22,7 @@
 - (void)updateContents;
 - (void)addContact;
 - (void)importContacts;
+- (void)exportContacts;
 - (void)deleteContact:(UIButton*)sender;
 @end
 
@@ -29,6 +30,7 @@
     Company *globalCompany;
     Contact *globalSelectedContact;
     NSMutableArray *allContacts;
+    bool exportingContact;
 }
 
 @synthesize phone,industryType,website,CompanyName,company;
@@ -59,6 +61,7 @@
     industryType.text = industry.industry_type;
     allContacts = [[NSMutableArray alloc] init];
     
+    exportingContact = false;
     
     contents = @[
                   @[
@@ -153,24 +156,35 @@
     
     
     if (indexPath.section == 1) {
-
+        // create new contact button
         UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
         [addButton addTarget:self
                       action:@selector(addContact)
             forControlEvents:UIControlEventTouchUpInside];
         [addButton setTitle:@"新建" forState:UIControlStateNormal];
-        addButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
+        addButton.frame = CGRectMake(480, 0, 55, 40.0); // x, y, width, height
         [cell.contentView addSubview:addButton];
         
+        // import contacts button
         UIButton *importButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         
         [importButton addTarget:self
                       action:@selector(importContacts)
             forControlEvents:UIControlEventTouchUpInside];
         [importButton setTitle:@"导入" forState:UIControlStateNormal];
-        importButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
+        importButton.frame = CGRectMake(540, 0, 55, 40.0); // x, y, width, height
         [cell.contentView addSubview:importButton];
+        
+        // export contacts button
+        UIButton *exportButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        
+        [exportButton addTarget:self
+                         action:@selector(exportContacts)
+               forControlEvents:UIControlEventTouchUpInside];
+        [exportButton setTitle:@"批量导出" forState:UIControlStateNormal];
+        exportButton.frame = CGRectMake(590, 0, 80, 40.0); // x, y, width, height
+        [cell.contentView addSubview:exportButton];
     }
     
     return cell;
@@ -251,6 +265,16 @@
     controller.actionDelegate = self;
     controller.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)exportContacts
+{
+    if([[self tableView] numberOfRowsInSection:1] == 1) {
+    // contacts not expanded, expand them
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+        [[self tableView] selectRowAtIndexPath:indexPath animated:false scrollPosition:UITableViewScrollPositionNone];
+        [self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 - (void)deleteContact:(UIButton*)sender
