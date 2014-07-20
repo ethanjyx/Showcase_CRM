@@ -112,6 +112,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     printf("%d %d\n", indexPath.section, indexPath.row);
+    
+    
+    
+    
+    
     if (indexPath.section == 1 && indexPath.row != 0) {
         // a contact is clicked
         globalSelectedContact = [allContacts objectAtIndex:indexPath.row - 1];
@@ -205,16 +210,16 @@
     [cell.contentView addSubview:editButton];
     
     
-    
-    UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    deleteButton.tag = indexPath.subRow - 1;
-    [deleteButton addTarget:self
-                     action:@selector(deleteContact:)
-         forControlEvents:UIControlEventTouchUpInside];
-    [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
-    deleteButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
-    [cell.contentView addSubview:deleteButton];
-    
+    if (indexPath.section == 1) {
+        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        deleteButton.tag = indexPath.subRow - 1;
+        [deleteButton addTarget:self
+                         action:@selector(deleteContact:)
+             forControlEvents:UIControlEventTouchUpInside];
+        [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+        deleteButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
+        [cell.contentView addSubview:deleteButton];
+    }
     return cell;
 }
 

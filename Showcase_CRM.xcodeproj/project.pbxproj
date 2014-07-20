@@ -17,6 +17,8 @@
 		6120CFD21959F3ED001FCAC1 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD11959F3ED001FCAC1 /* Status.m */; };
 		6120CFD51959F3ED001FCAC1 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD41959F3ED001FCAC1 /* Address.m */; };
 		612A343E197BA023009A5A21 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A343D197BA023009A5A21 /* Contact.m */; };
+		612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A3440197BCB38009A5A21 /* ShippingAddressViewController.m */; };
+		612A3444197BCB47009A5A21 /* BillAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A3443197BCB47009A5A21 /* BillAddressViewController.m */; };
 		61438ACD19717E5E00B9DF58 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61438ACC19717E5E00B9DF58 /* AddContactViewController.m */; };
 		618DE7351949B272000CC43E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE7341949B272000CC43E /* MainViewController.m */; };
 		618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE73A1949B2D0000CC43E /* CreateClientViewController.m */; };
@@ -104,6 +106,10 @@
 		6120CFD41959F3ED001FCAC1 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		612A343C197BA023009A5A21 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		612A343D197BA023009A5A21 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		612A343F197BCB38009A5A21 /* ShippingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShippingAddressViewController.h; sourceTree = "<group>"; };
+		612A3440197BCB38009A5A21 /* ShippingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShippingAddressViewController.m; sourceTree = "<group>"; };
+		612A3442197BCB47009A5A21 /* BillAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillAddressViewController.h; sourceTree = "<group>"; };
+		612A3443197BCB47009A5A21 /* BillAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillAddressViewController.m; sourceTree = "<group>"; };
 		61438ACB19717E5D00B9DF58 /* AddContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactViewController.h; sourceTree = "<group>"; };
 		61438ACC19717E5E00B9DF58 /* AddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactViewController.m; sourceTree = "<group>"; };
 		618DE7331949B272000CC43E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -488,6 +494,10 @@
 				CE65A39B19754C760051BFAC /* AddContact2ViewController.m */,
 				CE8D41E819759B1500E3D374 /* DetailContactViewController.h */,
 				CE8D41E919759B1500E3D374 /* DetailContactViewController.m */,
+				612A343F197BCB38009A5A21 /* ShippingAddressViewController.h */,
+				612A3440197BCB38009A5A21 /* ShippingAddressViewController.m */,
+				612A3442197BCB47009A5A21 /* BillAddressViewController.h */,
+				612A3443197BCB47009A5A21 /* BillAddressViewController.m */,
 			);
 			name = SKSTableViewImp;
 			sourceTree = "<group>";
@@ -692,6 +702,7 @@
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */,
 				CE0E674F196161F50074E821 /* DetailViewController.m in Sources */,
+				612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */,
 				9D132E76195A589700CD5788 /* TKGroupPickerController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				9D132E8C195A58DA00CD5788 /* NSString+TKUtilities.m in Sources */,
@@ -710,6 +721,7 @@
 				6120CFD21959F3ED001FCAC1 /* Status.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
 				6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */,
+				612A3444197BCB47009A5A21 /* BillAddressViewController.m in Sources */,
 				61AE4DC41975584B00E3811C /* Hanzi2Pinyin.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
 				9DF6359A196BBA4D00E10E48 /* SKSTableView.m in Sources */,
