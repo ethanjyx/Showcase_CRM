@@ -7,6 +7,9 @@
 //
 
 #import "BillAddressViewController.h"
+#import "ViewBillingAddressController.h"
+#import "Address.h"
+#import "DatabaseInterface.h"
 
 @interface BillAddressViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *companyName;
@@ -26,7 +29,7 @@
 @implementation BillAddressViewController
 
 @synthesize company;
-@synthesize companyName;
+@synthesize companyName,country,province,city,address,postcode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +45,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     companyName.text = company.name;
+    Address *billingAddress = company.billing_address;
+    country.text = billingAddress.country;
+    province.text = billingAddress.province;
+    city.text = billingAddress.city;
+    address.text = billingAddress.street;
+    postcode.text = billingAddress.postal;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +70,38 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"returnFromEditBillingAddress"]) {
+        BillAddressViewController *billingController = segue.destinationViewController;
+        billingController.company = company;
+    }
+    else if([segue.identifier isEqualToString:@"saveBillingAddress"]) {
+
+        DatabaseInterface *database = [DatabaseInterface databaseInterface];
+        
+        Address *billingAddress = company.billing_address;
+        if (billingAddress == nil) {
+            [database addCompanyBillingAddress:company];
+            company = [database fetchCompanyByName:company.name];
+        }
+        billingAddress = company.billing_address;
+        billingAddress.country = country.text;
+        billingAddress.province = province.text;
+        billingAddress.city = city.text;
+        billingAddress.street = address.text;
+        billingAddress.postal = postcode.text;
+        
+        
+        
+        [database editCompany:company billingAddress:billingAddress];
+        
+        BillAddressViewController *billingController = segue.destinationViewController;
+        billingController.company = company;
+    }
+}
+
 
 - (IBAction)save:(id)sender {
 }
