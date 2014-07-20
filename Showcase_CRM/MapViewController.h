@@ -16,7 +16,7 @@
 
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) NSMutableArray *geocodeSearchs;
-@property (nonatomic, retain) NSArray *contacts;
+@property (nonatomic, retain) NSMutableArray *contacts;
 @property (nonatomic, retain) NSMutableArray *dataLists;
 @property (nonatomic, retain) NSMutableArray *tableViews;
 @property (nonatomic, retain) NSMutableArray *annotations;

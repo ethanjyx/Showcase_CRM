@@ -50,14 +50,19 @@
     [_locService startUserLocationService];
     
     // Init containers
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    self.contacts = [[NSMutableArray alloc] initWithArray:[database getAllContacts]];
     self.geocodeSearchs = [[NSMutableArray alloc] init];
     self.dataLists = [[NSMutableArray alloc] init];
     self.tableViews = [[NSMutableArray alloc] init];
     self.annotations = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.contacts count]; i++) {
+        [self.dataLists addObject:[NSNull null]];
+        [self.tableViews addObject:[NSNull null]];
+        [self.annotations addObject:[NSNull null]];
+    }
     
     // Init Geocoder then convert street address to latitude and longitude
-    DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    self.contacts = [database getAllContacts];
     for (int i = 0; i < [self.contacts count]; i++) {
         BMKGeoCodeSearch* geocodesearch = [[BMKGeoCodeSearch alloc] init];
         geocodesearch.delegate = self;
@@ -131,6 +136,17 @@
         } else {
             // update checkin times
             msg = @"签到成功！";
+            Contact *contact = [self.contacts objectAtIndex:index];
+            NSNumber *updated_sign_up_times = [[NSNumber alloc] initWithInt:contact.sign_up_times.intValue + 1];
+            contact.sign_up_times = updated_sign_up_times;
+            DatabaseInterface *database = [DatabaseInterface databaseInterface];
+            [database editContact:contact];
+            [self.contacts replaceObjectAtIndex:index withObject:contact];
+            NSMutableArray *datalist = [self.dataLists objectAtIndex:index];
+            NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%@次", updated_sign_up_times];
+            [datalist replaceObjectAtIndex:4 withObject:checkinStr];
+            [self.dataLists replaceObjectAtIndex:index withObject:datalist];
+            [tableView reloadData];
         }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
@@ -198,21 +214,21 @@
         NSString *addressStr = [[NSString alloc] initWithFormat:@"地址：%@", address.street];
         NSString *cellphoneStr = [[NSString alloc] initWithFormat:@"电话：%@", contact.phone_mobile];
         NSString *companyStr = [[NSString alloc] initWithFormat:@"公司：%@", contact.company.name];
-        NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：0次"];
+        NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%@次", contact.sign_up_times];
         
-        NSArray *dataList = [NSArray arrayWithObjects:nameStr, addressStr, cellphoneStr, companyStr, checkinStr, @"", @"                        签到", nil];
-        [self.dataLists addObject:dataList];
+        NSMutableArray *dataList = [NSMutableArray arrayWithObjects:nameStr, addressStr, cellphoneStr, companyStr, checkinStr, @"", @"                        签到", nil];
+        [self.dataLists replaceObjectAtIndex:index withObject:dataList];
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 400) style:UITableViewStylePlain];
         // 设置tableView的数据源
         tableView.dataSource = self;
         // 设置tableView的委托
         tableView.delegate = self;
-        [self.tableViews addObject:tableView];
+        [self.tableViews replaceObjectAtIndex:index withObject:tableView];
         
         BMKPointAnnotation* pinAnnotation = [[BMKPointAnnotation alloc] init];
 		pinAnnotation.coordinate = result.location;
-        [self.annotations addObject:pinAnnotation];
+        [self.annotations replaceObjectAtIndex:index withObject:pinAnnotation];
         [_mapView addAnnotation:pinAnnotation];
         
         /*
@@ -252,6 +268,10 @@
         BMKGeoCodeSearch* geocodesearch = [self.geocodeSearchs objectAtIndex:i];
         geocodesearch.delegate = nil;
     }
+    for (int i = 0; i < [self.tableViews count]; i++) {
+        UITableView* tableView = [self.tableViews objectAtIndex:i];
+        tableView.delegate = nil;
+    }
 }
 
 // Override
@@ -264,7 +284,7 @@
     // 从天上掉下效果
     ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
     // 设置可拖拽
-    ((BMKPinAnnotationView*)annotationView).draggable = YES;
+    //((BMKPinAnnotationView*)annotationView).draggable = YES;
     //设置大头针图标
     //((BMKPinAnnotationView*)newAnnotation).image = [UIImage imageNamed:@"zhaohuoche"];
     
