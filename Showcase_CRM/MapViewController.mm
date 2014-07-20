@@ -35,11 +35,15 @@
     _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 1024, 724)];
     CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(31.023722, 121.437416);
     _mapView.centerCoordinate = coord;
+    _mapView.showsUserLocation = YES; // 显示定位图层
     [self.view addSubview:_mapView];
     
     // Add search bar on map view
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 34, 800, 44)];
-    [self.view addSubview:searchBar];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 34, 800, 44)];
+    self.searchBar.showsCancelButton = YES;
+    self.searchBar.placeholder = @"请输入客户姓名";
+    self.searchBar.delegate = self;
+    [self.view addSubview:self.searchBar];
     
     // Init and start location service
     _locService = [[BMKLocationService alloc] init];
@@ -71,6 +75,22 @@
             NSLog(@"geo检索发送失败");
         }
     }
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    //按软键盘右下角的搜索按钮时触发
+    NSString *searchTerm=[searchBar text];
+    //读取被输入的关键字
+    [self.searchBar resignFirstResponder];
+    //隐藏软键盘
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    //取消按钮被按下时触发
+    searchBar.text=@"";
+    //输入框清空
+    [self.searchBar resignFirstResponder];
+    //重新载入数据，隐藏软键盘
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -106,7 +126,7 @@
         float latitudeDiff = fabs(clientCoord.latitude - userCoord.latitude);
         float longitudeDiff = fabs(clientCoord.longitude - userCoord.longitude);
         NSString *msg;
-        if (latitudeDiff >= 0.001 || longitudeDiff >= 0.001) {
+        if (latitudeDiff >= 0.1 || longitudeDiff >= 0.1) {
             msg = @"距离过远，签到失败!";
         } else {
             // update checkin times
@@ -115,6 +135,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)mapViewWillStartLocatingUser:(BMKMapView *)mapView
@@ -173,7 +194,7 @@
         //NSLog(@"corresponding address: %@", address.street);
         //NSLog(@"result: %@", result.address);
         
-        NSString *nameStr = [[NSString alloc] initWithFormat:@"姓名：%@%@", contact.lastname, contact.firstname];
+        NSString *nameStr = [[NSString alloc] initWithFormat:@"姓名：%@ %@", contact.firstname, contact.lastname];
         NSString *addressStr = [[NSString alloc] initWithFormat:@"地址：%@", address.street];
         NSString *cellphoneStr = [[NSString alloc] initWithFormat:@"电话：%@", contact.phone_mobile];
         NSString *companyStr = [[NSString alloc] initWithFormat:@"公司：%@", contact.company.name];
@@ -221,7 +242,6 @@
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _locService.delegate = self;
-    //_geocodesearch.delegate = self;
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -236,24 +256,15 @@
 
 // Override
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
-    /*
-    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
-        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
-        newAnnotationView.pinColor = BMKPinAnnotationColorRed;
-        return newAnnotationView;
-    }
-    return nil;
-    */
-    
     NSString *AnnotationViewID = [NSString stringWithFormat:@"viewID"];
-    BMKPinAnnotationView *annotaionView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+    BMKPinAnnotationView *annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
     
     // 设置颜色
-    ((BMKPinAnnotationView*)annotaionView).pinColor = BMKPinAnnotationColorPurple;
+    ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorPurple;
     // 从天上掉下效果
-    ((BMKPinAnnotationView*)annotaionView).animatesDrop = YES;
+    ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
     // 设置可拖拽
-    //((BMKPinAnnotationView*)newAnnotation).draggable = YES;
+    ((BMKPinAnnotationView*)annotationView).draggable = YES;
     //设置大头针图标
     //((BMKPinAnnotationView*)newAnnotation).image = [UIImage imageNamed:@"zhaohuoche"];
     
@@ -290,10 +301,12 @@
     paopaoView.frame = CGRectMake(0, 0, 300, 400);
     paopaoView.layer.borderWidth = 1;
     paopaoView.layer.borderColor = [[UIColor blackColor] CGColor];
-    ((BMKPinAnnotationView*)annotaionView).paopaoView = nil;
-    ((BMKPinAnnotationView*)annotaionView).paopaoView = paopaoView;
+    ((BMKPinAnnotationView*)annotationView).paopaoView = nil;
+    ((BMKPinAnnotationView*)annotationView).paopaoView = paopaoView;
+    CGPoint offset = CGPointMake(0.0, 200.0);
+    ((BMKPinAnnotationView*)annotationView).calloutOffset = offset;
     
-    return annotaionView;
+    return annotationView;
 }
 
 /*
@@ -312,7 +325,6 @@
 }
 
 - (IBAction)locateButton:(id)sender {
-    _mapView.showsUserLocation = YES; // 显示定位图层
     [_mapView setCenterCoordinate:_locService.userLocation.location.coordinate animated:YES];
 }
 
