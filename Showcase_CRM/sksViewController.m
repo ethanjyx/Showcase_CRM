@@ -20,9 +20,12 @@
 
 @property (nonatomic, strong) NSArray *contents;
 - (void)updateContents;
+- (void)initButtons;
 - (void)addContact;
 - (void)importContacts;
-- (void)exportContacts;
+- (void)generateExportView;
+- (void)finishExport;
+- (void)cancelExport;
 - (void)deleteContact:(UIButton*)sender;
 @end
 
@@ -31,6 +34,11 @@
     Contact *globalSelectedContact;
     NSMutableArray *allContacts;
     bool exportingContact;
+    UIButton* createContactButton;
+    UIButton* importContactButton;
+    UIButton* exportContactButton;
+    UIButton* exportSaveButton;
+    UIButton* exportCancelButton;
 }
 
 @synthesize phone,industryType,website,CompanyName,company;
@@ -62,7 +70,6 @@
     allContacts = [[NSMutableArray alloc] init];
     
     exportingContact = false;
-    
     contents = @[
                   @[
                       @[@"地址信息", @"开单地址", @"收货地址"]
@@ -78,6 +85,7 @@
                       ]
                   ];
     [self updateContents];
+    [self initButtons];
 }
 
 - (void)updateContents
@@ -86,6 +94,45 @@
     NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
     NSArray *contactDescriptors = @[contactDescriptor];
     allContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+}
+
+- (void)initButtons
+{
+    createContactButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [createContactButton addTarget:self
+                            action:@selector(addContact)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [createContactButton setTitle:@"新建" forState:UIControlStateNormal];
+    createContactButton.frame = CGRectMake(480, 0, 55, 40.0); // x, y, width, height
+
+    importContactButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [importContactButton addTarget:self
+                            action:@selector(importContacts)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [importContactButton setTitle:@"导入" forState:UIControlStateNormal];
+    importContactButton.frame = CGRectMake(540, 0, 55, 40.0); // x, y, width, height
+    
+    exportContactButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [exportContactButton addTarget:self
+                            action:@selector(generateExportView)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [exportContactButton setTitle:@"批量导出" forState:UIControlStateNormal];
+    exportContactButton.frame = CGRectMake(590, 0, 80, 40.0); // x, y, width, height
+    
+    
+    exportSaveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [exportSaveButton addTarget:self
+                            action:@selector(finishExport)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [exportSaveButton setTitle:@"确认" forState:UIControlStateNormal];
+    exportSaveButton.frame = CGRectMake(480, 0, 55, 40.0); // x, y, width, height
+    
+    exportCancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [exportCancelButton addTarget:self
+                            action:@selector(cancelExport)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [exportCancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    exportCancelButton.frame = CGRectMake(540, 0, 55, 40.0); // x, y, width, height
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,7 +163,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    printf("%d %d\n", indexPath.section, indexPath.row);
+    printf("select row at section %d index %d\n", indexPath.section, indexPath.row);
     if (indexPath.section == 0 && indexPath.row == 1) {
         
         [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
@@ -125,14 +172,15 @@
         
         [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
     }
-
-    
-    
     
     if (indexPath.section == 1 && indexPath.row != 0) {
-        // a contact is clicked
-        globalSelectedContact = [allContacts objectAtIndex:indexPath.row - 1];
-        [self performSegueWithIdentifier:@"contactDetailSegue" sender:self];
+        if (exportingContact) {
+            
+        } else {
+            // a contact is clicked
+            globalSelectedContact = [allContacts objectAtIndex:indexPath.row - 1];
+            [self performSegueWithIdentifier:@"contactDetailSegue" sender:self];
+        }
     }
 }
 
@@ -155,36 +203,11 @@
         cell.isExpandable = YES;
     
     
+    printf("%d\n", exportingContact);
     if (indexPath.section == 1) {
-        // create new contact button
-        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    
-        [addButton addTarget:self
-                      action:@selector(addContact)
-            forControlEvents:UIControlEventTouchUpInside];
-        [addButton setTitle:@"新建" forState:UIControlStateNormal];
-        addButton.frame = CGRectMake(480, 0, 55, 40.0); // x, y, width, height
-        [cell.contentView addSubview:addButton];
-        
-        // import contacts button
-        UIButton *importButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        
-        [importButton addTarget:self
-                      action:@selector(importContacts)
-            forControlEvents:UIControlEventTouchUpInside];
-        [importButton setTitle:@"导入" forState:UIControlStateNormal];
-        importButton.frame = CGRectMake(540, 0, 55, 40.0); // x, y, width, height
-        [cell.contentView addSubview:importButton];
-        
-        // export contacts button
-        UIButton *exportButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        
-        [exportButton addTarget:self
-                         action:@selector(exportContacts)
-               forControlEvents:UIControlEventTouchUpInside];
-        [exportButton setTitle:@"批量导出" forState:UIControlStateNormal];
-        exportButton.frame = CGRectMake(590, 0, 80, 40.0); // x, y, width, height
-        [cell.contentView addSubview:exportButton];
+        [cell.contentView addSubview:createContactButton];
+        [cell.contentView addSubview:importContactButton];
+        [cell.contentView addSubview:exportContactButton];
     }
     
     return cell;
@@ -232,24 +255,24 @@
     
     if (indexPath.section == 1) {
         // add button as subView to control subRow
-        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [editButton addTarget:self
-                   action:@selector(aMethod:)
-         forControlEvents:UIControlEventTouchUpInside];
-        [editButton setTitle:@"编辑" forState:UIControlStateNormal];
-        editButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
-        [cell.contentView addSubview:editButton];
-        
-    
-
-        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        deleteButton.tag = indexPath.subRow - 1;
-        [deleteButton addTarget:self
-                         action:@selector(deleteContact:)
-             forControlEvents:UIControlEventTouchUpInside];
-        [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
-        deleteButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
-        [cell.contentView addSubview:deleteButton];
+//        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        [editButton addTarget:self
+//                   action:@selector(aMethod:)
+//         forControlEvents:UIControlEventTouchUpInside];
+//        [editButton setTitle:@"编辑" forState:UIControlStateNormal];
+//        editButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
+//        [cell.contentView addSubview:editButton];
+//        
+//    
+//
+//        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        deleteButton.tag = indexPath.subRow - 1;
+//        [deleteButton addTarget:self
+//                         action:@selector(deleteContact:)
+//             forControlEvents:UIControlEventTouchUpInside];
+//        [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+//        deleteButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
+//        [cell.contentView addSubview:deleteButton];
     }
     return cell;
 }
@@ -267,14 +290,46 @@
     [self presentViewController:controller animated:YES completion:nil];
 }
 
-- (void)exportContacts
+- (void)generateExportView
 {
+    printf("~~~~\n");
+    exportingContact = true;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     if([[self tableView] numberOfRowsInSection:1] == 1) {
     // contacts not expanded, expand them
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
         [[self tableView] selectRowAtIndexPath:indexPath animated:false scrollPosition:UITableViewScrollPositionNone];
         [self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:indexPath];
     }
+    [createContactButton removeFromSuperview];
+    [importContactButton removeFromSuperview];
+    [exportContactButton removeFromSuperview];
+    
+    [[[[self tableView] cellForRowAtIndexPath:indexPath] contentView] addSubview: exportSaveButton];
+    [[[[self tableView] cellForRowAtIndexPath:indexPath] contentView] addSubview: exportCancelButton];
+    
+    for (int i = 1; i <= [allContacts count]; ++i) {
+        NSIndexPath* index = [NSIndexPath indexPathForRow:i inSection:1];
+        UITableViewCell* cell = [[self tableView] cellForRowAtIndexPath:index];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setFrame:CGRectMake(30.0, 0.0, 28, 28)];
+        [button setBackgroundImage:[UIImage imageNamed:@"uncheckBox.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"checkBox.png"] forState:UIControlStateSelected];
+        [button addTarget:self action:@selector(checkButtonTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+        [button setSelected:false];
+        
+        cell.accessoryView = button;
+    }
+}
+
+- (void)finishExport
+{
+    
+}
+
+- (void)cancelExport
+{
+    
 }
 
 - (void)deleteContact:(UIButton*)sender
