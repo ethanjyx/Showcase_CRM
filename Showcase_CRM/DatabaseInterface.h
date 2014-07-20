@@ -37,6 +37,16 @@
 
 - (void)deleteContact:(Contact*) contact;
 
+- (void)addCompanyBillingAddress:(Company*) company;
+
+- (void)addCompanyShippingAddress:(Company*) company;
+
+
+- (void)editCompany:(Company*) company billingAddress:(Address *) billingAddress;
+
+- (void)editCompany:(Company*) company shippingAddress:(Address *) shippingAddress;
+
+
 @end
 
 

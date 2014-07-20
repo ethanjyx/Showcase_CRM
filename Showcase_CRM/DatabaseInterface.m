@@ -327,6 +327,37 @@
     }
 }
 
+
+
+
+- (void)addCompanyBillingAddress:(Company*) company
+{
+    Company *fetchedObject = [self fetchCompanyByName:company.name];
+    Address * newAddress = [NSEntityDescription insertNewObjectForEntityForName:@"Address"
+                                                         inManagedObjectContext:self.managedObjectContext];
+    NSError* error;
+    fetchedObject.billing_address = newAddress;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+
+}
+
+- (void)addCompanyShippingAddress:(Company*) company
+{
+    Company *fetchedObject = [self fetchCompanyByName:company.name];
+    Address * newAddress = [NSEntityDescription insertNewObjectForEntityForName:@"Address"
+                                                         inManagedObjectContext:self.managedObjectContext];
+    NSError* error;
+    fetchedObject.shipping_address = newAddress;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+
+
+
 - (void)editOldCompany:(Company*) oldCompany toNewCompany:(Company*) newCompany
 {
     // initializing NSFetchRequest
@@ -395,6 +426,30 @@
     
     Contact *fetchedContact = [fetchedObjects lastObject];
     [self.managedObjectContext deleteObject:fetchedContact];
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+- (void)editCompany:(Company*) company billingAddress:(Address *) billingAddress
+{
+    
+    Company *editCompany = [self fetchCompanyByName:company.name];
+    editCompany.billing_address = billingAddress;
+    NSError* error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+
+}
+
+- (void)editCompany:(Company*) company shippingAddress:(Address *) shippingAddress
+{
+
+
+    Company *editCompany = [self fetchCompanyByName:company.name];
+    editCompany.shipping_address = shippingAddress;
+    NSError* error;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }

@@ -13,8 +13,8 @@
 #import "DatabaseInterface.h"
 #import "AddContactViewController.h"
 #import "DetailContactViewController.h"
-#import "ShippingAddressViewController.h"
-#import "BillAddressViewController.h"
+#import "ViewBillingAddressController.h"
+#import "ViewShippingAddressController.h"
 
 @interface sksViewController ()
 
@@ -119,11 +119,11 @@
     printf("%d %d\n", indexPath.section, indexPath.row);
     if (indexPath.section == 0 && indexPath.row == 1) {
         
-        [self performSegueWithIdentifier:@"billingAddress" sender:self];
+        [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
     }
     if (indexPath.section == 0 && indexPath.row == 2) {
         
-        [self performSegueWithIdentifier:@"shippingAddress" sender:self];
+        [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
     }
 
     
@@ -199,12 +199,12 @@
         DetailContactViewController *detailcontact=segue.destinationViewController;
         detailcontact.contact = globalSelectedContact;
     }
-    else if ([segue.identifier isEqualToString:@"shippingAddress"]) {
-        ShippingAddressViewController *shippingAddressController = segue.destinationViewController;
+    else if ([segue.identifier isEqualToString:@"viewShippingAddress"]) {
+        ViewShippingAddressController *shippingAddressController = segue.destinationViewController;
         shippingAddressController.company = globalCompany;
     }
-    else if([segue.identifier isEqualToString:@"billingAddress"]) {
-        BillAddressViewController *billingAddressController = segue.destinationViewController;
+    else if([segue.identifier isEqualToString:@"viewBillingAddress"]) {
+        ViewBillingAddressController *billingAddressController = segue.destinationViewController;
         billingAddressController.company = globalCompany;
     }
 }
