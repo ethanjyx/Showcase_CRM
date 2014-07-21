@@ -104,7 +104,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.dataLists objectAtIndex:0] count];
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -332,6 +332,10 @@
     return annotationView;
 }
 
+- (void)addItemViewController:(RouteplanningViewController *)controller didFinishEnteringItem:(NSString *)item {
+    //NSLog(@"return: %@", item);
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -341,6 +345,7 @@
     // Pass the selected object to the new view controller.
     UIStoryboardPopoverSegue *popoverSegue = (UIStoryboardPopoverSegue *) segue;
     RouteplanningViewController *newViewController = [segue destinationViewController];
+    newViewController.delegate = self;
     newViewController.mypopoverController = popoverSegue.popoverController;
 }
 

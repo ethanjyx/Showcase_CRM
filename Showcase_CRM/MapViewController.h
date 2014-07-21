@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
+#import "RouteplanningViewController.h"
 
-@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate> {
+@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate> {
     BMKMapView* _mapView;
     BMKLocationService* _locService;
 }

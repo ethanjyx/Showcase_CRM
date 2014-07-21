@@ -93,7 +93,10 @@
 }
 */
 
-- (IBAction)confirmButton:(id)sender {    
+- (IBAction)confirmButton:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(addItemViewController:didFinishEnteringItem:)]) {
+        [self.delegate addItemViewController:self didFinishEnteringItem:@"test"];
+    }
     [self.mypopoverController dismissPopoverAnimated:YES];
 }
 
