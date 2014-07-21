@@ -26,6 +26,7 @@
 - (void)generateExportView;
 - (void)finishExport;
 - (void)cancelExport;
+- (void)exportEndsViewChange;
 - (void)deleteContact:(UIButton*)sender;
 @end
 
@@ -33,6 +34,7 @@
     Company *globalCompany;
     Contact *globalSelectedContact;
     NSMutableArray *allContacts;
+    NSMutableSet* selectedContactsForExport;
     bool exportingContact;
     UIButton* createContactButton;
     UIButton* importContactButton;
@@ -68,6 +70,7 @@
     Industry *industry = globalCompany.industry;
     industryType.text = industry.industry_type;
     allContacts = [[NSMutableArray alloc] init];
+    selectedContactsForExport = [[NSMutableSet alloc] init];
     
     exportingContact = false;
     contents = @[
@@ -163,7 +166,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    printf("select row at section %d index %d\n", indexPath.section, indexPath.row);
+    printf("select row at section %d row %d\n", indexPath.section, indexPath.row);
     if (indexPath.section == 0 && indexPath.row == 1) {
         
         [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
@@ -173,13 +176,32 @@
         [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
     }
     
-    if (indexPath.section == 1 && indexPath.row != 0) {
-        if (exportingContact) {
-            
+    NSLog(@"%d", exportingContact);
+    
+    if (indexPath.section == 1) {
+        if (indexPath.row != 0) {
+            if (exportingContact) {
+                // exporting contact, click on one of the contacts to select to export
+                UITableViewCell *cell =[self.tableView cellForRowAtIndexPath:indexPath];
+                UIButton *button = (UIButton *)cell.accessoryView;
+                Contact* con = [allContacts objectAtIndex:indexPath.row - 1];
+                if (button.selected) {
+                    [selectedContactsForExport removeObject:con];
+                } else {
+                    [selectedContactsForExport addObject:con];
+                    printf("%d\n", [selectedContactsForExport count]);
+                }
+                button.selected = !button.selected;
+            } else {
+                // not exporting, a contact is clicked to view details
+                globalSelectedContact = [allContacts objectAtIndex:indexPath.row - 1];
+                [self performSegueWithIdentifier:@"contactDetailSegue" sender:self];
+            }
         } else {
-            // a contact is clicked
-            globalSelectedContact = [allContacts objectAtIndex:indexPath.row - 1];
-            [self performSegueWithIdentifier:@"contactDetailSegue" sender:self];
+            if (exportingContact) {
+                // exporting contact, the section header clicked to shrink, and cancel exporting contact
+                [self exportEndsViewChange];
+            }
         }
     }
 }
@@ -201,9 +223,7 @@
         cell.isExpandable = NO;
     else
         cell.isExpandable = YES;
-    
-    
-    printf("%d\n", exportingContact);
+
     if (indexPath.section == 1) {
         [cell.contentView addSubview:createContactButton];
         [cell.contentView addSubview:importContactButton];
@@ -254,25 +274,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     if (indexPath.section == 1) {
-        // add button as subView to control subRow
-//        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        [editButton addTarget:self
-//                   action:@selector(aMethod:)
-//         forControlEvents:UIControlEventTouchUpInside];
-//        [editButton setTitle:@"编辑" forState:UIControlStateNormal];
-//        editButton.frame = CGRectMake(500, 0, 55, 40.0); // x, y, width, height
-//        [cell.contentView addSubview:editButton];
-//        
-//    
-//
-//        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        deleteButton.tag = indexPath.subRow - 1;
-//        [deleteButton addTarget:self
-//                         action:@selector(deleteContact:)
-//             forControlEvents:UIControlEventTouchUpInside];
-//        [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
-//        deleteButton.frame = CGRectMake(560, 0, 55, 40.0); // x, y, width, height
-//        [cell.contentView addSubview:deleteButton];
+        // add button as subView to control subRow here
     }
     return cell;
 }
@@ -292,8 +294,6 @@
 
 - (void)generateExportView
 {
-    printf("~~~~\n");
-    exportingContact = true;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     if([[self tableView] numberOfRowsInSection:1] == 1) {
     // contacts not expanded, expand them
@@ -308,8 +308,7 @@
     [[[[self tableView] cellForRowAtIndexPath:indexPath] contentView] addSubview: exportCancelButton];
     
     for (int i = 1; i <= [allContacts count]; ++i) {
-        NSIndexPath* index = [NSIndexPath indexPathForRow:i inSection:1];
-        UITableViewCell* cell = [[self tableView] cellForRowAtIndexPath:index];
+        UITableViewCell* cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1]];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(30.0, 0.0, 28, 28)];
@@ -320,16 +319,85 @@
         
         cell.accessoryView = button;
     }
+    
+    exportingContact = true;
+}
+
+- (void)checkButtonTapped:(id)sender event:(id)event
+{
+    // check button tapped
+	NSSet *touches = [event allTouches];
+	UITouch *touch = [touches anyObject];
+	CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+	NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+	
+	if (indexPath != nil)
+	{
+		[self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+	}
 }
 
 - (void)finishExport
 {
+    for (Contact* cont in selectedContactsForExport) {
+        printf("FUCK\n");
+        ABAddressBookRef addressBook = ABAddressBookCreate(); // create address book record
+        ABRecordRef person = ABPersonCreate(); // create a person
+        
+        //Phone number is a list of phone number, so create a multivalue
+        ABMutableMultiValueRef phoneNumberMultiValue =
+        ABMultiValueCreateMutable(kABPersonPhoneProperty);
+        ABMultiValueAddValueAndLabel(phoneNumberMultiValue ,(__bridge CFTypeRef)(cont.phone_home), kABPersonPhoneMainLabel, NULL);
+        ABMultiValueAddValueAndLabel(phoneNumberMultiValue ,(__bridge CFTypeRef)(cont.phone_work), kABPersonPhoneIPhoneLabel, NULL);
+        ABMultiValueAddValueAndLabel(phoneNumberMultiValue ,(__bridge CFTypeRef)(cont.phone_mobile), kABPersonPhoneMobileLabel, NULL);
+        
+        ABRecordSetValue(person, kABPersonFirstNameProperty, (__bridge CFTypeRef)(cont.firstname), nil); // first name of the new person
+        ABRecordSetValue(person, kABPersonLastNameProperty, (__bridge CFTypeRef)(cont.lastname), nil); // his last name
+        ABRecordSetValue(person, kABPersonPhoneProperty, phoneNumberMultiValue, nil); // set the phone number property
+        ABAddressBookAddRecord(addressBook, person, nil); //add the new person to the record
+        
+        ABAddressBookSave(addressBook, nil); //save the record
+        
+        CFRelease(person); // relase the ABRecordRef variable
+        
+        // TODO: add more attributes to export
+    }
     
+    NSString* msg = [[NSString alloc] initWithFormat:@"已成功导出%d位联系人到本地", [selectedContactsForExport count]];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"导出生成"
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil];
+    [alert show];
+
+    
+    [self exportEndsViewChange];
 }
 
 - (void)cancelExport
 {
+    [self exportEndsViewChange];
+}
+
+
+- (void)exportEndsViewChange
+{
+    exportingContact = false;
+    UITableViewCell* cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    [cell.contentView addSubview:createContactButton];
+    [cell.contentView addSubview:importContactButton];
+    [cell.contentView addSubview:exportContactButton];
+    [exportSaveButton removeFromSuperview];
+    [exportCancelButton removeFromSuperview];
     
+    
+    for (int i = 1; i <= [allContacts count]; ++i) {
+        UITableViewCell* cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1]];
+        cell.accessoryView = nil;
+    }
+    
+    [selectedContactsForExport removeAllObjects];
 }
 
 - (void)deleteContact:(UIButton*)sender
@@ -350,26 +418,6 @@
 //    [database deleteContact:[allContacts objectAtIndex:sender.tag]];
     // TODO: add reload page here
 }
-
-/*
--(void)setSelectedCompany:(Company *)comp {
-    contents = @[
-                  @[
-                      @[@"地址信息", @"开单地址", @"收货地址"]
-                      ],
-                  @[
-                      @[@"联系人信息"]
-                      ],
-                  @[
-                      @[@"业务进程"]
-                      ],
-                  @[
-                      @[@"活动历史"]
-                      ]
-                  ];
-    [self.tableView reloadData];
-}
-*/
 
 #pragma mark - TKContactsMultiPickerControllerDelegate
 
