@@ -69,6 +69,7 @@
 		CE65A39C19754C760051BFAC /* AddContact2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE65A39B19754C760051BFAC /* AddContact2ViewController.m */; };
 		CE8D41EA19759B1500E3D374 /* DetailContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8D41E919759B1500E3D374 /* DetailContactViewController.m */; };
 		CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */; };
+		F66917AC197CC50500FA11C7 /* RouteplanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66917AB197CC50500FA11C7 /* RouteplanningViewController.m */; };
 		F6CE94CB19631A670017DDAD /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F6CE94CA19631A670017DDAD /* mapapi.bundle */; };
 		F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F6CE94CD19631A7A0017DDAD /* MapViewController.mm */; };
 		F6CE94D219631B300017DDAD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CE94D119631B300017DDAD /* CoreLocation.framework */; };
@@ -192,6 +193,8 @@
 		CE8D41E919759B1500E3D374 /* DetailContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailContactViewController.m; sourceTree = "<group>"; };
 		CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
 		CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MutableDeepCopy.m"; sourceTree = "<group>"; };
+		F66917AA197CC50500FA11C7 /* RouteplanningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteplanningViewController.h; sourceTree = "<group>"; };
+		F66917AB197CC50500FA11C7 /* RouteplanningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteplanningViewController.m; sourceTree = "<group>"; };
 		F6CE948F19631A410017DDAD /* BMapKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMapKit.h; path = inc/BMapKit.h; sourceTree = "<group>"; };
 		F6CE949019631A410017DDAD /* BMKActionPaopaoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMKActionPaopaoView.h; path = inc/BMKActionPaopaoView.h; sourceTree = "<group>"; };
 		F6CE949119631A410017DDAD /* BMKAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMKAnnotation.h; path = inc/BMKAnnotation.h; sourceTree = "<group>"; };
@@ -517,6 +520,8 @@
 			children = (
 				F6CE94CC19631A7A0017DDAD /* MapViewController.h */,
 				F6CE94CD19631A7A0017DDAD /* MapViewController.mm */,
+				F66917AA197CC50500FA11C7 /* RouteplanningViewController.h */,
+				F66917AB197CC50500FA11C7 /* RouteplanningViewController.m */,
 				F6CE948E19631A2B0017DDAD /* Resources */,
 				F6CE948D19631A250017DDAD /* inc */,
 			);
@@ -744,6 +749,7 @@
 				F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */,
 				61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */,
 				612A343E197BA023009A5A21 /* Contact.m in Sources */,
+				F66917AC197CC50500FA11C7 /* RouteplanningViewController.m in Sources */,
 				9DF6359D196BBA4D00E10E48 /* sksViewController.m in Sources */,
 				9D132E8D195A58DA00CD5788 /* UIImage+TKUtilities.m in Sources */,
 			);

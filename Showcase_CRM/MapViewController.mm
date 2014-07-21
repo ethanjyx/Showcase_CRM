@@ -40,7 +40,7 @@
     
     // Add search bar on map view
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 34, 800, 44)];
-    self.searchBar.showsCancelButton = YES;
+    //self.searchBar.showsCancelButton = YES;
     self.searchBar.placeholder = @"请输入客户姓名";
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
