@@ -10,6 +10,7 @@
 #import "DatabaseInterface.h"
 #import "Contact.h"
 #import "Address.h"
+#import "RouteplanningViewController.h"
 
 @interface MapViewController ()
 - (IBAction)returnButton:(id)sender;
@@ -270,7 +271,9 @@
     }
     for (int i = 0; i < [self.tableViews count]; i++) {
         UITableView* tableView = [self.tableViews objectAtIndex:i];
-        tableView.delegate = nil;
+        if (tableView != [NSNull null]) {
+            tableView.delegate = nil;
+        }
     }
 }
 
@@ -329,7 +332,6 @@
     return annotationView;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -337,8 +339,10 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    UIStoryboardPopoverSegue *popoverSegue = (UIStoryboardPopoverSegue *) segue;
+    RouteplanningViewController *newViewController = [segue destinationViewController];
+    newViewController.mypopoverController = popoverSegue.popoverController;
 }
-*/
 
 - (IBAction)returnButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

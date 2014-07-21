@@ -93,8 +93,8 @@
 }
 */
 
-- (IBAction)confirmButton:(id)sender {
-    
+- (IBAction)confirmButton:(id)sender {    
+    [self.mypopoverController dismissPopoverAnimated:YES];
 }
 
 @end

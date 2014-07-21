@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class RouteplanningViewController;
+
+@protocol RouteplanningViewControllerDelegate <NSObject>
+- (void)addItemViewController:(RouteplanningViewController *)controller didFinishEnteringItem:(NSString *)item;
+
+@end
+
 @interface RouteplanningViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, weak) id <RouteplanningViewControllerDelegate> delegate;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
 @property (nonatomic, retain) NSArray *contacts;
+@property (nonatomic, retain) UIPopoverController *mypopoverController;
 
 @end
