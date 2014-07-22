@@ -1583,13 +1583,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="724"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0DF-zT-vbo" userLabel="CompanyButton">
-                                <rect key="frame" x="229" y="38" width="104" height="28"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="0DF-zT-vbo" userLabel="CompanyButton">
+                                <rect key="frame" x="268" y="44" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="+">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" image="icon_14.png"/>
                                 <connections>
                                     <action selector="switchview:" destination="oOj-8t-4aU" eventType="touchUpInside" id="357-TO-p9a"/>
                                     <segue destination="8Hx-ga-pF6" kind="replace" splitViewControllerTargetIndex="1" id="xS8-XN-vPo"/>
@@ -1634,12 +1631,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GEE-Tz-dsy" userLabel="ContactButton">
-                                <rect key="frame" x="229" y="38" width="104" height="28"/>
+                                <rect key="frame" x="260" y="42" width="38" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="+">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" image="icon_14.png"/>
                                 <connections>
                                     <action selector="switchview:" destination="oOj-8t-4aU" eventType="touchUpInside" id="pom-d3-4Jf"/>
                                     <segue destination="Wxf-Tq-ULj" kind="replace" splitViewControllerTargetIndex="1" id="kEX-VF-2JY"/>
@@ -1742,6 +1736,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="704" height="724"/>
@@ -2038,6 +2033,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="703" height="1000"/>
@@ -2103,40 +2099,67 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="mdE-s4-MU3">
             <objects>
                 <viewController id="TeU-Xk-Db8" customClass="RootViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rZW-u2-Uqj">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="rZW-u2-Uqj">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="82P-ID-PDm">
-                                <rect key="frame" x="1" y="725" width="1024" height="44"/>
+                            <toolbar opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" id="82P-ID-PDm">
+                                <rect key="frame" x="0.0" y="710" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
                                 <items>
-                                    <barButtonItem title="云销通" width="341.30000000000001" id="sA5-fu-0lB"/>
-                                    <barButtonItem title="GPS" width="341.30000000000001" id="OrV-Sa-cGK">
+                                    <barButtonItem image="icon_01.png" width="305" id="sA5-fu-0lB"/>
+                                    <barButtonItem image="icon_04.png" width="341.30000000000001" id="OrV-Sa-cGK">
                                         <connections>
-                                            <segue destination="kSA-q7-8j8" kind="modal" id="xSl-mX-iM1"/>
+                                            <segue destination="kSA-q7-8j8" kind="modal" id="Vak-f4-8jx"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="CRM" width="341.30000000000001" id="Ilh-ck-U7L"/>
+                                    <barButtonItem image="icon_06.png" width="341.30000000000001" id="Ilh-ck-U7L"/>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="TeU-Xk-Db8" id="G03-fc-GHY"/>
+                                </connections>
                             </toolbar>
                             <containerView contentMode="scaleToFill" id="PRn-HC-aVu">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="724"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="710"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <segue destination="vcZ-SR-huO" kind="embed" identifier="initSplitView" id="LDX-2N-3YG"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="云销通" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KER-4e-Mxx">
+                                <rect key="frame" x="144" y="750" width="51" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zmm-BN-YVp">
+                                <rect key="frame" x="487" y="750" width="36" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CRM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vro-jF-zXu">
+                                <rect key="frame" x="835" y="750" width="39" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="toolbar" destination="82P-ID-PDm" id="fvO-nu-aTz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZNC-up-cdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6671" y="-666"/>
+            <point key="canvasLocation" x="-6849" y="-678"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="jOc-cd-Tz8">
@@ -2177,7 +2200,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZT-MH-ERT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5253" y="616"/>
+            <point key="canvasLocation" x="-5597" y="-540"/>
         </scene>
         <!--Routeplanning View Controller-->
         <scene sceneID="Zaj-27-OsM">
@@ -2444,6 +2467,34 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qdg-l1-xA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="756" y="-658"/>
+        </scene>
+        <!--View Controller - Item-->
+        <scene sceneID="cqS-Yg-wsK">
+            <objects>
+                <viewController id="rhX-fI-qMM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H4i-vm-QId">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" id="mM8-lI-dCd">
+                                <rect key="frame" x="-50" y="763" width="768" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="yund" image="icon_01.png" id="y6c-Xv-zT6"/>
+                                    <tabBarItem title="Item" id="vD2-sp-Wse"/>
+                                    <tabBarItem title="Item" id="fq1-Me-qrO"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="viH-B7-gTj"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gyq-tv-Mpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1577" y="477"/>
         </scene>
         <!--View Billing Address Controller-->
         <scene sceneID="hma-ud-ice">
@@ -3306,6 +3357,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="703" height="1000"/>
@@ -3950,16 +4002,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="-1281" y="-3465"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_01.png" width="27" height="27"/>
+        <image name="icon_04.png" width="25" height="26"/>
+        <image name="icon_06.png" width="20" height="24"/>
+        <image name="icon_14.png" width="22" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Yam-Re-CI2"/>
-        <segue reference="e4B-a5-VRg"/>
         <segue reference="CSs-Gw-3PX"/>
-        <segue reference="yME-M3-KuJ"/>
+        <segue reference="Lhc-yw-b38"/>
+        <segue reference="V1I-yo-FPb"/>
+        <segue reference="Yam-Re-CI2"/>
         <segue reference="kma-GL-gRd"/>
     </inferredMetricsTieBreakers>
 </document>

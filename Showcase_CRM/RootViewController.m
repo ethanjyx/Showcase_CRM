@@ -16,6 +16,7 @@
 @end
 
 @implementation RootViewController
+@synthesize toolbar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
