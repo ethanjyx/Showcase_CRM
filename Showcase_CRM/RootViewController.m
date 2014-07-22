@@ -55,4 +55,14 @@
 }
 
 
+- (BOOL)shouldAutorotate{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    //decide number of origination to supported by Viewcontroller.
+    return UIInterfaceOrientationMaskLandscape;
+}
+
 @end
