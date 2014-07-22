@@ -1,16 +1,19 @@
 //
-//  DetailContactViewController.m
+//  DetailContact2ViewController.m
 //  Showcase_CRM
 //
-//  Created by user on 14-7-16.
-//  Copyright (c) 2014年 Linfeng Shi. All rights reserved.
+//  Created by Linfeng Shi on 7/22/14.
+//  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
-#import "DetailContactViewController.h"
+#import "DetailContact2ViewController.h"
 #import "Address.h"
+#import "sksViewController.h"
+#import "Company.h"
 #import "DatabaseInterface.h"
 
-@interface DetailContactViewController ()
+@interface DetailContact2ViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *lastname;
 @property (weak, nonatomic) IBOutlet UITextField *firstname;
 @property (weak, nonatomic) IBOutlet UITextField *title;
@@ -30,25 +33,29 @@
 @property (weak, nonatomic) IBOutlet UITextField *street;
 @property (weak, nonatomic) IBOutlet UITextField *postcode;
 
-@property (weak, nonatomic) IBOutlet UIButton *edit_button;
-@property (weak, nonatomic) IBOutlet UIButton *save_button;
-@property (weak, nonatomic) IBOutlet UIButton *delete_button;
-@property (weak, nonatomic) IBOutlet UIButton *cancel_button;
 
+@property (weak, nonatomic) IBOutlet UIButton *save_button;
+@property (weak, nonatomic) IBOutlet UIButton *edit_button;
+@property (weak, nonatomic) IBOutlet UIButton *cancel_button;
+@property (weak, nonatomic) IBOutlet UIButton *delete_button;
+@property (weak, nonatomic) IBOutlet UIButton *returnCompany_button;
+
+
+- (IBAction)returnCompany:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)edit:(id)sender;
-- (IBAction)delete:(id)sender;
 - (IBAction)cancel:(id)sender;
-
-
+- (IBAction)delete:(id)sender;
 
 
 
 @end
 
-@implementation DetailContactViewController
-@synthesize contact;
-@synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button;
+@implementation DetailContact2ViewController
+
+@synthesize contact,company;
+
+@synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,returnCompany_button;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,8 +70,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self disableAllTextField];
     [self setAllTextField];
+    [self disableAllTextField];
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
@@ -75,7 +82,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)setAllTextField
 {
@@ -145,18 +151,6 @@
     postcode.enabled = NO;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 #pragma mark - Navigation
 
@@ -167,6 +161,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)returnCompany:(id)sender {
+}
 
 - (IBAction)save:(id)sender {
     contact.lastname = lastname.text;
@@ -191,6 +188,7 @@
     [database editContact:contact];
     [self disableAllTextField];
     edit_button.hidden = NO;
+    returnCompany_button.hidden = NO;
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
@@ -199,23 +197,37 @@
 - (IBAction)edit:(id)sender {
     [self enableAllTextField];
     edit_button.hidden = YES;
+    returnCompany_button.hidden = YES;
     save_button.hidden = NO;
     cancel_button.hidden = NO;
     delete_button.hidden = NO;
-}
-
-- (IBAction)delete:(id)sender {
-    DatabaseInterface *database = [DatabaseInterface databaseInterface];
-    [database deleteContact:contact];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTable" object:nil];
 }
 
 - (IBAction)cancel:(id)sender {
     [self disableAllTextField];
     [self setAllTextField];
     edit_button.hidden = NO;
+    returnCompany_button.hidden = NO;
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
 }
+
+- (IBAction)delete:(id)sender {
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"returnToCompany"]) {
+        sksViewController *companyViewController = segue.destinationViewController;
+        companyViewController.company = company.name;
+    }
+    else if ([segue.identifier isEqualToString:@"deleteContact"]) {
+        DatabaseInterface *database = [DatabaseInterface databaseInterface];
+        [database deleteContact:contact];
+        sksViewController *companyViewController = segue.destinationViewController;
+        companyViewController.company = company.name;
+    }
+}
+
 @end

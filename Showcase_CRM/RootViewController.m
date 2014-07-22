@@ -16,6 +16,7 @@
 @end
 
 @implementation RootViewController
+@synthesize toolbar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,5 +55,15 @@
     }
 }
 
+
+- (BOOL)shouldAutorotate{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    //decide number of origination to supported by Viewcontroller.
+    return UIInterfaceOrientationMaskLandscape;
+}
 
 @end

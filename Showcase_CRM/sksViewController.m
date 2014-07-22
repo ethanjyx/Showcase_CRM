@@ -12,7 +12,7 @@
 #import "Industry.h"
 #import "DatabaseInterface.h"
 #import "AddContactViewController.h"
-#import "DetailContactViewController.h"
+#import "DetailContact2ViewController.h"
 #import "ViewBillingAddressController.h"
 #import "ViewShippingAddressController.h"
 
@@ -229,7 +229,7 @@
         [cell.contentView addSubview:importContactButton];
         [cell.contentView addSubview:exportContactButton];
     }
-    
+    cell.backgroundColor=[UIColor colorWithRed:236.0/255.0 green:236.0/255.0 blue:236.0/255.0 alpha:1.0];
     return cell;
 }
 
@@ -239,8 +239,9 @@
         AddContactViewController *addContact = segue.destinationViewController;
         addContact.company = company;
     } else if ([segue.identifier isEqualToString:@"contactDetailSegue"]) {
-        DetailContactViewController *detailcontact=segue.destinationViewController;
+        DetailContact2ViewController *detailcontact=segue.destinationViewController;
         detailcontact.contact = globalSelectedContact;
+        detailcontact.company = globalCompany;
     }
     else if ([segue.identifier isEqualToString:@"viewShippingAddress"]) {
         ViewShippingAddressController *shippingAddressController = segue.destinationViewController;
