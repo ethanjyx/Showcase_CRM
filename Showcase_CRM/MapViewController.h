@@ -10,9 +10,10 @@
 #import "BMapKit.h"
 #import "RouteplanningViewController.h"
 
-@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate> {
+@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate, BMKRouteSearchDelegate> {
     BMKMapView* _mapView;
     BMKLocationService* _locService;
+    BMKRouteSearch* _routesearch;
 }
 
 @property (nonatomic, retain) UISearchBar *searchBar;

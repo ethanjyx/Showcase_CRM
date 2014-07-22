@@ -32,16 +32,20 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 600, 600) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     self.contacts = [[NSMutableArray alloc] initWithArray:[database getAllContacts]];
     self.datalist = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.contacts count]; i++) {
         Contact *contact = [self.contacts objectAtIndex:i];
-        NSString *nameStr = [[NSString alloc] initWithFormat:@"%@ %@", contact.lastname, contact.firstname];
+        NSString *nameStr = [[NSString alloc] initWithFormat:@"%@ %@  %@  %@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
         [self.datalist addObject:nameStr];
     }
     [self.view addSubview:self.tableView];
+    
+    self.indicator = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.contacts count]; i++) {
+        [self.indicator addObject:[NSNumber numberWithInt:0]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,10 +78,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSUInteger index = [indexPath indexAtPosition:1];
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+        [self.indicator replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:0]];
     } else {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.indicator replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:1]];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -94,8 +101,8 @@
 */
 
 - (IBAction)confirmButton:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(addItemViewController:didFinishEnteringItem:)]) {
-        [self.delegate addItemViewController:self didFinishEnteringItem:@"test"];
+    if ([self.delegate respondsToSelector:@selector(onGetselectedContacts:)]) {
+        [self.delegate onGetselectedContacts:self.indicator];
     }
     [self.mypopoverController dismissPopoverAnimated:YES];
 }
