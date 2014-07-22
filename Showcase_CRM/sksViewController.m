@@ -12,7 +12,7 @@
 #import "Industry.h"
 #import "DatabaseInterface.h"
 #import "AddContactViewController.h"
-#import "DetailContactViewController.h"
+#import "DetailContact2ViewController.h"
 #import "ViewBillingAddressController.h"
 #import "ViewShippingAddressController.h"
 
@@ -239,8 +239,9 @@
         AddContactViewController *addContact = segue.destinationViewController;
         addContact.company = company;
     } else if ([segue.identifier isEqualToString:@"contactDetailSegue"]) {
-        DetailContactViewController *detailcontact=segue.destinationViewController;
+        DetailContact2ViewController *detailcontact=segue.destinationViewController;
         detailcontact.contact = globalSelectedContact;
+        detailcontact.company = globalCompany;
     }
     else if ([segue.identifier isEqualToString:@"viewShippingAddress"]) {
         ViewShippingAddressController *shippingAddressController = segue.destinationViewController;

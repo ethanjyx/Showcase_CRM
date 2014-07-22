@@ -11,6 +11,7 @@
 @interface AddContact2ViewController : ViewController
 
 @property (nonatomic, strong) NSString *company;
+
 - (IBAction)save:(id)sender;
 
 @end

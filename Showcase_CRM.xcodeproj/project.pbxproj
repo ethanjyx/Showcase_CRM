@@ -38,6 +38,7 @@
 		618E027219473FB00094BD1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025419473FAF0094BD1F /* UIKit.framework */; };
 		618E027A19473FB00094BD1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 618E027819473FB00094BD1F /* InfoPlist.strings */; };
 		618E027C19473FB00094BD1F /* Showcase_CRMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 618E027B19473FB00094BD1F /* Showcase_CRMTests.m */; };
+		619D4C8A197E550A00A72BF8 /* DetailContact2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 619D4C89197E550A00A72BF8 /* DetailContact2ViewController.m */; };
 		61AE4DC31975584B00E3811C /* pinyin.dat in Resources */ = {isa = PBXBuildFile; fileRef = 61AE4DC01975584B00E3811C /* pinyin.dat */; };
 		61AE4DC41975584B00E3811C /* Hanzi2Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61AE4DC21975584B00E3811C /* Hanzi2Pinyin.m */; };
 		61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */; };
@@ -142,6 +143,8 @@
 		618E027719473FB00094BD1F /* Showcase_CRMTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Showcase_CRMTests-Info.plist"; sourceTree = "<group>"; };
 		618E027919473FB00094BD1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		618E027B19473FB00094BD1F /* Showcase_CRMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Showcase_CRMTests.m; sourceTree = "<group>"; };
+		619D4C88197E550A00A72BF8 /* DetailContact2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailContact2ViewController.h; sourceTree = "<group>"; };
+		619D4C89197E550A00A72BF8 /* DetailContact2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailContact2ViewController.m; sourceTree = "<group>"; };
 		61AE4DC01975584B00E3811C /* pinyin.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = pinyin.dat; sourceTree = "<group>"; };
 		61AE4DC11975584B00E3811C /* Hanzi2Pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hanzi2Pinyin.h; sourceTree = "<group>"; };
 		61AE4DC21975584B00E3811C /* Hanzi2Pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hanzi2Pinyin.m; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 				9D132E68195A587B00CD5788 /* ImportContact */,
 				618E025F19473FAF0094BD1F /* AppDelegate.h */,
 				618E026019473FAF0094BD1F /* AppDelegate.m */,
+				618E026219473FAF0094BD1F /* Main.storyboard */,
 				9DD7B38A196E2E990063009B /* RootViewController.h */,
 				9DD7B38B196E2E990063009B /* RootViewController.m */,
 				618E026519473FAF0094BD1F /* ViewController.h */,
@@ -353,7 +357,6 @@
 				618DE7341949B272000CC43E /* MainViewController.m */,
 				618DE7391949B2D0000CC43E /* CreateClientViewController.h */,
 				618DE73A1949B2D0000CC43E /* CreateClientViewController.m */,
-				618E026219473FAF0094BD1F /* Main.storyboard */,
 				CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */,
 				CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */,
 				9DD7B389196E19900063009B /* SplitViewSelectionDelegate.h */,
@@ -503,6 +506,8 @@
 				CE65A39B19754C760051BFAC /* AddContact2ViewController.m */,
 				CE8D41E819759B1500E3D374 /* DetailContactViewController.h */,
 				CE8D41E919759B1500E3D374 /* DetailContactViewController.m */,
+				619D4C88197E550A00A72BF8 /* DetailContact2ViewController.h */,
+				619D4C89197E550A00A72BF8 /* DetailContact2ViewController.m */,
 				612A343F197BCB38009A5A21 /* ShippingAddressViewController.h */,
 				612A3440197BCB38009A5A21 /* ShippingAddressViewController.m */,
 				612A3448197BD820009A5A21 /* ViewShippingAddressController.h */,
@@ -718,6 +723,7 @@
 				9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */,
 				CE0E674F196161F50074E821 /* DetailViewController.m in Sources */,
 				612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */,
+				619D4C8A197E550A00A72BF8 /* DetailContact2ViewController.m in Sources */,
 				9D132E76195A589700CD5788 /* TKGroupPickerController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				9D132E8C195A58DA00CD5788 /* NSString+TKUtilities.m in Sources */,

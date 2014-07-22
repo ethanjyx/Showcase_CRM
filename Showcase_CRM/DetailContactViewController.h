@@ -14,9 +14,6 @@
 
 @interface DetailContactViewController : ViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *lastname;
-@property (weak, nonatomic) IBOutlet UILabel *firstname;
-
 @property (nonatomic, strong) Contact *contact;
 
 @end
