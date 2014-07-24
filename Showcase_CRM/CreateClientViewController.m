@@ -63,9 +63,20 @@
 */
 
 - (IBAction)save:(id)sender {
+    if ([companyName.text length]<=0 ) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新建失败"
+                                                        message:@"公司名不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     [database addCompanyWithName:companyName.text phone:phone.text website:website.text industry:industryType.text];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTable" object:nil];
+    [self performSegueWithIdentifier:@"saveCompanyInfo" sender:nil];
 }
 
 
