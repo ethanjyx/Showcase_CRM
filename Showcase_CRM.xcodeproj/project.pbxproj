@@ -59,6 +59,8 @@
 		9D132E93195A58DA00CD5788 /* checkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E89195A58DA00CD5788 /* checkBox@2x.png */; };
 		9D132E94195A58DA00CD5788 /* uncheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8A195A58DA00CD5788 /* uncheckBox.png */; };
 		9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */; };
+		9DC586861981DCF300677DB1 /* AddProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC586851981DCF300677DB1 /* AddProjectViewController.m */; };
+		9DC586891981E0CD00677DB1 /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC586881981E0CD00677DB1 /* AddEventViewController.m */; };
 		9DD7B38C196E2E990063009B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD7B38B196E2E990063009B /* RootViewController.m */; };
 		9DF63598196BBA4D00E10E48 /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF6358E196BBA4D00E10E48 /* expandableImage.png */; };
 		9DF63599196BBA4D00E10E48 /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */; };
@@ -217,6 +219,10 @@
 		9D132E89195A58DA00CD5788 /* checkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBox@2x.png"; sourceTree = "<group>"; };
 		9D132E8A195A58DA00CD5788 /* uncheckBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckBox.png; sourceTree = "<group>"; };
 		9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckBox@2x.png"; sourceTree = "<group>"; };
+		9DC586841981DCF300677DB1 /* AddProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProjectViewController.h; sourceTree = "<group>"; };
+		9DC586851981DCF300677DB1 /* AddProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProjectViewController.m; sourceTree = "<group>"; };
+		9DC586871981E0CD00677DB1 /* AddEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventViewController.h; sourceTree = "<group>"; };
+		9DC586881981E0CD00677DB1 /* AddEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventViewController.m; sourceTree = "<group>"; };
 		9DD7B389196E19900063009B /* SplitViewSelectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewSelectionDelegate.h; sourceTree = "<group>"; };
 		9DD7B38A196E2E990063009B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		9DD7B38B196E2E990063009B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -602,6 +608,10 @@
 				612A3443197BCB47009A5A21 /* BillAddressViewController.m */,
 				612A3445197BD811009A5A21 /* ViewBillingAddressController.h */,
 				612A3446197BD811009A5A21 /* ViewBillingAddressController.m */,
+				9DC586841981DCF300677DB1 /* AddProjectViewController.h */,
+				9DC586851981DCF300677DB1 /* AddProjectViewController.m */,
+				9DC586871981E0CD00677DB1 /* AddEventViewController.h */,
+				9DC586881981E0CD00677DB1 /* AddEventViewController.m */,
 			);
 			name = SKSTableViewImp;
 			sourceTree = "<group>";
@@ -929,10 +939,12 @@
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
 				6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */,
 				612A3444197BCB47009A5A21 /* BillAddressViewController.m in Sources */,
+				9DC586861981DCF300677DB1 /* AddProjectViewController.m in Sources */,
 				61AE4DC41975584B00E3811C /* Hanzi2Pinyin.m in Sources */,
 				618DE7351949B272000CC43E /* MainViewController.m in Sources */,
 				9DF6359A196BBA4D00E10E48 /* SKSTableView.m in Sources */,
 				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
+				9DC586891981E0CD00677DB1 /* AddEventViewController.m in Sources */,
 				9D132E8E195A58DA00CD5788 /* TKContact.m in Sources */,
 				6120CFC01959F3EC001FCAC1 /* Company.m in Sources */,
 				9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */,

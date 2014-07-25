@@ -12,6 +12,8 @@
 #import "Industry.h"
 #import "DatabaseInterface.h"
 #import "AddContactViewController.h"
+#import "AddProjectViewController.h"
+#import "AddEventViewController.h"
 #import "DetailContact2ViewController.h"
 #import "ViewBillingAddressController.h"
 #import "ViewShippingAddressController.h"
@@ -27,7 +29,8 @@
 - (void)finishExport;
 - (void)cancelExport;
 - (void)exportEndsViewChange;
-- (void)deleteContact:(UIButton*)sender;
+- (void)addProject;
+- (void)addEvent;
 @end
 
 @implementation sksViewController {
@@ -41,6 +44,8 @@
     UIButton* exportContactButton;
     UIButton* exportSaveButton;
     UIButton* exportCancelButton;
+    UIButton* addProjectButton;
+    UIButton* addEventButton;
 }
 
 @synthesize phone,industryType,website,CompanyName,company;
@@ -136,6 +141,22 @@
                   forControlEvents:UIControlEventTouchUpInside];
     [exportCancelButton setTitle:@"取消" forState:UIControlStateNormal];
     exportCancelButton.frame = CGRectMake(540, 0, 55, 40.0); // x, y, width, height
+    
+    
+    addProjectButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [addProjectButton addTarget:self
+                            action:@selector(addProject)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [addProjectButton setTitle:@"新建" forState:UIControlStateNormal];
+    addProjectButton.frame = CGRectMake(480, 0, 55, 40.0); // x, y, width, height
+
+    addEventButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [addEventButton addTarget:self
+                         action:@selector(addEvent)
+               forControlEvents:UIControlEventTouchUpInside];
+    [addEventButton setTitle:@"新建" forState:UIControlStateNormal];
+    addEventButton.frame = CGRectMake(480, 0, 55, 40.0); // x, y, width, height
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -228,7 +249,12 @@
         [cell.contentView addSubview:createContactButton];
         [cell.contentView addSubview:importContactButton];
         [cell.contentView addSubview:exportContactButton];
+    } else if (indexPath.section == 2) {
+        [cell.contentView addSubview:addProjectButton];
+    } else if (indexPath.section == 3) {
+        [cell.contentView addSubview:addEventButton];
     }
+    
     cell.backgroundColor=[UIColor colorWithRed:236.0/255.0 green:236.0/255.0 blue:236.0/255.0 alpha:1.0];
     return cell;
 }
@@ -250,6 +276,12 @@
     else if([segue.identifier isEqualToString:@"viewBillingAddress"]) {
         ViewBillingAddressController *billingAddressController = segue.destinationViewController;
         billingAddressController.company = globalCompany;
+    }
+    else if([segue.identifier isEqualToString:@"addProject"]) {
+        
+    }
+    else if([segue.identifier isEqualToString:@"addEvent"]) {
+        
     }
 }
 
@@ -341,7 +373,6 @@
 - (void)finishExport
 {
     for (Contact* cont in selectedContactsForExport) {
-        printf("FUCK\n");
         ABAddressBookRef addressBook = ABAddressBookCreate(); // create address book record
         ABRecordRef person = ABPersonCreate(); // create a person
         
@@ -401,24 +432,35 @@
     [selectedContactsForExport removeAllObjects];
 }
 
-- (void)deleteContact:(UIButton*)sender
+- (void)addProject
 {
-//    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
-//                            @"Share on Facebook",
-//                            @"Share on Twitter",
-//                            @"Share via E-mail",
-//                            @"Save to Camera Roll",
-//                            @"Rate this App",
-//                            nil];
-//    [popup showInView:[UIApplication sharedApplication].keyWindow];
-
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Default Alert View"message:@"Defalut" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",@"ThirdButton", nil];
-//    [alertView show];
-    
-//    DatabaseInterface *database = [DatabaseInterface databaseInterface];
-//    [database deleteContact:[allContacts objectAtIndex:sender.tag]];
-    // TODO: add reload page here
+    [self performSegueWithIdentifier: @"addProject" sender:self];
 }
+
+- (void)addEvent
+{
+    [self performSegueWithIdentifier: @"addEvent" sender:self];
+}
+
+
+//- (void)deleteContact:(UIButton*)sender
+//{
+////    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
+////                            @"Share on Facebook",
+////                            @"Share on Twitter",
+////                            @"Share via E-mail",
+////                            @"Save to Camera Roll",
+////                            @"Rate this App",
+////                            nil];
+////    [popup showInView:[UIApplication sharedApplication].keyWindow];
+//
+////    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Default Alert View"message:@"Defalut" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",@"ThirdButton", nil];
+////    [alertView show];
+//    
+////    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+////    [database deleteContact:[allContacts objectAtIndex:sender.tag]];
+//    // TODO: add reload page here
+//}
 
 #pragma mark - TKContactsMultiPickerControllerDelegate
 

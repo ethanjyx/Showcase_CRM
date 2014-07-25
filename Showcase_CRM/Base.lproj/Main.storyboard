@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="TeU-Xk-Db8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A2093" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="TeU-Xk-Db8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -513,10 +513,11 @@
             </objects>
             <point key="canvasLocation" x="1699" y="-4537"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Project View Controller-->
         <scene sceneID="VIV-7m-mfs">
             <objects>
-                <viewController id="EBd-NY-T7I" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VTv-nJ-OXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="EBd-NY-T7I" customClass="AddProjectViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tBX-Nj-p0u">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -657,24 +658,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <state key="normal" title="保存并新建">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="jIa-eO-fpF" kind="replace" identifier="saveProject" splitViewControllerTargetIndex="1" id="8Np-lM-CCl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K4R-mt-acP">
-                                <rect key="frame" x="526" y="715" width="30" height="30"/>
+                                <rect key="frame" x="560" y="715" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="返回">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="s6E-dD-Yag" kind="replace" splitViewControllerTargetIndex="1" id="AbT-UZ-Jv3"/>
+                                    <segue destination="jIa-eO-fpF" kind="replace" identifier="returnFromAddProject" splitViewControllerTargetIndex="1" id="Lvv-va-Dus"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VTv-nJ-OXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2077" y="-4432"/>
+            <point key="canvasLocation" x="-1325" y="-2029"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="IPT-8K-ywn">
@@ -849,9 +852,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <state key="normal" title="新建">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <connections>
-                                                <segue destination="JrN-Gl-T8a" kind="replace" splitViewControllerTargetIndex="1" id="84O-Y3-XZJ"/>
-                                            </connections>
                                         </button>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="rx6-ba-AZU">
                                             <rect key="frame" x="9" y="35" width="150" height="2"/>
@@ -917,9 +917,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <state key="normal" title="新建">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <connections>
-                                                <segue destination="EBd-NY-T7I" kind="replace" splitViewControllerTargetIndex="1" id="hym-Ko-I72"/>
-                                            </connections>
                                         </button>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="2FY-Rg-v5C">
                                             <rect key="frame" x="9" y="35" width="150" height="2"/>
@@ -1008,10 +1005,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1714" y="-4542"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Event View Controller-->
         <scene sceneID="4G6-Xp-GpQ">
             <objects>
-                <viewController id="JrN-Gl-T8a" sceneMemberID="viewController">
+                <viewController id="JrN-Gl-T8a" customClass="AddEventViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cc4-WK-ZHS">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1141,9 +1138,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <state key="normal" title="返回">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="s6E-dD-Yag" kind="replace" splitViewControllerTargetIndex="1" id="9B6-Sa-2QS"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="GfG-KE-AgX">
                                 <rect key="frame" x="107" y="222" width="201" height="30"/>
@@ -1157,7 +1151,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LfG-vW-P36" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2316" y="-4278"/>
+            <point key="canvasLocation" x="-3282" y="-238"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="beH-VT-Iy0">
@@ -1736,7 +1730,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="704" height="724"/>
@@ -1750,6 +1743,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="hOx-HH-ddi" kind="replace" identifier="viewShippingAddress" splitViewControllerTargetIndex="1" id="lwA-hS-YsY"/>
                         <segue destination="P0z-BW-MgC" kind="replace" identifier="addContactSegue" splitViewControllerTargetIndex="1" id="0qr-QY-uId"/>
                         <segue destination="AWN-iu-fEp" kind="replace" identifier="contactDetailSegue" splitViewControllerTargetIndex="1" id="hje-nl-RPg"/>
+                        <segue destination="EBd-NY-T7I" kind="replace" identifier="addProject" splitViewControllerTargetIndex="1" id="FQn-3l-mZ2"/>
+                        <segue destination="JrN-Gl-T8a" kind="replace" identifier="addEvent" splitViewControllerTargetIndex="1" id="RPS-8e-Hn7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Glb-KB-Etq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2033,7 +2028,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="703" height="1000"/>
@@ -2237,7 +2231,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="7Rb-a8-ToM" customClass="BillAddressViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sCq-u0-ObV">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开单地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="39d-Si-YQp">
@@ -2336,7 +2330,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="DSK-Xw-2c8" id="LLm-VC-Sz8"/>
@@ -2356,7 +2349,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="A6m-EH-Da0" customClass="ShippingAddressViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wGp-m8-3WZ">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发货地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="48t-GG-c0Y">
@@ -2455,7 +2448,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="A8u-8A-wqK" id="1Bp-ZY-qyK"/>
@@ -2503,7 +2495,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="ccr-JA-4EQ" customClass="ViewBillingAddressController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dy6-Bn-2Ug">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开单地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KKM-N0-oDa">
@@ -2606,7 +2598,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="7NO-PG-Ovc" id="NTt-dB-tG4"/>
@@ -2626,7 +2617,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="hOx-HH-ddi" customClass="ViewShippingAddressController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wBr-0q-vGk">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发货地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8PV-RT-jLv">
@@ -2729,7 +2720,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="qkQ-2E-Je5" id="bIN-rt-U8p"/>
@@ -3361,7 +3351,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="703" height="1000"/>
@@ -4018,10 +4007,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="CSs-Gw-3PX"/>
-        <segue reference="lwA-hS-YsY"/>
-        <segue reference="Lhc-yw-b38"/>
         <segue reference="V1I-yo-FPb"/>
+        <segue reference="scm-2R-sld"/>
+        <segue reference="Lvv-va-Dus"/>
+        <segue reference="lwA-hS-YsY"/>
         <segue reference="hkq-bI-o8K"/>
     </inferredMetricsTieBreakers>
 </document>
