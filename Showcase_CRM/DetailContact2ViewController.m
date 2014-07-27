@@ -47,7 +47,8 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)delete:(id)sender;
 
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITextField *activeField;
 
 @end
 
@@ -55,7 +56,7 @@
 
 @synthesize contact,company;
 
-@synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,returnCompany_button;
+@synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,returnCompany_button,scrollView,activeField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -75,6 +76,7 @@
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
+    [self registerForKeyboardNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -229,5 +231,58 @@
         companyViewController.company = company.name;
     }
 }
+
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.width, 0.0);
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.width;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    activeField = nil;
+}
+
+
+
 
 @end
