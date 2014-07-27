@@ -37,7 +37,7 @@
     self.datalist = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.contacts count]; i++) {
         Contact *contact = [self.contacts objectAtIndex:i];
-        NSString *nameStr = [[NSString alloc] initWithFormat:@"%@ %@  %@  %@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
+        NSString *nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:%@  电话:%@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
         [self.datalist addObject:nameStr];
     }
     [self.view addSubview:self.tableView];

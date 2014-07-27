@@ -22,5 +22,6 @@
 @property (nonatomic, retain) NSMutableArray *dataLists;
 @property (nonatomic, retain) NSMutableArray *tableViews;
 @property (nonatomic, retain) NSMutableArray *annotations;
+@property (nonatomic, retain) NSArray *visitOrder;
 
 @end

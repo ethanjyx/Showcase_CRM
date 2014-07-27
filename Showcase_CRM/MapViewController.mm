@@ -44,7 +44,6 @@
 
 - (UIImage*)imageRotatedByDegrees:(CGFloat)degrees
 {
-    
     CGFloat width = CGImageGetWidth(self.CGImage);
     CGFloat height = CGImageGetHeight(self.CGImage);
     
@@ -70,6 +69,8 @@
 @interface MapViewController ()
 - (IBAction)returnButton:(id)sender;
 - (IBAction)locateButton:(id)sender;
+- (void)calculateVisitOrder:(NSArray *)indicator;
+- (void)genPerms:(NSMutableArray *)queue Stack:(NSMutableArray *)stack Distances:(int **)distances Size:(int)size;
 
 @end
 
@@ -126,11 +127,13 @@
     self.dataLists = [[NSMutableArray alloc] init];
     self.tableViews = [[NSMutableArray alloc] init];
     self.annotations = [[NSMutableArray alloc] init];
+    self.visitOrder = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.contacts count]; i++) {
         [self.dataLists addObject:[NSNull null]];
         [self.tableViews addObject:[NSNull null]];
         [self.annotations addObject:[NSNull null]];
     }
+    
     
     // Init Geocoder then convert street address to latitude and longitude
     for (int i = 0; i < [self.contacts count]; i++) {
@@ -152,6 +155,38 @@
     }
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [_mapView viewWillAppear];
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _locService.delegate = self;
+    _routesearch.delegate = self;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [_mapView viewWillDisappear];
+    _mapView.delegate = nil; // 不用时，置nil
+    _locService.delegate = nil;
+    _routesearch.delegate = nil;
+    for (int i = 0; i < [self.geocodeSearchs count]; i++) {
+        BMKGeoCodeSearch* geocodesearch = [self.geocodeSearchs objectAtIndex:i];
+        geocodesearch.delegate = nil;
+    }
+    for (int i = 0; i < [self.tableViews count]; i++) {
+        UITableView* tableView = [self.tableViews objectAtIndex:i];
+        if (tableView != [NSNull null]) {
+            tableView.delegate = nil;
+        }
+    }
+}
+
+
+/* search bar functions */
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     //按软键盘右下角的搜索按钮时触发
     NSString *searchTerm=[searchBar text];
@@ -168,6 +203,8 @@
     //重新载入数据，隐藏软键盘
 }
 
+
+/* table view functions */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -196,12 +233,12 @@
     if ([indexPath indexAtPosition:1] == 6) {
         NSUInteger index = [self.tableViews indexOfObject:tableView];
         BMKPointAnnotation *annotation = [self.annotations objectAtIndex:index];
-        CLLocationCoordinate2D clientCoord = annotation.coordinate;
-        CLLocationCoordinate2D userCoord = _locService.userLocation.location.coordinate;
-        float latitudeDiff = fabs(clientCoord.latitude - userCoord.latitude);
-        float longitudeDiff = fabs(clientCoord.longitude - userCoord.longitude);
+        BMKMapPoint clientCoord = BMKMapPointForCoordinate(annotation.coordinate);
+        BMKMapPoint userCoord = BMKMapPointForCoordinate(_locService.userLocation.location.coordinate);
+        CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord,userCoord);
         NSString *msg;
-        if (latitudeDiff >= 0.1 || longitudeDiff >= 0.1) {
+        //NSLog(@"distance:%f", distance);
+        if (distance > 1500) {
             msg = @"距离过远，签到失败!";
         } else {
             // update checkin times
@@ -213,7 +250,7 @@
             [database editContact:contact];
             [self.contacts replaceObjectAtIndex:index withObject:contact];
             NSMutableArray *datalist = [self.dataLists objectAtIndex:index];
-            NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%@次", updated_sign_up_times];
+            NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%i次", [updated_sign_up_times intValue]];
             [datalist replaceObjectAtIndex:4 withObject:checkinStr];
             [self.dataLists replaceObjectAtIndex:index withObject:datalist];
             [tableView reloadData];
@@ -224,6 +261,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+
+/* location service functions */
 - (void)mapViewWillStartLocatingUser:(BMKMapView *)mapView
 {
 	NSLog(@"start locate");
@@ -268,6 +307,8 @@
     NSLog(@"location error");
 }
 
+
+/* geo-coder function */
 - (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
 {
 	if (error == 0) {
@@ -284,7 +325,7 @@
         NSString *addressStr = [[NSString alloc] initWithFormat:@"地址：%@", address.street];
         NSString *cellphoneStr = [[NSString alloc] initWithFormat:@"电话：%@", contact.phone_mobile];
         NSString *companyStr = [[NSString alloc] initWithFormat:@"公司：%@", contact.company.name];
-        NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%@次", contact.sign_up_times];
+        NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%i次", [contact.sign_up_times intValue]];
         
         NSMutableArray *dataList = [NSMutableArray arrayWithObjects:nameStr, addressStr, cellphoneStr, companyStr, checkinStr, @"", @"                        签到", nil];
         [self.dataLists replaceObjectAtIndex:index withObject:dataList];
@@ -300,55 +341,13 @@
 		pinAnnotation.coordinate = result.location;
         [self.annotations replaceObjectAtIndex:index withObject:pinAnnotation];
         [_mapView addAnnotation:pinAnnotation];
-        
-        /*
-        NSString* titleStr;
-        NSString* showmeg;
-        
-        titleStr = @"正向地理编码";
-        showmeg = [NSString stringWithFormat:@"经度:%f,纬度:%f", pinAnnotation.coordinate.latitude, pinAnnotation.coordinate.longitude];
-        
-        NSLog(@"%@ %@", titleStr, showmeg);
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:titleStr message:showmeg delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-        [myAlertView show];
-        */
 	} else {
         NSLog(@"Geocode search fail!");
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
--(void)viewWillAppear:(BOOL)animated {
-    [_mapView viewWillAppear];
-    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-    _locService.delegate = self;
-    _routesearch.delegate = self;
-}
-
--(void)viewWillDisappear:(BOOL)animated {
-    [_mapView viewWillDisappear];
-    _mapView.delegate = nil; // 不用时，置nil
-    _locService.delegate = nil;
-    _routesearch.delegate = nil;
-    for (int i = 0; i < [self.geocodeSearchs count]; i++) {
-        BMKGeoCodeSearch* geocodesearch = [self.geocodeSearchs objectAtIndex:i];
-        geocodesearch.delegate = nil;
-    }
-    for (int i = 0; i < [self.tableViews count]; i++) {
-        UITableView* tableView = [self.tableViews objectAtIndex:i];
-        if (tableView != [NSNull null]) {
-            tableView.delegate = nil;
-        }
-    }
-}
-
-// Override
+/* map view function */
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
     if ([annotation isKindOfClass:[RouteAnnotation class]]) {
 		return [self getRouteAnnotationView:mapView viewForAnnotation:(RouteAnnotation*)annotation];
@@ -364,33 +363,6 @@
         ((BMKPinAnnotationView*)annotationView).draggable = YES;
         //设置大头针图标
         //((BMKPinAnnotationView*)newAnnotation).image = [UIImage imageNamed:@"zhaohuoche"];
-        
-        /*
-         UIView *popView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 300)];
-         popView.backgroundColor = [UIColor whiteColor];
-         [popView addSubview:self.myTableView];
-         
-         //设置弹出气泡图片
-         UIImageView *image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"wenzi"]];
-         image.frame = CGRectMake(0, 0, 100, 60);
-         [popView addSubview:image];
-         //自定义显示的内容
-         UILabel *driverName = [[UILabel alloc]initWithFrame:CGRectMake(0, 3, 100, 20)];
-         driverName.text = @"张XX师傅";
-         //driverName.backgroundColor = [UIColor clearColor];
-         driverName.font = [UIFont systemFontOfSize:14];
-         driverName.textColor = [UIColor blackColor];
-         driverName.textAlignment = NSTextAlignmentCenter;
-         [popView addSubview:driverName];
-         
-         UILabel *carName = [[UILabel alloc]initWithFrame:CGRectMake(0, 25, 100, 20)];
-         carName.text = @"京A123456";
-         //carName.backgroundColor = [UIColor clearColor];
-         carName.font = [UIFont systemFontOfSize:14];
-         carName.textColor = [UIColor blackColor];
-         carName.textAlignment = NSTextAlignmentCenter;
-         [popView addSubview:carName];
-         */
         
         NSUInteger index = [self.annotations indexOfObject:annotation];
         UITableView *tableView = [self.tableViews objectAtIndex:index];
@@ -419,52 +391,8 @@
 	return nil;
 }
 
-- (void)onGetselectedContacts:(NSArray *)indicator; {
-    NSMutableArray *indexs = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [indicator count]; i++) {
-        if ([[indicator objectAtIndex:i] intValue] == 1) {
-            [indexs addObject:[NSNumber numberWithInt:i]];
-        }
-    }
-    
-    BMKPlanNode* start = [[BMKPlanNode alloc]init];
-	//start.name = @"东川路800号";
-    //start.cityName =  @"上海市";
-    start.pt = _locService.userLocation.location.coordinate;
-    BMKPlanNode* end = [[BMKPlanNode alloc]init];
-    NSMutableArray *wayPoints = [[NSMutableArray alloc] init];
-    
-    for (int i = 0; i < [indexs count]; i++) {
-        //Contact *contact = [self.contacts objectAtIndex:[[indexs objectAtIndex:i] intValue]];
-        BMKPointAnnotation *annotation = [self.annotations objectAtIndex:[[indexs objectAtIndex:i] intValue]];
-        if (i == [indexs count] - 1) {
-            //end.name = contact.address.street;
-            //end.cityName = contact.address.city;
-            end.pt = annotation.coordinate;
-        } else {
-            BMKPlanNode *wayPoint = [[BMKPlanNode alloc] init];
-            //wayPoint.name = contact.address.street;
-            //wayPoint.cityName = contact.address.city;
-            wayPoint.pt = annotation.coordinate;
-            [wayPoints addObject:wayPoint];
-        }
-    }
-    
-    BMKDrivingRoutePlanOption *drivingRouteSearchOption = [[BMKDrivingRoutePlanOption alloc]init];
-    drivingRouteSearchOption.from = start;
-    drivingRouteSearchOption.to = end;
-    drivingRouteSearchOption.wayPointsArray = wayPoints;    
-    BOOL flag = [_routesearch drivingSearch:drivingRouteSearchOption];
-    if(flag)
-    {
-        NSLog(@"route检索发送成功");
-    }
-    else
-    {
-        NSLog(@"route检索发送失败");
-    }
-}
 
+/* search drive route functions */
 - (void)onGetDrivingRouteResult:(BMKRouteSearch*)searcher result:(BMKDrivingRouteResult*)result errorCode:(BMKSearchErrorCode)error
 {
     /*
@@ -531,7 +459,7 @@
         // 通过points构建BMKPolyline
 		BMKPolyline* polyLine = [BMKPolyline polylineWithPoints:temppoints count:planPointCounts];
 		[_mapView addOverlay:polyLine]; // 添加路线overlay
-		delete []temppoints;
+		delete []temppoints;        
 	} else {
         NSLog(@"route search failed!");
     }
@@ -623,6 +551,149 @@
 	}
 	
 	return view;
+}
+
+/* route planning view controller delegate function */
+- (void)onGetselectedContacts:(NSArray *)indicator; {
+    NSMutableArray *indexs = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [indicator count]; i++) {
+        if ([[indicator objectAtIndex:i] intValue] == 1) {
+            [indexs addObject:[NSNumber numberWithInt:i]];
+        }
+    }
+    
+    [self calculateVisitOrder:indicator];
+    
+    BMKPlanNode* start = [[BMKPlanNode alloc]init];
+	//start.name = @"东川路800号";
+    //start.cityName =  @"上海市";
+    start.pt = _locService.userLocation.location.coordinate;
+    BMKPlanNode* end = [[BMKPlanNode alloc]init];
+    NSMutableArray *wayPoints = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [indexs count]; i++) {
+        //Contact *contact = [self.contacts objectAtIndex:[[indexs objectAtIndex:i] intValue]];
+        BMKPointAnnotation *annotation = [self.annotations objectAtIndex:[[indexs objectAtIndex:i] intValue]];
+        if (i == [indexs count] - 1) {
+            //end.name = contact.address.street;
+            //end.cityName = contact.address.city;
+            end.pt = annotation.coordinate;
+        } else {
+            BMKPlanNode *wayPoint = [[BMKPlanNode alloc] init];
+            //wayPoint.name = contact.address.street;
+            //wayPoint.cityName = contact.address.city;
+            wayPoint.pt = annotation.coordinate;
+            [wayPoints addObject:wayPoint];
+        }
+    }
+    
+    BMKDrivingRoutePlanOption *drivingRouteSearchOption = [[BMKDrivingRoutePlanOption alloc]init];
+    drivingRouteSearchOption.from = start;
+    drivingRouteSearchOption.to = end;
+    drivingRouteSearchOption.wayPointsArray = wayPoints;
+    BOOL flag = [_routesearch drivingSearch:drivingRouteSearchOption];
+    if(flag)
+    {
+        NSLog(@"route检索发送成功");
+    }
+    else
+    {
+        NSLog(@"route检索发送失败");
+    }
+}
+
+- (void)calculateVisitOrder:(NSArray *)indicator {
+    NSMutableArray *indexs = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [indicator count]; i++) {
+        if ([[indicator objectAtIndex:i] intValue] == 1) {
+            [indexs addObject:[NSNumber numberWithInt:i]];
+        }
+    }
+    
+    int** distances = (int **) malloc((1 + [indexs count]) * sizeof(int *));
+    for (int i = 0; i < 1 + [indexs count]; i++) {
+        distances[i] = (int *) malloc((1 + [indexs count]) * sizeof(int));
+    }
+    BMKMapPoint userCoord = BMKMapPointForCoordinate(_locService.userLocation.location.coordinate);
+    for (int i = 0; i < 1 + [indexs count]; i++) {
+        for (int j = 0; j < 1 + [indexs count]; j++) {
+            if (i == j) {
+                distances[i][j] = 0;
+            } else if (i == [indexs count]) {
+                BMKPointAnnotation *annotation = [self.annotations objectAtIndex:j];
+                BMKMapPoint clientCoord = BMKMapPointForCoordinate(annotation.coordinate);
+                CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord,userCoord);
+                distances[i][j] = distance;
+            } else if (j == [indexs count]) {
+                BMKPointAnnotation *annotation = [self.annotations objectAtIndex:i];
+                BMKMapPoint clientCoord = BMKMapPointForCoordinate(annotation.coordinate);
+                CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord,userCoord);
+                distances[i][j] = distance;
+            } else {
+                BMKPointAnnotation *annotation1 = [self.annotations objectAtIndex:i];
+                BMKMapPoint clientCoord1 = BMKMapPointForCoordinate(annotation1.coordinate);
+                BMKPointAnnotation *annotation2 = [self.annotations objectAtIndex:j];
+                BMKMapPoint clientCoord2 = BMKMapPointForCoordinate(annotation2.coordinate);
+                CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord1,clientCoord2);
+                distances[i][j] = distance;
+            }
+        }
+    }
+    
+    /*
+    for (int i = 0; i < 1 + [indexs count]; i++) {
+        for (int j = 0; j < 1 + [indexs count]; j++) {
+            printf("distance between %i and %i is: %i\n", i, j, distances[i][j]);
+        }
+    }
+    */
+    
+    NSMutableArray *stack = [[NSMutableArray alloc] init];
+    NSMutableArray *queue = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [indexs count]; i++) {
+        [queue addObject:[NSNumber numberWithInt:i]];
+    }
+    [self genPerms:queue Stack:stack Distances:distances Size:[indexs count]];
+    
+    for (int i = 0; i < 1 + [indexs count]; i++) {
+        free(distances[i]);
+    }
+    free(distances);
+}
+
+- (void)genPerms:(NSMutableArray *)queue Stack:(NSMutableArray *)stack Distances:(int **)distances Size:(int)size {
+    if ([queue count] == 0) {
+        static int minDistance = INT_MAX;
+        int current = size;
+        int distance = 0;
+        for (int i = 0; i < [stack count]; i++) {
+            int next = [[stack objectAtIndex:i] intValue];
+            distance += distances[current][next];
+            current = [[stack objectAtIndex:i] intValue];
+        }
+        if (distance < minDistance) {
+            minDistance = distance;
+            self.visitOrder = [[NSArray alloc] initWithArray:stack];
+            /*
+            printf("min distance: %i\n", minDistance);
+            printf("visit order: ");
+            for (int i = 0; i < [stack count]; i++) {
+                printf("%i", [[stack objectAtIndex:i] intValue]);
+            }
+            printf("\n");
+            */
+        }        
+        return;
+    }
+    for (int i = 0; i < size; i++) {
+        NSNumber *front = [queue firstObject];
+        [stack addObject:front];
+        [queue removeObjectAtIndex:0];
+        [self genPerms:queue Stack:stack Distances:distances Size:size];
+        NSNumber *top = [stack lastObject];
+        [queue addObject:top];
+        [stack removeObjectAtIndex:[stack count] - 1];
+    }
 }
 
 #pragma mark - Navigation
