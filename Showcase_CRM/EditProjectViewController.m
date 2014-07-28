@@ -119,17 +119,64 @@
 
 - (IBAction)save_action:(id)sender {
     project.name = name.text;
-    // check amount is number!!
+    NSNumber *amount_number, *possibility_number;
+    if ([name.text length]<=0 ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败"
+                                                        message:@"项目名不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    if ([amount.text length]<=0) {
+        amount_number = nil;
+    }
+    else {
+        NSNumber *amount_f = [f numberFromString:amount.text];
+        if (amount_f == nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败"
+                                                            message:@"金额不是数字"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            amount.text = nil;
+            return;
+        }
+        else {
+            amount_number = amount_f;
+        }
+    }
+    if ([possibility.text length]<=0) {
+        possibility_number = nil;
+    }
+    else {
+        NSNumber *possibility_f = [f numberFromString:possibility.text];
+        if (possibility_f == nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败"
+                                                            message:@"可能性不是数字"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            possibility.text = nil;
+            return;
+        }
+        else {
+            possibility_f = possibility_f;
+        }
+    }
+    project.amount = amount_number;
+    project.possibility = possibility_number;
+    project.deadline = date.date;
+    project.memo = memo.text;
+    project.status.status_type = progress.text;
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    [database editProject:project];
     
     
     
@@ -169,6 +216,7 @@
 }
 
 - (IBAction)delete_action:(id)sender {
+    [self performSegueWithIdentifier:@"deleteProject" sender:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -177,12 +225,12 @@
         sksViewController *companyViewController = segue.destinationViewController;
         companyViewController.company = company.name;
     }
-    /*else if ([segue.identifier isEqualToString:@"deleteProject"]) {
+    else if ([segue.identifier isEqualToString:@"deleteProject"]) {
         DatabaseInterface *database = [DatabaseInterface databaseInterface];
-        [database deleteContact:contact];
+        [database deleteProject:project];
         sksViewController *companyViewController = segue.destinationViewController;
         companyViewController.company = company.name;
-    }*/
+    }
 }
 
 
