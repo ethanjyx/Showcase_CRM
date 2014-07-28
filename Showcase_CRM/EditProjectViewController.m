@@ -31,6 +31,7 @@
 - (IBAction)save_action:(id)sender;
 - (IBAction)edit_action:(id)sender;
 - (IBAction)cancel_action:(id)sender;
+- (IBAction)delete_action:(id)sender;
 
 
 @end
@@ -165,6 +166,9 @@
     cancel_button.hidden = YES;
     date.hidden = YES;
     date_uneditable.hidden = NO;
+}
+
+- (IBAction)delete_action:(id)sender {
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
