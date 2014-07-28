@@ -491,6 +491,55 @@
     }
 }
 
+- (void)editProject:(Project*) project
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Project"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", project.id];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Project *editProject = [fetchedObjects lastObject];
+    editProject = project;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+- (void)deleteProject:(Project*) project
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Project"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", project.id];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Project *fetchedProject = [fetchedObjects lastObject];
+    [self.managedObjectContext deleteObject:fetchedProject];
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+
 - (void)editCompany:(Company*) company billingAddress:(Address *) billingAddress
 {
     

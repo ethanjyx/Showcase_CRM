@@ -8,6 +8,8 @@
 
 #import "EditProjectViewController.h"
 #import "Status.h"
+#import "sksViewController.h"
+#import "DatabaseInterface.h"
 
 @interface EditProjectViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *name;
@@ -36,7 +38,7 @@
 @implementation EditProjectViewController
 
 @synthesize project, company;
-@synthesize name,possibility,amount,memo,progress,date,return_button,save_button,edit_button,cancel_button,delete_button;
+@synthesize name,possibility,amount,memo,progress,date,return_button,save_button,edit_button,cancel_button,delete_button,date_uneditable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +55,10 @@
     // Do any additional setup after loading the view.
     [self setAllField];
     [self disableAllField];
+    save_button.hidden = YES;
+    delete_button.hidden = YES;
+    cancel_button.hidden = YES;
+    date.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,9 +73,10 @@
     possibility.text = [NSString stringWithFormat:@"%d", [project.possibility intValue]];
     amount.text = [NSString stringWithFormat:@"%d", [project.amount intValue]];
     memo.text = project.memo;
-    date.date = project.deadline;
     Status *project_status = project.status;
     progress.text = project_status.status_type;
+    NSDate *local_date = project.deadline;
+    date_uneditable.text = [NSDateFormatter localizedStringFromDate:local_date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
 }
 
 - (void)enableAllField
@@ -90,6 +97,7 @@
     memo.enabled = NO;
     progress.enabled = NO;
     date.enabled = NO;
+    date_uneditable.enabled = NO;
 }
 
 
@@ -105,15 +113,73 @@
 */
 
 - (IBAction)return_action:(id)sender {
+    [self performSegueWithIdentifier:@"returnFromViewProject" sender:nil];
 }
 
 - (IBAction)save_action:(id)sender {
+    project.name = name.text;
+    // check amount is number!!
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    [self disableAllField];
+    edit_button.hidden = NO;
+    return_button.hidden = NO;
+    save_button.hidden = YES;
+    delete_button.hidden = YES;
+    cancel_button.hidden = YES;
+    date.hidden = YES;
+    date_uneditable.hidden = NO;
+    date_uneditable.text = [NSDateFormatter localizedStringFromDate:date.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
 }
 
 - (IBAction)edit_action:(id)sender {
+    [self enableAllField];
+    date_uneditable.hidden = YES;
+    edit_button.hidden = YES;
+    return_button.hidden = YES;
+    save_button.hidden = NO;
+    cancel_button.hidden = NO;
+    delete_button.hidden = NO;
+    date.hidden = NO;
+    date.date = project.deadline;
 }
 
 - (IBAction)cancel_action:(id)sender {
+    [self disableAllField];
+    [self setAllField];
+    edit_button.hidden = NO;
+    return_button.hidden = NO;
+    save_button.hidden = YES;
+    delete_button.hidden = YES;
+    cancel_button.hidden = YES;
+    date.hidden = YES;
+    date_uneditable.hidden = NO;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"returnFromViewProject"]) {
+        sksViewController *companyViewController = segue.destinationViewController;
+        companyViewController.company = company.name;
+    }
+    /*else if ([segue.identifier isEqualToString:@"deleteProject"]) {
+        DatabaseInterface *database = [DatabaseInterface databaseInterface];
+        [database deleteContact:contact];
+        sksViewController *companyViewController = segue.destinationViewController;
+        companyViewController.company = company.name;
+    }*/
+}
+
 
 @end

@@ -10,6 +10,7 @@
 #import "Company.h"
 #import "Address.h"
 #import "Contact.h"
+#import "Project.h"
 
 @interface DatabaseInterface : NSObject
 
@@ -39,6 +40,11 @@
 - (void)editContact:(Contact*) contact;
 
 - (void)deleteContact:(Contact*) contact;
+
+- (void)editProject:(Project*) project;
+
+- (void)deleteProject:(Project*) project;
+
 
 - (void)addCompanyBillingAddress:(Company*) company;
 
