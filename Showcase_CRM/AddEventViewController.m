@@ -48,4 +48,23 @@
 }
 */
 
+- (IBAction)saveAddEvent:(id)sender {
+    [self performSegueWithIdentifier:@"saveEvent" sender:nil];
+}
+
+
+- (IBAction)cancelAddEvent:(id)sender {
+    [self performSegueWithIdentifier:@"cancelAddEvent" sender:nil];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"cancelAddEvent"]) {
+        
+    } else if ([segue.identifier isEqualToString:@"saveEvent"]) {
+        
+    }
+}
+
 @end
