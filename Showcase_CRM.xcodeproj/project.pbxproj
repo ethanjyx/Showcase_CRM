@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		6120CFBA1959EC0B001FCAC1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6120CFB91959EC0B001FCAC1 /* CoreData.framework */; };
 		6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */; };
-		6120CFC01959F3EC001FCAC1 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFBF1959F3EC001FCAC1 /* Company.m */; };
-		6120CFC31959F3ED001FCAC1 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC21959F3ED001FCAC1 /* Project.m */; };
 		6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC51959F3ED001FCAC1 /* Sale.m */; };
 		6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC81959F3ED001FCAC1 /* Industry.m */; };
 		6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFCE1959F3ED001FCAC1 /* Event.m */; };
@@ -22,6 +20,9 @@
 		612A3447197BD811009A5A21 /* ViewBillingAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A3446197BD811009A5A21 /* ViewBillingAddressController.m */; };
 		612A344A197BD820009A5A21 /* ViewShippingAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A3449197BD820009A5A21 /* ViewShippingAddressController.m */; };
 		61438ACD19717E5E00B9DF58 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61438ACC19717E5E00B9DF58 /* AddContactViewController.m */; };
+		6174CC07198627550054F904 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 6174CC06198627550054F904 /* Company.m */; };
+		6174CC0A198627560054F904 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 6174CC09198627560054F904 /* Project.m */; };
+		6174CC0D198628E00054F904 /* EditProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6174CC0C198628E00054F904 /* EditProjectViewController.m */; };
 		618DE7351949B272000CC43E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE7341949B272000CC43E /* MainViewController.m */; };
 		618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE73A1949B2D0000CC43E /* CreateClientViewController.m */; };
 		618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025019473FAF0094BD1F /* Foundation.framework */; };
@@ -138,10 +139,6 @@
 /* Begin PBXFileReference section */
 		6120CFB91959EC0B001FCAC1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6120CFBC1959EE16001FCAC1 /* CRM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CRM.xcdatamodel; sourceTree = "<group>"; };
-		6120CFBE1959F3EC001FCAC1 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
-		6120CFBF1959F3EC001FCAC1 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
-		6120CFC11959F3ED001FCAC1 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
-		6120CFC21959F3ED001FCAC1 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		6120CFC41959F3ED001FCAC1 /* Sale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sale.h; sourceTree = "<group>"; };
 		6120CFC51959F3ED001FCAC1 /* Sale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sale.m; sourceTree = "<group>"; };
 		6120CFC71959F3ED001FCAC1 /* Industry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Industry.h; sourceTree = "<group>"; };
@@ -164,6 +161,12 @@
 		612A3449197BD820009A5A21 /* ViewShippingAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewShippingAddressController.m; sourceTree = "<group>"; };
 		61438ACB19717E5D00B9DF58 /* AddContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactViewController.h; sourceTree = "<group>"; };
 		61438ACC19717E5E00B9DF58 /* AddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactViewController.m; sourceTree = "<group>"; };
+		6174CC05198627550054F904 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		6174CC06198627550054F904 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		6174CC08198627560054F904 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		6174CC09198627560054F904 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
+		6174CC0B198628E00054F904 /* EditProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjectViewController.h; sourceTree = "<group>"; };
+		6174CC0C198628E00054F904 /* EditProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjectViewController.m; sourceTree = "<group>"; };
 		618DE7331949B272000CC43E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		618DE7341949B272000CC43E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		618DE7391949B2D0000CC43E /* CreateClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateClientViewController.h; sourceTree = "<group>"; };
@@ -501,6 +504,10 @@
 			isa = PBXGroup;
 			children = (
 				6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */,
+				6174CC08198627560054F904 /* Project.h */,
+				6174CC09198627560054F904 /* Project.m */,
+				6174CC05198627550054F904 /* Company.h */,
+				6174CC06198627550054F904 /* Company.m */,
 				612A343C197BA023009A5A21 /* Contact.h */,
 				612A343D197BA023009A5A21 /* Contact.m */,
 				61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */,
@@ -515,10 +522,6 @@
 				6120CFC81959F3ED001FCAC1 /* Industry.m */,
 				6120CFC41959F3ED001FCAC1 /* Sale.h */,
 				6120CFC51959F3ED001FCAC1 /* Sale.m */,
-				6120CFC11959F3ED001FCAC1 /* Project.h */,
-				6120CFC21959F3ED001FCAC1 /* Project.m */,
-				6120CFBE1959F3EC001FCAC1 /* Company.h */,
-				6120CFBF1959F3EC001FCAC1 /* Company.m */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -608,10 +611,12 @@
 				612A3443197BCB47009A5A21 /* BillAddressViewController.m */,
 				612A3445197BD811009A5A21 /* ViewBillingAddressController.h */,
 				612A3446197BD811009A5A21 /* ViewBillingAddressController.m */,
-				9DC586841981DCF300677DB1 /* AddProjectViewController.h */,
-				9DC586851981DCF300677DB1 /* AddProjectViewController.m */,
 				9DC586871981E0CD00677DB1 /* AddEventViewController.h */,
 				9DC586881981E0CD00677DB1 /* AddEventViewController.m */,
+				9DC586841981DCF300677DB1 /* AddProjectViewController.h */,
+				9DC586851981DCF300677DB1 /* AddProjectViewController.m */,
+				6174CC0B198628E00054F904 /* EditProjectViewController.h */,
+				6174CC0C198628E00054F904 /* EditProjectViewController.m */,
 			);
 			name = SKSTableViewImp;
 			sourceTree = "<group>";
@@ -931,9 +936,11 @@
 				6120CFD51959F3ED001FCAC1 /* Address.m in Sources */,
 				6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */,
 				612A3447197BD811009A5A21 /* ViewBillingAddressController.m in Sources */,
-				6120CFC31959F3ED001FCAC1 /* Project.m in Sources */,
+				6174CC07198627550054F904 /* Company.m in Sources */,
 				9D132E8F195A58DA00CD5788 /* TKGroup.m in Sources */,
+				6174CC0D198628E00054F904 /* EditProjectViewController.m in Sources */,
 				CE65A39C19754C760051BFAC /* AddContact2ViewController.m in Sources */,
+				6174CC0A198627560054F904 /* Project.m in Sources */,
 				9D132E78195A589700CD5788 /* TKNoContactViewController.m in Sources */,
 				6120CFD21959F3ED001FCAC1 /* Status.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
@@ -946,7 +953,6 @@
 				618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */,
 				9DC586891981E0CD00677DB1 /* AddEventViewController.m in Sources */,
 				9D132E8E195A58DA00CD5788 /* TKContact.m in Sources */,
-				6120CFC01959F3EC001FCAC1 /* Company.m in Sources */,
 				9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */,
 				F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */,
 				61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */,

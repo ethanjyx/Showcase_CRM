@@ -17,6 +17,8 @@
 #import "DetailContact2ViewController.h"
 #import "ViewBillingAddressController.h"
 #import "ViewShippingAddressController.h"
+#import "Project.h"
+#import "EditProjectViewController.h"
 
 @interface sksViewController ()
 
@@ -36,7 +38,9 @@
 @implementation sksViewController {
     Company *globalCompany;
     Contact *globalSelectedContact;
+    Project *globalSelectedProject;
     NSMutableArray *allContacts;
+    NSMutableArray *allProjects;
     NSMutableSet* selectedContactsForExport;
     bool exportingContact;
     UIButton* createContactButton;
@@ -75,6 +79,7 @@
     Industry *industry = globalCompany.industry;
     industryType.text = industry.industry_type;
     allContacts = [[NSMutableArray alloc] init];
+    allProjects = [[NSMutableArray alloc] init];
     selectedContactsForExport = [[NSMutableSet alloc] init];
     
     exportingContact = false;
@@ -102,6 +107,11 @@
     NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
     NSArray *contactDescriptors = @[contactDescriptor];
     allContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+    
+    NSSet *projects = globalCompany.projects;
+    NSSortDescriptor *contactDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSArray *contactDescriptors2 = @[contactDescriptor2];
+    allProjects = [projects sortedArrayUsingDescriptors:contactDescriptors2];
 }
 
 - (void)initButtons
@@ -181,6 +191,8 @@
 {
     if (indexPath.section == 1)
         return [allContacts count];
+    else if(indexPath.section == 2)
+        return [allProjects count];
     else
         return [contents[indexPath.section][indexPath.row] count] - 1;
 }
@@ -225,6 +237,10 @@
             }
         }
     }
+    else if(indexPath.section == 2 && indexPath.row != 0) {
+        globalSelectedProject = [allProjects objectAtIndex:indexPath.row - 1];
+        [self performSegueWithIdentifier:@"viewProject" sender:self];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -238,9 +254,9 @@
     
     cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
     
-    if ([contents[indexPath.section][indexPath.row] count] == 1 && indexPath.section != 1)
-        cell.isExpandable = NO; // will call setIsExpandable
-    else if (indexPath.section == 1 && [allContacts count] == 0)
+    if (indexPath.section == 1 && [allContacts count] == 0)
+        cell.isExpandable = NO;
+    else if(indexPath.section == 2 && [allProjects count] == 0)
         cell.isExpandable = NO;
     else
         cell.isExpandable = YES;
@@ -278,7 +294,13 @@
         billingAddressController.company = globalCompany;
     }
     else if([segue.identifier isEqualToString:@"addProject"]) {
-        
+        AddProjectViewController *projectController = segue.destinationViewController;
+        projectController.company = company;
+    }
+    else if([segue.identifier isEqualToString:@"viewProject"]) {
+        EditProjectViewController *projectController = segue.destinationViewController;
+        projectController.company = globalCompany;
+        projectController.project = globalSelectedProject;
     }
     else if([segue.identifier isEqualToString:@"addEvent"]) {
         
@@ -296,12 +318,16 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     
-    if (indexPath.section != 1)
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
-    else {
+    //if (indexPath.section != 1)
+    //    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
+    if (indexPath.section == 1) {
         Contact *oneContact = [allContacts objectAtIndex:indexPath.subRow-1];
         NSString *name = [NSString stringWithFormat:@"%@ %@", oneContact.lastname, oneContact.firstname];
         cell.textLabel.text = name;
+    }
+    else if(indexPath.section == 2) {
+        Project *oneProject = [allProjects objectAtIndex:indexPath.subRow-1];
+        cell.textLabel.text = oneProject.name;
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
