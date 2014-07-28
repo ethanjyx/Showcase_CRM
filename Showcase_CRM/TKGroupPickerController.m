@@ -56,7 +56,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Groups", nil);
+        self.title = NSLocalizedString(@"群组", nil);
     }
     return self;
 }
@@ -69,7 +69,8 @@
     [super viewDidLoad];
     
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGroup:)]];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismissAction:)]];
+
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     
     [self reloadGroups];
@@ -118,7 +119,7 @@
     
     switch (indexPath.section) {
         case 0: {
-            cell.textLabel.text = NSLocalizedString(@"All Contacts", nil);
+            cell.textLabel.text = NSLocalizedString(@"所有联系人", nil);
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", (int)ABAddressBookGetPersonCount([(TKPeoplePickerController*)self.navigationController addressBook])];
         } break;
         default: {

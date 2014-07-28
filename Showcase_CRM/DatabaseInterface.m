@@ -13,6 +13,8 @@
 #import "Contact.h"
 #import "Address.h"
 #import "TKContact.h"
+#import "Project.h"
+#import "Status.h"
 
 @interface DatabaseInterface()
 
@@ -198,6 +200,64 @@
     }
 }
 
+
+- (void)addProjectWithName:(NSString*)name possibility:(NSNumber*)possibility amount:(NSNumber*)amount memo:(NSString*) memo deadline:(NSDate*)deadline progress:(NSString*)progress companyName:(NSString*) companyName
+{
+    Project *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Project"
+                                                      inManagedObjectContext:self.managedObjectContext];
+    newEntry.name = name;
+    newEntry.possibility = possibility;
+    newEntry.amount = amount;
+    newEntry.memo = memo;
+    newEntry.deadline = deadline;
+    Status* status = [NSEntityDescription insertNewObjectForEntityForName:@"Status"
+                                                      inManagedObjectContext:self.managedObjectContext];
+    status.status_type = progress;
+    newEntry.company = [self fetchCompanyByName:companyName];
+    
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity2 = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:entity2];
+    
+    // Specify that the request should return dictionaries.
+    [request setResultType:NSDictionaryResultType];
+    
+    // Create an expression for the key path.
+    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"id"];
+    
+    // Create an expression to represent the minimum value at the key path 'creationDate'
+    NSExpression *maxExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
+    
+    // Create an expression description using the minExpression and returning a date.
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+    
+    // The name is the key that will be used in the dictionary for the return value.
+    [expressionDescription setName:@"maxId"];
+    [expressionDescription setExpression:maxExpression];
+    [expressionDescription setExpressionResultType:NSDecimalAttributeType];
+    
+    // Set the request's properties to fetch just the property represented by the expressions.
+    [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+    
+    NSError* error;
+    NSArray *objects = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (objects == nil) {
+        newEntry.id = [[NSNumber alloc] initWithInt:1];
+    }
+    else {
+        if ([objects count] > 0) {
+            newEntry.id = @([[[objects objectAtIndex:0] valueForKey:@"maxId"] intValue] + 1);
+        }
+        else {
+            newEntry.id = [[NSNumber alloc] initWithInt:1];
+        }
+    }
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
 
 - (NSArray*)getAllContacts
 {

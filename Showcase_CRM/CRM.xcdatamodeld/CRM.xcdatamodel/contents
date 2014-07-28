@@ -18,6 +18,7 @@
         <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="company" inverseEntity="Contact" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="company" inverseEntity="Event" syncable="YES"/>
         <relationship name="industry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Industry" inverseName="companies" inverseEntity="Industry" syncable="YES"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="company" inverseEntity="Project" syncable="YES"/>
         <relationship name="sales" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sale" inverseName="companies" inverseEntity="Sale" syncable="YES"/>
         <relationship name="shipping_address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="company_shipping" inverseEntity="Address" syncable="YES"/>
     </entity>
@@ -65,6 +66,7 @@
         <attribute name="memo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="possibility" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="projects" inverseEntity="Company" syncable="YES"/>
         <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="projects" inverseEntity="Contact" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="project" inverseEntity="Event" syncable="YES"/>
         <relationship name="sale" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sale" inverseName="projects" inverseEntity="Sale" syncable="YES"/>
@@ -83,11 +85,11 @@
     </entity>
     <elements>
         <element name="Address" positionX="9" positionY="54" width="128" height="163"/>
-        <element name="Company" positionX="27" positionY="72" width="128" height="178"/>
+        <element name="Company" positionX="27" positionY="72" width="128" height="193"/>
         <element name="Contact" positionX="-36" positionY="9" width="128" height="343"/>
         <element name="Event" positionX="18" positionY="63" width="128" height="178"/>
         <element name="Industry" positionX="54" positionY="99" width="128" height="73"/>
-        <element name="Project" positionX="27" positionY="72" width="128" height="193"/>
+        <element name="Project" positionX="27" positionY="72" width="128" height="208"/>
         <element name="Sale" positionX="0" positionY="45" width="128" height="118"/>
         <element name="Status" positionX="36" positionY="81" width="128" height="73"/>
     </elements>

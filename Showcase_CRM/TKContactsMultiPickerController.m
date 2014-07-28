@@ -45,7 +45,7 @@
         peopleCount = (CFIndex)_group.membersCount;
     } else {
         // if group is not selected
-        self.title = NSLocalizedString(@"All Contacts", nil);
+        self.title = NSLocalizedString(@"所有联系人", nil);
         allPeople = ABAddressBookCopyArrayOfAllPeople(addressBooks);
         peopleCount = ABAddressBookGetPersonCount(addressBooks);
     }
@@ -197,8 +197,8 @@
 	[super viewDidLoad];
     
     [self.navigationItem setLeftBarButtonItem:nil];
-    [self.navigationItem setTitle:NSLocalizedString(@"Contacts", nil)];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)]];
+    [self.navigationItem setTitle:NSLocalizedString(@"所有联系人", nil)];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismissAction:)]];
     
     if (self.savedSearchTerm)
 	{
@@ -347,9 +347,9 @@
     if (checked) _selectedCount++;
     else _selectedCount--;
     if (_selectedCount > 0)
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)]];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneAction:)]];
     else
-        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)]];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismissAction:)]];
     
     UITableViewCell *cell =[self.tableView cellForRowAtIndexPath:indexPath];
     UIButton *button = (UIButton *)cell.accessoryView;

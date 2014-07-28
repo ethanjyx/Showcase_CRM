@@ -23,6 +23,9 @@
 
 - (void)addContactWithLastname:(NSString*)lastname firstname:(NSString*)firstname title:(NSString*)title phoneWork:(NSString*)phoneWork phoneHome:(NSString*)phoneHome phoneMobile:(NSString*)phoneMobile emailWork:(NSString*)emailWork emailPersonal:(NSString*)emailPersonal note:(NSString*)note country:(NSString*)country province:(NSString*)province city:(NSString*)city street:(NSString*)street postcode:(NSString*)postcode companyName:(NSString*)companyName QQ:(NSString*)QQ weChat:(NSString*)weChat skype:(NSString*)Skype weibo:(NSString*) Weibo;
 
+- (void)addProjectWithName:(NSString*)name possibility:(NSNumber*)possibility amount:(NSNumber*)amount memo:(NSString*) memo deadline:(NSDate*)deadline progress:(NSString*)progress companyName:(NSString*) companyName;
+
+
 - (NSArray*)getAllContacts;
 
 - (Company*)fetchCompanyByName:(NSString*)companyName;

@@ -17,6 +17,8 @@
 #import "DetailContact2ViewController.h"
 #import "ViewBillingAddressController.h"
 #import "ViewShippingAddressController.h"
+#import "Project.h"
+#import "EditProjectViewController.h"
 
 @interface sksViewController ()
 
@@ -31,12 +33,18 @@
 - (void)exportEndsViewChange;
 - (void)addProject;
 - (void)addEvent;
+
+
+// a wrap-up helper function to perform the click on indexPath at this customized tableview
+- (void)performClickOnRowAtIndexPath:(NSIndexPath*) indexPath;
 @end
 
 @implementation sksViewController {
     Company *globalCompany;
     Contact *globalSelectedContact;
+    Project *globalSelectedProject;
     NSMutableArray *allContacts;
+    NSMutableArray *allProjects;
     NSMutableSet* selectedContactsForExport;
     bool exportingContact;
     UIButton* createContactButton;
@@ -75,6 +83,7 @@
     Industry *industry = globalCompany.industry;
     industryType.text = industry.industry_type;
     allContacts = [[NSMutableArray alloc] init];
+    allProjects = [[NSMutableArray alloc] init];
     selectedContactsForExport = [[NSMutableSet alloc] init];
     
     exportingContact = false;
@@ -102,6 +111,11 @@
     NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
     NSArray *contactDescriptors = @[contactDescriptor];
     allContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+    
+    NSSet *projects = globalCompany.projects;
+    NSSortDescriptor *contactDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSArray *contactDescriptors2 = @[contactDescriptor2];
+    allProjects = [projects sortedArrayUsingDescriptors:contactDescriptors2];
 }
 
 - (void)initButtons
@@ -181,6 +195,8 @@
 {
     if (indexPath.section == 1)
         return [allContacts count];
+    else if(indexPath.section == 2)
+        return [allProjects count];
     else
         return [contents[indexPath.section][indexPath.row] count] - 1;
 }
@@ -225,6 +241,10 @@
             }
         }
     }
+    else if(indexPath.section == 2 && indexPath.row != 0) {
+        globalSelectedProject = [allProjects objectAtIndex:indexPath.row - 1];
+        [self performSegueWithIdentifier:@"viewProject" sender:self];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -238,9 +258,9 @@
     
     cell.textLabel.text = self.contents[indexPath.section][indexPath.row][0];
     
-    if ([contents[indexPath.section][indexPath.row] count] == 1 && indexPath.section != 1)
-        cell.isExpandable = NO; // will call setIsExpandable
-    else if (indexPath.section == 1 && [allContacts count] == 0)
+    if (indexPath.section == 1 && [allContacts count] == 0)
+        cell.isExpandable = NO;
+    else if(indexPath.section == 2 && [allProjects count] == 0)
         cell.isExpandable = NO;
     else
         cell.isExpandable = YES;
@@ -278,7 +298,13 @@
         billingAddressController.company = globalCompany;
     }
     else if([segue.identifier isEqualToString:@"addProject"]) {
-        
+        AddProjectViewController *projectController = segue.destinationViewController;
+        projectController.company = company;
+    }
+    else if([segue.identifier isEqualToString:@"viewProject"]) {
+        EditProjectViewController *projectController = segue.destinationViewController;
+        projectController.company = globalCompany;
+        projectController.project = globalSelectedProject;
     }
     else if([segue.identifier isEqualToString:@"addEvent"]) {
         
@@ -296,12 +322,16 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     
-    if (indexPath.section != 1)
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
-    else {
+    //if (indexPath.section != 1)
+    //    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.contents[indexPath.section][indexPath.row][indexPath.subRow]];
+    if (indexPath.section == 1) {
         Contact *oneContact = [allContacts objectAtIndex:indexPath.subRow-1];
         NSString *name = [NSString stringWithFormat:@"%@ %@", oneContact.lastname, oneContact.firstname];
         cell.textLabel.text = name;
+    }
+    else if(indexPath.section == 2) {
+        Project *oneProject = [allProjects objectAtIndex:indexPath.subRow-1];
+        cell.textLabel.text = oneProject.name;
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -327,11 +357,20 @@
 
 - (void)generateExportView
 {
+    if([allContacts count] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"导出失败"
+                                                        message:@"该公司没有可以导出的联系人，请先新建联系人"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     if([[self tableView] numberOfRowsInSection:1] == 1) {
     // contacts not expanded, expand them
-        [[self tableView] selectRowAtIndexPath:indexPath animated:false scrollPosition:UITableViewScrollPositionNone];
-        [self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+        [self performClickOnRowAtIndexPath:indexPath];
     }
     [createContactButton removeFromSuperview];
     [importContactButton removeFromSuperview];
@@ -466,8 +505,8 @@
 
 - (void)tkPeoplePickerController:(TKPeoplePickerController*)picker didFinishPickingDataWithInfo:(NSArray*)contacts
 {
+    [[picker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     
-    [self dismissModalViewControllerAnimated:YES];
 //    for (id view in self.scrollView.subviews) {
 //        if ([view isKindOfClass:[UIButton class]])
 //            [(UIButton*)view removeFromSuperview];
@@ -481,12 +520,25 @@
         [database addContactWithLastname:contact.lastName firstname:contact.firstName title:nil phoneWork:contact.tel phoneHome:nil phoneMobile:nil emailWork:contact.email emailPersonal:nil note:nil country:nil province:nil city:nil street:nil postcode:nil companyName:CompanyName.text QQ:nil weChat:nil skype:nil weibo:nil];
     }
     
-    [self updateContents];
-    [self.tableView reloadData];
+    if([[self tableView] numberOfRowsInSection:1] == 1) {
+        [self updateContents];
+        [self.tableView reloadData];
+    } else {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+        [self performClickOnRowAtIndexPath:indexPath];
+        [self updateContents];
+        [self performClickOnRowAtIndexPath:indexPath];
+    }
 }
 
 - (void)tkPeoplePickerControllerDidCancel:(TKPeoplePickerController*)picker
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [[picker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)performClickOnRowAtIndexPath:(NSIndexPath*) indexPath
+{
+    [[self tableView] selectRowAtIndexPath:indexPath animated:false scrollPosition:UITableViewScrollPositionNone];
+    [self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:indexPath];
 }
 @end
