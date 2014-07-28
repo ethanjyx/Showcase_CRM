@@ -20,7 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedString(@"All Contacts", nil);
+        self.title = NSLocalizedString(@"所有联系人", nil);
     }
     return self;
 }
@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     [self.navigationItem setLeftBarButtonItem:nil];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissAction:)]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismissAction:)]];
 }
 
 - (void)didReceiveMemoryWarning

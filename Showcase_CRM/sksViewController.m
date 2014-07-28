@@ -33,6 +33,10 @@
 - (void)exportEndsViewChange;
 - (void)addProject;
 - (void)addEvent;
+
+
+// a wrap-up helper function to perform the click on indexPath at this customized tableview
+- (void)performClickOnRowAtIndexPath:(NSIndexPath*) indexPath;
 @end
 
 @implementation sksViewController {
@@ -353,11 +357,20 @@
 
 - (void)generateExportView
 {
+    if([allContacts count] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"导出失败"
+                                                        message:@"该公司没有可以导出的联系人，请先新建联系人"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     if([[self tableView] numberOfRowsInSection:1] == 1) {
     // contacts not expanded, expand them
-        [[self tableView] selectRowAtIndexPath:indexPath animated:false scrollPosition:UITableViewScrollPositionNone];
-        [self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+        [self performClickOnRowAtIndexPath:indexPath];
     }
     [createContactButton removeFromSuperview];
     [importContactButton removeFromSuperview];
@@ -492,8 +505,8 @@
 
 - (void)tkPeoplePickerController:(TKPeoplePickerController*)picker didFinishPickingDataWithInfo:(NSArray*)contacts
 {
+    [[picker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     
-    [self dismissModalViewControllerAnimated:YES];
 //    for (id view in self.scrollView.subviews) {
 //        if ([view isKindOfClass:[UIButton class]])
 //            [(UIButton*)view removeFromSuperview];
@@ -507,12 +520,25 @@
         [database addContactWithLastname:contact.lastName firstname:contact.firstName title:nil phoneWork:contact.tel phoneHome:nil phoneMobile:nil emailWork:contact.email emailPersonal:nil note:nil country:nil province:nil city:nil street:nil postcode:nil companyName:CompanyName.text QQ:nil weChat:nil skype:nil weibo:nil];
     }
     
-    [self updateContents];
-    [self.tableView reloadData];
+    if([[self tableView] numberOfRowsInSection:1] == 1) {
+        [self updateContents];
+        [self.tableView reloadData];
+    } else {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+        [self performClickOnRowAtIndexPath:indexPath];
+        [self updateContents];
+        [self performClickOnRowAtIndexPath:indexPath];
+    }
 }
 
 - (void)tkPeoplePickerControllerDidCancel:(TKPeoplePickerController*)picker
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [[picker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)performClickOnRowAtIndexPath:(NSIndexPath*) indexPath
+{
+    [[self tableView] selectRowAtIndexPath:indexPath animated:false scrollPosition:UITableViewScrollPositionNone];
+    [self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:indexPath];
 }
 @end
