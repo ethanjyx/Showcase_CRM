@@ -505,8 +505,6 @@
 
 - (void)editCompany:(Company*) company shippingAddress:(Address *) shippingAddress
 {
-
-
     Company *editCompany = [self fetchCompanyByName:company.name];
     editCompany.shipping_address = shippingAddress;
     NSError* error;

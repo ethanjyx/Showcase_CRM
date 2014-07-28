@@ -4111,6 +4111,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="cz4-P8-Qiq">
+                                <rect key="frame" x="202" y="305" width="420" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -4118,6 +4124,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="amount" destination="xiB-qW-NN7" id="Inu-9a-GTw"/>
                         <outlet property="cancel_button" destination="kbc-h8-VXa" id="WPm-74-pMZ"/>
                         <outlet property="date" destination="Op2-TJ-UYh" id="ta6-xh-oEo"/>
+                        <outlet property="date_uneditable" destination="cz4-P8-Qiq" id="yQe-yO-R70"/>
                         <outlet property="delete_button" destination="qfF-Gs-ZrK" id="Al9-35-p2l"/>
                         <outlet property="edit_button" destination="VHM-xe-PKm" id="P2I-qW-WbO"/>
                         <outlet property="memo" destination="9c9-B9-fpx" id="g2r-be-nIm"/>
