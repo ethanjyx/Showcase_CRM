@@ -1059,6 +1059,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="beginEditDateTextField:" destination="JrN-Gl-T8a" eventType="editingDidBegin" id="vCh-os-REQ"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DSb-kz-7sf">
                                 <rect key="frame" x="194" y="475" width="75" height="30"/>
@@ -1092,6 +1095,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="704" height="724"/>
                     <connections>
+                        <outlet property="addressTextField" destination="lNv-DL-aui" id="p04-54-cIq"/>
+                        <outlet property="contextTextField" destination="kOf-uy-4On" id="1YP-TH-wNT"/>
+                        <outlet property="dateTextField" destination="Hgt-Y8-hIQ" id="kQo-gg-bh8"/>
+                        <outlet property="nameTextField" destination="Egq-aZ-LtD" id="Wg9-Yl-DNV"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="cancelAddEvent" splitViewControllerTargetIndex="1" id="vlj-iY-34O"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="saveEvent" splitViewControllerTargetIndex="1" id="dfg-aN-FwE"/>
                     </connections>
