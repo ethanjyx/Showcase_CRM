@@ -107,7 +107,7 @@
     [self.view addSubview:_mapView];
     
     // Add search bar on map view
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 34, 800, 44)];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 60, 800, 44)];
     //self.searchBar.showsCancelButton = YES;
     self.searchBar.placeholder = @"请输入客户姓名";
     self.searchBar.delegate = self;
@@ -134,6 +134,8 @@
         [self.annotations addObject:[NSNull null]];
     }
     
+    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 1024, 50)];
+    [self.view addSubview:navBar];
     
     // Init Geocoder then convert street address to latitude and longitude
     for (int i = 0; i < [self.contacts count]; i++) {
@@ -459,7 +461,14 @@
         // 通过points构建BMKPolyline
 		BMKPolyline* polyLine = [BMKPolyline polylineWithPoints:temppoints count:planPointCounts];
 		[_mapView addOverlay:polyLine]; // 添加路线overlay
-		delete []temppoints;        
+		delete []temppoints;
+        
+        UIBarButtonItem* btnWayPoint = [[UIBarButtonItem alloc]init];
+        btnWayPoint.target = self;
+        //btnWayPoint.action = @selector(wayPointDemo);
+        btnWayPoint.title = @"途经点";
+        btnWayPoint.enabled = TRUE;
+        self.navigationController.topViewController.navigationItem.rightBarButtonItem = btnWayPoint;
 	} else {
         NSLog(@"route search failed!");
     }
@@ -555,26 +564,17 @@
 
 /* route planning view controller delegate function */
 - (void)onGetselectedContacts:(NSArray *)indicator; {
-    NSMutableArray *indexs = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [indicator count]; i++) {
-        if ([[indicator objectAtIndex:i] intValue] == 1) {
-            [indexs addObject:[NSNumber numberWithInt:i]];
-        }
-    }
-    
     [self calculateVisitOrder:indicator];
     
     BMKPlanNode* start = [[BMKPlanNode alloc]init];
-	//start.name = @"东川路800号";
-    //start.cityName =  @"上海市";
     start.pt = _locService.userLocation.location.coordinate;
     BMKPlanNode* end = [[BMKPlanNode alloc]init];
     NSMutableArray *wayPoints = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < [indexs count]; i++) {
+    for (int i = 0; i < [self.visitOrder count]; i++) {
         //Contact *contact = [self.contacts objectAtIndex:[[indexs objectAtIndex:i] intValue]];
-        BMKPointAnnotation *annotation = [self.annotations objectAtIndex:[[indexs objectAtIndex:i] intValue]];
-        if (i == [indexs count] - 1) {
+        BMKPointAnnotation *annotation = [self.annotations objectAtIndex:[[self.visitOrder objectAtIndex:i] intValue]];
+        if (i == [self.visitOrder count] - 1) {
             //end.name = contact.address.street;
             //end.cityName = contact.address.city;
             end.pt = annotation.coordinate;
@@ -682,7 +682,7 @@
             }
             printf("\n");
             */
-        }        
+        }
         return;
     }
     for (int i = 0; i < size; i++) {
