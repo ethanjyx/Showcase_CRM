@@ -49,13 +49,15 @@
 */
 
 @synthesize state,capital,stateLabel, capitalLabel;
-
+@synthesize n,m;
 
 - (void)viewDidLoad
 
 {
     
     [super viewDidLoad];
+    m= [[UINavigationBar alloc] initWithFrame:CGRectMake(-31, 100, 768, 100)];
+    
     
     stateLabel.text = state;
     

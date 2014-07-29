@@ -58,6 +58,7 @@
 
 @synthesize phone,industryType,website,CompanyName,company;
 @synthesize contents;
+@synthesize nnn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,6 +72,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //nnn=[[UINavigationBar alloc] initWithFrame:CGRectMake(0, 1, 104, 500)];
+   // [nnn drawRect:CGRectMake(0, 1, 104, 500)];
+    nnn.frame=CGRectMake(0, 0, 768, 73);
+    //nnn.translucent= NO;
+   //nnn.backgroundColor=[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+
 
     self.tableView.SKSTableViewDelegate = self;
     

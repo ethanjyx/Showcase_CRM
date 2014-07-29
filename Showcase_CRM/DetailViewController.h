@@ -21,6 +21,8 @@
     IBOutlet UILabel *capitalLabel;
     
 }
+@property (weak, nonatomic) IBOutlet UINavigationItem *n;
+@property (weak, nonatomic) IBOutlet UINavigationBar *m;
 
 @property (nonatomic, retain)NSString *state, *capital;
 
