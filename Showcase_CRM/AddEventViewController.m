@@ -7,6 +7,8 @@
 //
 
 #import "AddEventViewController.h"
+#import "DatabaseInterface.h"
+#import "sksViewController.h"
 
 @interface AddEventViewController ()
 
@@ -28,7 +30,7 @@
 
 @implementation AddEventViewController
 
-@synthesize date, dateTextField;
+@synthesize company, date, dateTextField, nameTextField, addressTextField, contextTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,6 +89,17 @@
 }
 
 - (IBAction)saveAddEvent:(id)sender {
+    if ([nameTextField.text length]<=0 ) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新建失败"
+                                                        message:@"活动名不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     [self performSegueWithIdentifier:@"saveEvent" sender:nil];
 }
 
@@ -99,7 +112,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"cancelAddEvent"]) {
+        DatabaseInterface *database = [DatabaseInterface databaseInterface];
+        [database addEventWithName:nameTextField.text date:date locations:addressTextField.text memo:contextTextField.text companyName:company];
         
+        sksViewController *c = segue.destinationViewController;
+        c.company = company;
     } else if ([segue.identifier isEqualToString:@"saveEvent"]) {
         
     }

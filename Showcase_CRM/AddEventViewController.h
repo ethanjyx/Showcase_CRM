@@ -10,4 +10,6 @@
 
 @interface AddEventViewController : UIViewController
 
+@property (nonatomic, strong) NSString *company;
+
 @end

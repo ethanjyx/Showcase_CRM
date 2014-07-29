@@ -18,6 +18,7 @@
 #import "ViewBillingAddressController.h"
 #import "ViewShippingAddressController.h"
 #import "Project.h"
+#import "Event.h"
 #import "EditProjectViewController.h"
 
 @interface sksViewController ()
@@ -43,8 +44,10 @@
     Company *globalCompany;
     Contact *globalSelectedContact;
     Project *globalSelectedProject;
+    Event *globalSelectedEvent;
     NSMutableArray *allContacts;
     NSMutableArray *allProjects;
+    NSMutableArray *allEvents;
     NSMutableSet* selectedContactsForExport;
     bool exportingContact;
     UIButton* createContactButton;
@@ -84,6 +87,7 @@
     industryType.text = industry.industry_type;
     allContacts = [[NSMutableArray alloc] init];
     allProjects = [[NSMutableArray alloc] init];
+    allEvents = [[NSMutableArray alloc] init];
     selectedContactsForExport = [[NSMutableSet alloc] init];
     
     exportingContact = false;
@@ -116,6 +120,11 @@
     NSSortDescriptor *contactDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *contactDescriptors2 = @[contactDescriptor2];
     allProjects = [projects sortedArrayUsingDescriptors:contactDescriptors2];
+    
+    NSSet *events = globalCompany.events;
+    NSSortDescriptor *contactDescriptor3 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSArray *contactDescriptors3 = @[contactDescriptor3];
+    allEvents = [events sortedArrayUsingDescriptors:contactDescriptors3];
 }
 
 - (void)initButtons
@@ -197,6 +206,8 @@
         return [allContacts count];
     else if(indexPath.section == 2)
         return [allProjects count];
+    else if(indexPath.section == 3)
+        return [allEvents count];
     else
         return [contents[indexPath.section][indexPath.row] count] - 1;
 }
@@ -208,12 +219,10 @@
         
         [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
     }
-    if (indexPath.section == 0 && indexPath.row == 2) {
+    else if (indexPath.section == 0 && indexPath.row == 2) {
         
         [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
     }
-    
-    NSLog(@"%d", exportingContact);
     
     if (indexPath.section == 1) {
         if (indexPath.row != 0) {
@@ -245,6 +254,10 @@
         globalSelectedProject = [allProjects objectAtIndex:indexPath.row - 1];
         [self performSegueWithIdentifier:@"viewProject" sender:self];
     }
+    else if(indexPath.section == 3 && indexPath.row != 0) {
+        globalSelectedEvent = [allEvents objectAtIndex:indexPath.row - 1];
+        [self performSegueWithIdentifier:@"viewEvent" sender:self];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -261,6 +274,8 @@
     if (indexPath.section == 1 && [allContacts count] == 0)
         cell.isExpandable = NO;
     else if(indexPath.section == 2 && [allProjects count] == 0)
+        cell.isExpandable = NO;
+    else if(indexPath.section == 3 && [allEvents count] == 0)
         cell.isExpandable = NO;
     else
         cell.isExpandable = YES;
@@ -307,7 +322,8 @@
         projectController.project = globalSelectedProject;
     }
     else if([segue.identifier isEqualToString:@"addEvent"]) {
-        
+        AddEventViewController* c = segue.destinationViewController;
+        c.company = company;
     }
 }
 
@@ -328,10 +344,12 @@
         Contact *oneContact = [allContacts objectAtIndex:indexPath.subRow-1];
         NSString *name = [NSString stringWithFormat:@"%@ %@", oneContact.lastname, oneContact.firstname];
         cell.textLabel.text = name;
-    }
-    else if(indexPath.section == 2) {
+    } else if(indexPath.section == 2) {
         Project *oneProject = [allProjects objectAtIndex:indexPath.subRow-1];
         cell.textLabel.text = oneProject.name;
+    } else if (indexPath.section == 3) {
+        Event* eve = [allEvents objectAtIndex:indexPath.subRow - 1];
+        cell.textLabel.text = eve.name;
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
