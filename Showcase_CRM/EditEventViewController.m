@@ -15,11 +15,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *date;
 @property (weak, nonatomic) IBOutlet UITextField *memo;
 
-
+@property (weak, nonatomic) IBOutlet UIButton *returnButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveEditButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelEditButton;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @end
 
 @implementation EditEventViewController
+
+@synthesize name, address, date, memo, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,7 +39,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setAllField];
+    [self disableAllField];
+    saveEditButton.hidden = YES;
+    deleteButton.hidden = YES;
+    cancelEditButton.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,20 +63,47 @@
 }
 */
 
+- (void)setAllField
+{
+    name.text = event.name;
+    address.text = event.location;
+    NSDate *local_date = event.date;
+    date.text = [NSDateFormatter localizedStringFromDate:local_date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
+    memo.text = event.memo;
+}
+
+- (void)enableAllField
+{
+    name.enabled = YES;
+    address.enabled = YES;
+    date.enabled = YES;
+    memo.enabled = YES;
+}
+
+- (void)disableAllField
+{
+    name.enabled = NO;
+    address.enabled = NO;
+    date.enabled = NO;
+    memo.enabled = NO;
+}
+
 - (IBAction)returnFromViewEvent:(id)sender {
     
 }
 
 - (IBAction)deleteEvent:(id)sender {
+
 }
 
 - (IBAction)saveEditEvent:(id)sender {
+
 }
 
 
 - (IBAction)editEvent:(id)sender {
+    
 }
-
 
 - (IBAction)cancelEditEvent:(id)sender {
 

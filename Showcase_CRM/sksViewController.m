@@ -20,6 +20,7 @@
 #import "Project.h"
 #import "Event.h"
 #import "EditProjectViewController.h"
+#import "EditEventViewController.h"
 
 @interface sksViewController ()
 
@@ -328,6 +329,11 @@
         projectController.company = globalCompany;
         projectController.project = globalSelectedProject;
     }
+    else if([segue.identifier isEqualToString:@"viewEvent"]) {
+        EditEventViewController *c = segue.destinationViewController;
+        c.company = globalCompany;
+        c.event = globalSelectedEvent;
+    }
     else if([segue.identifier isEqualToString:@"addEvent"]) {
         AddEventViewController* c = segue.destinationViewController;
         c.company = company;
@@ -505,26 +511,6 @@
 {
     [self performSegueWithIdentifier: @"addEvent" sender:self];
 }
-
-
-//- (void)deleteContact:(UIButton*)sender
-//{
-////    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
-////                            @"Share on Facebook",
-////                            @"Share on Twitter",
-////                            @"Share via E-mail",
-////                            @"Save to Camera Roll",
-////                            @"Rate this App",
-////                            nil];
-////    [popup showInView:[UIApplication sharedApplication].keyWindow];
-//
-////    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Default Alert View"message:@"Defalut" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",@"ThirdButton", nil];
-////    [alertView show];
-//    
-////    DatabaseInterface *database = [DatabaseInterface databaseInterface];
-////    [database deleteContact:[allContacts objectAtIndex:sender.tag]];
-//    // TODO: add reload page here
-//}
 
 #pragma mark - TKContactsMultiPickerControllerDelegate
 

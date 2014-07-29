@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
+#import "Event.h"
 #import <UIKit/UIKit.h>
 
 @interface EditEventViewController : UIViewController
+
+@property (nonatomic, strong) Event *event;
+@property (nonatomic, strong) Company *company;
 
 @end

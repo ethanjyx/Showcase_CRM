@@ -4258,7 +4258,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nbJ-lg-JEo">
-                                <rect key="frame" x="34" y="20" width="60" height="30"/>
+                                <rect key="frame" x="34" y="58" width="60" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="返回公司">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -4268,7 +4268,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Tob-I2-Pyh">
-                                <rect key="frame" x="626" y="20" width="30" height="30"/>
+                                <rect key="frame" x="626" y="58" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="取消">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -4278,7 +4278,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EHH-2d-FJ0">
-                                <rect key="frame" x="626" y="20" width="30" height="30"/>
+                                <rect key="frame" x="626" y="58" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="编辑">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -4288,7 +4288,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P5D-DT-inW">
-                                <rect key="frame" x="543" y="20" width="60" height="30"/>
+                                <rect key="frame" x="543" y="58" width="60" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="保存修改">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -4304,13 +4304,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <size key="freeformSize" width="704" height="724"/>
                     <connections>
                         <outlet property="address" destination="oqP-Lo-pXs" id="sjr-8n-Jac"/>
-                        <outlet property="addressTextField" destination="oqP-Lo-pXs" id="wAk-Wv-z7Y"/>
-                        <outlet property="contextTextField" destination="WjS-4I-aJL" id="oXa-8c-p3Z"/>
+                        <outlet property="cancelEditButton" destination="Tob-I2-Pyh" id="wcj-jX-u6J"/>
                         <outlet property="date" destination="ay4-bY-ckW" id="Opk-bX-yaj"/>
-                        <outlet property="dateTextField" destination="ay4-bY-ckW" id="qKU-fn-EJp"/>
+                        <outlet property="deleteButton" destination="yf3-zH-PmQ" id="plZ-wC-9LC"/>
+                        <outlet property="editButton" destination="EHH-2d-FJ0" id="LXB-aw-MvY"/>
                         <outlet property="memo" destination="WjS-4I-aJL" id="QId-fh-Vu5"/>
                         <outlet property="name" destination="7QP-mn-NkU" id="zaA-4J-ka7"/>
-                        <outlet property="nameTextField" destination="7QP-mn-NkU" id="Dgo-4o-grJ"/>
+                        <outlet property="returnButton" destination="nbJ-lg-JEo" id="Kvu-HJ-U6M"/>
+                        <outlet property="saveEditButton" destination="P5D-DT-inW" id="pOp-fG-NKw"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="returnFromViewEvent" splitViewControllerTargetIndex="1" id="gJ8-u3-EXT"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="deleteProject" splitViewControllerTargetIndex="1" id="O69-Gt-pV3"/>
                     </connections>
