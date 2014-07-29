@@ -112,13 +112,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"cancelAddEvent"]) {
+        
+    } else if ([segue.identifier isEqualToString:@"saveEvent"]) {
         DatabaseInterface *database = [DatabaseInterface databaseInterface];
         [database addEventWithName:nameTextField.text date:date locations:addressTextField.text memo:contextTextField.text companyName:company];
         
         sksViewController *c = segue.destinationViewController;
         c.company = company;
-    } else if ([segue.identifier isEqualToString:@"saveEvent"]) {
-        
     }
 }
 

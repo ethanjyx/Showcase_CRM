@@ -308,6 +308,7 @@
             newEntry.id = [[NSNumber alloc] initWithInt:1];
         }
     }
+    
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }
