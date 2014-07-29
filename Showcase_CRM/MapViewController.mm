@@ -69,6 +69,11 @@
 @interface MapViewController ()
 - (IBAction)returnButton:(id)sender;
 - (IBAction)locateButton:(id)sender;
+- (IBAction)startNav:(id)sender;
+- (IBAction)endNav:(id)sender;
+- (IBAction)zoomIn:(id)sender;
+- (IBAction)zoomOut:(id)sender;
+
 - (void)calculateVisitOrder:(NSArray *)indicator;
 - (void)genPerms:(NSMutableArray *)queue Stack:(NSMutableArray *)stack Distances:(int **)distances Size:(int)size;
 
@@ -107,11 +112,54 @@
     [self.view addSubview:_mapView];
     
     // Add search bar on map view
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 60, 800, 44)];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 40, 800, 44)];
     //self.searchBar.showsCancelButton = YES;
     self.searchBar.placeholder = @"请输入客户姓名";
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
+    
+    // Add buttons on map view
+    self.startNavButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.startNavButton.frame = CGRectMake(60, 620, 80, 40);
+    [self.startNavButton.layer setMasksToBounds:YES];
+    //[self.startNavButton setCornerRadius:10.0];
+    [self.startNavButton.layer setBorderWidth:1.0];
+    self.startNavButton.backgroundColor = [UIColor whiteColor];
+    [self.startNavButton setTitle:@"开始导航" forState:UIControlStateNormal];
+    [self.startNavButton addTarget:self action:@selector(startNav:) forControlEvents:UIControlEventTouchUpInside];
+    [self.startNavButton setEnabled:NO];
+    [self.view addSubview:self.startNavButton];
+    
+    self.endNavButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.endNavButton.frame = CGRectMake(140, 620, 80, 40);
+    [self.endNavButton.layer setMasksToBounds:YES];
+    //[self.endNavButton.layer setCornerRadius:10.0];
+    [self.endNavButton.layer setBorderWidth:1.0];
+    self.endNavButton.backgroundColor = [UIColor whiteColor];
+    [self.endNavButton setTitle:@"停止" forState:UIControlStateNormal];
+    [self.endNavButton addTarget:self action:@selector(endNav:) forControlEvents:UIControlEventTouchUpInside];
+    [self.endNavButton setEnabled:NO];
+    [self.view addSubview:self.endNavButton];
+    
+    self.zoomInButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.zoomInButton.frame = CGRectMake(900, 620, 40, 40);
+    [self.zoomInButton.layer setMasksToBounds:YES];
+    //[self.zoomInButton.layer setCornerRadius:10.0];
+    [self.zoomInButton.layer setBorderWidth:1.0];
+    self.zoomInButton.backgroundColor = [UIColor whiteColor];
+    [self.zoomInButton setTitle:@"+" forState:UIControlStateNormal];
+    [self.zoomInButton addTarget:self action:@selector(zoomIn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.zoomInButton];
+    
+    self.zoomOutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.zoomOutButton.frame = CGRectMake(940, 620, 40, 40);
+    [self.zoomOutButton.layer setMasksToBounds:YES];
+    //[self.zoomOutButton.layer setCornerRadius:10.0];
+    [self.zoomOutButton.layer setBorderWidth:1.0];
+    self.zoomOutButton.backgroundColor = [UIColor whiteColor];
+    [self.zoomOutButton setTitle:@"-" forState:UIControlStateNormal];
+    [self.zoomOutButton addTarget:self action:@selector(zoomOut:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.zoomOutButton];
     
     // Init and start location service
     _locService = [[BMKLocationService alloc] init];
@@ -120,7 +168,7 @@
     // Init route search
     _routesearch = [[BMKRouteSearch alloc]init];
     
-    // Init containers
+    // Init members
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     self.contacts = [[NSMutableArray alloc] initWithArray:[database getAllContacts]];
     self.geocodeSearchs = [[NSMutableArray alloc] init];
@@ -133,9 +181,8 @@
         [self.tableViews addObject:[NSNull null]];
         [self.annotations addObject:[NSNull null]];
     }
-    
-    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 1024, 50)];
-    [self.view addSubview:navBar];
+    self.visitedNum = 0;
+    self.minDistance = INT_MAX;
     
     // Init Geocoder then convert street address to latitude and longitude
     for (int i = 0; i < [self.contacts count]; i++) {
@@ -257,7 +304,7 @@
             [self.dataLists replaceObjectAtIndex:index withObject:datalist];
             [tableView reloadData];
         }
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -349,7 +396,7 @@
 }
 
 
-/* map view function */
+/* map view functions */
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
     if ([annotation isKindOfClass:[RouteAnnotation class]]) {
 		return [self getRouteAnnotationView:mapView viewForAnnotation:(RouteAnnotation*)annotation];
@@ -397,12 +444,11 @@
 /* search drive route functions */
 - (void)onGetDrivingRouteResult:(BMKRouteSearch*)searcher result:(BMKDrivingRouteResult*)result errorCode:(BMKSearchErrorCode)error
 {
-    /*
     NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
 	[_mapView removeAnnotations:array];
 	array = [NSArray arrayWithArray:_mapView.overlays];
 	[_mapView removeOverlays:array];
-    */
+    
 	if (error == BMK_SEARCH_NO_ERROR) {
         BMKDrivingRouteLine* plan = (BMKDrivingRouteLine*)[result.routes objectAtIndex:0];
         // 计算路线方案中的路段数目
@@ -456,19 +502,15 @@
                 temppoints[i].y = transitStep.points[k].y;
                 i++;
             }
-            
         }
         // 通过points构建BMKPolyline
 		BMKPolyline* polyLine = [BMKPolyline polylineWithPoints:temppoints count:planPointCounts];
 		[_mapView addOverlay:polyLine]; // 添加路线overlay
 		delete []temppoints;
         
-        UIBarButtonItem* btnWayPoint = [[UIBarButtonItem alloc]init];
-        btnWayPoint.target = self;
-        //btnWayPoint.action = @selector(wayPointDemo);
-        btnWayPoint.title = @"途经点";
-        btnWayPoint.enabled = TRUE;
-        self.navigationController.topViewController.navigationItem.rightBarButtonItem = btnWayPoint;
+        // enable buttons for navigation
+        [self.startNavButton setEnabled:YES];
+        [self.endNavButton setEnabled:YES];
 	} else {
         NSLog(@"route search failed!");
     }
@@ -562,6 +604,7 @@
 	return view;
 }
 
+
 /* route planning view controller delegate function */
 - (void)onGetselectedContacts:(NSArray *)indicator; {
     [self calculateVisitOrder:indicator];
@@ -600,6 +643,117 @@
     {
         NSLog(@"route检索发送失败");
     }
+}
+
+
+/* alert delegate function */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //NSLog(@"button index: %ld", (long)buttonIndex);
+    if (buttonIndex == 0) {
+        NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
+        [_mapView removeAnnotations:array];
+        array = [NSArray arrayWithArray:_mapView.overlays];
+        [_mapView removeOverlays:array];
+        
+        self.visitedNum = 0;
+        self.minDistance = INT_MAX;
+        [self.startNavButton setTitle:@"开始导航" forState:UIControlStateNormal];
+        [self.startNavButton setEnabled:NO];
+        [self.endNavButton setEnabled:NO];
+        
+        for (BMKPointAnnotation* annotation in self.annotations) {
+            [_mapView addAnnotation:annotation];
+        }
+    }
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    UIStoryboardPopoverSegue *popoverSegue = (UIStoryboardPopoverSegue *) segue;
+    RouteplanningViewController *newViewController = [segue destinationViewController];
+    newViewController.delegate = self;
+    newViewController.mypopoverController = popoverSegue.popoverController;
+}
+
+
+/* map view member functions */
+- (IBAction)returnButton:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)locateButton:(id)sender {
+    [_mapView setCenterCoordinate:_locService.userLocation.location.coordinate animated:YES];
+}
+
+- (IBAction)startNav:(id)sender {
+    //初始化调启导航时的参数管理类
+    BMKNaviPara* para = [[BMKNaviPara alloc]init];
+    //指定导航类型
+    para.naviType = BMK_NAVI_TYPE_WEB;
+        
+    CLLocationCoordinate2D current, next;
+    BMKPlanNode* start = [[BMKPlanNode alloc]init];
+    BMKPlanNode* end = [[BMKPlanNode alloc]init];
+        
+    if (self.visitedNum == 0) {
+        [self.startNavButton setTitle:@"继续导航" forState:UIControlStateNormal];
+        current = _locService.userLocation.location.coordinate;
+        BMKPointAnnotation* annotation = [self.annotations firstObject];
+        next = annotation.coordinate;
+    } else {
+        BMKPointAnnotation* annotation1 = [self.annotations objectAtIndex:self.visitedNum - 1];
+        BMKPointAnnotation* annotation2 = [self.annotations objectAtIndex:self.visitedNum];
+        current = annotation1.coordinate;
+        next = annotation2.coordinate;
+    }
+        
+    start.pt = current;
+    end.pt = next;
+    para.startPoint = start;
+    para.endPoint = end;
+    para.appName = [NSString stringWithFormat:@"%@", @"Showcase_CRM"];
+        
+    //调启web导航
+    [BMKNavigation openBaiduMapNavigation:para];
+    self.visitedNum++;
+    
+    if (self.visitedNum == [self.visitOrder count]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"到达终点，导航结束！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
+        [_mapView removeAnnotations:array];
+        array = [NSArray arrayWithArray:_mapView.overlays];
+        [_mapView removeOverlays:array];
+        
+        self.visitedNum = 0;
+        self.minDistance = INT_MAX;
+        [self.startNavButton setTitle:@"开始导航" forState:UIControlStateNormal];
+        [self.startNavButton setEnabled:NO];
+        [self.endNavButton setEnabled:NO];
+        
+        for (BMKPointAnnotation* annotation in self.annotations) {
+            [_mapView addAnnotation:annotation];
+        }
+    }
+}
+
+- (IBAction)endNav:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定停止导航？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [alert show];
+}
+
+- (IBAction)zoomIn:(id)sender {
+    _mapView.zoomLevel++;
+}
+
+- (IBAction)zoomOut:(id)sender {
+    _mapView.zoomLevel--;
 }
 
 - (void)calculateVisitOrder:(NSArray *)indicator {
@@ -641,13 +795,14 @@
     }
     
     /*
-    for (int i = 0; i < 1 + [indexs count]; i++) {
-        for (int j = 0; j < 1 + [indexs count]; j++) {
-            printf("distance between %i and %i is: %i\n", i, j, distances[i][j]);
-        }
-    }
-    */
+     for (int i = 0; i < 1 + [indexs count]; i++) {
+     for (int j = 0; j < 1 + [indexs count]; j++) {
+     printf("distance between %i and %i is: %i\n", i, j, distances[i][j]);
+     }
+     }
+     */
     
+    self.minDistance = INT_MAX;
     NSMutableArray *stack = [[NSMutableArray alloc] init];
     NSMutableArray *queue = [[NSMutableArray alloc] init];
     for (int i = 0; i < [indexs count]; i++) {
@@ -663,7 +818,6 @@
 
 - (void)genPerms:(NSMutableArray *)queue Stack:(NSMutableArray *)stack Distances:(int **)distances Size:(int)size {
     if ([queue count] == 0) {
-        static int minDistance = INT_MAX;
         int current = size;
         int distance = 0;
         for (int i = 0; i < [stack count]; i++) {
@@ -671,17 +825,17 @@
             distance += distances[current][next];
             current = [[stack objectAtIndex:i] intValue];
         }
-        if (distance < minDistance) {
-            minDistance = distance;
+        if (distance < self.minDistance) {
+            self.minDistance = distance;
             self.visitOrder = [[NSArray alloc] initWithArray:stack];
             /*
-            printf("min distance: %i\n", minDistance);
-            printf("visit order: ");
-            for (int i = 0; i < [stack count]; i++) {
-                printf("%i", [[stack objectAtIndex:i] intValue]);
-            }
-            printf("\n");
-            */
+             printf("min distance: %i\n", self.minDistance);
+             printf("visit order: ");
+             for (int i = 0; i < [stack count]; i++) {
+             printf("%i", [[stack objectAtIndex:i] intValue]);
+             }
+             printf("\n");
+             */
         }
         return;
     }
@@ -694,27 +848,6 @@
         [queue addObject:top];
         [stack removeObjectAtIndex:[stack count] - 1];
     }
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    UIStoryboardPopoverSegue *popoverSegue = (UIStoryboardPopoverSegue *) segue;
-    RouteplanningViewController *newViewController = [segue destinationViewController];
-    newViewController.delegate = self;
-    newViewController.mypopoverController = popoverSegue.popoverController;
-}
-
-- (IBAction)returnButton:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)locateButton:(id)sender {
-    [_mapView setCenterCoordinate:_locService.userLocation.location.coordinate animated:YES];
 }
 
 @end
