@@ -4313,7 +4313,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="returnButton" destination="nbJ-lg-JEo" id="Kvu-HJ-U6M"/>
                         <outlet property="saveEditButton" destination="P5D-DT-inW" id="pOp-fG-NKw"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="returnFromViewEvent" splitViewControllerTargetIndex="1" id="gJ8-u3-EXT"/>
-                        <segue destination="jIa-eO-fpF" kind="replace" identifier="deleteProject" splitViewControllerTargetIndex="1" id="O69-Gt-pV3"/>
+                        <segue destination="jIa-eO-fpF" kind="replace" identifier="deleteEvent" splitViewControllerTargetIndex="1" id="O69-Gt-pV3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fv0-uO-M5d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4334,7 +4334,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="scm-2R-sld"/>
-        <segue reference="O69-Gt-pV3"/>
+        <segue reference="gJ8-u3-EXT"/>
         <segue reference="lwA-hS-YsY"/>
         <segue reference="hkq-bI-o8K"/>
         <segue reference="zXn-ca-5jz"/>
