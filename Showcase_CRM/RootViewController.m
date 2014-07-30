@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //toolbar.frame=CGRectMake(0,300,1024,1000);
 }
 
 - (void)didReceiveMemoryWarning
