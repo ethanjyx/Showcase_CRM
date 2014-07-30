@@ -10,6 +10,7 @@
 #import "Company.h"
 #import "Address.h"
 #import "Contact.h"
+#import "Event.h"
 #import "Project.h"
 
 @interface DatabaseInterface : NSObject
@@ -46,6 +47,9 @@
 
 - (void)deleteProject:(Project*) project;
 
+- (void)editEvent:(Event*) event;
+
+- (void)deleteEvent:(Event*) event;
 
 - (void)addCompanyBillingAddress:(Company*) company;
 

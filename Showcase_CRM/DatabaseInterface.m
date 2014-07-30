@@ -594,6 +594,54 @@
     }
 }
 
+- (void)editEvent:(Event*) event
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", event.id];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Event *editEvent = [fetchedObjects lastObject];
+    editEvent = event;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+- (void)deleteEvent:(Event*) event
+{
+    // initializing NSFetchRequest
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    //Setting Entity to be Queried
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
+                                              inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", event.id];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error;
+    // Query on managedObjectContext With Generated fetchRequest
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Event *fetchedProject = [fetchedObjects lastObject];
+    [self.managedObjectContext deleteObject:fetchedProject];
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+
+}
 
 - (void)editCompany:(Company*) company billingAddress:(Address *) billingAddress
 {
