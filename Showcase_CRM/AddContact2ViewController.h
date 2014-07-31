@@ -11,6 +11,7 @@
 @interface AddContact2ViewController : ViewController
 
 @property (nonatomic, strong) NSString *company;
+@property (weak, nonatomic) IBOutlet UINavigationBar *header3;
 
 - (IBAction)save:(id)sender;
 

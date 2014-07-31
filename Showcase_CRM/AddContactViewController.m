@@ -44,6 +44,7 @@
 @synthesize lastname, firstname, title, email_work, email_personal, phone_work, phone_personal, mobile_phone, QQ, WeChat, Skype, Weibo, province, city, street, country, postcode,note,scrollView,activeField;
 
 @synthesize company;
+@synthesize header2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header2.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
     [self registerForKeyboardNotifications];
 }
