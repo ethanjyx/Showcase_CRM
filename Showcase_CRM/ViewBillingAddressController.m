@@ -14,11 +14,12 @@
 @property (weak, nonatomic) IBOutlet UINavigationBar *header7;
 @property (weak, nonatomic) IBOutlet UINavigationItem *headertitle2;
 @property (weak, nonatomic) IBOutlet UILabel *companyName;
-@property (weak, nonatomic) IBOutlet UILabel *country;
-@property (weak, nonatomic) IBOutlet UILabel *province;
-@property (weak, nonatomic) IBOutlet UILabel *city;
-@property (weak, nonatomic) IBOutlet UILabel *address;
-@property (weak, nonatomic) IBOutlet UILabel *postcode;
+
+@property (weak, nonatomic) IBOutlet UITextField *country;
+@property (weak, nonatomic) IBOutlet UITextField *province;
+@property (weak, nonatomic) IBOutlet UITextField *city;
+@property (weak, nonatomic) IBOutlet UITextField *address;
+@property (weak, nonatomic) IBOutlet UITextField *postcode;
 
 - (IBAction)edit:(id)sender;
 
@@ -43,6 +44,13 @@
     [super viewDidLoad];
     header7.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
+    
+    country.enabled = NO;
+    province.enabled = NO;
+    city.enabled = NO;
+    address.enabled = NO;
+    postcode.enabled = NO;
+    
     headertitle2.title = company.name;
     Address *billingAddress = company.billing_address;
     country.text = billingAddress.country;
