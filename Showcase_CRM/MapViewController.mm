@@ -11,6 +11,7 @@
 #import "Contact.h"
 #import "Address.h"
 #import "RouteplanningViewController.h"
+#import "Hanzi2Pinyin.h"
 
 #define MYBUNDLE_NAME @ "mapapi.bundle"
 #define MYBUNDLE_PATH [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: MYBUNDLE_NAME]
@@ -74,8 +75,12 @@
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomOut:(id)sender;
 
-- (void)calculateVisitOrder:(NSArray *)indicator;
+- (BOOL)isAddressEmpty:(Address *)address;
+- (void)calculateVisitOrder:(NSArray *)selectionIndicator;
 - (void)genPerms:(NSMutableArray *)queue Stack:(NSMutableArray *)stack Distances:(int **)distances Size:(int)size;
+- (void)setupNames;
+- (void)resetSearch;
+- (void)handleSearchForTerm:(NSString *)searchTerm;
 
 @end
 
@@ -126,7 +131,6 @@
     self.searchController.delegate = self;
     self.searchController.searchResultsDataSource = self;
     self.searchController.searchResultsDelegate = self;
-    self.searchDataList = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", nil];
     
     // Add buttons on map view
     self.startNavButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -179,6 +183,9 @@
     _routesearch = [[BMKRouteSearch alloc]init];
     
     // Init members
+    self.names = [[NSMutableDictionary alloc] init];
+    self.mutableNames = [[NSMutableDictionary alloc] init];
+    self.mutableKeys = [[NSMutableArray alloc] init];
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     self.contacts = [[NSMutableArray alloc] initWithArray:[database getAllContacts]];
     self.geocodeSearchs = [[NSMutableArray alloc] init];
@@ -193,17 +200,23 @@
     }
     self.visitedNum = 0;
     self.minDistance = INT_MAX;
+    [self setupNames];
+    [self resetSearch];
     
     // Init Geocoder then convert street address to latitude and longitude
     for (int i = 0; i < [self.contacts count]; i++) {
+        Contact *contact = [self.contacts objectAtIndex:i];
+        Address *address = contact.address;
+        if ([self isAddressEmpty:address] == YES) {
+            [self.geocodeSearchs addObject:[NSNull null]];
+            continue;
+        }
         BMKGeoCodeSearch* geocodesearch = [[BMKGeoCodeSearch alloc] init];
         geocodesearch.delegate = self;
         [self.geocodeSearchs addObject:geocodesearch];
         BMKGeoCodeSearchOption *geocodeSearchOption = [[BMKGeoCodeSearchOption alloc] init];
-        Contact *contact = [self.contacts objectAtIndex:i];
-        Address *address = contact.address;
         //NSLog(@"country:%@, province:%@, city:%@, street:%@, postal:%@", address.country, address.province, address.city, address.street, address.postal);
-        geocodeSearchOption.city= address.city;
+        geocodeSearchOption.city = address.city;
         geocodeSearchOption.address = address.street;
         BOOL flag = [geocodesearch geoCode:geocodeSearchOption];
         if (flag) {
@@ -234,7 +247,9 @@
     _routesearch.delegate = nil;
     for (int i = 0; i < [self.geocodeSearchs count]; i++) {
         BMKGeoCodeSearch* geocodesearch = [self.geocodeSearchs objectAtIndex:i];
-        geocodesearch.delegate = nil;
+        if (geocodesearch != [NSNull null]) {
+            geocodesearch.delegate = nil;
+        }
     }
     for (int i = 0; i < [self.tableViews count]; i++) {
         UITableView* tableView = [self.tableViews objectAtIndex:i];
@@ -246,26 +261,64 @@
 
 
 /* search bar function */
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
     NSString *searchTerm=[searchBar text];
-    for (int i = 0; i < [self.contacts count]; i++) {
-        Contact *contact = [self.contacts objectAtIndex:i];
-        NSString *fullname = [[NSString alloc] initWithFormat:@"%@%@", contact.lastname, contact.lastname];
-        if ([searchTerm isEqualToString:fullname] || [searchTerm isEqualToString:contact.lastname] || [searchTerm isEqualToString:contact.firstname]) {
-            BMKPointAnnotation* annotation = [self.annotations objectAtIndex:i];
-            [_mapView setCenterCoordinate:annotation.coordinate animated:YES];
-            [_mapView selectAnnotation:annotation animated:YES];
-            searchBar.text=@"";
-            break;
+    [self handleSearchForTerm:searchTerm];
+    
+    if ([self.mutableKeys count] == 0) {
+        [self.searchController setActive:NO];
+    } else if ([self.mutableKeys count] == 1) {
+        NSString *key = [self.mutableKeys firstObject];
+        NSArray *nameSection = [self.mutableNames objectForKey:key];
+        if ([nameSection count] > 1) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请指定一个客户" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+        } else {
+            Contact *oneContact = [nameSection firstObject];
+            for (int i = 0; i < [self.contacts count]; i++) {
+                Contact *contact = [self.contacts objectAtIndex:i];
+                if (contact == oneContact) {
+                    if ([self isAddressEmpty:contact.address] == YES) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"该客户的地址信息为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                        [alert show];
+                    } else {
+                        BMKPointAnnotation *annotation = [self.annotations objectAtIndex:i];
+                        [_mapView selectAnnotation:annotation animated:YES];
+                        [_mapView setCenterCoordinate:annotation.coordinate animated:YES];
+                    }
+                    [self.searchController setActive:NO];
+                    break;
+                }
+            }
         }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请指定一个客户" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
     }
-    [self.searchController setActive:NO];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if([searchText length]==0)
+    {
+        [self resetSearch];
+        [self.searchDisplayController.searchResultsTableView reloadData];
+        return;
+    }
+    
+    [self handleSearchForTerm:searchText];
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [self resetSearch];
+    [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 
 /* search display controller function */
 - (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView {
-    [tableView setFrame:CGRectMake(112, 0, 800, 400)];
+    [tableView setFrame:CGRectMake(112, 0, 800, 310)];
     tableView.layer.borderWidth = 1;
     tableView.layer.borderColor = [[UIColor blackColor] CGColor];
 }
@@ -273,12 +326,21 @@
 
 /* table view functions */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.mutableKeys count];
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        return [self.searchDataList count];
+        if ([self.mutableKeys count] == 0) {
+            return 0;
+        }
+        NSString *key = [self.mutableKeys objectAtIndex:section];
+        NSArray *nameSection = [self.mutableNames objectForKey:key];
+        return [nameSection count];
     } else {
         return 7;
     }
@@ -293,7 +355,15 @@
     }
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        cell.textLabel.text = [self.searchDataList objectAtIndex:[indexPath row]];
+        NSUInteger section=[indexPath section];
+        NSUInteger rowNumber=[indexPath row];
+        
+        NSString *key = [self.mutableKeys objectAtIndex:section];
+        //取得第section组array的key
+        NSArray *nameSection = [self.mutableNames objectForKey:key];
+        
+        Contact *oneContact = [nameSection objectAtIndex:rowNumber];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname];
     } else {
         NSUInteger row = [indexPath row];
         NSUInteger index = [self.tableViews indexOfObject:tableView];
@@ -307,7 +377,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        NSLog(@"selected");
+        NSUInteger section=[indexPath section];
+        NSUInteger rowNumber=[indexPath row];
+        NSString *key = [self.mutableKeys objectAtIndex:section];
+        //取得第section组array的key
+        NSArray *nameSection = [self.mutableNames objectForKey:key];
+        Contact *oneContact = [nameSection objectAtIndex:rowNumber];
+        for (int i = 0; i < [self.contacts count]; i++) {
+            Contact *contact = [self.contacts objectAtIndex:i];
+            if (contact == oneContact) {
+                if ([self isAddressEmpty:contact.address] == YES) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"该客户的地址信息为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alert show];
+                } else {
+                    BMKPointAnnotation *annotation = [self.annotations objectAtIndex:i];
+                    [_mapView selectAnnotation:annotation animated:YES];
+                    [_mapView setCenterCoordinate:annotation.coordinate animated:YES];
+                }
+                [self.searchController setActive:NO];
+                [self.searchBar resignFirstResponder];
+                break;
+            }
+        }
     } else {
         if ([indexPath indexAtPosition:1] == 6) {
             NSUInteger index = [self.tableViews indexOfObject:tableView];
@@ -338,6 +429,19 @@
             [alert show];
         }
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if ([self.mutableKeys count]==0) {
+            return 0;
+        }
+        NSString *key=[self.mutableKeys objectAtIndex:section];
+        return key;
+    } else {
+        return @"";
     }
 }
 
@@ -637,8 +741,8 @@
 
 
 /* route planning view controller delegate function */
-- (void)onGetselectedContacts:(NSArray *)indicator; {
-    [self calculateVisitOrder:indicator];
+- (void)onGetselectedContacts:(NSArray *)selectionIndicator; {
+    [self calculateVisitOrder:selectionIndicator];
     
     BMKPlanNode* start = [[BMKPlanNode alloc]init];
     start.pt = _locService.userLocation.location.coordinate;
@@ -679,7 +783,6 @@
 
 /* alert delegate function */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //NSLog(@"button index: %ld", (long)buttonIndex);
     if (buttonIndex == 0) {
         NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
         [_mapView removeAnnotations:array];
@@ -692,8 +795,11 @@
         [self.startNavButton setEnabled:NO];
         [self.endNavButton setEnabled:NO];
         
-        for (BMKPointAnnotation* annotation in self.annotations) {
-            [_mapView addAnnotation:annotation];
+        for (int i = 0; i < [self.annotations count]; i++) {
+            BMKPointAnnotation *annotation = [self.annotations objectAtIndex:i];
+            if (annotation != [NSNull null]) {
+                [_mapView addAnnotation:annotation];
+            }
         }
     }
 }
@@ -768,8 +874,11 @@
         [self.startNavButton setEnabled:NO];
         [self.endNavButton setEnabled:NO];
         
-        for (BMKPointAnnotation* annotation in self.annotations) {
-            [_mapView addAnnotation:annotation];
+        for (int i = 0; i < [self.annotations count]; i++) {
+            BMKPointAnnotation *annotation = [self.annotations objectAtIndex:i];
+            if (annotation != [NSNull null]) {
+                [_mapView addAnnotation:annotation];
+            }
         }
     }
 }
@@ -787,10 +896,17 @@
     _mapView.zoomLevel--;
 }
 
-- (void)calculateVisitOrder:(NSArray *)indicator {
+- (BOOL)isAddressEmpty:(Address *)address {
+    if ([address.street isEqualToString:@""] || [address.city isEqualToString:@""]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)calculateVisitOrder:(NSArray *)selectionIndicator {
     NSMutableArray *indexs = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [indicator count]; i++) {
-        if ([[indicator objectAtIndex:i] intValue] == 1) {
+    for (int i = 0; i < [selectionIndicator count]; i++) {
+        if ([[selectionIndicator objectAtIndex:i] intValue] == 1) {
             [indexs addObject:[NSNumber numberWithInt:i]];
         }
     }
@@ -805,19 +921,19 @@
             if (i == j) {
                 distances[i][j] = 0;
             } else if (i == [indexs count]) {
-                BMKPointAnnotation *annotation = [self.annotations objectAtIndex:j];
+                BMKPointAnnotation *annotation = [self.annotations objectAtIndex:[[indexs objectAtIndex:j] intValue]];
                 BMKMapPoint clientCoord = BMKMapPointForCoordinate(annotation.coordinate);
                 CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord,userCoord);
                 distances[i][j] = distance;
             } else if (j == [indexs count]) {
-                BMKPointAnnotation *annotation = [self.annotations objectAtIndex:i];
+                BMKPointAnnotation *annotation = [self.annotations objectAtIndex:[[indexs objectAtIndex:i] intValue]];
                 BMKMapPoint clientCoord = BMKMapPointForCoordinate(annotation.coordinate);
                 CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord,userCoord);
                 distances[i][j] = distance;
             } else {
-                BMKPointAnnotation *annotation1 = [self.annotations objectAtIndex:i];
+                BMKPointAnnotation *annotation1 = [self.annotations objectAtIndex:[[indexs objectAtIndex:i] intValue]];
                 BMKMapPoint clientCoord1 = BMKMapPointForCoordinate(annotation1.coordinate);
-                BMKPointAnnotation *annotation2 = [self.annotations objectAtIndex:j];
+                BMKPointAnnotation *annotation2 = [self.annotations objectAtIndex:[[indexs objectAtIndex:j] intValue]];
                 BMKMapPoint clientCoord2 = BMKMapPointForCoordinate(annotation2.coordinate);
                 CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord1,clientCoord2);
                 distances[i][j] = distance;
@@ -826,18 +942,24 @@
     }
     
     /*
-     for (int i = 0; i < 1 + [indexs count]; i++) {
-     for (int j = 0; j < 1 + [indexs count]; j++) {
-     printf("distance between %i and %i is: %i\n", i, j, distances[i][j]);
-     }
-     }
-     */
+    for (int i = 0; i < 1 + [indexs count]; i++) {
+        for (int j = 0; j < 1 + [indexs count]; j++) {
+            if (i == [indexs count]) {
+                printf("distance between user and %i is: %i\n", [[indexs objectAtIndex:j] intValue], distances[i][j]);
+            } else if (j == [indexs count]) {
+                printf("distance between %i and user is: %i\n", [[indexs objectAtIndex:i] intValue], distances[i][j]);
+            } else {
+                printf("distance between %i and %i is: %i\n", [[indexs objectAtIndex:i] intValue], [[indexs objectAtIndex:j] intValue], distances[i][j]);
+            }
+        }
+    }
+    */
     
     self.minDistance = INT_MAX;
     NSMutableArray *stack = [[NSMutableArray alloc] init];
     NSMutableArray *queue = [[NSMutableArray alloc] init];
     for (int i = 0; i < [indexs count]; i++) {
-        [queue addObject:[NSNumber numberWithInt:i]];
+        [queue addObject:[NSNumber numberWithInt:[[indexs objectAtIndex:i] intValue]]];
     }
     [self genPerms:queue Stack:stack Distances:distances Size:[indexs count]];
     
@@ -852,9 +974,9 @@
         int current = size;
         int distance = 0;
         for (int i = 0; i < [stack count]; i++) {
-            int next = [[stack objectAtIndex:i] intValue];
+            int next = i;
             distance += distances[current][next];
-            current = [[stack objectAtIndex:i] intValue];
+            current = i;
         }
         if (distance < self.minDistance) {
             self.minDistance = distance;
@@ -879,6 +1001,107 @@
         [queue addObject:top];
         [stack removeObjectAtIndex:[stack count] - 1];
     }
+}
+
+- (void)setupNames
+{
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    
+    NSArray *fetchedContactsArrayLocal = [database getAllContacts];
+    NSLog(@"fetched %d", [fetchedContactsArrayLocal count]);
+    for (int i = 0; i < [fetchedContactsArrayLocal count]; i++) {
+        Contact *oneContact = [fetchedContactsArrayLocal objectAtIndex:i];
+        
+        NSString *name = [NSString stringWithFormat:@"%@%@",oneContact.lastname, oneContact.firstname];
+        
+        NSString *initKey;
+        if ([Hanzi2Pinyin hasChineseCharacter:name]) {
+            initKey = [[Hanzi2Pinyin convert:name] substringToIndex:1];
+        }
+        else {
+            initKey = [name substringToIndex:1];
+        }
+        NSString *key = [initKey uppercaseString];
+        
+        NSMutableArray *localNames = [self.names objectForKey:key];
+        if (localNames == nil) {
+            NSMutableArray *newArray = [[NSMutableArray alloc] init];
+            localNames = newArray;
+        }
+        [localNames addObject:oneContact];
+        
+        
+        NSArray *sortedNames = [localNames sortedArrayUsingComparator:^NSComparisonResult(Contact* a, Contact* b) {
+            
+            NSString *first = [NSString stringWithFormat:@"%@%@",a.lastname, a.firstname];
+            NSString *second = [NSString stringWithFormat:@"%@%@",b.lastname, b.firstname];
+            
+            if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+                first = [Hanzi2Pinyin convert:first];
+                first = [NSString stringWithFormat:@"%@%@",@" ", first];
+            }
+            if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+                second = [Hanzi2Pinyin convert:second];
+                second = [NSString stringWithFormat:@"%@%@",@" ", second];
+            }
+            
+            return [first compare:second];
+        }];
+        
+        NSMutableArray *sortedMutableArray = [NSMutableArray arrayWithArray:sortedNames];
+        
+        
+        [self.names setObject:sortedMutableArray forKey:key];
+    }
+}
+
+- (void)resetSearch
+{
+    self.mutableNames=[self.names mutableDeepCopy];
+    NSMutableArray *keyarr=[NSMutableArray new];
+    [keyarr addObjectsFromArray:[[self.names allKeys] sortedArrayUsingSelector:@selector(compare:)]];
+    self.mutableKeys=keyarr;
+}
+
+- (void)handleSearchForTerm:(NSString *)searchTerm
+{
+    NSMutableArray *sectionToRemove=[NSMutableArray new];
+    //分组待删除列表
+    [self resetSearch];
+    //先重置
+    for(NSString *key in self.mutableKeys)
+    {//循环读取所有的数组
+        NSMutableArray *array=[self.mutableNames valueForKey:key];
+        NSMutableArray *toRemove=[NSMutableArray new];
+        //待删除列表
+        for(Contact *contact in array)
+        {//数组内的元素循环对比
+            NSString *contactName = [NSString stringWithFormat:@"%@ %@",contact.lastname, contact.firstname];
+            if([contactName rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location==NSNotFound)
+            {
+                //rangeOfString方法是返回NSRange对象(包含位置索引和长度信息)
+                //NSCaseInsensitiveSearch是忽略大小写
+                //这里的代码会在name中找不到searchTerm时执行
+                [toRemove addObject:contact];
+                //找不到，把name添加到待删除列表
+            }
+            if (([Hanzi2Pinyin hasChineseCharacter:contactName] && [[Hanzi2Pinyin convertToAbbreviation:contactName] rangeOfString:searchTerm options:NSCaseInsensitiveSearch].location!=NSNotFound)) {
+                [toRemove removeObject:contact];
+            }
+            
+        }
+        
+        if ([array count]==[toRemove count]) {
+            [sectionToRemove addObject:key];
+            //如果待删除的总数和数组元素总数相同，把该分组的key加入待删除列表，即不显示该分组
+        }
+        [array removeObjectsInArray:toRemove];
+        //删除数组待删除元素
+    }
+    [self.mutableKeys removeObjectsInArray:sectionToRemove];
+    //能过待删除的key数组删除数组
+    [self.searchDisplayController.searchResultsTableView reloadData];
+    //重载数据
 }
 
 @end
