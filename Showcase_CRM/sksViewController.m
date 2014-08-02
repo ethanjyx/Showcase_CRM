@@ -37,8 +37,10 @@
 - (void)addEvent;
 
 
+
 // a wrap-up helper function to perform the click on indexPath at this customized tableview
 - (void)performClickOnRowAtIndexPath:(NSIndexPath*) indexPath;
+- (void)updateUI;
 @end
 
 @implementation sksViewController {
@@ -115,6 +117,20 @@
                   ];
     [self updateContents];
     [self initButtons];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self performSelector:@selector(updateUI) withObject:nil afterDelay:0.0];
+}
+
+- (void)updateUI
+{
+    for (int i = 0; i < 4; ++i) {
+        [self performClickOnRowAtIndexPath: [NSIndexPath indexPathForRow:0 inSection:i]];
+    }
+
 }
 
 - (void)updateContents
