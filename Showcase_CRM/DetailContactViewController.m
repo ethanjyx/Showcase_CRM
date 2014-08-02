@@ -11,6 +11,8 @@
 #import "DatabaseInterface.h"
 
 @interface DetailContactViewController ()
+
+@property (weak, nonatomic) IBOutlet UINavigationBar *header5;
 @property (weak, nonatomic) IBOutlet UITextField *lastname;
 @property (weak, nonatomic) IBOutlet UITextField *firstname;
 @property (weak, nonatomic) IBOutlet UITextField *title;
@@ -48,8 +50,10 @@
 @end
 
 @implementation DetailContactViewController
+
 @synthesize contact;
 @synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,scrollView,activeField;
+@synthesize header5;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,6 +67,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header5.frame=CGRectMake(152, 123, 768, 73);
     // Do any additional setup after loading the view.
     [self disableAllTextField];
     [self setAllTextField];
