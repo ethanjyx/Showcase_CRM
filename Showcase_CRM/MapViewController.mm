@@ -516,10 +516,15 @@
         //NSLog(@"corresponding address: %@", address.street);
         //NSLog(@"result: %@", result.address);
         
-        NSString *nameStr = [[NSString alloc] initWithFormat:@"姓名：%@ %@", contact.firstname, contact.lastname];
+        NSString *nameStr = [[NSString alloc] initWithFormat:@"姓名：%@ %@", contact.lastname, contact.firstname];
         NSString *addressStr = [[NSString alloc] initWithFormat:@"地址：%@", address.street];
         NSString *cellphoneStr = [[NSString alloc] initWithFormat:@"电话：%@", contact.phone_mobile];
-        NSString *companyStr = [[NSString alloc] initWithFormat:@"公司：%@", contact.company.name];
+        NSString *companyStr;
+        if (contact.company == nil) {
+            companyStr = @"公司：";
+        } else {
+            companyStr = [[NSString alloc] initWithFormat:@"公司：%@", contact.company.name];
+        }
         NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%i次", [contact.sign_up_times intValue]];
         
         NSMutableArray *dataList = [NSMutableArray arrayWithObjects:nameStr, addressStr, cellphoneStr, companyStr, checkinStr, @"", @"                        签到", nil];
