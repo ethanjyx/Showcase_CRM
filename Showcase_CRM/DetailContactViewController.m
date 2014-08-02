@@ -9,6 +9,8 @@
 #import "DetailContactViewController.h"
 #import "Address.h"
 #import "DatabaseInterface.h"
+#import "sksViewController.h"
+#import "Company.h"
 
 @interface DetailContactViewController ()
 
@@ -32,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *street;
 @property (weak, nonatomic) IBOutlet UITextField *postcode;
 
+@property (weak, nonatomic) IBOutlet UIButton *goToCompany_button;
 @property (weak, nonatomic) IBOutlet UIButton *edit_button;
 @property (weak, nonatomic) IBOutlet UIButton *save_button;
 @property (weak, nonatomic) IBOutlet UIButton *delete_button;
@@ -41,6 +44,7 @@
 - (IBAction)edit:(id)sender;
 - (IBAction)delete:(id)sender;
 - (IBAction)cancel:(id)sender;
+- (IBAction)goToCompany:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *activeField;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -52,7 +56,7 @@
 @implementation DetailContactViewController
 
 @synthesize contact;
-@synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,scrollView,activeField;
+@synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,scrollView,activeField,goToCompany_button;
 @synthesize header5;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -75,6 +79,12 @@
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
     [self registerForKeyboardNotifications];
+    if (contact.company == nil) {
+        goToCompany_button.hidden = YES;
+    }
+    else {
+        goToCompany_button.hidden = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,25 +165,15 @@
 
 
 
-
-
-
-
-
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"goToCompany"]) {
+        sksViewController *localContact = segue.destinationViewController;
+        Company *localCompany = contact.company;
+        localContact.company = localCompany.name;
+    }
 }
-*/
+
 
 - (IBAction)save:(id)sender {
     if ([lastname.text length]<=0 ) {
@@ -212,6 +212,7 @@
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
+    goToCompany_button.hidden = NO;
 }
 
 - (IBAction)edit:(id)sender {
@@ -220,6 +221,7 @@
     save_button.hidden = NO;
     cancel_button.hidden = NO;
     delete_button.hidden = NO;
+    goToCompany_button.hidden = YES;
 }
 
 - (IBAction)delete:(id)sender {
@@ -235,6 +237,11 @@
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
+    goToCompany_button.hidden = NO;
+}
+
+- (IBAction)goToCompany:(id)sender {
+    [self performSegueWithIdentifier:@"goToCompany" sender:nil];
 }
 
 
