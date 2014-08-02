@@ -12,6 +12,8 @@
 @interface RouteplanningViewController ()
 - (IBAction)confirmButton:(id)sender;
 
+- (BOOL)isAddressEmpty:(Address *) address;
+
 @end
 
 @implementation RouteplanningViewController
@@ -36,15 +38,15 @@
     self.contacts = [[NSMutableArray alloc] initWithArray:[database getAllContacts]];
     self.datalist = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.contacts count]; i++) {
-        Contact *contact = [self.contacts objectAtIndex:i];
+        Contact *contact = [self.contacts objectAtIndex:i];        
         NSString *nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:%@  电话:%@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
         [self.datalist addObject:nameStr];
     }
     [self.view addSubview:self.tableView];
     
-    self.indicator = [[NSMutableArray alloc] init];
+    self.selectionIndicator = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.contacts count]; i++) {
-        [self.indicator addObject:[NSNumber numberWithInt:0]];
+        [self.selectionIndicator addObject:[NSNumber numberWithInt:0]];
     }
 }
 
@@ -81,10 +83,10 @@
     NSUInteger index = [indexPath indexAtPosition:1];
     if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-        [self.indicator replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:0]];
+        [self.selectionIndicator replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:0]];
     } else {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-        [self.indicator replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:1]];
+        [self.selectionIndicator replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:1]];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -102,9 +104,16 @@
 
 - (IBAction)confirmButton:(id)sender {
     if ([self.delegate respondsToSelector:@selector(onGetselectedContacts:)]) {
-        [self.delegate onGetselectedContacts:self.indicator];
+        [self.delegate onGetselectedContacts:self.selectionIndicator];
     }
     [self.mypopoverController dismissPopoverAnimated:YES];
+}
+
+- (BOOL)isAddressEmpty:(Address *)address {
+    if ([address.street isEqualToString:@""] || [address.city isEqualToString:@""]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

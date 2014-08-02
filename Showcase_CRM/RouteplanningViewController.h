@@ -21,7 +21,7 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *datalist;
 @property (nonatomic, retain) NSArray *contacts;
-@property (nonatomic, retain) NSMutableArray *indicator;
+@property (nonatomic, retain) NSMutableArray *selectionIndicator;
 @property (nonatomic, retain) UIPopoverController *mypopoverController;
 
 @end

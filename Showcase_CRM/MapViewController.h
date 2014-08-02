@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
 #import "RouteplanningViewController.h"
+#import "NSDictionary+MutableDeepCopy.h"
 
 @interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate, BMKRouteSearchDelegate, UIAlertViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate> {
     BMKMapView* _mapView;
@@ -17,8 +18,10 @@
 }
 
 @property (nonatomic,retain) UISearchDisplayController *searchController;
-@property (nonatomic, retain) NSMutableArray *searchDataList;
 @property (nonatomic, retain) UISearchBar *searchBar;
+@property (nonatomic, retain) NSMutableDictionary *names;
+@property (nonatomic, retain) NSMutableDictionary *mutableNames;
+@property (nonatomic, retain) NSMutableArray *mutableKeys;
 @property (nonatomic, retain) UIButton *startNavButton;
 @property (nonatomic, retain) UIButton *endNavButton;
 @property (nonatomic, retain) UIButton *zoomInButton;
