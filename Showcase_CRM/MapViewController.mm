@@ -109,14 +109,24 @@
     CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(31.023722, 121.437416);
     _mapView.centerCoordinate = coord;
     _mapView.showsUserLocation = YES; // 显示定位图层
-    [self.view addSubview:_mapView];
+    //[self.view addSubview:_mapView];
+    [self.view insertSubview:_mapView atIndex:0];
     
     // Add search bar on map view
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(112, 40, 800, 44)];
+    UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(112, 40, 800, 44)];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 800, 44)];
     //self.searchBar.showsCancelButton = YES;
     self.searchBar.placeholder = @"请输入客户姓名";
     self.searchBar.delegate = self;
-    [self.view addSubview:self.searchBar];
+    [searchBarView addSubview:self.searchBar];
+    [self.view addSubview:searchBarView];
+    
+    // Init search display controller
+    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
+    self.searchController.delegate = self;
+    self.searchController.searchResultsDataSource = self;
+    self.searchController.searchResultsDelegate = self;
+    self.searchDataList = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", nil];
     
     // Add buttons on map view
     self.startNavButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -210,14 +220,14 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _locService.delegate = self;
     _routesearch.delegate = self;
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
@@ -235,21 +245,29 @@
 }
 
 
-/* search bar functions */
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    //按软键盘右下角的搜索按钮时触发
+/* search bar function */
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *searchTerm=[searchBar text];
-    //读取被输入的关键字
-    [self.searchBar resignFirstResponder];
-    //隐藏软键盘
+    for (int i = 0; i < [self.contacts count]; i++) {
+        Contact *contact = [self.contacts objectAtIndex:i];
+        NSString *fullname = [[NSString alloc] initWithFormat:@"%@%@", contact.lastname, contact.lastname];
+        if ([searchTerm isEqualToString:fullname] || [searchTerm isEqualToString:contact.lastname] || [searchTerm isEqualToString:contact.firstname]) {
+            BMKPointAnnotation* annotation = [self.annotations objectAtIndex:i];
+            [_mapView setCenterCoordinate:annotation.coordinate animated:YES];
+            [_mapView selectAnnotation:annotation animated:YES];
+            searchBar.text=@"";
+            break;
+        }
+    }
+    [self.searchController setActive:NO];
 }
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    //取消按钮被按下时触发
-    searchBar.text=@"";
-    //输入框清空
-    [self.searchBar resignFirstResponder];
-    //重新载入数据，隐藏软键盘
+
+/* search display controller function */
+- (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView {
+    [tableView setFrame:CGRectMake(112, 0, 800, 400)];
+    tableView.layer.borderWidth = 1;
+    tableView.layer.borderColor = [[UIColor blackColor] CGColor];
 }
 
 
@@ -259,7 +277,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.searchDataList count];
+    } else {
+        return 7;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -269,45 +291,54 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellWithIdentifier];
     }
-    NSUInteger row = [indexPath row];
-    NSUInteger index = [self.tableViews indexOfObject:tableView];
-    cell.textLabel.text = [[self.dataLists objectAtIndex:index] objectAtIndex:row];
-    //cell.imageView.image = [UIImage imageNamed:@"green.png"];
-    //cell.detailTextLabel.text = @"详细信息";
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        cell.textLabel.text = [self.searchDataList objectAtIndex:[indexPath row]];
+    } else {
+        NSUInteger row = [indexPath row];
+        NSUInteger index = [self.tableViews indexOfObject:tableView];
+        cell.textLabel.text = [[self.dataLists objectAtIndex:index] objectAtIndex:row];
+        //cell.imageView.image = [UIImage imageNamed:@"green.png"];
+        //cell.detailTextLabel.text = @"详细信息";
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([indexPath indexAtPosition:1] == 6) {
-        NSUInteger index = [self.tableViews indexOfObject:tableView];
-        BMKPointAnnotation *annotation = [self.annotations objectAtIndex:index];
-        BMKMapPoint clientCoord = BMKMapPointForCoordinate(annotation.coordinate);
-        BMKMapPoint userCoord = BMKMapPointForCoordinate(_locService.userLocation.location.coordinate);
-        CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord,userCoord);
-        NSString *msg;
-        //NSLog(@"distance:%f", distance);
-        if (distance > 1500) {
-            msg = @"距离过远，签到失败!";
-        } else {
-            // update checkin times
-            msg = @"签到成功！";
-            Contact *contact = [self.contacts objectAtIndex:index];
-            NSNumber *updated_sign_up_times = [[NSNumber alloc] initWithInt:contact.sign_up_times.intValue + 1];
-            contact.sign_up_times = updated_sign_up_times;
-            DatabaseInterface *database = [DatabaseInterface databaseInterface];
-            [database editContact:contact];
-            [self.contacts replaceObjectAtIndex:index withObject:contact];
-            NSMutableArray *datalist = [self.dataLists objectAtIndex:index];
-            NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%i次", [updated_sign_up_times intValue]];
-            [datalist replaceObjectAtIndex:4 withObject:checkinStr];
-            [self.dataLists replaceObjectAtIndex:index withObject:datalist];
-            [tableView reloadData];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        NSLog(@"selected");
+    } else {
+        if ([indexPath indexAtPosition:1] == 6) {
+            NSUInteger index = [self.tableViews indexOfObject:tableView];
+            BMKPointAnnotation *annotation = [self.annotations objectAtIndex:index];
+            BMKMapPoint clientCoord = BMKMapPointForCoordinate(annotation.coordinate);
+            BMKMapPoint userCoord = BMKMapPointForCoordinate(_locService.userLocation.location.coordinate);
+            CLLocationDistance distance = BMKMetersBetweenMapPoints(clientCoord,userCoord);
+            NSString *msg;
+            //NSLog(@"distance:%f", distance);
+            if (distance > 1500) {
+                msg = @"距离过远，签到失败!";
+            } else {
+                // update checkin times
+                msg = @"签到成功！";
+                Contact *contact = [self.contacts objectAtIndex:index];
+                NSNumber *updated_sign_up_times = [[NSNumber alloc] initWithInt:contact.sign_up_times.intValue + 1];
+                contact.sign_up_times = updated_sign_up_times;
+                DatabaseInterface *database = [DatabaseInterface databaseInterface];
+                [database editContact:contact];
+                [self.contacts replaceObjectAtIndex:index withObject:contact];
+                NSMutableArray *datalist = [self.dataLists objectAtIndex:index];
+                NSString *checkinStr = [[NSString alloc] initWithFormat:@"签到次数：%i次", [updated_sign_up_times intValue]];
+                [datalist replaceObjectAtIndex:4 withObject:checkinStr];
+                [self.dataLists replaceObjectAtIndex:index withObject:datalist];
+                [tableView reloadData];
+            }
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
         }
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
