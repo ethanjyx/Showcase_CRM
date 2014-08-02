@@ -14,6 +14,8 @@
 
 @interface DetailContact2ViewController ()
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headertitle;
 @property (weak, nonatomic) IBOutlet UITextField *lastname;
 @property (weak, nonatomic) IBOutlet UITextField *firstname;
 @property (weak, nonatomic) IBOutlet UITextField *title;
@@ -54,6 +56,8 @@
 
 @implementation DetailContact2ViewController
 
+@synthesize headertitle,header;
+
 @synthesize contact,company;
 
 @synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,returnCompany_button,scrollView,activeField;
@@ -70,6 +74,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header.frame=CGRectMake(140, 122, 768, 73);
+    headertitle.title=company.name;
     // Do any additional setup after loading the view.
     [self setAllTextField];
     [self disableAllTextField];

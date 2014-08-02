@@ -10,12 +10,14 @@
 #import "BMapKit.h"
 #import "RouteplanningViewController.h"
 
-@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate, BMKRouteSearchDelegate, UIAlertViewDelegate> {
+@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate, BMKRouteSearchDelegate, UIAlertViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate> {
     BMKMapView* _mapView;
     BMKLocationService* _locService;
     BMKRouteSearch* _routesearch;
 }
 
+@property (nonatomic,retain) UISearchDisplayController *searchController;
+@property (nonatomic, retain) NSMutableArray *searchDataList;
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) UIButton *startNavButton;
 @property (nonatomic, retain) UIButton *endNavButton;

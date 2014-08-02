@@ -12,6 +12,7 @@
 
 @interface CreateClientViewController ()
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *header4;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (retain, nonatomic) IBOutlet UITextField *companyName;
 @property (retain, nonatomic) IBOutlet UITextField *phone;
@@ -29,6 +30,7 @@
 @synthesize phone;
 @synthesize website;
 @synthesize industryType;
+@synthesize header4;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header4.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
 }
 

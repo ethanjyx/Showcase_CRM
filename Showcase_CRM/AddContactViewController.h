@@ -11,5 +11,6 @@
 @interface AddContactViewController : ViewController
 
 @property (nonatomic, strong) NSString *company;
+@property (weak, nonatomic) IBOutlet UINavigationBar *header2;
 
 @end

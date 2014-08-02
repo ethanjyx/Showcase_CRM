@@ -12,6 +12,8 @@
 #import "DatabaseInterface.h"
 
 @interface BillAddressViewController ()
+@property (weak, nonatomic) IBOutlet UINavigationBar *header6;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headertitle1;
 @property (weak, nonatomic) IBOutlet UILabel *companyName;
 @property (weak, nonatomic) IBOutlet UITextField *country;
 @property (weak, nonatomic) IBOutlet UITextField *province;
@@ -30,7 +32,7 @@
 
 @synthesize company;
 @synthesize companyName,country,province,city,address,postcode;
-
+@synthesize headertitle1,header6;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,8 +45,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    headertitle1.title=company.name;
+    header6.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
-    companyName.text = company.name;
+   
     Address *billingAddress = company.billing_address;
     country.text = billingAddress.country;
     province.text = billingAddress.province;
