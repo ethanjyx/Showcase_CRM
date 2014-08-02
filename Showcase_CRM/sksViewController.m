@@ -23,6 +23,8 @@
 #import "EditEventViewController.h"
 #import "BillAddressViewController.h"
 #import "ShippingAddressViewController.h"
+#import "Hanzi2Pinyin.h"
+#import "Contact.h"
 
 @interface sksViewController ()
 
@@ -140,17 +142,71 @@
     NSSet *contacts = globalCompany.contacts;
     NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
     NSArray *contactDescriptors = @[contactDescriptor];
-    allContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+    NSArray *localContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+    NSArray *sortedContacts = [localContacts sortedArrayUsingComparator:^NSComparisonResult(Contact* a, Contact* b) {
+        
+        NSString *first = [NSString stringWithFormat:@"%@%@",a.lastname, a.firstname];
+        NSString *second = [NSString stringWithFormat:@"%@%@",b.lastname, b.firstname];
+        
+        if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+            first = [Hanzi2Pinyin convert:first];
+            first = [NSString stringWithFormat:@"%@%@%@",[first substringToIndex:1] ,@" ", [first substringFromIndex:1]];
+        }
+        if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+            second = [Hanzi2Pinyin convert:second];
+            second = [NSString stringWithFormat:@"%@%@%@",[second substringToIndex:1] ,@" ", [second substringFromIndex:1]];
+        }
+        return [first compare:second];
+    }];
+    allContacts = [NSMutableArray arrayWithArray:sortedContacts];
+    
+    
     
     NSSet *projects = globalCompany.projects;
     NSSortDescriptor *contactDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *contactDescriptors2 = @[contactDescriptor2];
-    allProjects = [projects sortedArrayUsingDescriptors:contactDescriptors2];
+    NSArray *localProjects = [projects sortedArrayUsingDescriptors:contactDescriptors2];
+    NSArray *sortedProjects = [localProjects sortedArrayUsingComparator:^NSComparisonResult(Project* a, Project* b) {
+        
+        NSString *first = a.name;
+        NSString *second = b.name;
+        
+        if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+            first = [Hanzi2Pinyin convert:first];
+            first = [NSString stringWithFormat:@"%@%@%@",[first substringToIndex:1] ,@" ", [first substringFromIndex:1]];
+        }
+        if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+            second = [Hanzi2Pinyin convert:second];
+            second = [NSString stringWithFormat:@"%@%@%@",[second substringToIndex:1] ,@" ", [second substringFromIndex:1]];
+        }
+        return [first compare:second];
+    }];
+    allProjects = [NSMutableArray arrayWithArray:sortedProjects];
+    
+    
+    
+    
     
     NSSet *events = globalCompany.events;
     NSSortDescriptor *contactDescriptor3 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *contactDescriptors3 = @[contactDescriptor3];
-    allEvents = [events sortedArrayUsingDescriptors:contactDescriptors3];
+    NSArray *localEvents = [events sortedArrayUsingDescriptors:contactDescriptors3];
+    NSArray *sortedEvents = [localEvents sortedArrayUsingComparator:^NSComparisonResult(Event* a, Event* b) {
+        
+        NSString *first = a.name;
+        NSString *second = b.name;
+        
+        if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+            first = [Hanzi2Pinyin convert:first];
+            first = [NSString stringWithFormat:@"%@%@%@",[first substringToIndex:1] ,@" ", [first substringFromIndex:1]];
+        }
+        if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+            second = [Hanzi2Pinyin convert:second];
+            second = [NSString stringWithFormat:@"%@%@%@",[second substringToIndex:1] ,@" ", [second substringFromIndex:1]];
+        }
+        return [first compare:second];
+    }];
+    allEvents = [NSMutableArray arrayWithArray:sortedEvents];
 }
 
 - (void)initButtons
