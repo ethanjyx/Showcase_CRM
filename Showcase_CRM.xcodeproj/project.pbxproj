@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		611DE802198D6376008E9549 /* EmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611DE801198D6376008E9549 /* EmptyViewController.m */; };
 		6120CFBA1959EC0B001FCAC1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6120CFB91959EC0B001FCAC1 /* CoreData.framework */; };
 		6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */; };
 		6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC51959F3ED001FCAC1 /* Sale.m */; };
@@ -139,6 +140,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		611DE800198D6376008E9549 /* EmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyViewController.h; sourceTree = "<group>"; };
+		611DE801198D6376008E9549 /* EmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyViewController.m; sourceTree = "<group>"; };
 		6120CFB91959EC0B001FCAC1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6120CFBC1959EE16001FCAC1 /* CRM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CRM.xcdatamodel; sourceTree = "<group>"; };
 		6120CFC41959F3ED001FCAC1 /* Sale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sale.h; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 				CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */,
 				CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */,
 				9DD7B389196E19900063009B /* SplitViewSelectionDelegate.h */,
+				611DE800198D6376008E9549 /* EmptyViewController.h */,
+				611DE801198D6376008E9549 /* EmptyViewController.m */,
 				618E026819473FB00094BD1F /* Images.xcassets */,
 				618E025719473FAF0094BD1F /* Supporting Files */,
 			);
@@ -945,6 +950,7 @@
 				612A344A197BD820009A5A21 /* ViewShippingAddressController.m in Sources */,
 				CE8D41EA19759B1500E3D374 /* DetailContactViewController.m in Sources */,
 				9DF6359B196BBA4D00E10E48 /* SKSTableViewCell.m in Sources */,
+				611DE802198D6376008E9549 /* EmptyViewController.m in Sources */,
 				6120CFD51959F3ED001FCAC1 /* Address.m in Sources */,
 				6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */,
 				612A3447197BD811009A5A21 /* ViewBillingAddressController.m in Sources */,
