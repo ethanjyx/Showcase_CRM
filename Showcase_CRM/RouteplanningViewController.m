@@ -43,8 +43,13 @@
     }
     
     for (int i = 0; i < [self.contacts count]; i++) {
-        Contact *contact = [self.contacts objectAtIndex:i];        
-        NSString *nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:%@  电话:%@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
+        Contact *contact = [self.contacts objectAtIndex:i];
+        NSString *nameStr;
+        if (contact.company == nil) {
+            nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:  电话:%@", contact.lastname, contact.firstname, contact.phone_mobile];
+        } else {
+            nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:%@  电话:%@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
+        }
         [self.datalist addObject:nameStr];
         if ([self isAddressEmpty:contact.address] == YES) {
             [self.emptyAddressIndicator replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:1]];
