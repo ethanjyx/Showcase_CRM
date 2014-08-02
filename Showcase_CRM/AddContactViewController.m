@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *activeField;
 
+- (IBAction)save:(id)sender;
 
 @end
 
@@ -94,10 +95,11 @@
         sksViewController *localContact = segue.destinationViewController;
         localContact.company = company;
     }
-    else if([segue.identifier isEqualToString:@"returnFromContact"]) {
+    else if([segue.identifier isEqualToString:@"returnFromContact"] || [segue.identifier isEqualToString:@"returnFromContact_2"]) {
         sksViewController *localContact = segue.destinationViewController;
         localContact.company = company;
     }
+
 }
 
 
@@ -152,4 +154,19 @@
 }
 
 
+- (IBAction)save:(id)sender {
+    if ([lastname.text length]<=0 ) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新建失败"
+                                                        message:@"姓氏不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    
+    [self performSegueWithIdentifier:@"saveContact" sender:nil];
+}
 @end

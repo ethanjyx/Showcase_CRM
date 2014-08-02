@@ -84,9 +84,24 @@
 
 
 - (IBAction)save:(id)sender {
+    
+    if ([lastname.text length]<=0 ) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新建失败"
+                                                        message:@"姓氏不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     [database addContactWithLastname:lastname.text firstname:firstname.text title:title.text phoneWork:phone_work.text phoneHome:phone_personal.text phoneMobile:mobile_phone.text emailWork:email_work.text emailPersonal:email_personal.text note:note.text country:country.text province:province.text city:city.text street:street.text postcode:postcode.text companyName:company QQ:QQ.text weChat:WeChat.text skype:Skype.text weibo:Weibo.text];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"updateTable" object:nil];
+    
+    [self performSegueWithIdentifier:@"saveContact2" sender:nil];
 }
 
 // Call this method somewhere in your view controller setup code.

@@ -174,6 +174,17 @@
 }
 
 - (IBAction)save:(id)sender {
+    
+    if ([lastname.text length]<=0 ) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败"
+                                                        message:@"姓氏不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     contact.lastname = lastname.text;
     contact.firstname = firstname.text;
     contact.title = title.text;
