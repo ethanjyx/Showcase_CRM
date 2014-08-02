@@ -21,6 +21,8 @@
 #import "Event.h"
 #import "EditProjectViewController.h"
 #import "EditEventViewController.h"
+#import "BillAddressViewController.h"
+#import "ShippingAddressViewController.h"
 
 @interface sksViewController ()
 
@@ -241,12 +243,23 @@
     printf("select row at section %d row %d\n", indexPath.section, indexPath.row);
     if (indexPath.section == 0 && indexPath.row == 1) {
         
-        [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
+        if (globalCompany.billing_address == nil) {
+            [self performSegueWithIdentifier:@"editBillAddressDirectly" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
+        }
+        
     }
     else if (indexPath.section == 0 && indexPath.row == 2) {
-        
-        [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
+        if (globalCompany.shipping_address == nil) {
+            [self performSegueWithIdentifier:@"editShippingAddressDirectly" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
+        }
     }
+    
     
     if (indexPath.section == 1) {
         if (indexPath.row != 0) {
@@ -332,9 +345,17 @@
         ViewShippingAddressController *shippingAddressController = segue.destinationViewController;
         shippingAddressController.company = globalCompany;
     }
+    else if([segue.identifier isEqualToString:@"editShippingAddressDirectly"]) {
+        ShippingAddressViewController *shippingAddressController = segue.destinationViewController;
+        shippingAddressController.company = globalCompany;
+    }
     else if([segue.identifier isEqualToString:@"viewBillingAddress"]) {
         ViewBillingAddressController *billingAddressController = segue.destinationViewController;
         billingAddressController.company = globalCompany;
+    }
+    else if([segue.identifier isEqualToString:@"editBillAddressDirectly"]) {
+        BillAddressViewController *billAddressController = segue.destinationViewController;
+        billAddressController.company = globalCompany;
     }
     else if([segue.identifier isEqualToString:@"addProject"]) {
         AddProjectViewController *projectController = segue.destinationViewController;
