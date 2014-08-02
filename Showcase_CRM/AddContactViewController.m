@@ -13,6 +13,7 @@
 
 @interface AddContactViewController ()
 
+@property (weak, nonatomic) IBOutlet UINavigationItem *headertitle;
 @property (weak, nonatomic) IBOutlet UITextField *lastname;
 @property (weak, nonatomic) IBOutlet UITextField *firstname;
 @property (weak, nonatomic) IBOutlet UITextField *title;
@@ -44,7 +45,7 @@
 @synthesize lastname, firstname, title, email_work, email_personal, phone_work, phone_personal, mobile_phone, QQ, WeChat, Skype, Weibo, province, city, street, country, postcode,note,scrollView,activeField;
 
 @synthesize company;
-@synthesize header2;
+@synthesize header2,headertitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,7 +59,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    header2.frame=CGRectMake(0, 0, 768, 73);
+    header2.frame=CGRectMake(140, 122, 768, 73);
+    //headertitle.title=company.name;
     // Do any additional setup after loading the view.
     [self registerForKeyboardNotifications];
 }

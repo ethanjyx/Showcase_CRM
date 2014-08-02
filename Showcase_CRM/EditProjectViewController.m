@@ -12,6 +12,7 @@
 #import "DatabaseInterface.h"
 
 @interface EditProjectViewController ()
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
 @property (weak, nonatomic) IBOutlet UITextField *name;
 @property (weak, nonatomic) IBOutlet UITextField *possibility;
 @property (weak, nonatomic) IBOutlet UITextField *amount;
@@ -37,7 +38,7 @@
 @end
 
 @implementation EditProjectViewController
-
+@synthesize header;
 @synthesize project, company;
 @synthesize name,possibility,amount,memo,progress,date,return_button,save_button,edit_button,cancel_button,delete_button,date_uneditable;
 
@@ -53,6 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
     [self setAllField];
     [self disableAllField];

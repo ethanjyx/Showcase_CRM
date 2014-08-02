@@ -11,6 +11,8 @@
 #import "sksViewController.h"
 
 @interface AddProjectViewController ()
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headertitle;
 @property (weak, nonatomic) IBOutlet UITextField *name;
 @property (weak, nonatomic) IBOutlet UITextField *possibility;
 
@@ -29,7 +31,7 @@
     NSNumber *possibility_number;
     NSNumber *amount_number;
 }
-
+@synthesize headertitle,header;
 @synthesize company,name,possibility,amount,note,date,progress;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -44,6 +46,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header.frame=CGRectMake(0, 0, 768, 73);
+    //headertitle.title=company.name;
     // Do any additional setup after loading the view.
 }
 

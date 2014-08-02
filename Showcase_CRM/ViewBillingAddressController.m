@@ -11,6 +11,8 @@
 #import "Address.h"
 
 @interface ViewBillingAddressController ()
+@property (weak, nonatomic) IBOutlet UINavigationBar *header7;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headertitle2;
 @property (weak, nonatomic) IBOutlet UILabel *companyName;
 @property (weak, nonatomic) IBOutlet UILabel *country;
 @property (weak, nonatomic) IBOutlet UILabel *province;
@@ -25,6 +27,7 @@
 @implementation ViewBillingAddressController
 @synthesize company;
 @synthesize companyName,country,province,city,address,postcode;
+@synthesize header7,headertitle2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,8 +41,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header7.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
-    companyName.text = company.name;
+    headertitle2.title = company.name;
     Address *billingAddress = company.billing_address;
     country.text = billingAddress.country;
     province.text = billingAddress.province;

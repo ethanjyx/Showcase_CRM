@@ -12,6 +12,8 @@
 
 @interface ShippingAddressViewController ()
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headertitle;
 @property (weak, nonatomic) IBOutlet UILabel *companyName;
 @property (weak, nonatomic) IBOutlet UITextField *country;
 @property (weak, nonatomic) IBOutlet UITextField *province;
@@ -29,6 +31,7 @@
 
 @synthesize company;
 @synthesize companyName,country,province,city,address,postcode;
+@synthesize headertitle,header;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,8 +45,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    header.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
-    companyName.text = company.name;
+    headertitle.title = company.name;
     Address *shippingAddress = company.shipping_address;
     country.text = shippingAddress.country;
     province.text = shippingAddress.province;

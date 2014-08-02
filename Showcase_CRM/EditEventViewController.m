@@ -7,6 +7,8 @@
 //
 
 #import "EditEventViewController.h"
+#import "sksViewController.h"
+#import "DatabaseInterface.h"
 
 @interface EditEventViewController ()
 
@@ -20,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelEditButton;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+@property (nonatomic, retain) NSDate * globalDate;
 
 @end
 
@@ -89,33 +93,71 @@
 }
 
 - (IBAction)returnFromViewEvent:(id)sender {
-    
+    [self performSegueWithIdentifier:@"returnFromViewEvent" sender:nil];
 }
 
 - (IBAction)deleteEvent:(id)sender {
-
+    [self performSegueWithIdentifier:@"deleteEvent" sender:nil];
 }
 
 - (IBAction)saveEditEvent:(id)sender {
-
+    event.name = name.text;
+    
+    if ([name.text length]<=0 ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败"
+                                                        message:@"项目名不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    event.memo = memo.text;
+    
+    DatabaseInterface *database = [DatabaseInterface databaseInterface];
+    [database editEvent:event];
+    
+    [self disableAllField];
+    editButton.hidden = NO;
+    returnButton.hidden = NO;
+    saveEditButton.hidden = YES;
+    deleteButton.hidden = YES;
+    cancelEditButton.hidden = YES;
 }
 
-
 - (IBAction)editEvent:(id)sender {
-    
+    [self enableAllField];
+    editButton.hidden = YES;
+    returnButton.hidden = YES;
+    saveEditButton.hidden = NO;
+    cancelEditButton.hidden = NO;
+    deleteButton.hidden = NO;
 }
 
 - (IBAction)cancelEditEvent:(id)sender {
-
+    [self disableAllField];
+    [self setAllField];
+    editButton.hidden = NO;
+    returnButton.hidden = NO;
+    saveEditButton.hidden = YES;
+    deleteButton.hidden = YES;
+    cancelEditButton.hidden = YES;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"cancelAddEvent"]) {
-        
-    } else if ([segue.identifier isEqualToString:@"saveEvent"]) {
-
+    if ([segue.identifier isEqualToString:@"returnFromViewEvent"]) {
+        sksViewController *companyViewController = segue.destinationViewController;
+        companyViewController.company = company.name;
     }
+    else if ([segue.identifier isEqualToString:@"deleteEvent"]) {
+        DatabaseInterface *database = [DatabaseInterface databaseInterface];
+        [database deleteEvent:event];
+        sksViewController *companyViewController = segue.destinationViewController;
+        companyViewController.company = company.name;
+    }
+    
 }
 
 @end
