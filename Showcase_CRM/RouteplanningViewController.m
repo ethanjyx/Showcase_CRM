@@ -37,10 +37,18 @@
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     self.contacts = [[NSMutableArray alloc] initWithArray:[database getAllContacts]];
     self.datalist = [[NSMutableArray alloc] init];
+    self.emptyAddressIndicator = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.contacts count]; i++) {
+        [self.emptyAddressIndicator addObject:[NSNumber numberWithInt:0]];
+    }
+    
     for (int i = 0; i < [self.contacts count]; i++) {
         Contact *contact = [self.contacts objectAtIndex:i];        
         NSString *nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:%@  电话:%@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
         [self.datalist addObject:nameStr];
+        if ([self isAddressEmpty:contact.address] == YES) {
+            [self.emptyAddressIndicator replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:1]];
+        }
     }
     [self.view addSubview:self.tableView];
     
@@ -73,6 +81,10 @@
     }
     NSUInteger row = [indexPath row];
     cell.textLabel.text = [self.datalist objectAtIndex:row];
+    if ([[self.emptyAddressIndicator objectAtIndex:row] intValue] == 1) {
+        cell.userInteractionEnabled = NO;
+        cell.textLabel.enabled = NO;
+    }
     //cell.imageView.image = [UIImage imageNamed:@"green.png"];
     //cell.detailTextLabel.text = @"详细信息";
     return cell;

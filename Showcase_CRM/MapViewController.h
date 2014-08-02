@@ -26,6 +26,7 @@
 @property (nonatomic, retain) UIButton *endNavButton;
 @property (nonatomic, retain) UIButton *zoomInButton;
 @property (nonatomic, retain) UIButton *zoomOutButton;
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, retain) NSMutableArray *geocodeSearchs;
 @property (nonatomic, retain) NSMutableArray *contacts;
 @property (nonatomic, retain) NSMutableArray *dataLists;

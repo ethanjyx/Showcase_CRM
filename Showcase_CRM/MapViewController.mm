@@ -109,6 +109,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Start activity indicator, gray the entire view
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(482, 332, 60, 60)];
+    [self.activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:self.activityIndicator];
+    [self.activityIndicator startAnimating];
+    self.view.userInteractionEnabled = NO;
+    self.view.alpha = 0.3f;
+    
     // Init View for BaiduMap
     _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 1024, 724)];
     CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(31.023722, 121.437416);
@@ -495,6 +503,9 @@
 /* geo-coder function */
 - (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
 {
+    self.view.alpha = 1.0f;
+    self.view.userInteractionEnabled = YES;
+    [self.activityIndicator stopAnimating];
 	if (error == 0) {
         NSUInteger index = [self.geocodeSearchs indexOfObject:searcher];
         //NSLog(@"index: %lu", (unsigned long)index);
@@ -982,13 +993,13 @@
             self.minDistance = distance;
             self.visitOrder = [[NSArray alloc] initWithArray:stack];
             /*
-             printf("min distance: %i\n", self.minDistance);
-             printf("visit order: ");
-             for (int i = 0; i < [stack count]; i++) {
-             printf("%i", [[stack objectAtIndex:i] intValue]);
-             }
-             printf("\n");
-             */
+            printf("min distance: %i\n", self.minDistance);
+            printf("visit order: ");
+            for (int i = 0; i < [stack count]; i++) {
+                printf("%i", [[stack objectAtIndex:i] intValue]);
+            }
+            printf("\n");
+            */
         }
         return;
     }
