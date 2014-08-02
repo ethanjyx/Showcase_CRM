@@ -1077,6 +1077,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="beginEditDateTextField:" destination="JrN-Gl-T8a" eventType="editingDidBegin" id="vCh-os-REQ"/>
+                                    <action selector="touchEditDateTextField:" destination="JrN-Gl-T8a" eventType="touchUpInside" id="A4l-rG-lIz"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DSb-kz-7sf">
@@ -4386,6 +4387,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="beginEditDateField:" destination="zWo-2i-Kzh" eventType="editingDidBegin" id="TDZ-Am-k2m"/>
                                     <action selector="beginEditDateTextField:" destination="zWo-2i-Kzh" eventType="editingDidBegin" id="Qnk-Cw-REz"/>
                                 </connections>
                             </textField>
@@ -4482,10 +4484,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="O69-Gt-pV3"/>
-        <segue reference="e4B-a5-VRg"/>
-        <segue reference="kma-GL-gRd"/>
         <segue reference="scm-2R-sld"/>
+        <segue reference="e4B-a5-VRg"/>
+        <segue reference="O69-Gt-pV3"/>
         <segue reference="Yam-Re-CI2"/>
+        <segue reference="kma-GL-gRd"/>
     </inferredMetricsTieBreakers>
 </document>

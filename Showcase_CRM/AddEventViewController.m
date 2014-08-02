@@ -9,6 +9,7 @@
 #import "AddEventViewController.h"
 #import "DatabaseInterface.h"
 #import "sksViewController.h"
+#import "PickerHelper.h"
 
 @interface AddEventViewController ()
 
@@ -19,7 +20,6 @@
 
 - (IBAction)beginEditDateTextField:(id)sender;
 - (void)updateTextField:(id)sender;
-- (NSString *)formatDate:(NSDate *)d;
 
 - (IBAction)saveAddEvent:(id)sender;
 - (IBAction)cancelAddEvent:(id)sender;
@@ -45,7 +45,7 @@
 {
     [super viewDidLoad];
     date = [[NSDate alloc] init];
-    dateTextField.text = [self formatDate:date];
+    dateTextField.text = [PickerHelper formatDate:date];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,25 +67,17 @@
 
 - (IBAction)beginEditDateTextField:(id)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
     [datePicker setDate:[NSDate date]];
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     [self.dateTextField setInputView:datePicker];
 }
 
--(void)updateTextField:(id)sender
+- (void)updateTextField:(id)sender
 {
     UIDatePicker *picker = (UIDatePicker*)self.dateTextField.inputView;
-    self.dateTextField.text = [self formatDate:picker.date];;
+    self.dateTextField.text = [PickerHelper formatDate:picker.date];;
     date = picker.date;
-}
-
-- (NSString *)formatDate:(NSDate *)d
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    [dateFormatter setDateFormat:@"MM'/'dd'/'yyyy"];
-    NSString *formattedDate = [dateFormatter stringFromDate:d];
-    return formattedDate;
 }
 
 - (IBAction)saveAddEvent:(id)sender {

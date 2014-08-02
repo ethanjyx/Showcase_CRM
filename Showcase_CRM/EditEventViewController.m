@@ -9,6 +9,7 @@
 #import "EditEventViewController.h"
 #import "sksViewController.h"
 #import "DatabaseInterface.h"
+#import "PickerHelper.h"
 
 @interface EditEventViewController ()
 
@@ -25,11 +26,13 @@
 
 @property (nonatomic, retain) NSDate * globalDate;
 
+- (void)updateTextField:(id)sender;
+
 @end
 
 @implementation EditEventViewController
 
-@synthesize name, address, date, memo, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton;
+@synthesize name, address, date, memo, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,6 +69,22 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (IBAction)beginEditDateField:(id)sender {
+    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [datePicker setDate:[NSDate date]];
+    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    [self.date setInputView:datePicker];
+}
+
+- (void)updateTextField:(id)sender
+{
+    UIDatePicker *picker = (UIDatePicker*)self.date.inputView;
+    self.date.text = [PickerHelper formatDate:picker.date];;
+    globalDate = picker.date;
+}
 
 - (void)setAllField
 {
@@ -114,6 +133,7 @@
     }
     
     event.memo = memo.text;
+    event.date = globalDate;
     
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     [database editEvent:event];

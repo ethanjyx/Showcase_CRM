@@ -60,6 +60,7 @@
 		9D132E93195A58DA00CD5788 /* checkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E89195A58DA00CD5788 /* checkBox@2x.png */; };
 		9D132E94195A58DA00CD5788 /* uncheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8A195A58DA00CD5788 /* uncheckBox.png */; };
 		9D132E95195A58DA00CD5788 /* uncheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */; };
+		9D31CF33198D296E0092842B /* PickerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D31CF32198D296E0092842B /* PickerHelper.m */; };
 		9D79935D1987D76800A69311 /* EditEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D79935C1987D76800A69311 /* EditEventViewController.m */; };
 		9DC586861981DCF300677DB1 /* AddProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC586851981DCF300677DB1 /* AddProjectViewController.m */; };
 		9DC586891981E0CD00677DB1 /* AddEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC586881981E0CD00677DB1 /* AddEventViewController.m */; };
@@ -223,6 +224,8 @@
 		9D132E89195A58DA00CD5788 /* checkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBox@2x.png"; sourceTree = "<group>"; };
 		9D132E8A195A58DA00CD5788 /* uncheckBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckBox.png; sourceTree = "<group>"; };
 		9D132E8B195A58DA00CD5788 /* uncheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckBox@2x.png"; sourceTree = "<group>"; };
+		9D31CF31198D295F0092842B /* PickerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerHelper.h; sourceTree = "<group>"; };
+		9D31CF32198D296E0092842B /* PickerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerHelper.m; sourceTree = "<group>"; };
 		9D79935B1987D76800A69311 /* EditEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEventViewController.h; sourceTree = "<group>"; };
 		9D79935C1987D76800A69311 /* EditEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEventViewController.m; sourceTree = "<group>"; };
 		9DC586841981DCF300677DB1 /* AddProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProjectViewController.h; sourceTree = "<group>"; };
@@ -622,6 +625,8 @@
 				6174CC0C198628E00054F904 /* EditProjectViewController.m */,
 				9D79935B1987D76800A69311 /* EditEventViewController.h */,
 				9D79935C1987D76800A69311 /* EditEventViewController.m */,
+				9D31CF31198D295F0092842B /* PickerHelper.h */,
+				9D31CF32198D296E0092842B /* PickerHelper.m */,
 			);
 			name = SKSTableViewImp;
 			sourceTree = "<group>";
@@ -929,6 +934,7 @@
 				CE0E674F196161F50074E821 /* DetailViewController.m in Sources */,
 				612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */,
 				619D4C8A197E550A00A72BF8 /* DetailContact2ViewController.m in Sources */,
+				9D31CF33198D296E0092842B /* PickerHelper.m in Sources */,
 				9D132E76195A589700CD5788 /* TKGroupPickerController.m in Sources */,
 				618E026119473FAF0094BD1F /* AppDelegate.m in Sources */,
 				9D132E8C195A58DA00CD5788 /* NSString+TKUtilities.m in Sources */,
