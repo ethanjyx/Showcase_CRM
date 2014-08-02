@@ -60,8 +60,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    header2.frame=CGRectMake(140, 122, 768, 73);
-    //headertitle.title=company.name;
+    header2.frame=CGRectMake(152, 123, 780, 73);
+    headertitle.title=company;
     // Do any additional setup after loading the view.
     [self registerForKeyboardNotifications];
 }

@@ -74,7 +74,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    header.frame=CGRectMake(140, 122, 768, 73);
+    header.frame=CGRectMake(140, 122, 850, 74);
     headertitle.title=company.name;
     // Do any additional setup after loading the view.
     [self setAllTextField];
