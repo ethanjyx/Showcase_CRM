@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A2093" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="TeU-Xk-Db8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="TeU-Xk-Db8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -1713,6 +1713,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="CompanyButton" destination="0DF-zT-vbo" id="b5e-8O-Jbx"/>
                         <outlet property="ContactButton" destination="GEE-Tz-dsy" id="o9g-m8-2uD"/>
                         <outlet property="Segment" destination="BsQ-Ig-22R" id="kn0-Gu-laZ"/>
+                        <outlet property="search" destination="Rg5-t0-tlI" id="FlE-6n-I6s"/>
                         <outlet property="searchDisplayController" destination="PiY-2z-mzd" id="Iah-nG-9Nv"/>
                         <outlet property="tableView" destination="dSK-Lf-4di" id="ep0-6W-O5U"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="detailSegue" splitViewControllerTargetIndex="1" id="Lhc-yw-b38"/>
