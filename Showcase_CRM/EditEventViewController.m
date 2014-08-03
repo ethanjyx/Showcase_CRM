@@ -46,7 +46,7 @@
 
 @implementation EditEventViewController
 
-@synthesize name, address, date, memo, contact, project, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate,header,header_title, toolbar, selectedProject, selectedContact, contactSelect, projectSelect, activePicker;
+@synthesize name, address, date, memo, contact, project, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate,header,header_title, toolbar, selectedProject, selectedContact, contactSelect, projectSelect, activePicker, allContacts, allProjects;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -119,7 +119,23 @@
 }
 
 - (IBAction)finish:(id)sender {
-    
+    if (activePicker == contactSelect) {
+        if ([allContacts count] == 1) {
+            selectedContact = [allContacts objectAtIndex:0];
+        }
+        
+        contactSelect.hidden = YES;
+        toolbar.hidden = YES;
+        contact.text = [NSString stringWithFormat:@"%@ %@",selectedContact.lastname, selectedContact.firstname];
+    } else if (activePicker == projectSelect) {
+        if ([allProjects count] == 1) {
+            selectedProject = [allProjects objectAtIndex:0];
+        }
+        
+        projectSelect.hidden = YES;
+        toolbar.hidden = YES;
+        project.text = selectedProject.name;
+    }
 }
 
 - (void)updateTextField:(id)sender
@@ -261,6 +277,41 @@
         companyViewController.company = company.name;
     }
     
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView; {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component; {
+    if (pickerView == contactSelect) {
+        return [allContacts count];
+    } else if (pickerView == projectSelect) {
+        return [allProjects count];
+    }
+    
+    return 0;
+}
+
+-(NSString*) pickerView:(UIPickerView*)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (pickerView == contactSelect) {
+        Contact* c = [allContacts objectAtIndex:row];
+        return [NSString stringWithFormat:@"%@ %@",c.lastname, c.firstname];
+    } else if (pickerView == projectSelect) {
+        return [[allProjects objectAtIndex:row] name];
+    }
+    
+    return @"";
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
+{
+    if (pickerView == contactSelect) {
+        selectedContact = [allContacts objectAtIndex:row];
+    } else if (pickerView == projectSelect) {
+        selectedProject = [allProjects objectAtIndex:row];
+    }
 }
 
 @end

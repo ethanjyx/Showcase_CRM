@@ -421,6 +421,8 @@
         EditEventViewController *c = segue.destinationViewController;
         c.company = globalCompany;
         c.event = globalSelectedEvent;
+        c.allProjects = allProjects;
+        c.allContacts = allContacts;
     }
     else if([segue.identifier isEqualToString:@"addEvent"]) {
         AddEventViewController* c = segue.destinationViewController;

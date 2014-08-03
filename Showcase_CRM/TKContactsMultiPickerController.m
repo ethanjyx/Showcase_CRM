@@ -123,7 +123,7 @@
                 CFStringRef value = ABMultiValueCopyValueAtIndex(valuesRef, k);
                 switch (j) {
                     case 0: {// Phone number
-                        //contact.tel = [(NSString*)value initTelephoneWithReformat];
+                        contact.tel = [(__bridge NSString*)value initTelephoneWithReformat];
                         break;
                     }
                     case 1: {// Email

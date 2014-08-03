@@ -14,4 +14,7 @@
 @property (nonatomic, strong) Event *event;
 @property (nonatomic, strong) Company *company;
 
+@property (nonatomic, strong) NSMutableArray *allContacts;
+@property (nonatomic, strong) NSMutableArray *allProjects;
+
 @end
