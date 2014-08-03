@@ -44,7 +44,7 @@
 @implementation AddContactViewController
 
 @synthesize lastname, firstname, title, email_work, email_personal, phone_work, phone_personal, mobile_phone, QQ, WeChat, Skype, Weibo, province, city, street, country, postcode,note,scrollView,activeField;
-
+@synthesize picker,toolbar;
 @synthesize company;
 @synthesize header2,headertitle;
 
@@ -62,6 +62,17 @@
     [super viewDidLoad];
     header2.frame=CGRectMake(152, 123, 780, 73);
     headertitle.title=company;
+    provinces = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ProvincesAndCities.plist" ofType:nil]];
+    cities = [[provinces objectAtIndex:0] objectForKey:@"Cities"];
+    province.inputView=picker;
+    province.inputAccessoryView=toolbar;
+    city.inputAccessoryView=toolbar;
+    city.inputView=picker;
+    province.delegate=self;
+    city.delegate=self;
+    picker.delegate=self;
+    picker.dataSource=self;
+    
     // Do any additional setup after loading the view.
     [self registerForKeyboardNotifications];
 }
@@ -142,7 +153,58 @@
 {
     activeField = nil;
 }
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2;
+}
 
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [provinces count];
+            break;
+        case 1:
+            return [cities count];
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [[provinces objectAtIndex:row] objectForKey:@"State"];
+            break;
+        case 1:
+            return [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            cities = [[provinces objectAtIndex:row] objectForKey:@"Cities"];
+            [self.picker selectRow:0 inComponent:1 animated:NO];
+            [self.picker reloadComponent:1];
+            
+            self.province.text = [[provinces objectAtIndex:row] objectForKey:@"State"];
+            self.city.text = [[cities objectAtIndex:0] objectForKey:@"city"];
+            break;
+        case 1:
+            self.city.text = [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            break;
+    }
+}
 
 - (IBAction)save:(id)sender {
     if ([lastname.text length]<=0 ) {
@@ -158,5 +220,20 @@
     
     
     [self performSegueWithIdentifier:@"saveContact" sender:nil];
+}
+- (IBAction)finish:(id)sender {
+    [province endEditing:YES];
+    [city endEditing:YES];
+    picker.hidden=YES;
+    toolbar.hidden=YES;
+}
+- (IBAction)editprovince:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
+}
+
+- (IBAction)editcity:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
 }
 @end

@@ -9,8 +9,17 @@
 #import "ViewController.h"
 #import "Company.h"
 
-@interface ShippingAddressViewController : ViewController
+@interface ShippingAddressViewController : ViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+    NSArray *provinces;
+    NSArray *cities;
+}
+
+@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (nonatomic, strong) Company *company;
+- (IBAction)finish:(id)sender;
+- (IBAction)editprovince:(id)sender;
+- (IBAction)editcity:(id)sender;
 
 @end

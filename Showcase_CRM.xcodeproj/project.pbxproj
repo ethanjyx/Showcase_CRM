@@ -116,6 +116,7 @@
 		CE3A0178197EA5630052B1D9 /* 2x_icon_13.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0163197EA5630052B1D9 /* 2x_icon_13.png */; };
 		CE3A0179197EA5630052B1D9 /* 2x_icon_14.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0164197EA5630052B1D9 /* 2x_icon_14.png */; };
 		CE65A39C19754C760051BFAC /* AddContact2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE65A39B19754C760051BFAC /* AddContact2ViewController.m */; };
+		CE890491198E1AC200B4A815 /* ProvincesAndCities.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE890490198E1AC200B4A815 /* ProvincesAndCities.plist */; };
 		CE8D41EA19759B1500E3D374 /* DetailContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8D41E919759B1500E3D374 /* DetailContactViewController.m */; };
 		CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */; };
 		F66917AC197CC50500FA11C7 /* RouteplanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66917AB197CC50500FA11C7 /* RouteplanningViewController.m */; };
@@ -294,6 +295,7 @@
 		CE3A0164197EA5630052B1D9 /* 2x_icon_14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2x_icon_14.png; sourceTree = "<group>"; };
 		CE65A39A19754C760051BFAC /* AddContact2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContact2ViewController.h; sourceTree = "<group>"; };
 		CE65A39B19754C760051BFAC /* AddContact2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContact2ViewController.m; sourceTree = "<group>"; };
+		CE890490198E1AC200B4A815 /* ProvincesAndCities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvincesAndCities.plist; sourceTree = "<group>"; };
 		CE8D41E819759B1500E3D374 /* DetailContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailContactViewController.h; sourceTree = "<group>"; };
 		CE8D41E919759B1500E3D374 /* DetailContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailContactViewController.m; sourceTree = "<group>"; };
 		CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MutableDeepCopy.h"; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 		9DF6359E196BBA5200E10E48 /* SKSTableViewImp */ = {
 			isa = PBXGroup;
 			children = (
+				CE890490198E1AC200B4A815 /* ProvincesAndCities.plist */,
 				9DF6358E196BBA4D00E10E48 /* expandableImage.png */,
 				9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */,
 				9DF63590196BBA4D00E10E48 /* SKSTableView.h */,
@@ -904,6 +907,7 @@
 				CE3A0166197EA5630052B1D9 /* 2x_btn_02.png in Resources */,
 				CE3A013E197EA54B0052B1D9 /* btn_05.png in Resources */,
 				CE3A013C197EA54B0052B1D9 /* btn_03.png in Resources */,
+				CE890491198E1AC200B4A815 /* ProvincesAndCities.plist in Resources */,
 				CE3A0142197EA54B0052B1D9 /* icon_02.png in Resources */,
 				CE3A0178197EA5630052B1D9 /* 2x_icon_13.png in Resources */,
 				CE3A0171197EA5630052B1D9 /* 2x_icon_06.png in Resources */,

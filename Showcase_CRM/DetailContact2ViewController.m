@@ -59,7 +59,8 @@
 @synthesize headertitle,header;
 
 @synthesize contact,company;
-
+@synthesize toolbar,picker;
+@synthesize countrypicker;
 @synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,returnCompany_button,scrollView,activeField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -79,6 +80,18 @@
     // Do any additional setup after loading the view.
     [self setAllTextField];
     [self disableAllTextField];
+    countries=[NSArray arrayWithObjects:@"中国", nil];
+    country.inputView=countrypicker;
+    provinces = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ProvincesAndCities.plist" ofType:nil]];
+    cities = [[provinces objectAtIndex:0] objectForKey:@"Cities"];
+    province.inputView=picker;
+    province.inputAccessoryView=toolbar;
+    city.inputAccessoryView=toolbar;
+    city.inputView=picker;
+    province.delegate=self;
+    city.delegate=self;
+    picker.delegate=self;
+    picker.dataSource=self;
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
@@ -299,7 +312,78 @@
     activeField = nil;
 }
 
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [provinces count];
+            break;
+        case 1:
+            return [cities count];
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [[provinces objectAtIndex:row] objectForKey:@"State"];
+            break;
+        case 1:
+            return [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            cities = [[provinces objectAtIndex:row] objectForKey:@"Cities"];
+            [self.picker selectRow:0 inComponent:1 animated:NO];
+            [self.picker reloadComponent:1];
+            
+            self.province.text = [[provinces objectAtIndex:row] objectForKey:@"State"];
+            self.city.text = [[cities objectAtIndex:0] objectForKey:@"city"];
+            break;
+        case 1:
+            self.city.text = [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            break;
+    }
+}
 
 
 
+- (IBAction)finish:(id)sender {
+    [province endEditing:YES];
+    [country endEditing:YES];
+    picker.hidden=YES;
+    countrypicker.hidden=YES;
+    toolbar.hidden=YES;
+}
+- (IBAction)editcitiy:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
+}
+
+- (IBAction)editcountry:(id)sender {
+}
+
+- (IBAction)editprovince:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
+}
 @end

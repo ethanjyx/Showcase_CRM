@@ -29,11 +29,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *Skype;
 @property (weak, nonatomic) IBOutlet UITextField *Weibo;
 @property (weak, nonatomic) IBOutlet UITextField *country;
-@property (weak, nonatomic) IBOutlet UITextField *province;
-@property (weak, nonatomic) IBOutlet UITextField *city;
 @property (weak, nonatomic) IBOutlet UITextField *street;
 @property (weak, nonatomic) IBOutlet UITextField *postcode;
-
 @property (weak, nonatomic) IBOutlet UIButton *goToCompany_button;
 @property (weak, nonatomic) IBOutlet UIButton *edit_button;
 @property (weak, nonatomic) IBOutlet UIButton *save_button;
@@ -56,6 +53,7 @@
 @implementation DetailContactViewController
 
 @synthesize contact;
+@synthesize picker,toolbar;
 @synthesize lastname,firstname,title,email_personal,email_work,mobile_phone,phone_personal,phone_work,note,QQ,WeChat,Weibo,Skype,country,province,city,street,postcode,edit_button,save_button,delete_button,cancel_button,scrollView,activeField,goToCompany_button;
 @synthesize header5;
 
@@ -72,9 +70,20 @@
 {
     [super viewDidLoad];
     header5.frame=CGRectMake(152, 123, 768, 73);
+    
     // Do any additional setup after loading the view.
     [self disableAllTextField];
     [self setAllTextField];
+    provinces = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ProvincesAndCities.plist" ofType:nil]];
+    cities = [[provinces objectAtIndex:0] objectForKey:@"Cities"];
+    province.inputView=picker;
+    province.inputAccessoryView=toolbar;
+    city.inputAccessoryView=toolbar;
+    city.inputView=picker;
+    province.delegate=self;
+    city.delegate=self;
+    picker.delegate=self;
+    picker.dataSource=self;
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
@@ -295,5 +304,73 @@
     activeField = nil;
 }
 
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2;
+}
 
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [provinces count];
+            break;
+        case 1:
+            return [cities count];
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [[provinces objectAtIndex:row] objectForKey:@"State"];
+            break;
+        case 1:
+            return [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            cities = [[provinces objectAtIndex:row] objectForKey:@"Cities"];
+            [self.picker selectRow:0 inComponent:1 animated:NO];
+            [self.picker reloadComponent:1];
+            
+            self.province.text = [[provinces objectAtIndex:row] objectForKey:@"State"];
+            self.city.text = [[cities objectAtIndex:0] objectForKey:@"city"];
+            break;
+        case 1:
+            self.city.text = [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            break;
+    }
+}
+- (IBAction)finish:(id)sender {
+    [province endEditing:YES];
+    picker.hidden=YES;
+    toolbar.hidden=YES;
+}
+
+- (IBAction)editcity:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
+    
+}
+
+- (IBAction)editprovince:(id)sender {
+
+    toolbar.hidden=NO;
+    picker.hidden=NO;
+}
 @end

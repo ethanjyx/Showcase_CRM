@@ -9,9 +9,20 @@
 #import "ViewController.h"
 #import "Contact.h"
 
-@interface DetailContact2ViewController : ViewController
+@interface DetailContact2ViewController : ViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate>{
+    NSArray *provinces;
+    NSArray *cities;
+    NSArray *countries;
+}
 
 @property (nonatomic, strong) Contact *contact;
 @property (nonatomic, strong) Company *company;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+- (IBAction)finish:(id)sender;
+@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+@property (weak, nonatomic) IBOutlet UIPickerView *countrypicker;
+- (IBAction)editcitiy:(id)sender;
+- (IBAction)editcountry:(id)sender;
 
+- (IBAction)editprovince:(id)sender;
 @end

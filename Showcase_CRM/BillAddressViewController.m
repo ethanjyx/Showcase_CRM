@@ -29,7 +29,7 @@
 @end
 
 @implementation BillAddressViewController
-
+@synthesize toolbar,picker;
 @synthesize company;
 @synthesize companyName,country,province,city,address,postcode;
 @synthesize headertitle1,header6;
@@ -48,6 +48,16 @@
     headertitle1.title=company.name;
     header6.frame=CGRectMake(0, 0, 768, 73);
     // Do any additional setup after loading the view.
+    provinces = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ProvincesAndCities.plist" ofType:nil]];
+    cities = [[provinces objectAtIndex:0] objectForKey:@"Cities"];
+    province.inputView=picker;
+    province.inputAccessoryView=toolbar;
+    city.inputAccessoryView=toolbar;
+    city.inputView=picker;
+    province.delegate=self;
+    city.delegate=self;
+    picker.delegate=self;
+    picker.dataSource=self;
    
     Address *billingAddress = company.billing_address;
     country.text = billingAddress.country;
@@ -105,11 +115,79 @@
         billingController.company = company;
     }
 }
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2;
+}
 
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [provinces count];
+            break;
+        case 1:
+            return [cities count];
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    switch (component) {
+        case 0:
+            return [[provinces objectAtIndex:row] objectForKey:@"State"];
+            break;
+        case 1:
+            return [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            return nil;
+            break;
+    }
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            cities = [[provinces objectAtIndex:row] objectForKey:@"Cities"];
+            [self.picker selectRow:0 inComponent:1 animated:NO];
+            [self.picker reloadComponent:1];
+            
+            self.province.text = [[provinces objectAtIndex:row] objectForKey:@"State"];
+            self.city.text = [[cities objectAtIndex:0] objectForKey:@"city"];
+            break;
+        case 1:
+            self.city.text = [[cities objectAtIndex:row] objectForKey:@"city"];
+            break;
+        default:
+            break;
+    }
+}
 
 - (IBAction)save:(id)sender {
 }
 
 - (IBAction)returnFromBilling:(id)sender {
+
+}
+- (IBAction)finish:(id)sender {
+    [province endEditing:YES];
+    [country endEditing:YES];
+    picker.hidden=YES;
+    toolbar.hidden=YES;
+}
+
+- (IBAction)editprovince:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
+}
+
+- (IBAction)editcity:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
 }
 @end

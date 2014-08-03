@@ -12,8 +12,22 @@
 
 
 
-@interface DetailContactViewController : ViewController
+@interface DetailContactViewController : ViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+    NSArray *provinces;
+    NSArray *cities;
+}
+@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UITextField *province;
+@property (weak, nonatomic) IBOutlet UITextField *city;
 
 @property (nonatomic, strong) Contact *contact;
+
+- (IBAction)finish:(id)sender;
+
+- (IBAction)editcity:(id)sender;
+- (IBAction)editprovince:(id)sender;
+
 
 @end
