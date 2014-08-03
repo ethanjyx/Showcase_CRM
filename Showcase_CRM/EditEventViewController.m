@@ -112,9 +112,19 @@
     NSDate *local_date = event.date;
     date.text = [NSDateFormatter localizedStringFromDate:local_date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
     memo.text = event.memo;
-    Contact* c = [[event.contacts allObjects] objectAtIndex:0];
-    contact.text = [NSString stringWithFormat:@"%@ %@",c.lastname, c.firstname];
-    project.text = event.project.name;
+    
+    if ([event.contacts count] != 0) {
+        Contact* c = [[event.contacts allObjects] objectAtIndex:0];
+        contact.text = [NSString stringWithFormat:@"%@ %@",c.lastname, c.firstname];
+    } else {
+        contact.text = @"";
+    }
+    
+    if (event.project) {
+        project.text = event.project.name;
+    } else {
+        project.text = @"";
+    }
 }
 
 - (void)enableAllField

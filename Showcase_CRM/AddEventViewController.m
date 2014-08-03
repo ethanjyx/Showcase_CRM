@@ -59,6 +59,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    selectedContact = nil;
+    selectedProject = nil;
+    
     date = [[NSDate alloc] init];
     dateTextField.text = [PickerHelper formatDate:date];
     header.frame=CGRectMake(0, 0, 768, 73);

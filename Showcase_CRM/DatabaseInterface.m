@@ -269,7 +269,7 @@
     newEntry.memo = memo;
     newEntry.date = date;
     newEntry.company = [self fetchCompanyByName:companyName];
-    newEntry.contacts = [NSSet setWithObject:contact];
+    newEntry.contacts = contact ? [NSSet setWithObject:contact] : nil;
     newEntry.project = project;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
