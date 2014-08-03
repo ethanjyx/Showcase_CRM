@@ -22,7 +22,10 @@
 @property (retain,nonatomic) NSMutableArray *mutableKeys;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
+
 @property (weak, nonatomic) IBOutlet UISearchBar *search;
+
+
 @property (nonatomic, assign) id<SplitViewSelectionDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *Segment;
 @property (weak, nonatomic) IBOutlet UIButton *CompanyButton;

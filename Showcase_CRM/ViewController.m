@@ -253,8 +253,8 @@
     else { // Contact
         globalSelectedContact = [[mutableNames objectForKey:[mutableKeys objectAtIndex:[indexPath section]]] objectAtIndex: [indexPath row]];
         [self performSegueWithIdentifier: @"detailContact" sender:self];
-        
     }
+    [search endEditing:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
