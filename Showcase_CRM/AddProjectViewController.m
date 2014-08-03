@@ -31,6 +31,7 @@
     NSNumber *possibility_number;
     NSNumber *amount_number;
 }
+@synthesize picker,toolbar;
 @synthesize headertitle,header;
 @synthesize company,name,possibility,amount,note,date,progress;
 
@@ -48,6 +49,11 @@
     [super viewDidLoad];
     header.frame=CGRectMake(0, 0, 768, 73);
     headertitle.title=company;
+    pickerArray=[NSArray arrayWithObjects:@"0",@"10",@"20",@"30",@"40",@"50",@"60",@"70",@"80",@"90",@"100",nil];
+    possibility.inputView=picker;
+    possibility.inputAccessoryView=toolbar;
+    possibility.delegate=self;
+    picker.delegate=self;
     // Do any additional setup after loading the view.
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//设置为中文显示
     date.locale = locale;
@@ -135,7 +141,7 @@
             return;
         }
         else {
-            possibility_f = possibility_f;
+            possibility_number = possibility_f;
         }
     }
     
@@ -144,5 +150,31 @@
 }
 
 - (IBAction)returnFromProject:(id)sender {
+}
+-(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [pickerArray count];
+}
+-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return [pickerArray objectAtIndex:row];
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    NSInteger row=[picker selectedRowInComponent:0];
+    self.possibility.text=[pickerArray objectAtIndex:row];
+    NSNumberFormatter * A = [[NSNumberFormatter alloc] init];
+    NSNumber *number= [A numberFromString:possibility.text];
+    possibility_number=number;
+    picker.hidden=YES;
+    toolbar.hidden=YES;
+}
+- (IBAction)finish:(id)sender {
+    [possibility endEditing:YES];
+}
+
+- (IBAction)edit:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
 }
 @end

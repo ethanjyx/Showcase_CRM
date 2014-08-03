@@ -40,6 +40,7 @@
 
 @implementation EditProjectViewController
 @synthesize header;
+@synthesize picker,toolbar;
 @synthesize project, company;
 @synthesize name,possibility,amount,memo,progress,date,return_button,save_button,edit_button,cancel_button,delete_button,date_uneditable,headerTitle;
 
@@ -60,6 +61,12 @@
     // Do any additional setup after loading the view.
     [self setAllField];
     [self disableAllField];
+    pickerArray=[NSArray arrayWithObjects:@"0",@"10",@"20",@"30",@"40",@"50",@"60",@"70",@"80",@"90",@"100",nil];
+    possibility.inputView=picker;
+    possibility.inputAccessoryView=toolbar;
+    possibility.delegate=self;
+    picker.delegate=self;
+    picker.dataSource=self;
     save_button.hidden = YES;
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
@@ -172,7 +179,7 @@
             return;
         }
         else {
-            possibility_f = possibility_f;
+            possibility_number = possibility_f;
         }
     }
     project.amount = amount_number;
@@ -238,6 +245,31 @@
         companyViewController.company = company.name;
     }
 }
+-(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [pickerArray count];
+}
+-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return [pickerArray objectAtIndex:row];
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    NSInteger row=[picker selectedRowInComponent:0];
+    self.possibility.text=[pickerArray objectAtIndex:row];
+    NSNumberFormatter * A = [[NSNumberFormatter alloc] init];
+    NSNumber *number= [A numberFromString:possibility.text];
+    project.possibility=number;
+    picker.hidden=YES;
+    toolbar.hidden=YES;
+}
 
+- (IBAction)Edit:(id)sender {
+    toolbar.hidden=NO;
+    picker.hidden=NO;
+}
 
+- (IBAction)finish:(id)sender {
+    [possibility endEditing:YES];
+}
 @end

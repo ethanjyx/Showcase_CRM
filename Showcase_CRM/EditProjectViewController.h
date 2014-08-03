@@ -9,9 +9,16 @@
 #import "ViewController.h"
 #import "Project.h"
 
-@interface EditProjectViewController : ViewController
+@interface EditProjectViewController : ViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+    NSArray *pickerArray;
+}
 
 @property (nonatomic, strong) Project *project;
 @property (nonatomic, strong) Company *company;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+
+- (IBAction)Edit:(id)sender;
+- (IBAction)finish:(id)sender;
 
 @end
