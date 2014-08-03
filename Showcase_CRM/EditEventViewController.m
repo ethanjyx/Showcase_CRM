@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *address;
 @property (weak, nonatomic) IBOutlet UITextField *date;
 @property (weak, nonatomic) IBOutlet UITextField *memo;
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
+@property (weak, nonatomic) IBOutlet UINavigationItem *header_title;
 
 @property (weak, nonatomic) IBOutlet UIButton *returnButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveEditButton;
@@ -32,7 +34,7 @@
 
 @implementation EditEventViewController
 
-@synthesize name, address, date, memo, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate;
+@synthesize name, address, date, memo, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate,header,header_title;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,6 +53,8 @@
     saveEditButton.hidden = YES;
     deleteButton.hidden = YES;
     cancelEditButton.hidden = YES;
+    header.frame=CGRectMake(0, 0, 768, 73);
+    header_title.title = company.name;
 }
 
 - (void)didReceiveMemoryWarning

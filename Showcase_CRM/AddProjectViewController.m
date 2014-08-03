@@ -47,8 +47,10 @@
 {
     [super viewDidLoad];
     header.frame=CGRectMake(0, 0, 768, 73);
-    //headertitle.title=company.name;
+    headertitle.title=company;
     // Do any additional setup after loading the view.
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//设置为中文显示
+    date.locale = locale;
 }
 
 - (void)didReceiveMemoryWarning

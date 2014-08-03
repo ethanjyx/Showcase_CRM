@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *contextTextField;
+@property (weak, nonatomic) IBOutlet UINavigationBar *header;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headerTitle;
 
 - (IBAction)beginEditDateTextField:(id)sender;
 - (void)updateTextField:(id)sender;
@@ -30,7 +32,7 @@
 
 @implementation AddEventViewController
 
-@synthesize company, date, dateTextField, nameTextField, addressTextField, contextTextField;
+@synthesize company, date, dateTextField, nameTextField, addressTextField, contextTextField,header,headerTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +48,8 @@
     [super viewDidLoad];
     date = [[NSDate alloc] init];
     dateTextField.text = [PickerHelper formatDate:date];
+    header.frame=CGRectMake(0, 0, 768, 73);
+    headerTitle.title = company;
 }
 
 - (void)didReceiveMemoryWarning
