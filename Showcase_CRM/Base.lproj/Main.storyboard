@@ -4708,7 +4708,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </state>
                                 <connections>
                                     <action selector="deleteEvent:" destination="zWo-2i-Kzh" eventType="touchUpInside" id="072-Zt-P5T"/>
-                                    <action selector="saveAddEvent:" destination="zWo-2i-Kzh" eventType="touchUpInside" id="HLX-7r-HVo"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="WjS-4I-aJL">

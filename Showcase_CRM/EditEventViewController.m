@@ -120,7 +120,7 @@
 
 - (IBAction)finish:(id)sender {
     if (activePicker == contactSelect) {
-        if ([allContacts count] == 1) {
+        if ([allContacts count] == 1 || !selectedContact) {
             selectedContact = [allContacts objectAtIndex:0];
         }
         event.contact = selectedContact;
@@ -128,8 +128,9 @@
         contactSelect.hidden = YES;
         toolbar.hidden = YES;
         contact.text = [NSString stringWithFormat:@"%@ %@",selectedContact.lastname, selectedContact.firstname];
+        [contact endEditing:true];
     } else if (activePicker == projectSelect) {
-        if ([allProjects count] == 1) {
+        if ([allProjects count] == 1 || !selectedProject) {
             selectedProject = [allProjects objectAtIndex:0];
         }
         event.project = selectedProject;
@@ -137,6 +138,7 @@
         projectSelect.hidden = YES;
         toolbar.hidden = YES;
         project.text = selectedProject.name;
+        [project endEditing:true];
     }
 }
 

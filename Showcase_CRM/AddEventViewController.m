@@ -135,21 +135,24 @@
 
 - (IBAction)finish:(id)sender {
     if (activePicker == contactSelect) {
-        if ([allContacts count] == 1) {
+        if ([allContacts count] == 1 || !selectedContact) {
             selectedContact = [allContacts objectAtIndex:0];
         }
         
         contactSelect.hidden = YES;
         toolbar.hidden = YES;
         contactTextField.text = [NSString stringWithFormat:@"%@ %@",selectedContact.lastname, selectedContact.firstname];
+        
+        [contactTextField endEditing:true];
     } else if (activePicker == projectSelect) {
-        if ([allProjects count] == 1) {
+        if ([allProjects count] == 1 || !selectedProject) {
             selectedProject = [allProjects objectAtIndex:0];
         }
         
         projectSelect.hidden = YES;
         toolbar.hidden = YES;
         projectTextField.text = selectedProject.name;
+        [projectTextField endEditing:true];
     }
 }
 
