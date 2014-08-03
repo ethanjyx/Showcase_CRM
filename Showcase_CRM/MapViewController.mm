@@ -856,11 +856,11 @@
     if (self.visitedNum == 0) {
         [self.startNavButton setTitle:@"继续导航" forState:UIControlStateNormal];
         current = _locService.userLocation.location.coordinate;
-        BMKPointAnnotation* annotation = [self.annotations firstObject];
+        BMKPointAnnotation* annotation = [self.annotations objectAtIndex:[[self.visitOrder firstObject] intValue]];
         next = annotation.coordinate;
     } else {
-        BMKPointAnnotation* annotation1 = [self.annotations objectAtIndex:self.visitedNum - 1];
-        BMKPointAnnotation* annotation2 = [self.annotations objectAtIndex:self.visitedNum];
+        BMKPointAnnotation* annotation1 = [self.annotations objectAtIndex:[[self.visitOrder objectAtIndex:self.visitedNum - 1] intValue]];
+        BMKPointAnnotation* annotation2 = [self.annotations objectAtIndex:[[self.visitOrder objectAtIndex:self.visitedNum] intValue]];
         current = annotation1.coordinate;
         next = annotation2.coordinate;
     }
