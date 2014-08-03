@@ -11,5 +11,7 @@
 @interface AddEventViewController : UIViewController
 
 @property (nonatomic, strong) NSString *company;
+@property (nonatomic, strong) NSMutableArray *allContacts;
+@property (nonatomic, strong) NSMutableArray *allProjects;
 
 @end

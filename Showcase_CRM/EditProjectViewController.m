@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *progress;
 @property (weak, nonatomic) IBOutlet UIDatePicker *date;
 @property (weak, nonatomic) IBOutlet UITextField *date_uneditable;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headerTitle;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *return_button;
@@ -40,7 +41,7 @@
 @implementation EditProjectViewController
 @synthesize header;
 @synthesize project, company;
-@synthesize name,possibility,amount,memo,progress,date,return_button,save_button,edit_button,cancel_button,delete_button,date_uneditable;
+@synthesize name,possibility,amount,memo,progress,date,return_button,save_button,edit_button,cancel_button,delete_button,date_uneditable,headerTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +56,7 @@
 {
     [super viewDidLoad];
     header.frame=CGRectMake(0, 0, 768, 73);
+    headerTitle.title = company.name;
     // Do any additional setup after loading the view.
     [self setAllField];
     [self disableAllField];
@@ -62,6 +64,8 @@
     delete_button.hidden = YES;
     cancel_button.hidden = YES;
     date.hidden = YES;
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//设置为中文显示
+    date.locale = locale;
 }
 
 - (void)didReceiveMemoryWarning

@@ -21,6 +21,10 @@
 #import "Event.h"
 #import "EditProjectViewController.h"
 #import "EditEventViewController.h"
+#import "BillAddressViewController.h"
+#import "ShippingAddressViewController.h"
+#import "Hanzi2Pinyin.h"
+#import "Contact.h"
 
 @interface sksViewController ()
 
@@ -117,11 +121,6 @@
                   ];
     [self updateContents];
     [self initButtons];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     [self performSelector:@selector(updateUI) withObject:nil afterDelay:0.0];
 }
 
@@ -138,17 +137,71 @@
     NSSet *contacts = globalCompany.contacts;
     NSSortDescriptor *contactDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastname" ascending:YES];
     NSArray *contactDescriptors = @[contactDescriptor];
-    allContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+    NSArray *localContacts = [contacts sortedArrayUsingDescriptors:contactDescriptors];
+    NSArray *sortedContacts = [localContacts sortedArrayUsingComparator:^NSComparisonResult(Contact* a, Contact* b) {
+        
+        NSString *first = [NSString stringWithFormat:@"%@%@",a.lastname, a.firstname];
+        NSString *second = [NSString stringWithFormat:@"%@%@",b.lastname, b.firstname];
+        
+        if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+            first = [Hanzi2Pinyin convert:first];
+            first = [NSString stringWithFormat:@"%@%@%@",[first substringToIndex:1] ,@" ", [first substringFromIndex:1]];
+        }
+        if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+            second = [Hanzi2Pinyin convert:second];
+            second = [NSString stringWithFormat:@"%@%@%@",[second substringToIndex:1] ,@" ", [second substringFromIndex:1]];
+        }
+        return [first compare:second];
+    }];
+    allContacts = [NSMutableArray arrayWithArray:sortedContacts];
+    
+    
     
     NSSet *projects = globalCompany.projects;
     NSSortDescriptor *contactDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *contactDescriptors2 = @[contactDescriptor2];
-    allProjects = [projects sortedArrayUsingDescriptors:contactDescriptors2];
+    NSArray *localProjects = [projects sortedArrayUsingDescriptors:contactDescriptors2];
+    NSArray *sortedProjects = [localProjects sortedArrayUsingComparator:^NSComparisonResult(Project* a, Project* b) {
+        
+        NSString *first = a.name;
+        NSString *second = b.name;
+        
+        if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+            first = [Hanzi2Pinyin convert:first];
+            first = [NSString stringWithFormat:@"%@%@%@",[first substringToIndex:1] ,@" ", [first substringFromIndex:1]];
+        }
+        if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+            second = [Hanzi2Pinyin convert:second];
+            second = [NSString stringWithFormat:@"%@%@%@",[second substringToIndex:1] ,@" ", [second substringFromIndex:1]];
+        }
+        return [first compare:second];
+    }];
+    allProjects = [NSMutableArray arrayWithArray:sortedProjects];
+    
+    
+    
+    
     
     NSSet *events = globalCompany.events;
     NSSortDescriptor *contactDescriptor3 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *contactDescriptors3 = @[contactDescriptor3];
-    allEvents = [events sortedArrayUsingDescriptors:contactDescriptors3];
+    NSArray *localEvents = [events sortedArrayUsingDescriptors:contactDescriptors3];
+    NSArray *sortedEvents = [localEvents sortedArrayUsingComparator:^NSComparisonResult(Event* a, Event* b) {
+        
+        NSString *first = a.name;
+        NSString *second = b.name;
+        
+        if ([Hanzi2Pinyin hasChineseCharacter:first]) {
+            first = [Hanzi2Pinyin convert:first];
+            first = [NSString stringWithFormat:@"%@%@%@",[first substringToIndex:1] ,@" ", [first substringFromIndex:1]];
+        }
+        if ([Hanzi2Pinyin hasChineseCharacter:second]) {
+            second = [Hanzi2Pinyin convert:second];
+            second = [NSString stringWithFormat:@"%@%@%@",[second substringToIndex:1] ,@" ", [second substringFromIndex:1]];
+        }
+        return [first compare:second];
+    }];
+    allEvents = [NSMutableArray arrayWithArray:sortedEvents];
 }
 
 - (void)initButtons
@@ -241,12 +294,23 @@
     printf("select row at section %d row %d\n", indexPath.section, indexPath.row);
     if (indexPath.section == 0 && indexPath.row == 1) {
         
-        [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
+        if (globalCompany.billing_address == nil) {
+            [self performSegueWithIdentifier:@"editBillAddressDirectly" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"viewBillingAddress" sender:self];
+        }
+        
     }
     else if (indexPath.section == 0 && indexPath.row == 2) {
-        
-        [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
+        if (globalCompany.shipping_address == nil) {
+            [self performSegueWithIdentifier:@"editShippingAddressDirectly" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"viewShippingAddress" sender:self];
+        }
     }
+    
     
     if (indexPath.section == 1) {
         if (indexPath.row != 0) {
@@ -332,9 +396,17 @@
         ViewShippingAddressController *shippingAddressController = segue.destinationViewController;
         shippingAddressController.company = globalCompany;
     }
+    else if([segue.identifier isEqualToString:@"editShippingAddressDirectly"]) {
+        ShippingAddressViewController *shippingAddressController = segue.destinationViewController;
+        shippingAddressController.company = globalCompany;
+    }
     else if([segue.identifier isEqualToString:@"viewBillingAddress"]) {
         ViewBillingAddressController *billingAddressController = segue.destinationViewController;
         billingAddressController.company = globalCompany;
+    }
+    else if([segue.identifier isEqualToString:@"editBillAddressDirectly"]) {
+        BillAddressViewController *billAddressController = segue.destinationViewController;
+        billAddressController.company = globalCompany;
     }
     else if([segue.identifier isEqualToString:@"addProject"]) {
         AddProjectViewController *projectController = segue.destinationViewController;
@@ -353,6 +425,8 @@
     else if([segue.identifier isEqualToString:@"addEvent"]) {
         AddEventViewController* c = segue.destinationViewController;
         c.company = company;
+        c.allContacts = allContacts;
+        c.allProjects = allProjects;
     }
 }
 
@@ -534,15 +608,9 @@
 {
     [[picker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     
-//    for (id view in self.scrollView.subviews) {
-//        if ([view isKindOfClass:[UIButton class]])
-//            [(UIButton*)view removeFromSuperview];
-//    }
-    
-    
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     
-    //[database importContacts:contacts];
+    // contacts are the contacts selected in the import contact view
     for (TKContact* contact in contacts) {
         [database addContactWithLastname:contact.lastName firstname:contact.firstName title:nil phoneWork:contact.tel phoneHome:nil phoneMobile:nil emailWork:contact.email emailPersonal:nil note:nil country:nil province:nil city:nil street:nil postcode:nil companyName:CompanyName.text QQ:nil weChat:nil skype:nil weibo:nil];
     }
