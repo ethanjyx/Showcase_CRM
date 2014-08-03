@@ -425,6 +425,8 @@
     else if([segue.identifier isEqualToString:@"addEvent"]) {
         AddEventViewController* c = segue.destinationViewController;
         c.company = company;
+        c.allContacts = allContacts;
+        c.allProjects = allProjects;
     }
 }
 

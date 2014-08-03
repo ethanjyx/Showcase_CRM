@@ -14,6 +14,8 @@
 @interface EditEventViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *name;
+@property (weak, nonatomic) IBOutlet UITextField *contact;
+@property (weak, nonatomic) IBOutlet UITextField *project;
 @property (weak, nonatomic) IBOutlet UITextField *address;
 @property (weak, nonatomic) IBOutlet UITextField *date;
 @property (weak, nonatomic) IBOutlet UITextField *memo;
@@ -90,6 +92,13 @@
     self.date.text = [PickerHelper formatDate:picker.date];;
     globalDate = picker.date;
 }
+
+- (IBAction)beginEditContactTextField:(id)sender {
+}
+
+- (IBAction)beginEditProjectTextField:(id)sender {
+}
+
 
 - (void)setAllField
 {

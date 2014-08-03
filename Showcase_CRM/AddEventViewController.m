@@ -14,9 +14,12 @@
 @interface AddEventViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *contactTextField;
+@property (weak, nonatomic) IBOutlet UITextField *projectTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *contextTextField;
+
 @property (weak, nonatomic) IBOutlet UINavigationBar *header;
 @property (weak, nonatomic) IBOutlet UINavigationItem *headerTitle;
 
@@ -84,6 +87,14 @@
     self.dateTextField.text = [PickerHelper formatDate:picker.date];;
     date = picker.date;
 }
+
+- (IBAction)beginEditContactTextField:(id)sender {
+}
+
+
+- (IBAction)beginEditProjectTextField:(id)sender {
+}
+
 
 - (IBAction)saveAddEvent:(id)sender {
     if ([nameTextField.text length]<=0 ) {
