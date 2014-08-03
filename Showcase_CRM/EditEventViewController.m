@@ -153,24 +153,52 @@
     contactSelect.hidden = NO;
     toolbar.hidden = NO;
     activePicker = contactSelect;
+    
+    for (int i = 0; i < [allContacts count]; i++) {
+        if ([allContacts objectAtIndex:i] == event.contact) {
+            [contactSelect selectRow:i inComponent:0 animated:YES];
+            break;
+        }
+    }
 }
 
 - (IBAction)focusContact:(id)sender {
     contactSelect.hidden = NO;
     toolbar.hidden = NO;
     activePicker = contactSelect;
+    
+    for (int i = 0; i < [allContacts count]; i++) {
+        if ([allContacts objectAtIndex:i] == event.contact) {
+            [contactSelect selectRow:i inComponent:0 animated:YES];
+            break;
+        }
+    }
 }
 
 - (IBAction)beginEditProjectTextField:(id)sender {
     projectSelect.hidden = NO;
     toolbar.hidden = NO;
     activePicker = projectSelect;
+    
+    for (int i = 0; i < [allProjects count]; i++) {
+        if ([allProjects objectAtIndex:i] == event.project) {
+            [projectSelect selectRow:i inComponent:0 animated:YES];
+            break;
+        }
+    }
 }
 
 - (IBAction)focusProject:(id)sender {
     projectSelect.hidden = NO;
     toolbar.hidden = NO;
     activePicker = projectSelect;
+    
+    for (int i = 0; i < [allProjects count]; i++) {
+        if ([allProjects objectAtIndex:i] == event.project) {
+            [projectSelect selectRow:i inComponent:0 animated:YES];
+            break;
+        }
+    }
 }
 
 - (void)setAllField
