@@ -100,8 +100,8 @@
         contact.name = fullNameString;
         contact.recordID = (int)ABRecordGetRecordID(contactRecord);
         contact.rowSelected = NO;
-        contact.lastName = (__bridge NSString*)abLastName;
-        contact.firstName = (__bridge NSString*)abName;
+        contact.lastName = (__bridge id)abLastName ? (__bridge NSString*)abLastName : @"";
+        contact.firstName = (__bridge id)abName ? (__bridge NSString*)abName : @"";
         
         ABPropertyID multiProperties[] = {
             kABPersonPhoneProperty,

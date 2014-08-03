@@ -121,11 +121,6 @@
                   ];
     [self updateContents];
     [self initButtons];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     [self performSelector:@selector(updateUI) withObject:nil afterDelay:0.0];
 }
 
@@ -611,15 +606,9 @@
 {
     [[picker presentingViewController] dismissViewControllerAnimated:YES completion:nil];
     
-//    for (id view in self.scrollView.subviews) {
-//        if ([view isKindOfClass:[UIButton class]])
-//            [(UIButton*)view removeFromSuperview];
-//    }
-    
-    
     DatabaseInterface *database = [DatabaseInterface databaseInterface];
     
-    //[database importContacts:contacts];
+    // contacts are the contacts selected in the import contact view
     for (TKContact* contact in contacts) {
         [database addContactWithLastname:contact.lastName firstname:contact.firstName title:nil phoneWork:contact.tel phoneHome:nil phoneMobile:nil emailWork:contact.email emailPersonal:nil note:nil country:nil province:nil city:nil street:nil postcode:nil companyName:CompanyName.text QQ:nil weChat:nil skype:nil weibo:nil];
     }
