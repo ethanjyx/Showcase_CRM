@@ -142,7 +142,7 @@
     WeChat.enabled = YES;
     Skype.enabled = YES;
     Weibo.enabled = YES;
-    country.enabled = YES;
+    //country.enabled = YES;
     province.enabled = YES;
     city.enabled = YES;
     street.enabled = YES;

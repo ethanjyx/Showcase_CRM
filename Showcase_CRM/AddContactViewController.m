@@ -72,7 +72,8 @@
     city.delegate=self;
     picker.delegate=self;
     picker.dataSource=self;
-    
+    country.text= @"中国";
+    country.enabled = NO;
     // Do any additional setup after loading the view.
     [self registerForKeyboardNotifications];
 }

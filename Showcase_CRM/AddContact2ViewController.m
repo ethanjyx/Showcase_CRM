@@ -73,6 +73,8 @@
     city.delegate=self;
     picker.delegate=self;
     picker.dataSource=self;
+    country.text= @"中国";
+    country.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning
