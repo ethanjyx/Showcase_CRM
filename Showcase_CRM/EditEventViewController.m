@@ -28,6 +28,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
+@property (nonatomic, strong) UIPickerView *contactSelect;
+@property (nonatomic, strong) UIPickerView *projectSelect;
+@property (nonatomic, strong) UIPickerView *activePicker;
+
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+- (IBAction)finish:(id)sender;
+
+@property (nonatomic, retain) Contact * selectedContact;
+@property (nonatomic, retain) Project * selectedProject;
+
 @property (nonatomic, retain) NSDate * globalDate;
 
 - (void)updateTextField:(id)sender;
@@ -36,7 +46,7 @@
 
 @implementation EditEventViewController
 
-@synthesize name, address, date, memo, contact, project, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate,header,header_title;
+@synthesize name, address, date, memo, contact, project, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate,header,header_title, toolbar, selectedProject, selectedContact, contactSelect, projectSelect, activePicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,9 +65,29 @@
     saveEditButton.hidden = YES;
     deleteButton.hidden = YES;
     cancelEditButton.hidden = YES;
+    toolbar.hidden = YES;
     header.frame=CGRectMake(0, 0, 768, 73);
     header_title.title = company.name;
     globalDate = [NSDate date];
+    
+    selectedContact = event.contact;
+    selectedProject = event.project;
+    
+    contactSelect = [[UIPickerView alloc] initWithFrame:CGRectMake(140, 122, 850, 74)];
+    contactSelect.showsSelectionIndicator = YES;
+    contactSelect.hidden = NO;
+    contactSelect.delegate = self;
+    contactSelect.dataSource = self;
+    contact.inputAccessoryView = toolbar;
+    contact.inputView = contactSelect;
+    
+    projectSelect = [[UIPickerView alloc] initWithFrame:CGRectMake(140, 122, 850, 74)];
+    projectSelect.showsSelectionIndicator = YES;
+    projectSelect.hidden = NO;
+    projectSelect.delegate = self;
+    projectSelect.dataSource = self;
+    project.inputAccessoryView = toolbar;
+    project.inputView = projectSelect;
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,7 +113,13 @@
     datePicker.datePickerMode = UIDatePickerModeDate;
     [datePicker setDate:globalDate];
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//设置为中文显示
+    datePicker.locale = locale;
     [self.date setInputView:datePicker];
+}
+
+- (IBAction)finish:(id)sender {
+    
 }
 
 - (void)updateTextField:(id)sender
@@ -94,15 +130,27 @@
 }
 
 - (IBAction)beginEditContactTextField:(id)sender {
+    contactSelect.hidden = NO;
+    toolbar.hidden = NO;
+    activePicker = contactSelect;
 }
 
 - (IBAction)focusContact:(id)sender {
+    contactSelect.hidden = NO;
+    toolbar.hidden = NO;
+    activePicker = contactSelect;
 }
 
 - (IBAction)beginEditProjectTextField:(id)sender {
+    projectSelect.hidden = NO;
+    toolbar.hidden = NO;
+    activePicker = projectSelect;
 }
 
 - (IBAction)focusProject:(id)sender {
+    projectSelect.hidden = NO;
+    toolbar.hidden = NO;
+    activePicker = projectSelect;
 }
 
 - (void)setAllField

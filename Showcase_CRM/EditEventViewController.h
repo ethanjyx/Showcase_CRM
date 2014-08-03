@@ -9,7 +9,7 @@
 #import "Event.h"
 #import <UIKit/UIKit.h>
 
-@interface EditEventViewController : UIViewController
+@interface EditEventViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, strong) Event *event;
 @property (nonatomic, strong) Company *company;

@@ -4797,6 +4797,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="focusProject:" destination="zWo-2i-Kzh" eventType="editingDidEnd" id="a5E-GR-pqN"/>
                                 </connections>
                             </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2mR-vn-ePc">
+                                <rect key="frame" x="-9" y="578" width="704" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Wnf-ie-if9"/>
+                                    <barButtonItem title="完成" id="qCS-6x-P8p">
+                                        <connections>
+                                            <action selector="finish:" destination="zWo-2i-Kzh" id="SNL-bl-qty"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -4810,6 +4822,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="date" destination="ay4-bY-ckW" id="Opk-bX-yaj"/>
                         <outlet property="deleteButton" destination="yf3-zH-PmQ" id="plZ-wC-9LC"/>
                         <outlet property="editButton" destination="EHH-2d-FJ0" id="LXB-aw-MvY"/>
+                        <outlet property="finish" destination="qCS-6x-P8p" id="Uzc-We-uY3"/>
                         <outlet property="header" destination="i56-XG-0pP" id="NOs-wP-arO"/>
                         <outlet property="header_title" destination="wYB-7t-KjW" id="dN1-eG-HeM"/>
                         <outlet property="memo" destination="WjS-4I-aJL" id="QId-fh-Vu5"/>
@@ -4817,6 +4830,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="project" destination="Bu4-Eg-bQP" id="6Kz-sV-5lr"/>
                         <outlet property="returnButton" destination="nbJ-lg-JEo" id="Kvu-HJ-U6M"/>
                         <outlet property="saveEditButton" destination="P5D-DT-inW" id="pOp-fG-NKw"/>
+                        <outlet property="toolbar" destination="2mR-vn-ePc" id="Hxz-0B-HiK"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="returnFromViewEvent" splitViewControllerTargetIndex="1" id="gJ8-u3-EXT"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="deleteEvent" splitViewControllerTargetIndex="1" id="O69-Gt-pV3"/>
                     </connections>

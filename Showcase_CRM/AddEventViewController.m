@@ -121,6 +121,8 @@
     datePicker.datePickerMode = UIDatePickerModeDate;
     [datePicker setDate:date];
     [datePicker addTarget:self action:@selector(updateDateTextField:) forControlEvents:UIControlEventValueChanged];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//设置为中文显示
+    datePicker.locale = locale;
     [dateTextField setInputView:datePicker];
 }
 
