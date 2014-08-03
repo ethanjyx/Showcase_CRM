@@ -55,6 +55,7 @@
     cancelEditButton.hidden = YES;
     header.frame=CGRectMake(0, 0, 768, 73);
     header_title.title = company.name;
+    globalDate = [NSDate date];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +79,7 @@
 - (IBAction)beginEditDateField:(id)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
     datePicker.datePickerMode = UIDatePickerModeDate;
-    [datePicker setDate:[NSDate date]];
+    [datePicker setDate:globalDate];
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     [self.date setInputView:datePicker];
 }

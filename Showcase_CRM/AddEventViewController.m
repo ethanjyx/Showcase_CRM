@@ -50,6 +50,7 @@
     dateTextField.text = [PickerHelper formatDate:date];
     header.frame=CGRectMake(0, 0, 768, 73);
     headerTitle.title = company;
+    date = [NSDate date];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +73,7 @@
 - (IBAction)beginEditDateTextField:(id)sender {
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
     datePicker.datePickerMode = UIDatePickerModeDate;
-    [datePicker setDate:[NSDate date]];
+    [datePicker setDate:date];
     [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     [self.dateTextField setInputView:datePicker];
 }
