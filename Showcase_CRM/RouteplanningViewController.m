@@ -142,10 +142,17 @@
 */
 
 - (IBAction)confirmButton:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(onGetselectedContacts:)]) {
-        [self.delegate onGetselectedContacts:self.selectionIndicator];
+    for (NSNumber *num in self.selectionIndicator) {
+        if ([num intValue] == 1) {
+            if ([self.delegate respondsToSelector:@selector(onGetselectedContacts:)]) {
+                [self.delegate onGetselectedContacts:self.selectionIndicator];
+            }
+            [self.mypopoverController dismissPopoverAnimated:YES];
+            return;
+        }
     }
-    [self.mypopoverController dismissPopoverAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请至少选择一个客户！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 - (BOOL)isAddressEmpty:(Address *)address {
