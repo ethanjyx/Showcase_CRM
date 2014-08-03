@@ -35,7 +35,7 @@
 
 @implementation AddEventViewController
 
-@synthesize company, date, dateTextField, nameTextField, addressTextField, contextTextField,header,headerTitle;
+@synthesize company, date, dateTextField, nameTextField, addressTextField, contextTextField,header,headerTitle, allContacts, allProjects, contactTextField, projectTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,6 +54,18 @@
     header.frame=CGRectMake(0, 0, 768, 73);
     headerTitle.title = company;
     date = [NSDate date];
+    
+    if ([allContacts count] == 0) {
+        contactTextField.text = @"没有可供选择的联系人";
+        contactTextField.textColor = [UIColor grayColor];
+        contactTextField.enabled = false;
+    }
+    
+    if ([allProjects count] == 0) {
+        projectTextField.text = @"没有可供选择的项目";
+        projectTextField.textColor = [UIColor grayColor];
+        projectTextField.enabled = false;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,8 +101,8 @@
 }
 
 - (IBAction)beginEditContactTextField:(id)sender {
+    
 }
-
 
 - (IBAction)beginEditProjectTextField:(id)sender {
 }
