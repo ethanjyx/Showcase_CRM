@@ -123,6 +123,7 @@
         if ([allContacts count] == 1) {
             selectedContact = [allContacts objectAtIndex:0];
         }
+        event.contact = selectedContact;
         
         contactSelect.hidden = YES;
         toolbar.hidden = YES;
@@ -131,6 +132,7 @@
         if ([allProjects count] == 1) {
             selectedProject = [allProjects objectAtIndex:0];
         }
+        event.project = selectedProject;
         
         projectSelect.hidden = YES;
         toolbar.hidden = YES;

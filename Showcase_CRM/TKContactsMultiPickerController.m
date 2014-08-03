@@ -124,6 +124,7 @@
                 switch (j) {
                     case 0: {// Phone number
                         contact.tel = [(__bridge NSString*)value initTelephoneWithReformat];
+                        NSLog(@"%@", contact.tel);
                         break;
                     }
                     case 1: {// Email

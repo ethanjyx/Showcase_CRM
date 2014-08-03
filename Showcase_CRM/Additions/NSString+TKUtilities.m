@@ -39,6 +39,10 @@
         self = [self stringByReplacingOccurrencesOfString:@")" withString:@""];
     }
     
+    if ([self containsString:@" "]) {
+        self = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+    }
+    
     return self;
 }
 
