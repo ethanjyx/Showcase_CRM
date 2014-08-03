@@ -97,14 +97,6 @@
     projectTextField.inputView = projectSelect;
 
     toolbar.hidden = YES;
-    
-    if ([allContacts count] == 1) {
-        selectedContact = [allContacts objectAtIndex:0];
-    }
-    
-    if ([allProjects count] == 1) {
-        selectedProject = [allProjects objectAtIndex:0];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,10 +133,18 @@
 
 - (IBAction)finish:(id)sender {
     if (activePicker == contactSelect) {
+        if ([allContacts count] == 1) {
+            selectedContact = [allContacts objectAtIndex:0];
+        }
+        
         contactSelect.hidden = YES;
         toolbar.hidden = YES;
         contactTextField.text = [NSString stringWithFormat:@"%@ %@",selectedContact.lastname, selectedContact.firstname];
     } else if (activePicker == projectSelect) {
+        if ([allProjects count] == 1) {
+            selectedProject = [allProjects objectAtIndex:0];
+        }
+        
         projectSelect.hidden = YES;
         toolbar.hidden = YES;
         projectTextField.text = selectedProject.name;
