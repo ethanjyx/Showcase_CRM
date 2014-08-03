@@ -113,9 +113,8 @@
     date.text = [NSDateFormatter localizedStringFromDate:local_date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
     memo.text = event.memo;
     
-    if ([event.contacts count] != 0) {
-        Contact* c = [[event.contacts allObjects] objectAtIndex:0];
-        contact.text = [NSString stringWithFormat:@"%@ %@",c.lastname, c.firstname];
+    if (event.contact) {
+        contact.text = [NSString stringWithFormat:@"%@ %@", event.contact.lastname, event.contact.firstname];
     } else {
         contact.text = @"";
     }
