@@ -8,6 +8,7 @@
 
 #import "RouteplanningViewController.h"
 #import "DatabaseInterface.h"
+#import "Hanzi2Pinyin.h"
 
 @interface RouteplanningViewController ()
 - (IBAction)confirmButton:(id)sender;
@@ -44,13 +45,33 @@
     
     for (int i = 0; i < [self.contacts count]; i++) {
         Contact *contact = [self.contacts objectAtIndex:i];
-        NSString *nameStr;
-        if (contact.company == nil) {
-            nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:  电话:%@", contact.lastname, contact.firstname, contact.phone_mobile];
+        NSString *name;
+        NSString *company;
+        NSString *phone = [[NSString alloc] initWithFormat:@"电话: %@", contact.phone_mobile];
+        phone = [phone stringByPaddingToLength:18 withString:@" " startingAtIndex:0];
+        
+        if ([Hanzi2Pinyin hasChineseCharacter:contact.lastname] == YES) {
+            name = [[NSString alloc] initWithFormat:@"%@ %@", contact.lastname, contact.firstname];
+            if ([contact.firstname length] == 0) {
+                name = [name stringByPaddingToLength:16 withString:@" " startingAtIndex:0];
+            } else if ([contact.firstname length] == 1) {
+                name = [name stringByPaddingToLength:15 withString:@" " startingAtIndex:0];
+            } else {
+                name = [name stringByPaddingToLength:15 withString:@" " startingAtIndex:0];
+            }
         } else {
-            nameStr = [[NSString alloc] initWithFormat:@"%@ %@  公司:%@  电话:%@", contact.lastname, contact.firstname, contact.company.name, contact.phone_mobile];
+            name = [[NSString alloc] initWithFormat:@"%@ %@", contact.firstname, contact.lastname];
+            name = [name stringByPaddingToLength:16 withString:@" " startingAtIndex:0];
         }
-        [self.datalist addObject:nameStr];
+        
+        if (contact.company == nil) {
+            company = @"公司:";
+        } else {
+            company = [[NSString alloc] initWithFormat:@"公司: %@", contact.company.name];
+        }
+        
+        NSString *contactInfo = [[NSString alloc] initWithFormat:@"%@ %@ %@", name, phone, company];
+        [self.datalist addObject:contactInfo];
         if ([self isAddressEmpty:contact.address] == YES) {
             [self.emptyAddressIndicator replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:1]];
         }
@@ -86,6 +107,7 @@
     }
     NSUInteger row = [indexPath row];
     cell.textLabel.text = [self.datalist objectAtIndex:row];
+    cell.textLabel.font = [UIFont fontWithName:@"Courier" size:16];
     if ([[self.emptyAddressIndicator objectAtIndex:row] intValue] == 1) {
         cell.userInteractionEnabled = NO;
         cell.textLabel.enabled = NO;
@@ -120,10 +142,17 @@
 */
 
 - (IBAction)confirmButton:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(onGetselectedContacts:)]) {
-        [self.delegate onGetselectedContacts:self.selectionIndicator];
+    for (NSNumber *num in self.selectionIndicator) {
+        if ([num intValue] == 1) {
+            if ([self.delegate respondsToSelector:@selector(onGetselectedContacts:)]) {
+                [self.delegate onGetselectedContacts:self.selectionIndicator];
+            }
+            [self.mypopoverController dismissPopoverAnimated:YES];
+            return;
+        }
     }
-    [self.mypopoverController dismissPopoverAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请至少选择一个客户！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 - (BOOL)isAddressEmpty:(Address *)address {
