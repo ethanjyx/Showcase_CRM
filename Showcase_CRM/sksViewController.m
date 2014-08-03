@@ -614,7 +614,7 @@
     
     // contacts are the contacts selected in the import contact view
     for (TKContact* contact in contacts) {
-        [database addContactWithLastname:contact.lastName firstname:contact.firstName title:nil phoneWork:nil phoneHome:nil phoneMobile:contact.tel emailWork:contact.email emailPersonal:nil note:nil country:nil province:nil city:nil street:nil postcode:nil companyName:CompanyName.text QQ:nil weChat:nil skype:nil weibo:nil];
+        [database addContactWithLastname:contact.lastName firstname:contact.firstName title:@"" phoneWork:@"" phoneHome:@"" phoneMobile:contact.tel emailWork:contact.email emailPersonal:@"" note:@"" country:@"" province:@"" city:@"" street:@"" postcode:@"" companyName:CompanyName.text QQ:@"" weChat:@"" skype:@"" weibo:@""];
     }
     
     if([[self tableView] numberOfRowsInSection:1] == 1) {
