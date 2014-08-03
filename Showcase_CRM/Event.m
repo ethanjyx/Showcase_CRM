@@ -2,7 +2,7 @@
 //  Event.m
 //  Showcase_CRM
 //
-//  Created by Linfeng Shi on 6/25/14.
+//  Created by Linfeng Shi on 8/4/14.
 //  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
@@ -14,14 +14,14 @@
 
 @implementation Event
 
+@dynamic attachment_url;
 @dynamic date;
 @dynamic id;
-@dynamic name;
 @dynamic location;
 @dynamic memo;
-@dynamic attachment_url;
+@dynamic name;
 @dynamic company;
-@dynamic contacts;
+@dynamic contact;
 @dynamic project;
 
 @end

@@ -2,7 +2,7 @@
 //  Contact.h
 //  Showcase_CRM
 //
-//  Created by Linfeng Shi on 7/20/14.
+//  Created by Linfeng Shi on 8/4/14.
 //  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
@@ -23,11 +23,11 @@
 @property (nonatomic, retain) NSString * phone_mobile;
 @property (nonatomic, retain) NSString * phone_work;
 @property (nonatomic, retain) NSString * qq;
+@property (nonatomic, retain) NSNumber * sign_up_times;
 @property (nonatomic, retain) NSString * skype;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * wechat;
 @property (nonatomic, retain) NSString * weibo;
-@property (nonatomic, retain) NSNumber * sign_up_times;
 @property (nonatomic, retain) Address *address;
 @property (nonatomic, retain) Company *company;
 @property (nonatomic, retain) Event *event;

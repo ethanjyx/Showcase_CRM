@@ -2,7 +2,7 @@
 //  Contact.m
 //  Showcase_CRM
 //
-//  Created by Linfeng Shi on 7/20/14.
+//  Created by Linfeng Shi on 8/4/14.
 //  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 
@@ -26,11 +26,11 @@
 @dynamic phone_mobile;
 @dynamic phone_work;
 @dynamic qq;
+@dynamic sign_up_times;
 @dynamic skype;
 @dynamic title;
 @dynamic wechat;
 @dynamic weibo;
-@dynamic sign_up_times;
 @dynamic address;
 @dynamic company;
 @dynamic event;

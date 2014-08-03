@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		611DE802198D6376008E9549 /* EmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611DE801198D6376008E9549 /* EmptyViewController.m */; };
+		611DE805198EA80B008E9549 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 611DE804198EA80B008E9549 /* Contact.m */; };
+		611DE808198EA80C008E9549 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 611DE807198EA80C008E9549 /* Event.m */; };
 		6120CFBA1959EC0B001FCAC1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6120CFB91959EC0B001FCAC1 /* CoreData.framework */; };
 		6120CFBD1959EE16001FCAC1 /* CRM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */; };
 		6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC51959F3ED001FCAC1 /* Sale.m */; };
 		6120CFC91959F3ED001FCAC1 /* Industry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFC81959F3ED001FCAC1 /* Industry.m */; };
-		6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFCE1959F3ED001FCAC1 /* Event.m */; };
 		6120CFD21959F3ED001FCAC1 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD11959F3ED001FCAC1 /* Status.m */; };
 		6120CFD51959F3ED001FCAC1 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 6120CFD41959F3ED001FCAC1 /* Address.m */; };
-		612A343E197BA023009A5A21 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A343D197BA023009A5A21 /* Contact.m */; };
 		612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A3440197BCB38009A5A21 /* ShippingAddressViewController.m */; };
 		612A3444197BCB47009A5A21 /* BillAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A3443197BCB47009A5A21 /* BillAddressViewController.m */; };
 		612A3447197BD811009A5A21 /* ViewBillingAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612A3446197BD811009A5A21 /* ViewBillingAddressController.m */; };
@@ -143,20 +143,20 @@
 /* Begin PBXFileReference section */
 		611DE800198D6376008E9549 /* EmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyViewController.h; sourceTree = "<group>"; };
 		611DE801198D6376008E9549 /* EmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyViewController.m; sourceTree = "<group>"; };
+		611DE803198EA80B008E9549 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		611DE804198EA80B008E9549 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		611DE806198EA80C008E9549 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		611DE807198EA80C008E9549 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		6120CFB91959EC0B001FCAC1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6120CFBC1959EE16001FCAC1 /* CRM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CRM.xcdatamodel; sourceTree = "<group>"; };
 		6120CFC41959F3ED001FCAC1 /* Sale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sale.h; sourceTree = "<group>"; };
 		6120CFC51959F3ED001FCAC1 /* Sale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sale.m; sourceTree = "<group>"; };
 		6120CFC71959F3ED001FCAC1 /* Industry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Industry.h; sourceTree = "<group>"; };
 		6120CFC81959F3ED001FCAC1 /* Industry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Industry.m; sourceTree = "<group>"; };
-		6120CFCD1959F3ED001FCAC1 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		6120CFCE1959F3ED001FCAC1 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		6120CFD01959F3ED001FCAC1 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		6120CFD11959F3ED001FCAC1 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		6120CFD31959F3ED001FCAC1 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		6120CFD41959F3ED001FCAC1 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
-		612A343C197BA023009A5A21 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		612A343D197BA023009A5A21 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		612A343F197BCB38009A5A21 /* ShippingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShippingAddressViewController.h; sourceTree = "<group>"; };
 		612A3440197BCB38009A5A21 /* ShippingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShippingAddressViewController.m; sourceTree = "<group>"; };
 		612A3442197BCB47009A5A21 /* BillAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillAddressViewController.h; sourceTree = "<group>"; };
@@ -517,20 +517,20 @@
 			isa = PBXGroup;
 			children = (
 				6120CFBB1959EE16001FCAC1 /* CRM.xcdatamodeld */,
+				611DE806198EA80C008E9549 /* Event.h */,
+				611DE807198EA80C008E9549 /* Event.m */,
+				611DE803198EA80B008E9549 /* Contact.h */,
+				611DE804198EA80B008E9549 /* Contact.m */,
 				6174CC08198627560054F904 /* Project.h */,
 				6174CC09198627560054F904 /* Project.m */,
 				6174CC05198627550054F904 /* Company.h */,
 				6174CC06198627550054F904 /* Company.m */,
-				612A343C197BA023009A5A21 /* Contact.h */,
-				612A343D197BA023009A5A21 /* Contact.m */,
 				61ECB2AE1961BB1E0072F8D6 /* DatabaseInterface.h */,
 				61ECB2AF1961BB1E0072F8D6 /* DatabaseInterface.m */,
 				6120CFD31959F3ED001FCAC1 /* Address.h */,
 				6120CFD41959F3ED001FCAC1 /* Address.m */,
 				6120CFD01959F3ED001FCAC1 /* Status.h */,
 				6120CFD11959F3ED001FCAC1 /* Status.m */,
-				6120CFCD1959F3ED001FCAC1 /* Event.h */,
-				6120CFCE1959F3ED001FCAC1 /* Event.m */,
 				6120CFC71959F3ED001FCAC1 /* Industry.h */,
 				6120CFC81959F3ED001FCAC1 /* Industry.m */,
 				6120CFC41959F3ED001FCAC1 /* Sale.h */,
@@ -936,7 +936,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEFF78B5196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m in Sources */,
-				6120CFCF1959F3ED001FCAC1 /* Event.m in Sources */,
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				9D79935D1987D76800A69311 /* EditEventViewController.m in Sources */,
 				9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */,
@@ -964,6 +963,7 @@
 				CE65A39C19754C760051BFAC /* AddContact2ViewController.m in Sources */,
 				6174CC0A198627560054F904 /* Project.m in Sources */,
 				9D132E78195A589700CD5788 /* TKNoContactViewController.m in Sources */,
+				611DE805198EA80B008E9549 /* Contact.m in Sources */,
 				6120CFD21959F3ED001FCAC1 /* Status.m in Sources */,
 				618E025D19473FAF0094BD1F /* main.m in Sources */,
 				6120CFC61959F3ED001FCAC1 /* Sale.m in Sources */,
@@ -978,10 +978,10 @@
 				9D132E74195A589700CD5788 /* TKContactsMultiPickerController.m in Sources */,
 				F6CE94CE19631A7A0017DDAD /* MapViewController.mm in Sources */,
 				61ECB2B01961BB1E0072F8D6 /* DatabaseInterface.m in Sources */,
-				612A343E197BA023009A5A21 /* Contact.m in Sources */,
 				F66917AC197CC50500FA11C7 /* RouteplanningViewController.m in Sources */,
 				9DF6359D196BBA4D00E10E48 /* sksViewController.m in Sources */,
 				9D132E8D195A58DA00CD5788 /* UIImage+TKUtilities.m in Sources */,
+				611DE808198EA80C008E9549 /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
