@@ -200,6 +200,9 @@
             break;
         case 1:
             self.city.text = [[cities objectAtIndex:row] objectForKey:@"city"];
+            if ([province.text length]<=0){
+                province.text=@"直辖市";
+            }
             break;
         default:
             break;
