@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="TeU-Xk-Db8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A2093" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="TeU-Xk-Db8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -515,7 +515,7 @@
             <objects>
                 <viewController id="EBd-NY-T7I" customClass="AddProjectViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tBX-Nj-p0u">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="业务信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dm5-sn-Sno">
@@ -576,7 +576,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="e9F-o8-3cI">
-                                <rect key="frame" x="201" y="322" width="355" height="216"/>
+                                <rect key="frame" x="201" y="322" width="420" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="425327349.30871099">
                                     <!--2014-06-24 18:29:09 +0000-->
@@ -656,7 +656,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="eHO-tV-pmJ">
-                                <rect key="frame" x="0.0" y="10" width="703" height="44"/>
+                                <rect key="frame" x="0.0" y="10" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -668,7 +668,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </navigationBar>
                             <pickerView contentMode="scaleToFill" id="cde-cQ-J5p">
-                                <rect key="frame" x="0.0" y="795" width="703" height="216"/>
+                                <rect key="frame" x="0.0" y="795" width="768" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="EBd-NY-T7I" id="bgb-YE-Q1G"/>
@@ -676,7 +676,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </pickerView>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GyI-6e-agv">
-                                <rect key="frame" x="0.0" y="469" width="703" height="44"/>
+                                <rect key="frame" x="0.0" y="725" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem id="cQc-wf-jEE"/>
@@ -1163,6 +1163,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="beginEditContactTextField:" destination="JrN-Gl-T8a" eventType="editingDidBegin" id="Rhp-Wb-mE8"/>
+                                    <action selector="focusOnContactTextField:" destination="JrN-Gl-T8a" eventType="touchDown" id="yzw-D3-GdH"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="qeU-uP-G52">
@@ -1172,8 +1173,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="beginEditProjectTextField:" destination="JrN-Gl-T8a" eventType="editingDidBegin" id="LDn-5b-Tva"/>
+                                    <action selector="focusOnProjectTextField:" destination="JrN-Gl-T8a" eventType="editingDidEnd" id="AeC-Jb-QVO"/>
                                 </connections>
                             </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="P8X-0j-b1y">
+                                <rect key="frame" x="0.0" y="622" width="704" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tT7-bI-wWg"/>
+                                    <barButtonItem title="完成" id="ATD-fl-UMu">
+                                        <connections>
+                                            <action selector="finish:" destination="JrN-Gl-T8a" id="yc7-95-RZf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1189,6 +1203,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="headerTitle" destination="SRK-Yl-dlU" id="EOi-j6-Jlx"/>
                         <outlet property="nameTextField" destination="Egq-aZ-LtD" id="Wg9-Yl-DNV"/>
                         <outlet property="projectTextField" destination="qeU-uP-G52" id="vSF-Z6-1kI"/>
+                        <outlet property="toolbar" destination="P8X-0j-b1y" id="cXU-mm-lM2"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="cancelAddEvent" splitViewControllerTargetIndex="1" id="vlj-iY-34O"/>
                         <segue destination="jIa-eO-fpF" kind="replace" identifier="saveEvent" splitViewControllerTargetIndex="1" id="dfg-aN-FwE"/>
                     </connections>
@@ -4377,7 +4392,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="Ad1-fL-0qg" customClass="EditProjectViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="esK-0X-6N6">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="业务信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PA6-62-aRN">
@@ -4438,7 +4453,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="Op2-TJ-UYh">
-                                <rect key="frame" x="200" y="387" width="355" height="216"/>
+                                <rect key="frame" x="200" y="387" width="420" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="425327349.30871099">
                                     <!--2014-06-24 18:29:09 +0000-->
@@ -4552,7 +4567,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="Sak-Lo-WAB">
-                                <rect key="frame" x="0.0" y="0.0" width="703" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -4564,7 +4579,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </navigationBar>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="7rA-LL-Z0A">
-                                <rect key="frame" x="0.0" y="488" width="703" height="44"/>
+                                <rect key="frame" x="0.0" y="744" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem id="es1-if-ZYb"/>
@@ -4577,7 +4592,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </toolbar>
                             <pickerView contentMode="scaleToFill" id="4Il-Ip-8kR">
-                                <rect key="frame" x="1" y="788" width="703" height="216"/>
+                                <rect key="frame" x="1" y="788" width="768" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Ad1-fL-0qg" id="upl-eO-Kk0"/>
@@ -4769,6 +4784,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <connections>
                                     <action selector="beginEditContactTextField:" destination="zWo-2i-Kzh" eventType="editingDidBegin" id="FWS-PF-ZSs"/>
                                     <action selector="beginEditContactTextField:" destination="zWo-2i-Kzh" eventType="editingDidEnd" id="Vkv-Sr-Np3"/>
+                                    <action selector="focusContact:" destination="zWo-2i-Kzh" eventType="editingDidEnd" id="sWv-4K-uT2"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Bu4-Eg-bQP">
@@ -4778,6 +4794,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="beginEditProjectTextField:" destination="zWo-2i-Kzh" eventType="editingDidBegin" id="vl8-9B-RS1"/>
+                                    <action selector="focusProject:" destination="zWo-2i-Kzh" eventType="editingDidEnd" id="a5E-GR-pqN"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -4821,10 +4838,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9zv-Vi-1R9"/>
+        <segue reference="gJ8-u3-EXT"/>
         <segue reference="W0T-x3-o3Z"/>
-        <segue reference="iLr-MT-ciE"/>
         <segue reference="Yam-Re-CI2"/>
+        <segue reference="9zv-Vi-1R9"/>
         <segue reference="scm-2R-sld"/>
         <segue reference="2r8-FO-qbt"/>
         <segue reference="kma-GL-gRd"/>

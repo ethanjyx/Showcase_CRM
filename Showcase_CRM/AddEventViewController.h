@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddEventViewController : UIViewController
+@interface AddEventViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, strong) NSString *company;
 @property (nonatomic, strong) NSMutableArray *allContacts;

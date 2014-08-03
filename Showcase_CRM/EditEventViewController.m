@@ -36,7 +36,7 @@
 
 @implementation EditEventViewController
 
-@synthesize name, address, date, memo, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate,header,header_title;
+@synthesize name, address, date, memo, contact, project, event, company, returnButton, saveEditButton, cancelEditButton, editButton, deleteButton, globalDate,header,header_title;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,9 +96,14 @@
 - (IBAction)beginEditContactTextField:(id)sender {
 }
 
+- (IBAction)focusContact:(id)sender {
+}
+
 - (IBAction)beginEditProjectTextField:(id)sender {
 }
 
+- (IBAction)focusProject:(id)sender {
+}
 
 - (void)setAllField
 {
@@ -107,6 +112,9 @@
     NSDate *local_date = event.date;
     date.text = [NSDateFormatter localizedStringFromDate:local_date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
     memo.text = event.memo;
+    Contact* c = [[event.contacts allObjects] objectAtIndex:0];
+    contact.text = [NSString stringWithFormat:@"%@ %@",c.lastname, c.firstname];
+    project.text = event.project.name;
 }
 
 - (void)enableAllField
@@ -115,6 +123,8 @@
     address.enabled = YES;
     date.enabled = YES;
     memo.enabled = YES;
+    contact.enabled = YES;
+    project.enabled = YES;
 }
 
 - (void)disableAllField
@@ -123,6 +133,8 @@
     address.enabled = NO;
     date.enabled = NO;
     memo.enabled = NO;
+    contact.enabled = NO;
+    project.enabled = NO;
 }
 
 - (IBAction)returnFromViewEvent:(id)sender {

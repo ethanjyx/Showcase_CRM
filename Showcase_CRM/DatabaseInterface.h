@@ -27,7 +27,7 @@
 
 - (void)addProjectWithName:(NSString*)name possibility:(NSNumber*)possibility amount:(NSNumber*)amount memo:(NSString*) memo deadline:(NSDate*)deadline progress:(NSString*)progress companyName:(NSString*) companyName;
 
-- (void)addEventWithName:(NSString*)name date:(NSDate*)date locations:(NSString*)location memo:(NSString*) memo companyName:(NSString*)companyName;
+- (void)addEventWithName:(NSString*)name date:(NSDate*)date locations:(NSString*)location memo:(NSString*) memo companyName:(NSString*)companyName contact:(Contact*)contact project:(Project*)project;
 
 - (NSArray*)getAllContacts;
 

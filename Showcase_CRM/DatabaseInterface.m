@@ -260,7 +260,7 @@
     }
 }
 
-- (void)addEventWithName:(NSString*)name date:(NSDate*)date locations:(NSString*)location memo:(NSString*) memo companyName:(NSString*)companyName
+- (void)addEventWithName:(NSString*)name date:(NSDate*)date locations:(NSString*)location memo:(NSString*) memo companyName:(NSString*)companyName contact:(Contact*)contact project:(Project*)project
 {
     Event *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"Event"
                                                       inManagedObjectContext:self.managedObjectContext];
@@ -269,6 +269,8 @@
     newEntry.memo = memo;
     newEntry.date = date;
     newEntry.company = [self fetchCompanyByName:companyName];
+    newEntry.contacts = [NSSet setWithObject:contact];
+    newEntry.project = project;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity2 = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
