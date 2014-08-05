@@ -24,6 +24,7 @@
 		6174CC07198627550054F904 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 6174CC06198627550054F904 /* Company.m */; };
 		6174CC0A198627560054F904 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 6174CC09198627560054F904 /* Project.m */; };
 		6174CC0D198628E00054F904 /* EditProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6174CC0C198628E00054F904 /* EditProjectViewController.m */; };
+		6186FFA119910D86002F1232 /* EditCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6186FFA019910D86002F1232 /* EditCompanyViewController.m */; };
 		618DE7351949B272000CC43E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE7341949B272000CC43E /* MainViewController.m */; };
 		618DE73B1949B2D0000CC43E /* CreateClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DE73A1949B2D0000CC43E /* CreateClientViewController.m */; };
 		618E025119473FAF0094BD1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 618E025019473FAF0094BD1F /* Foundation.framework */; };
@@ -172,6 +173,8 @@
 		6174CC09198627560054F904 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		6174CC0B198628E00054F904 /* EditProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjectViewController.h; sourceTree = "<group>"; };
 		6174CC0C198628E00054F904 /* EditProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjectViewController.m; sourceTree = "<group>"; };
+		6186FF9F19910D86002F1232 /* EditCompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCompanyViewController.h; sourceTree = "<group>"; };
+		6186FFA019910D86002F1232 /* EditCompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCompanyViewController.m; sourceTree = "<group>"; };
 		618DE7331949B272000CC43E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		618DE7341949B272000CC43E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		618DE7391949B2D0000CC43E /* CreateClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateClientViewController.h; sourceTree = "<group>"; };
@@ -630,6 +633,8 @@
 				9D79935C1987D76800A69311 /* EditEventViewController.m */,
 				9D31CF31198D295F0092842B /* PickerHelper.h */,
 				9D31CF32198D296E0092842B /* PickerHelper.m */,
+				6186FF9F19910D86002F1232 /* EditCompanyViewController.h */,
+				6186FFA019910D86002F1232 /* EditCompanyViewController.m */,
 			);
 			name = DetailViews;
 			sourceTree = "<group>";
@@ -934,6 +939,7 @@
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				9D79935D1987D76800A69311 /* EditEventViewController.m in Sources */,
 				9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */,
+				6186FFA119910D86002F1232 /* EditCompanyViewController.m in Sources */,
 				612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */,
 				619D4C8A197E550A00A72BF8 /* DetailContact2ViewController.m in Sources */,
 				9D31CF33198D296E0092842B /* PickerHelper.m in Sources */,

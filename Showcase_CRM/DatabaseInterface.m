@@ -56,7 +56,7 @@
     newEntry.website = website;
     
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    /*NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Industry"
                                               inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
@@ -64,18 +64,14 @@
     [fetchRequest setPredicate:predicate];
     NSError* error;
     NSArray *fetchedIndustries = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    if ([fetchedIndustries count]) {
-        // this industry already exists
-        newEntry.industry = [fetchedIndustries objectAtIndex:0];
-    }
-    else {
-        // create a new industry if the industry does not exist
-        Industry * industry1 = [NSEntityDescription insertNewObjectForEntityForName:@"Industry"
-                                                             inManagedObjectContext:self.managedObjectContext];
-        industry1.industry_type = industry;
-        newEntry.industry = industry1;
-    }
+    */
+
+
+    NSError* error;
+    Industry * industry1 = [NSEntityDescription insertNewObjectForEntityForName:@"Industry"
+                                                         inManagedObjectContext:self.managedObjectContext];
+    industry1.industry_type = industry;
+    newEntry.industry = industry1;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }
@@ -665,6 +661,28 @@
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Couldn't save: %@", [error localizedDescription]);
     }
+}
+
+- (void)editCompanyInfo:(Company*) company
+{
+    Company *editCompany = [self fetchCompanyByName:company.name];
+    editCompany = company;
+    NSError* error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+}
+- (void)deleteCompany:(Company*) company
+{
+    Company *deleteCompany = [self fetchCompanyByName:company.name];
+
+    [self.managedObjectContext deleteObject:deleteCompany];
+    NSError* error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Couldn't save: %@", [error localizedDescription]);
+    }
+
+
 }
 
 @end

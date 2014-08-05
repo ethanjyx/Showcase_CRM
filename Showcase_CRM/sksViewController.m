@@ -25,6 +25,7 @@
 #import "ShippingAddressViewController.h"
 #import "Hanzi2Pinyin.h"
 #import "Contact.h"
+#import "EditCompanyViewController.h"
 
 @interface sksViewController ()
 
@@ -429,6 +430,10 @@
         c.company = company;
         c.allContacts = allContacts;
         c.allProjects = allProjects;
+    }
+    else if([segue.identifier isEqualToString:@"editCompany"]) {
+        EditCompanyViewController* localCompany = segue.destinationViewController;
+        localCompany.company = globalCompany;
     }
 }
 

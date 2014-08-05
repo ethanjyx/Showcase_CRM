@@ -60,6 +60,9 @@
 
 - (void)editCompany:(Company*) company shippingAddress:(Address *) shippingAddress;
 
+- (void)editCompanyInfo:(Company*) company;
+
+- (void)deleteCompany:(Company*) company;
 
 @end
 
