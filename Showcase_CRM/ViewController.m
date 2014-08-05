@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Linfeng Shi. All rights reserved.
 //
 #import "ViewController.h"
-#import "DetailViewController.h"
 #import "UIImage+TKUtilities.h"
 #import "DatabaseInterface.h"
 #import "Company.h"

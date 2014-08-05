@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DetailViewController.h"
 #import "TKPeoplePickerController.h"
 #import "NSDictionary+MutableDeepCopy.h"
 #import "SplitViewSelectionDelegate.h"

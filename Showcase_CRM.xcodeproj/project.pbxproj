@@ -72,7 +72,6 @@
 		9DF6359B196BBA4D00E10E48 /* SKSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63593196BBA4D00E10E48 /* SKSTableViewCell.m */; };
 		9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63595196BBA4D00E10E48 /* SKSTableViewCellIndicator.m */; };
 		9DF6359D196BBA4D00E10E48 /* sksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF63597196BBA4D00E10E48 /* sksViewController.m */; };
-		CE0E674F196161F50074E821 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0E674E196161F50074E821 /* DetailViewController.m */; };
 		CE3A013A197EA54B0052B1D9 /* btn_01.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0125197EA54B0052B1D9 /* btn_01.png */; };
 		CE3A013B197EA54B0052B1D9 /* btn_02.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0126197EA54B0052B1D9 /* btn_02.png */; };
 		CE3A013C197EA54B0052B1D9 /* btn_03.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0127197EA54B0052B1D9 /* btn_03.png */; };
@@ -249,8 +248,6 @@
 		9DF63595196BBA4D00E10E48 /* SKSTableViewCellIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSTableViewCellIndicator.m; sourceTree = "<group>"; };
 		9DF63596196BBA4D00E10E48 /* sksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sksViewController.h; sourceTree = "<group>"; };
 		9DF63597196BBA4D00E10E48 /* sksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sksViewController.m; sourceTree = "<group>"; };
-		CE0E674B196160160074E821 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		CE0E674E196161F50074E821 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		CE3A0125197EA54B0052B1D9 /* btn_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_01.png; sourceTree = "<group>"; };
 		CE3A0126197EA54B0052B1D9 /* btn_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_02.png; sourceTree = "<group>"; };
 		CE3A0127197EA54B0052B1D9 /* btn_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_03.png; sourceTree = "<group>"; };
@@ -446,7 +443,7 @@
 				CE3A014F197EA5630052B1D9 /* app.2x */,
 				CE3A0124197EA54B0052B1D9 /* app */,
 				61AE4DBF1975583500E3811C /* Pinyin */,
-				9DF6359E196BBA5200E10E48 /* SKSTableViewImp */,
+				9DF6359E196BBA5200E10E48 /* DetailViews */,
 				F6CE948C19631A1F0017DDAD /* BaiduMap */,
 				61ECB2B11961BB320072F8D6 /* Database */,
 				9D132E68195A587B00CD5788 /* ImportContact */,
@@ -457,12 +454,8 @@
 				9DD7B38B196E2E990063009B /* RootViewController.m */,
 				618E026519473FAF0094BD1F /* ViewController.h */,
 				618E026619473FAF0094BD1F /* ViewController.m */,
-				CE0E674E196161F50074E821 /* DetailViewController.m */,
-				CE0E674B196160160074E821 /* DetailViewController.h */,
 				618DE7331949B272000CC43E /* MainViewController.h */,
 				618DE7341949B272000CC43E /* MainViewController.m */,
-				618DE7391949B2D0000CC43E /* CreateClientViewController.h */,
-				618DE73A1949B2D0000CC43E /* CreateClientViewController.m */,
 				CEFF78B3196990C600FAC0EA /* NSDictionary+MutableDeepCopy.h */,
 				CEFF78B4196990C600FAC0EA /* NSDictionary+MutableDeepCopy.m */,
 				9DD7B389196E19900063009B /* SplitViewSelectionDelegate.h */,
@@ -595,9 +588,11 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		9DF6359E196BBA5200E10E48 /* SKSTableViewImp */ = {
+		9DF6359E196BBA5200E10E48 /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
+				618DE7391949B2D0000CC43E /* CreateClientViewController.h */,
+				618DE73A1949B2D0000CC43E /* CreateClientViewController.m */,
 				CE890490198E1AC200B4A815 /* ProvincesAndCities.plist */,
 				9DF6358E196BBA4D00E10E48 /* expandableImage.png */,
 				9DF6358F196BBA4D00E10E48 /* expandableImage@2x.png */,
@@ -636,7 +631,7 @@
 				9D31CF31198D295F0092842B /* PickerHelper.h */,
 				9D31CF32198D296E0092842B /* PickerHelper.m */,
 			);
-			name = SKSTableViewImp;
+			name = DetailViews;
 			sourceTree = "<group>";
 		};
 		CE3A0124197EA54B0052B1D9 /* app */ = {
@@ -939,7 +934,6 @@
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				9D79935D1987D76800A69311 /* EditEventViewController.m in Sources */,
 				9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */,
-				CE0E674F196161F50074E821 /* DetailViewController.m in Sources */,
 				612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */,
 				619D4C8A197E550A00A72BF8 /* DetailContact2ViewController.m in Sources */,
 				9D31CF33198D296E0092842B /* PickerHelper.m in Sources */,
