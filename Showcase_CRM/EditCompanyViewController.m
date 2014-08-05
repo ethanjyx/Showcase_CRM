@@ -87,6 +87,18 @@
 }
 
 - (IBAction)save:(id)sender {
+    if ([name.text length]<=0 ) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新建失败"
+                                                        message:@"公司名不能为空"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [name endEditing:YES];
+        [alert show];
+        return;
+    }
+    
     company.name = name.text;
     company.phone = phone.text;
     company.website = website.text;
