@@ -65,6 +65,8 @@
     city.delegate=self;
     picker.delegate=self;
     picker.dataSource=self;
+    country.enabled = NO;
+    country.text = @"中国";
 
 }
 
@@ -185,7 +187,7 @@
 }
 - (IBAction)finish:(id)sender {
     [province endEditing:YES];
-    [country endEditing:YES];
+    [city endEditing:YES];
     picker.hidden=YES;
     toolbar.hidden=YES;
 }

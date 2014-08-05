@@ -51,6 +51,7 @@
     address.enabled = NO;
     postcode.enabled = NO;
     
+    
     headertitle2.title = company.name;
     Address *billingAddress = company.billing_address;
     country.text = billingAddress.country;

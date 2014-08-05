@@ -65,6 +65,9 @@
     city.text = billingAddress.city;
     address.text = billingAddress.street;
     postcode.text = billingAddress.postal;
+    country.enabled = NO;
+    country.text = @"中国";
+
 
 }
 
@@ -179,7 +182,7 @@
 }
 - (IBAction)finish:(id)sender {
     [province endEditing:YES];
-    [country endEditing:YES];
+    [city endEditing:YES];
     picker.hidden=YES;
     toolbar.hidden=YES;
 }
