@@ -95,6 +95,7 @@
                                               cancelButtonTitle:@"确定"
                                               otherButtonTitles:nil];
         [name endEditing:YES];
+        name.text = company.name;
         [alert show];
         return;
     }
