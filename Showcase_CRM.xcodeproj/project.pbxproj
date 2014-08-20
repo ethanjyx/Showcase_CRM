@@ -115,6 +115,7 @@
 		CE3A0177197EA5630052B1D9 /* 2x_icon_12.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0162197EA5630052B1D9 /* 2x_icon_12.png */; };
 		CE3A0178197EA5630052B1D9 /* 2x_icon_13.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0163197EA5630052B1D9 /* 2x_icon_13.png */; };
 		CE3A0179197EA5630052B1D9 /* 2x_icon_14.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3A0164197EA5630052B1D9 /* 2x_icon_14.png */; };
+		CE4965FB199E271500FDE087 /* ContactNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4965FA199E271500FDE087 /* ContactNearbyViewController.m */; };
 		CE65A39C19754C760051BFAC /* AddContact2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE65A39B19754C760051BFAC /* AddContact2ViewController.m */; };
 		CE890491198E1AC200B4A815 /* ProvincesAndCities.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE890490198E1AC200B4A815 /* ProvincesAndCities.plist */; };
 		CE8D41EA19759B1500E3D374 /* DetailContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8D41E919759B1500E3D374 /* DetailContactViewController.m */; };
@@ -293,6 +294,8 @@
 		CE3A0162197EA5630052B1D9 /* 2x_icon_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2x_icon_12.png; sourceTree = "<group>"; };
 		CE3A0163197EA5630052B1D9 /* 2x_icon_13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2x_icon_13.png; sourceTree = "<group>"; };
 		CE3A0164197EA5630052B1D9 /* 2x_icon_14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2x_icon_14.png; sourceTree = "<group>"; };
+		CE4965F9199E271500FDE087 /* ContactNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactNearbyViewController.h; sourceTree = "<group>"; };
+		CE4965FA199E271500FDE087 /* ContactNearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactNearbyViewController.m; sourceTree = "<group>"; };
 		CE65A39A19754C760051BFAC /* AddContact2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContact2ViewController.h; sourceTree = "<group>"; };
 		CE65A39B19754C760051BFAC /* AddContact2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContact2ViewController.m; sourceTree = "<group>"; };
 		CE890490198E1AC200B4A815 /* ProvincesAndCities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ProvincesAndCities.plist; sourceTree = "<group>"; };
@@ -702,6 +705,8 @@
 				F6CE94CD19631A7A0017DDAD /* MapViewController.mm */,
 				F66917AA197CC50500FA11C7 /* RouteplanningViewController.h */,
 				F66917AB197CC50500FA11C7 /* RouteplanningViewController.m */,
+				CE4965F9199E271500FDE087 /* ContactNearbyViewController.h */,
+				CE4965FA199E271500FDE087 /* ContactNearbyViewController.m */,
 				F6CE948E19631A2B0017DDAD /* Resources */,
 				F6CE948D19631A250017DDAD /* inc */,
 			);
@@ -939,6 +944,7 @@
 				618E026719473FAF0094BD1F /* ViewController.m in Sources */,
 				9D79935D1987D76800A69311 /* EditEventViewController.m in Sources */,
 				9DF6359C196BBA4D00E10E48 /* SKSTableViewCellIndicator.m in Sources */,
+				CE4965FB199E271500FDE087 /* ContactNearbyViewController.m in Sources */,
 				6186FFA119910D86002F1232 /* EditCompanyViewController.m in Sources */,
 				612A3441197BCB38009A5A21 /* ShippingAddressViewController.m in Sources */,
 				619D4C8A197E550A00A72BF8 /* DetailContact2ViewController.m in Sources */,

@@ -10,8 +10,9 @@
 #import "BMapKit.h"
 #import "RouteplanningViewController.h"
 #import "NSDictionary+MutableDeepCopy.h"
+#import "ContactNearbyViewController.h"
 
-@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate, BMKRouteSearchDelegate, UIAlertViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate> {
+@interface MapViewController : UIViewController <BMKMapViewDelegate, BMKLocationServiceDelegate, UITableViewDataSource, UITableViewDelegate, BMKGeoCodeSearchDelegate, UISearchBarDelegate, RouteplanningViewControllerDelegate,ContactNearbyViewControllerDelegate, BMKRouteSearchDelegate, UIAlertViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate> {
     BMKMapView* _mapView;
     BMKLocationService* _locService;
     BMKRouteSearch* _routesearch;
@@ -35,5 +36,8 @@
 @property (nonatomic, retain) NSArray *visitOrder;
 @property (nonatomic, assign) int visitedNum;
 @property (nonatomic, assign) int minDistance;
+@property (nonatomic, retain) IBOutlet UITableView *NearContacttableview;
+@property (nonatomic, retain) NSMutableArray *nearContactdata;
+@property (nonatomic, retain) UIButton *confirmButton;
 
 @end

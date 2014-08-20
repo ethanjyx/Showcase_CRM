@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="EBd-NY-T7I" customClass="AddProjectViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tBX-Nj-p0u">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="业务信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dm5-sn-Sno">
@@ -70,7 +70,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="e9F-o8-3cI">
-                                <rect key="frame" x="201" y="322" width="420" height="216"/>
+                                <rect key="frame" x="201" y="322" width="355" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="425327349.30871099">
                                     <!--2014-06-24 18:29:09 +0000-->
@@ -150,7 +150,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="eHO-tV-pmJ">
-                                <rect key="frame" x="0.0" y="10" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="10" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -162,7 +162,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </navigationBar>
                             <pickerView contentMode="scaleToFill" id="cde-cQ-J5p">
-                                <rect key="frame" x="0.0" y="795" width="768" height="216"/>
+                                <rect key="frame" x="0.0" y="795" width="703" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="EBd-NY-T7I" id="bgb-YE-Q1G"/>
@@ -170,7 +170,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </pickerView>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GyI-6e-agv">
-                                <rect key="frame" x="0.0" y="725" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="469" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem id="cQc-wf-jEE"/>
@@ -187,6 +187,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="amount" destination="wvR-IO-0eH" id="1Sc-JR-1CI"/>
@@ -358,6 +359,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="704" height="724"/>
@@ -684,6 +686,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="704" height="724"/>
@@ -1037,6 +1040,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="703" height="1000"/>
@@ -1196,19 +1200,27 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="定位" width="341.30000000000001" id="hNG-iW-NHe">
+                                    <barButtonItem title="定位" width="250" id="hNG-iW-NHe">
                                         <connections>
                                             <action selector="locateButton:" destination="kSA-q7-8j8" id="1N8-RS-m25"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="路线规划" width="341.30000000000001" id="neW-55-Z1j">
+                                    <barButtonItem title="路线规划" width="250" id="neW-55-Z1j">
                                         <connections>
                                             <segue destination="f0M-rL-Xnp" kind="popover" popoverAnchorBarButtonItem="neW-55-Z1j" id="QkK-i0-fh5">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="返回" width="341.30000000000001" id="x6j-VY-prw">
+                                    <barButtonItem title="附近客户" width="204.80000000000001" id="m6q-Dr-ASn">
+                                        <connections>
+                                            <segue destination="45r-KW-Y6I" kind="popover" popoverAnchorBarButtonItem="m6q-Dr-ASn" id="V30-sm-PXx">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem id="HrC-pW-ynT"/>
+                                    <barButtonItem title="返回" width="204.80000000000001" id="x6j-VY-prw">
                                         <connections>
                                             <action selector="returnButton:" destination="kSA-q7-8j8" id="AUl-iC-aMQ"/>
                                         </connections>
@@ -1253,14 +1265,31 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Sp-CN-WlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6281" y="758"/>
+            <point key="canvasLocation" x="-6081" y="534"/>
+        </scene>
+        <!--ContactNearby View Controller-->
+        <scene sceneID="zBb-3o-LBH">
+            <objects>
+                <viewController id="45r-KW-Y6I" userLabel="ContactNearby View Controller" customClass="ContactNearbyViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vev-A6-OGv">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="220"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="150" height="220"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4WS-it-RhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6238" y="1718"/>
         </scene>
         <!--Bill Address View Controller-->
         <scene sceneID="JdR-QL-FFX">
             <objects>
                 <viewController id="7Rb-a8-ToM" customClass="BillAddressViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sCq-u0-ObV">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开单地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="39d-Si-YQp">
@@ -1358,7 +1387,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="Jm0-Y1-z5B">
-                                <rect key="frame" x="0.0" y="23" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="23" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -1370,11 +1399,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </navigationBar>
                             <pickerView hidden="YES" contentMode="scaleToFill" id="FPr-eL-mFy">
-                                <rect key="frame" x="0.0" y="832" width="768" height="216"/>
+                                <rect key="frame" x="0.0" y="832" width="703" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="yJE-iI-PWO">
-                                <rect key="frame" x="0.0" y="779" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="523" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="4aO-aR-wDb"/>
@@ -1387,6 +1416,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="DSK-Xw-2c8" id="LLm-VC-Sz8"/>
@@ -1409,7 +1439,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="A6m-EH-Da0" customClass="ShippingAddressViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wGp-m8-3WZ">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="48t-GG-c0Y">
@@ -1507,7 +1537,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="zdU-Rz-tET">
-                                <rect key="frame" x="0.0" y="1" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="1" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -1519,11 +1549,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </navigationBar>
                             <pickerView hidden="YES" contentMode="scaleToFill" id="PdQ-ek-L39">
-                                <rect key="frame" x="0.0" y="823" width="768" height="216"/>
+                                <rect key="frame" x="0.0" y="823" width="703" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="amQ-NV-URr">
-                                <rect key="frame" x="0.0" y="743" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="487" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem id="yaU-wv-k1O"/>
@@ -1537,6 +1567,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="A8u-8A-wqK" id="1Bp-ZY-qyK"/>
@@ -1559,7 +1590,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="ccr-JA-4EQ" customClass="ViewBillingAddressController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dy6-Bn-2Ug">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开单地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KKM-N0-oDa">
@@ -1620,7 +1651,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="C4z-Hg-4be">
-                                <rect key="frame" x="0.0" y="7" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="7" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -1663,6 +1694,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="HZ1-wv-wVZ" id="USb-W0-Hfl"/>
@@ -1683,7 +1715,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="hOx-HH-ddi" customClass="ViewShippingAddressController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wBr-0q-vGk">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8PV-RT-jLv">
@@ -1744,7 +1776,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="ZYO-Ld-ARN">
-                                <rect key="frame" x="0.0" y="1" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="1" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -1787,6 +1819,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="address" destination="hol-IE-JqT" id="mGg-Cy-Hwx"/>
@@ -2512,6 +2545,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="703" height="1000"/>
@@ -2962,7 +2996,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="Ad1-fL-0qg" customClass="EditProjectViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="esK-0X-6N6">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="业务信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PA6-62-aRN">
@@ -3023,7 +3057,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="Op2-TJ-UYh">
-                                <rect key="frame" x="200" y="387" width="420" height="216"/>
+                                <rect key="frame" x="200" y="387" width="355" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="425327349.30871099">
                                     <!--2014-06-24 18:29:09 +0000-->
@@ -3137,7 +3171,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="Sak-Lo-WAB">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -3149,7 +3183,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </navigationBar>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="7rA-LL-Z0A">
-                                <rect key="frame" x="0.0" y="744" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="488" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem id="es1-if-ZYb"/>
@@ -3162,7 +3196,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                             </toolbar>
                             <pickerView contentMode="scaleToFill" id="4Il-Ip-8kR">
-                                <rect key="frame" x="1" y="788" width="768" height="216"/>
+                                <rect key="frame" x="1" y="788" width="703" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Ad1-fL-0qg" id="upl-eO-Kk0"/>
@@ -3171,6 +3205,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="amount" destination="xiB-qW-NN7" id="Inu-9a-GTw"/>
@@ -3379,6 +3414,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="704" height="724"/>
@@ -3410,7 +3446,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="Ojx-Dp-9bH" customClass="EditCompanyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U36-2K-L2C">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公司信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xgB-Pz-Cj2">
@@ -3497,7 +3533,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             </textField>
                             <navigationBar userInteractionEnabled="NO" contentMode="scaleToFill" translucent="NO" id="C39-6k-EnM">
-                                <rect key="frame" x="0.0" y="0.0" width="1025" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.086274512110000007" green="0.52549022440000004" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -3556,11 +3592,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9dx-Yj-jsC"/>
-        <segue reference="DYp-J3-xIz"/>
-        <segue reference="lwA-hS-YsY"/>
-        <segue reference="hkq-bI-o8K"/>
         <segue reference="W0T-x3-o3Z"/>
+        <segue reference="Lhc-yw-b38"/>
+        <segue reference="hkq-bI-o8K"/>
         <segue reference="pkM-H1-woS"/>
+        <segue reference="lwA-hS-YsY"/>
+        <segue reference="DYp-J3-xIz"/>
     </inferredMetricsTieBreakers>
 </document>

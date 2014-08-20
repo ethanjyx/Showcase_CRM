@@ -85,6 +85,11 @@
 @end
 
 @implementation MapViewController
+@synthesize NearContacttableview;
+@synthesize nearContactdata;
+@synthesize contacts;
+@synthesize annotations;
+@synthesize confirmButton;
 
 - (NSString*)getMyBundlePath1:(NSString *)filename
 {
@@ -182,6 +187,7 @@
     [self.zoomOutButton setTitle:@"-" forState:UIControlStateNormal];
     [self.zoomOutButton addTarget:self action:@selector(zoomOut:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.zoomOutButton];
+
     
     // Init and start location service
     _locService = [[BMKLocationService alloc] init];
@@ -191,6 +197,7 @@
     _routesearch = [[BMKRouteSearch alloc]init];
     
     // Init members
+    self.nearContactdata = [ [NSMutableArray alloc] init];
     self.names = [[NSMutableDictionary alloc] init];
     self.mutableNames = [[NSMutableDictionary alloc] init];
     self.mutableKeys = [[NSMutableArray alloc] init];
@@ -336,7 +343,8 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return [self.mutableKeys count];
-    } else {
+    }
+    else {
         return 1;
     }
 }
@@ -349,7 +357,11 @@
         NSString *key = [self.mutableKeys objectAtIndex:section];
         NSArray *nameSection = [self.mutableNames objectForKey:key];
         return [nameSection count];
-    } else {
+    }
+    else if (tableView == self.NearContacttableview) {
+        return [nearContactdata count];
+    }
+    else {
         return 7;
     }
 }
@@ -372,7 +384,13 @@
         
         Contact *oneContact = [nameSection objectAtIndex:rowNumber];
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",oneContact.lastname, oneContact.firstname];
-    } else {
+    }
+    else if (tableView == NearContacttableview) {
+        cell.textLabel.text= [nearContactdata objectAtIndex:indexPath.row];
+        cell.textLabel.font = [UIFont fontWithName:@"Courier" size:16];
+        
+    }
+    else {
         NSUInteger row = [indexPath row];
         NSUInteger index = [self.tableViews indexOfObject:tableView];
         cell.textLabel.text = [[self.dataLists objectAtIndex:index] objectAtIndex:row];
@@ -919,6 +937,11 @@
     return NO;
 }
 
+- (IBAction)ClickButton:(id)sender {
+    [NearContacttableview removeFromSuperview];
+    confirmButton.hidden=YES;
+}
+
 - (void)calculateVisitOrder:(NSArray *)selectionIndicator {
     NSMutableArray *indexs = [[NSMutableArray alloc] init];
     for (int i = 0; i < [selectionIndicator count]; i++) {
@@ -1130,4 +1153,95 @@
     return UIInterfaceOrientationMaskLandscape;
 }
 
+- (void) addContacttoNearContactdata:(Contact*)contact {
+    NSString *name;
+    NSString *address=[[NSString alloc]init];
+    NSString *phone = [[NSString alloc] initWithFormat:@"电话: %@", contact.phone_mobile];
+    phone = [phone stringByPaddingToLength:18 withString:@" " startingAtIndex:0];
+    
+    if ([Hanzi2Pinyin hasChineseCharacter:contact.lastname] == YES) {
+        name = [[NSString alloc] initWithFormat:@"%@ %@", contact.lastname, contact.firstname];
+        if ([contact.firstname length] == 0) {
+            name = [name stringByPaddingToLength:16 withString:@" " startingAtIndex:0];
+        } else if ([contact.firstname length] == 1) {
+            name = [name stringByPaddingToLength:15 withString:@" " startingAtIndex:0];
+        } else {
+            name = [name stringByPaddingToLength:15 withString:@" " startingAtIndex:0];
+        }
+    } else {
+        name = [[NSString alloc] initWithFormat:@"%@ %@", contact.firstname, contact.lastname];
+        name = [name stringByPaddingToLength:16 withString:@" " startingAtIndex:0];
+    }
+
+    address=[[NSString alloc]initWithFormat:@"地址: %@",contact.address.street];
+    
+    NSString *contactInfo = [[NSString alloc] initWithFormat:@"%@ %@ %@", name, phone, address];
+    [self.nearContactdata addObject:contactInfo];
+}
+
+-(void)selecteddistance:(NSString*)distance {
+    [self.nearContactdata removeAllObjects];
+    self.NearContacttableview = [[UITableView alloc] initWithFrame:CGRectMake(212, 100, 600, 600) style:UITableViewStylePlain];
+    self.NearContacttableview.dataSource = self;
+    self.NearContacttableview.delegate = self;
+    
+    self.confirmButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.confirmButton.frame = CGRectMake(500, 497, 40, 40);
+    [self.confirmButton.layer setMasksToBounds:YES];
+    //[self.confirmButton.layer setBorderWidth:1.0];
+    self.confirmButton.backgroundColor = [UIColor whiteColor];
+    [self.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
+    [self.confirmButton addTarget:self action:@selector(ClickButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.confirmButton];
+    confirmButton.hidden=1;
+    for (int i = 0; i < [self.annotations count]; i++) {
+       if ([annotations objectAtIndex:i] != [NSNull null] ) {
+       //calculate the distance between user and clients
+       BMKPointAnnotation *annotation = [self.annotations objectAtIndex:i];
+       BMKMapPoint clientCoordinate = BMKMapPointForCoordinate(annotation.coordinate);
+       BMKMapPoint userCoord = BMKMapPointForCoordinate(_locService.userLocation.location.coordinate);
+       CLLocationDistance d= BMKMetersBetweenMapPoints(clientCoordinate,userCoord);
+        
+       //remove the annotation from the map firstly
+       [_mapView removeAnnotation: [self.annotations objectAtIndex:i]];
+        
+        if ([distance isEqualToString:@"全部"] ) {
+            [_mapView addAnnotation: [self.annotations objectAtIndex:i]];
+            [self performSelector:@selector(addContacttoNearContactdata:) withObject:[contacts objectAtIndex:i]];
+        }
+        else if ([distance isEqualToString:@"1 km以内"]) {
+            if ( d<1000 ) {
+                [_mapView addAnnotation: [self.annotations objectAtIndex:i]];
+                [self performSelector:@selector(addContacttoNearContactdata:) withObject:[contacts objectAtIndex:i]];
+            }
+        }
+        else if ([distance isEqualToString:@"2 km以内"]) {
+            if ( d<2000 ) {
+                [_mapView addAnnotation: [self.annotations objectAtIndex:i]];
+                [self performSelector:@selector(addContacttoNearContactdata:) withObject:[contacts objectAtIndex:i]];
+            }
+        }
+        else if ([distance isEqualToString:@"3 km以内"]) {
+            if ( d<3000 ) {
+                [_mapView addAnnotation: [self.annotations objectAtIndex:i]];
+                [self performSelector:@selector(addContacttoNearContactdata:) withObject:[contacts objectAtIndex:i]];
+            }
+        }
+        else if ([distance isEqualToString:@"5 km以内"]) {
+            if ( d<5000 ) {
+                [_mapView addAnnotation: [self.annotations objectAtIndex:i]];
+                [self performSelector:@selector(addContacttoNearContactdata:) withObject:[contacts objectAtIndex:i]];
+            }
+        }
+        else if ([distance isEqualToString:@"10 km以内"]) {
+            if ( d<10000 ) {
+                [_mapView addAnnotation: [self.annotations objectAtIndex:i]];
+                [self performSelector:@selector(addContacttoNearContactdata:) withObject:[contacts objectAtIndex:i]];
+            }
+        }
+     }
+   }
+    [_mapView addSubview:NearContacttableview];
+    confirmButton.hidden=NO;
+}
 @end
